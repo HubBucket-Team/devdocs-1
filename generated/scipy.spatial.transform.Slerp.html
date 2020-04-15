@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.spatial.transform.Slerp &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-spatial-transform-slerp">
+<h1>scipy.spatial.transform.Slerp<a class="headerlink" href="#scipy-spatial-transform-slerp" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.spatial.transform.Slerp">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.spatial.transform.</code><code class="sig-name descname">Slerp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">times</span></em>, <em class="sig-param"><span class="n">rotations</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/spatial/transform/rotation.py#L1981-L2124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.spatial.transform.Slerp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spherical Linear Interpolation of Rotations.</p>
+<p>The interpolation between consecutive rotations is performed as a rotation
+around a fixed axis with a constant angular velocity <a class="reference internal" href="#r11e26afb3035-1" id="id1"><span>[R11e26afb3035-1]</span></a>. This ensures
+that the interpolated rotations follow the shortest path between initial
+and final orientations.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>times</strong><span class="classifier">array_like, shape (N,)</span></dt><dd><p>Times of the known rotations. At least 2 times must be specified.</p>
+</dd>
+<dt><strong>rotations</strong><span class="classifier"><a class="reference internal" href="scipy.spatial.transform.Rotation.html#scipy.spatial.transform.Rotation" title="scipy.spatial.transform.Rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Rotation</span></code></a> instance</span></dt><dd><p>Rotations to perform the interpolation between. Must contain N
+rotations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.spatial.transform.Rotation.html#scipy.spatial.transform.Rotation" title="scipy.spatial.transform.Rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Rotation</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r11e26afb3035-1"><span class="brackets"><a class="fn-backref" href="#id1">R11e26afb3035-1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Slerp#Quaternion_Slerp">https://en.wikipedia.org/wiki/Slerp#Quaternion_Slerp</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial.transform</span> <span class="kn">import</span> <span class="n">Rotation</span> <span class="k">as</span> <span class="n">R</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial.transform</span> <span class="kn">import</span> <span class="n">Slerp</span>
+</pre></div>
+</div>
+<p>Setup the fixed keyframe rotations and times:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key_rots</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2342345</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key_times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Create the interpolator object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slerp</span> <span class="o">=</span> <span class="n">Slerp</span><span class="p">(</span><span class="n">key_times</span><span class="p">,</span> <span class="n">key_rots</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Interpolate the rotations at the given times:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">,</span> <span class="mf">3.60</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interp_rots</span> <span class="o">=</span> <span class="n">slerp</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The keyframe rotations expressed as Euler angles:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key_rots</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[ 14.31443779, -27.50095894,  -3.7275787 ],</span>
+<span class="go">       [ -1.79924227, -24.69421529, 164.57701743],</span>
+<span class="go">       [146.15020772,  43.22849451, -31.34891088],</span>
+<span class="go">       [ 46.39959442,  11.62126073, -45.99719267],</span>
+<span class="go">       [-88.94647804, -49.64400082, -65.80546984]])</span>
+</pre></div>
+</div>
+<p>The interpolated rotations expressed as Euler angles. These agree with the
+keyframe rotations at both endpoints of the range of keyframe times.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">interp_rots</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;xyz&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[  14.31443779,  -27.50095894,   -3.7275787 ],</span>
+<span class="go">       [   4.74588574,  -32.44683966,   81.25139984],</span>
+<span class="go">       [  10.71094749,  -31.56690154,   38.06896408],</span>
+<span class="go">       [  -1.79924227,  -24.69421529,  164.57701743],</span>
+<span class="go">       [  11.72796022,   51.64207311, -171.7374683 ],</span>
+<span class="go">       [ 146.15020772,   43.22849451,  -31.34891088],</span>
+<span class="go">       [  68.10921869,   20.67625074,  -48.74886034],</span>
+<span class="go">       [  46.39959442,   11.62126073,  -45.99719267],</span>
+<span class="go">       [  12.35552615,    4.21525086,  -64.89288124],</span>
+<span class="go">       [ -30.08117143,  -19.90769513,  -78.98121326],</span>
+<span class="go">       [ -88.94647804,  -49.64400082,  -65.80546984]])</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.spatial.transform.Slerp.__call__.html#scipy.spatial.transform.Slerp.__call__" title="scipy.spatial.transform.Slerp.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(self, times)</p></td>
+<td><p>Interpolate rotations.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

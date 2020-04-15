@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.rvs_ratio_uniforms &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.circmean" href="scipy.stats.circmean.html" >
+    <link rel="prev" title="scipy.stats.energy_distance" href="scipy.stats.energy_distance.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.circmean.html" title="scipy.stats.circmean"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.energy_distance.html" title="scipy.stats.energy_distance"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-rvs-ratio-uniforms">
+<h1>scipy.stats.rvs_ratio_uniforms<a class="headerlink" href="#scipy-stats-rvs-ratio-uniforms" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.rvs_ratio_uniforms">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">rvs_ratio_uniforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pdf</span></em>, <em class="sig-param"><span class="n">umax</span></em>, <em class="sig-param"><span class="n">vmin</span></em>, <em class="sig-param"><span class="n">vmax</span></em>, <em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">c</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/_rvs_sampling.py#L5-L169"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.rvs_ratio_uniforms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random samples from a probability density function using the
+ratio-of-uniforms method.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>pdf</strong><span class="classifier">callable</span></dt><dd><p>A function with signature <em class="xref py py-obj">pdf(x)</em> that is proportional to the
+probability density function of the distribution.</p>
+</dd>
+<dt><strong>umax</strong><span class="classifier">float</span></dt><dd><p>The upper bound of the bounding rectangle in the u-direction.</p>
+</dd>
+<dt><strong>vmin</strong><span class="classifier">float</span></dt><dd><p>The lower bound of the bounding rectangle in the v-direction.</p>
+</dd>
+<dt><strong>vmax</strong><span class="classifier">float</span></dt><dd><p>The upper bound of the bounding rectangle in the v-direction.</p>
+</dd>
+<dt><strong>size</strong><span class="classifier">int or tuple of ints, optional</span></dt><dd><p>Defining number of random variates (default is 1).</p>
+</dd>
+<dt><strong>c</strong><span class="classifier">float, optional.</span></dt><dd><p>Shift parameter of ratio-of-uniforms method, see Notes. Default is 0.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">{None, int, <em class="xref py py-obj">RandomState</em>, <em class="xref py py-obj">Generator</em>}, optional</span></dt><dd><p>If <em class="xref py py-obj">random_state</em> is <em class="xref py py-obj">None</em> the <em class="xref py py-obj">RandomState</em> singleton is
+used.
+If <em class="xref py py-obj">random_state</em> is an int, a new <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> instance is used,
+seeded with random_state.
+If <em class="xref py py-obj">random_state</em> is already a <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> or <code class="docutils literal notranslate"><span class="pre">Generator</span></code>
+instance, then that object is used.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>rvs</strong><span class="classifier">ndarray</span></dt><dd><p>The random variates distributed according to the probability
+distribution defined by the pdf.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Given a univariate probability density function <em class="xref py py-obj">pdf</em> and a constant <em class="xref py py-obj">c</em>,
+define the set <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">{(u,</span> <span class="pre">v)</span> <span class="pre">:</span> <span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">u</span> <span class="pre">&lt;=</span> <span class="pre">sqrt(pdf(v/u</span> <span class="pre">+</span> <span class="pre">c))}</span></code>.
+If <em class="xref py py-obj">(U, V)</em> is a random vector uniformly distributed over <em class="xref py py-obj">A</em>,
+then <em class="xref py py-obj">V/U + c</em> follows a distribution according to <em class="xref py py-obj">pdf</em>.</p>
+<p>The above result (see <a class="reference internal" href="#r35317a3df42e-1" id="id1">[1]</a>, <a class="reference internal" href="#r35317a3df42e-2" id="id2">[2]</a>) can be used to sample random variables
+using only the pdf, i.e. no inversion of the cdf is required. Typical
+choices of <em class="xref py py-obj">c</em> are zero or the mode of <em class="xref py py-obj">pdf</em>. The set <em class="xref py py-obj">A</em> is a subset of
+the rectangle <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">umax]</span> <span class="pre">x</span> <span class="pre">[vmin,</span> <span class="pre">vmax]</span></code> where</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">umax</span> <span class="pre">=</span> <span class="pre">sup</span> <span class="pre">sqrt(pdf(x))</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vmin</span> <span class="pre">=</span> <span class="pre">inf</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">c)</span> <span class="pre">sqrt(pdf(x))</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vmax</span> <span class="pre">=</span> <span class="pre">sup</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">c)</span> <span class="pre">sqrt(pdf(x))</span></code></p></li>
+</ul>
+<p>In particular, these values are finite if <em class="xref py py-obj">pdf</em> is bounded and
+<code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">*</span> <span class="pre">pdf(x)</span></code> is bounded (i.e. subquadratic tails).
+One can generate <em class="xref py py-obj">(U, V)</em> uniformly on <em class="xref py py-obj">R</em> and return
+<em class="xref py py-obj">V/U + c</em> if <em class="xref py py-obj">(U, V)</em> are also in <em class="xref py py-obj">A</em> which can be directly
+verified.</p>
+<p>The algorithm is not changed if one replaces <em class="xref py py-obj">pdf</em> by k * <em class="xref py py-obj">pdf</em> for any
+constant k &gt; 0. Thus, it is often convenient to work with a function
+that is proportional to the probability density function by dropping
+unneccessary normalization factors.</p>
+<p>Intuitively, the method works well if <em class="xref py py-obj">A</em> fills up most of the
+enclosing rectangle such that the probability is high that <em class="xref py py-obj">(U, V)</em>
+lies in <em class="xref py py-obj">A</em> whenever it lies in <em class="xref py py-obj">R</em> as the number of required
+iterations becomes too large otherwise. To be more precise, note that
+the expected number of iterations to draw <em class="xref py py-obj">(U, V)</em> uniformly
+distributed on <em class="xref py py-obj">R</em> such that <em class="xref py py-obj">(U, V)</em> is also in <em class="xref py py-obj">A</em> is given by
+the ratio <code class="docutils literal notranslate"><span class="pre">area(R)</span> <span class="pre">/</span> <span class="pre">area(A)</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">umax</span> <span class="pre">*</span> <span class="pre">(vmax</span> <span class="pre">-</span> <span class="pre">vmin)</span> <span class="pre">/</span> <span class="pre">area(pdf)</span></code>,
+where <em class="xref py py-obj">area(pdf)</em> is the integral of <em class="xref py py-obj">pdf</em> (which is equal to one if the
+probability density function is used but can take on other values if a
+function proportional to the density is used). The equality holds since
+the area of <em class="xref py py-obj">A</em> is equal to 0.5 * area(pdf) (Theorem 7.1 in <a class="reference internal" href="#r35317a3df42e-1" id="id3">[1]</a>).
+If the sampling fails to generate a single random variate after 50000
+iterations (i.e. not a single draw is in <em class="xref py py-obj">A</em>), an exception is raised.</p>
+<p>If the bounding rectangle is not correctly specified (i.e. if it does not
+contain <em class="xref py py-obj">A</em>), the algorithm samples from a distribution different from
+the one given by <em class="xref py py-obj">pdf</em>. It is therefore recommended to perform a
+test such as <a class="reference internal" href="scipy.stats.kstest.html#scipy.stats.kstest" title="scipy.stats.kstest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kstest</span></code></a> as a check.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r35317a3df42e-1"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p>L. Devroye, “Non-Uniform Random Variate Generation”,
+Springer-Verlag, 1986.</p>
+</dd>
+<dt class="label" id="r35317a3df42e-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>W. Hoermann and J. Leydold, “Generating generalized inverse Gaussian
+random variates”, Statistics and Computing, 24(4), p. 547–557, 2014.</p>
+</dd>
+<dt class="label" id="r35317a3df42e-3"><span class="brackets">3</span></dt>
+<dd><p>A.J. Kinderman and J.F. Monahan, “Computer Generation of Random
+Variables Using the Ratio of Uniform Deviates”,
+ACM Transactions on Mathematical Software, 3(3), p. 257–260, 1977.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+<p>Simulate normally distributed random variables. It is easy to compute the
+bounding rectangle explicitly in that case. For simplicity, we drop the
+normalization factor of the density.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">umax</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="o">-</span><span class="n">v_bound</span><span class="p">,</span> <span class="n">v_bound</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rvs</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">rvs_ratio_uniforms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">umax</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2500</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The K-S test confirms that the random variates are indeed normally
+distributed (normality is not rejected at 5% significance level):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="s1">&#39;norm&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">0.3420173467307638</span>
+</pre></div>
+</div>
+<p>The exponential distribution provides another example where the bounding
+rectangle can be determined explicitly.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rvs</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">rvs_ratio_uniforms</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">),</span> <span class="n">umax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="s1">&#39;expon&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">0.928454552559516</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.energy_distance.html"
+                        title="previous chapter">scipy.stats.energy_distance</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.circmean.html"
+                        title="next chapter">scipy.stats.circmean</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

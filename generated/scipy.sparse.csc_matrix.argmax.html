@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.sparse.csc_matrix.argmax &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="scipy.sparse.csc_matrix" href="scipy.sparse.csc_matrix.html" >
+    <link rel="next" title="scipy.sparse.csc_matrix.argmin" href="scipy.sparse.csc_matrix.argmin.html" >
+    <link rel="prev" title="scipy.sparse.csc_matrix.arctanh" href="scipy.sparse.csc_matrix.arctanh.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../sparse.html" >Sparse matrices (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code>)</a></li>
+          <li class="active"><a href="scipy.sparse.csc_matrix.html" accesskey="U">scipy.sparse.csc_matrix</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.csc_matrix.argmin.html" title="scipy.sparse.csc_matrix.argmin"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.csc_matrix.arctanh.html" title="scipy.sparse.csc_matrix.arctanh"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-sparse-csc-matrix-argmax">
+<h1>scipy.sparse.csc_matrix.argmax<a class="headerlink" href="#scipy-sparse-csc-matrix-argmax" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="scipy.sparse.csc_matrix.argmax">
+<code class="sig-prename descclassname">csc_matrix.</code><code class="sig-name descname">argmax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">out</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/sparse/data.py#L353-L374"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.sparse.csc_matrix.argmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return indices of maximum elements along an axis.</p>
+<p>Implicit zero elements are also taken into account. If there are
+several maximum values, the index of the first occurrence is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>axis</strong><span class="classifier">{-2, -1, 0, 1, None}, optional</span></dt><dd><p>Axis along which the argmax is computed. If None (default), index
+of the maximum element in the flatten data is returned.</p>
+</dd>
+<dt><strong>out</strong><span class="classifier">None, optional</span></dt><dd><p>This argument is in the signature <em>solely</em> for NumPy
+compatibility reasons. Do not pass in anything except for
+the default value, as this argument is not used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ind</strong><span class="classifier">numpy.matrix or int</span></dt><dd><p>Indices of maximum elements. If matrix, its size along <em class="xref py py-obj">axis</em> is 1.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.sparse.csc_matrix.arctanh.html"
+                        title="previous chapter">scipy.sparse.csc_matrix.arctanh</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.sparse.csc_matrix.argmin.html"
+                        title="next chapter">scipy.sparse.csc_matrix.argmin</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

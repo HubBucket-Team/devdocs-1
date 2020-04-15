@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>minimize(method=’trust-constr’) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="optimize.html" >
+    <link rel="next" title="minimize(method=’dogleg’)" href="optimize.minimize-dogleg.html" >
+    <link rel="prev" title="minimize(method=’SLSQP’)" href="optimize.minimize-slsqp.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="index.html">
+      <img style="border: 0;" alt="SciPy" src="_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="optimize.minimize-dogleg.html" title="minimize(method=’dogleg’)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="optimize.minimize-slsqp.html" title="minimize(method=’SLSQP’)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="minimize-method-trust-constr">
+<span id="optimize-minimize-trustconstr"></span><h1>minimize(method=’trust-constr’)<a class="headerlink" href="#minimize-method-trust-constr" title="Permalink to this headline">¶</a></h1>
+<dl class="scipy-optimize function">
+<dt>
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">minimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'trust-constr'</span></em>, <em class="sig-param"><span class="n">hess</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hessp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bounds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">constraints</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">{'grad': None, 'xtol': 1e-08, 'gtol': 1e-08, 'barrier_tol': 1e-08, 'sparse_jacobian': None, 'maxiter': 1000, 'verbose': 0, 'finite_diff_rel_step': None, 'initial_constr_penalty': 1.0, 'initial_tr_radius': 1.0, 'initial_barrier_parameter': 0.1, 'initial_barrier_tolerance': 0.1, 'factorization_method': None, 'disp': False}</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Minimize a scalar function subject to constraints.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>gtol</strong><span class="classifier">float, optional</span></dt><dd><p>Tolerance for termination by the norm of the Lagrangian gradient.
+The algorithm will terminate when both the infinity norm (i.e., max
+abs value) of the Lagrangian gradient and the constraint violation
+are smaller than <code class="docutils literal notranslate"><span class="pre">gtol</span></code>. Default is 1e-8.</p>
+</dd>
+<dt><strong>xtol</strong><span class="classifier">float, optional</span></dt><dd><p>Tolerance for termination by the change of the independent variable.
+The algorithm will terminate when <code class="docutils literal notranslate"><span class="pre">tr_radius</span> <span class="pre">&lt;</span> <span class="pre">xtol</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">tr_radius</span></code> is the radius of the trust region used in the algorithm.
+Default is 1e-8.</p>
+</dd>
+<dt><strong>barrier_tol</strong><span class="classifier">float, optional</span></dt><dd><p>Threshold on the barrier parameter for the algorithm termination.
+When inequality constraints are present, the algorithm will terminate
+only when the barrier parameter is less than <em class="xref py py-obj">barrier_tol</em>.
+Default is 1e-8.</p>
+</dd>
+<dt><strong>sparse_jacobian</strong><span class="classifier">{bool, None}, optional</span></dt><dd><p>Determines how to represent Jacobians of the constraints. If bool,
+then Jacobians of all the constraints will be converted to the
+corresponding format. If None (default), then Jacobians won’t be
+converted, but the algorithm can proceed only if they all have the
+same format.</p>
+</dd>
+<dt><strong>initial_tr_radius: float, optional</strong></dt><dd><p>Initial trust radius. The trust radius gives the maximum distance
+between solution points in consecutive iterations. It reflects the
+trust the algorithm puts in the local approximation of the optimization
+problem. For an accurate local approximation the trust-region should be
+large and for an  approximation valid only close to the current point it
+should be a small one. The trust radius is automatically updated throughout
+the optimization process, with <code class="docutils literal notranslate"><span class="pre">initial_tr_radius</span></code> being its initial value.
+Default is 1 (recommended in <a class="reference internal" href="#rab657fac9340-1" id="id1">[1]</a>, p. 19).</p>
+</dd>
+<dt><strong>initial_constr_penalty</strong><span class="classifier">float, optional</span></dt><dd><p>Initial constraints penalty parameter. The penalty parameter is used for
+balancing the requirements of decreasing the objective function
+and satisfying the constraints. It is used for defining the merit function:
+<code class="docutils literal notranslate"><span class="pre">merit_function(x)</span> <span class="pre">=</span> <span class="pre">fun(x)</span> <span class="pre">+</span> <span class="pre">constr_penalty</span> <span class="pre">*</span> <span class="pre">constr_norm_l2(x)</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">constr_norm_l2(x)</span></code> is the l2 norm of a vector containing all
+the constraints. The merit function is used for accepting or rejecting
+trial points and <code class="docutils literal notranslate"><span class="pre">constr_penalty</span></code> weights the two conflicting goals
+of reducing objective function and constraints. The penalty is automatically
+updated throughout the optimization  process, with
+<code class="docutils literal notranslate"><span class="pre">initial_constr_penalty</span></code> being its  initial value. Default is 1
+(recommended in <a class="reference internal" href="#rab657fac9340-1" id="id2">[1]</a>, p 19).</p>
+</dd>
+<dt><strong>initial_barrier_parameter, initial_barrier_tolerance: float, optional</strong></dt><dd><p>Initial barrier parameter and initial tolerance for the barrier subproblem.
+Both are used only when inequality constraints are present. For dealing with
+optimization problems <code class="docutils literal notranslate"><span class="pre">min_x</span> <span class="pre">f(x)</span></code> subject to inequality constraints
+<code class="docutils literal notranslate"><span class="pre">c(x)</span> <span class="pre">&lt;=</span> <span class="pre">0</span></code> the algorithm introduces slack variables, solving the problem
+<code class="docutils literal notranslate"><span class="pre">min_(x,s)</span> <span class="pre">f(x)</span> <span class="pre">+</span> <span class="pre">barrier_parameter*sum(ln(s))</span></code> subject to the equality
+constraints  <code class="docutils literal notranslate"><span class="pre">c(x)</span> <span class="pre">+</span> <span class="pre">s</span> <span class="pre">=</span> <span class="pre">0</span></code> instead of the original problem. This subproblem
+is solved for decreasing values of <code class="docutils literal notranslate"><span class="pre">barrier_parameter</span></code> and with decreasing
+tolerances for the termination, starting with <code class="docutils literal notranslate"><span class="pre">initial_barrier_parameter</span></code>
+for the barrier parameter and <code class="docutils literal notranslate"><span class="pre">initial_barrier_tolerance</span></code> for the
+barrier tolerance. Default is 0.1 for both values (recommended in <a class="reference internal" href="#rab657fac9340-1" id="id3">[1]</a> p. 19).
+Also note that <code class="docutils literal notranslate"><span class="pre">barrier_parameter</span></code> and <code class="docutils literal notranslate"><span class="pre">barrier_tolerance</span></code> are updated
+with the same prefactor.</p>
+</dd>
+<dt><strong>factorization_method</strong><span class="classifier">string or None, optional</span></dt><dd><p>Method to factorize the Jacobian of the constraints. Use None (default)
+for the auto selection or one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘NormalEquation’ (requires scikit-sparse)</p></li>
+<li><p>‘AugmentedSystem’</p></li>
+<li><p>‘QRFactorization’</p></li>
+<li><p>‘SVDFactorization’</p></li>
+</ul>
+</div></blockquote>
+<p>The methods ‘NormalEquation’ and ‘AugmentedSystem’ can be used only
+with sparse constraints. The projections required by the algorithm
+will be computed using, respectively, the the normal equation  and the
+augmented system approaches explained in <a class="reference internal" href="#rab657fac9340-1" id="id4">[1]</a>. ‘NormalEquation’
+computes the Cholesky factorization of <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">A.T</span></code> and ‘AugmentedSystem’
+performs the LU factorization of an augmented system. They usually
+provide similar results. ‘AugmentedSystem’ is used by default for
+sparse matrices.</p>
+<p>The methods ‘QRFactorization’ and ‘SVDFactorization’ can be used
+only with dense constraints. They compute the required projections
+using, respectively, QR and SVD factorizations. The ‘SVDFactorization’
+method can cope with Jacobian matrices with deficient row rank and will
+be used whenever other factorization methods fail (which may imply the
+conversion of sparse matrices to a dense format when required).
+By default, ‘QRFactorization’ is used for dense matrices.</p>
+</dd>
+<dt><strong>finite_diff_rel_step</strong><span class="classifier">None or array_like, optional</span></dt><dd><p>Relative step size for the finite difference approximation.</p>
+</dd>
+<dt><strong>maxiter</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of algorithm iterations. Default is 1000.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">{0, 1, 2}, optional</span></dt><dd><p>Level of algorithm’s verbosity:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 (default) : work silently.</p></li>
+<li><p>1 : display a termination report.</p></li>
+<li><p>2 : display progress during iterations.</p></li>
+<li><p>3 : display progress during iterations (more complete report).</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>disp</strong><span class="classifier">bool, optional</span></dt><dd><p>If True (default), then <em class="xref py py-obj">verbose</em> will be set to 1 if it was 0.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><a class="reference internal" href="generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult" title="scipy.optimize.OptimizeResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a> with the fields documented below. Note the following:</dt><dd><ol class="arabic simple">
+<li><p>All values corresponding to the constraints are ordered as they
+were passed to the solver. And values corresponding to <em class="xref py py-obj">bounds</em>
+constraints are put <em>after</em> other constraints.</p></li>
+<li><p>All numbers of function, Jacobian or Hessian evaluations correspond
+to numbers of actual Python function calls. It means, for example,
+that if a Jacobian is estimated by finite differences, then the
+number of Jacobian evaluations will be zero and the number of
+function evaluations will be incremented by all calls during the
+finite difference estimation.</p></li>
+</ol>
+</dd>
+<dt><strong>x</strong><span class="classifier">ndarray, shape (n,)</span></dt><dd><p>Solution found.</p>
+</dd>
+<dt><strong>optimality</strong><span class="classifier">float</span></dt><dd><p>Infinity norm of the Lagrangian gradient at the solution.</p>
+</dd>
+<dt><strong>constr_violation</strong><span class="classifier">float</span></dt><dd><p>Maximum constraint violation at the solution.</p>
+</dd>
+<dt><strong>fun</strong><span class="classifier">float</span></dt><dd><p>Objective function at the solution.</p>
+</dd>
+<dt><strong>grad</strong><span class="classifier">ndarray, shape (n,)</span></dt><dd><p>Gradient of the objective function at the solution.</p>
+</dd>
+<dt><strong>lagrangian_grad</strong><span class="classifier">ndarray, shape (n,)</span></dt><dd><p>Gradient of the Lagrangian function at the solution.</p>
+</dd>
+<dt><strong>nit</strong><span class="classifier">int</span></dt><dd><p>Total number of iterations.</p>
+</dd>
+<dt><strong>nfev</strong><span class="classifier">integer</span></dt><dd><p>Number of the objective function evaluations.</p>
+</dd>
+<dt><strong>njev</strong><span class="classifier">integer</span></dt><dd><p>Number of the objective function gradient evaluations.</p>
+</dd>
+<dt><strong>nhev</strong><span class="classifier">integer</span></dt><dd><p>Number of the objective function Hessian evaluations.</p>
+</dd>
+<dt><strong>cg_niter</strong><span class="classifier">int</span></dt><dd><p>Total number of the conjugate gradient method iterations.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">{‘equality_constrained_sqp’, ‘tr_interior_point’}</span></dt><dd><p>Optimization method used.</p>
+</dd>
+<dt><strong>constr</strong><span class="classifier">list of ndarray</span></dt><dd><p>List of constraint values at the solution.</p>
+</dd>
+<dt><strong>jac</strong><span class="classifier">list of {ndarray, sparse matrix}</span></dt><dd><p>List of the Jacobian matrices of the constraints at the solution.</p>
+</dd>
+<dt><strong>v</strong><span class="classifier">list of ndarray</span></dt><dd><p>List of the Lagrange multipliers for the constraints at the solution.
+For an inequality constraint a positive multiplier means that the upper
+bound is active, a negative multiplier means that the lower bound is
+active and if a multiplier is zero it means the constraint is not
+active.</p>
+</dd>
+<dt><strong>constr_nfev</strong><span class="classifier">list of int</span></dt><dd><p>Number of constraint evaluations for each of the constraints.</p>
+</dd>
+<dt><strong>constr_njev</strong><span class="classifier">list of int</span></dt><dd><p>Number of Jacobian matrix evaluations for each of the constraints.</p>
+</dd>
+<dt><strong>constr_nhev</strong><span class="classifier">list of int</span></dt><dd><p>Number of Hessian evaluations for each of the constraints.</p>
+</dd>
+<dt><strong>tr_radius</strong><span class="classifier">float</span></dt><dd><p>Radius of the trust region at the last iteration.</p>
+</dd>
+<dt><strong>constr_penalty</strong><span class="classifier">float</span></dt><dd><p>Penalty parameter at the last iteration, see <em class="xref py py-obj">initial_constr_penalty</em>.</p>
+</dd>
+<dt><strong>barrier_tolerance</strong><span class="classifier">float</span></dt><dd><p>Tolerance for the barrier subproblem at the last iteration.
+Only for problems with inequality constraints.</p>
+</dd>
+<dt><strong>barrier_parameter</strong><span class="classifier">float</span></dt><dd><p>Barrier parameter at the last iteration. Only for problems
+with inequality constraints.</p>
+</dd>
+<dt><strong>execution_time</strong><span class="classifier">float</span></dt><dd><p>Total execution time.</p>
+</dd>
+<dt><strong>message</strong><span class="classifier">str</span></dt><dd><p>Termination message.</p>
+</dd>
+<dt><strong>status</strong><span class="classifier">{0, 1, 2, 3}</span></dt><dd><p>Termination status:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 : The maximum number of function evaluations is exceeded.</p></li>
+<li><p>1 : <em class="xref py py-obj">gtol</em> termination condition is satisfied.</p></li>
+<li><p>2 : <em class="xref py py-obj">xtol</em> termination condition is satisfied.</p></li>
+<li><p>3 : <em class="xref py py-obj">callback</em> function requested termination.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>cg_stop_cond</strong><span class="classifier">int</span></dt><dd><p>Reason for CG subproblem termination at the last iteration:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 : CG subproblem not evaluated.</p></li>
+<li><p>1 : Iteration limit was reached.</p></li>
+<li><p>2 : Reached the trust-region boundary.</p></li>
+<li><p>3 : Negative curvature detected.</p></li>
+<li><p>4 : Tolerance was satisfied.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rab657fac9340-1"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>)</span></dt>
+<dd><p>Conn, A. R., Gould, N. I., &amp; Toint, P. L.
+Trust region methods. 2000. Siam. pp. 19.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optimize.minimize-slsqp.html"
+                        title="previous chapter">minimize(method=’SLSQP’)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optimize.minimize-dogleg.html"
+                        title="next chapter">minimize(method=’dogleg’)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.SR1 &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.SR1.dot" href="scipy.optimize.SR1.dot.html" >
+    <link rel="prev" title="scipy.optimize.BFGS.update" href="scipy.optimize.BFGS.update.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.SR1.dot.html" title="scipy.optimize.SR1.dot"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.BFGS.update.html" title="scipy.optimize.BFGS.update"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-sr1">
+<h1>scipy.optimize.SR1<a class="headerlink" href="#scipy-optimize-sr1" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.optimize.SR1">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">SR1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_denominator</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">init_scale</span><span class="o">=</span><span class="default_value">'auto'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/_hessian_update_strategy.py#L377-L429"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.SR1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Symmetric-rank-1 Hessian update strategy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>min_denominator</strong><span class="classifier">float</span></dt><dd><p>This number, scaled by a normalization factor,
+defines the minimum denominator magnitude allowed
+in the update. When the condition is violated we skip
+the update. By default uses <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>.</p>
+</dd>
+<dt><strong>init_scale</strong><span class="classifier">{float, ‘auto’}, optional</span></dt><dd><p>Matrix scale at first iteration. At the first
+iteration the Hessian matrix or its inverse will be initialized
+with <code class="docutils literal notranslate"><span class="pre">init_scale*np.eye(n)</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the problem dimension.
+Set it to ‘auto’ in order to use an automatic heuristic for choosing
+the initial scale. The heuristic is described in <a class="reference internal" href="#rf73631950f54-1" id="id1"><span>[Rf73631950f54-1]</span></a>, p.143.
+By default uses ‘auto’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The update is based on the description in <a class="reference internal" href="#rf73631950f54-1" id="id2"><span>[Rf73631950f54-1]</span></a>, p.144-146.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rf73631950f54-1"><span class="brackets">Rf73631950f54-1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Nocedal, Jorge, and Stephen J. Wright. “Numerical optimization”
+Second Edition (2006).</p>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.SR1.dot.html#scipy.optimize.SR1.dot" title="scipy.optimize.SR1.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(self, p)</p></td>
+<td><p>Compute the product of the internal matrix with the given vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.SR1.get_matrix.html#scipy.optimize.SR1.get_matrix" title="scipy.optimize.SR1.get_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_matrix</span></code></a>(self)</p></td>
+<td><p>Return the current internal matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.SR1.initialize.html#scipy.optimize.SR1.initialize" title="scipy.optimize.SR1.initialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize</span></code></a>(self, n, approx_type)</p></td>
+<td><p>Initialize internal matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.SR1.update.html#scipy.optimize.SR1.update" title="scipy.optimize.SR1.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(self, delta_x, delta_grad)</p></td>
+<td><p>Update internal matrix.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.BFGS.update.html"
+                        title="previous chapter">scipy.optimize.BFGS.update</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.SR1.dot.html"
+                        title="next chapter">scipy.optimize.SR1.dot</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.gstd &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.iqr" href="scipy.stats.iqr.html" >
+    <link rel="prev" title="scipy.stats.trim_mean" href="scipy.stats.trim_mean.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.iqr.html" title="scipy.stats.iqr"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.trim_mean.html" title="scipy.stats.trim_mean"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-gstd">
+<h1>scipy.stats.gstd<a class="headerlink" href="#scipy-stats-gstd" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.gstd">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">gstd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L2442-L2567"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.gstd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the geometric standard deviation of an array.</p>
+<p>The geometric standard deviation describes the spread of a set of numbers
+where the geometric mean is preferred. It is a multiplicative factor, and
+so a dimensionless quantity.</p>
+<p>It is defined as the exponent of the standard deviation of <code class="docutils literal notranslate"><span class="pre">log(a)</span></code>.
+Mathematically the population geometric standard deviation can be
+evaluated as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gstd</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">std</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>a</strong><span class="classifier">array_like</span></dt><dd><p>An array like object containing the sample data.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int, tuple or None, optional</span></dt><dd><p>Axis along which to operate. Default is 0. If None, compute over
+the whole array <em class="xref py py-obj">a</em>.</p>
+</dd>
+<dt><strong>ddof</strong><span class="classifier">int, optional</span></dt><dd><p>Degree of freedom correction in the calculation of the
+geometric standard deviation. Default is 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray or float</dt><dd><p>An array of the geometric standard deviation. If <em class="xref py py-obj">axis</em> is None or <em class="xref py py-obj">a</em>
+is a 1d array a float is returned.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>As the calculation requires the use of logarithms the geometric standard
+deviation only supports strictly positive values. Any non-positive or
+infinite values will raise a <em class="xref py py-obj">ValueError</em>.
+The geometric standard deviation is sometimes confused with the exponent of
+the standard deviation, <code class="docutils literal notranslate"><span class="pre">exp(std(a))</span></code>. Instead the geometric standard
+deviation is <code class="docutils literal notranslate"><span class="pre">exp(std(log(a)))</span></code>.
+The default value for <em class="xref py py-obj">ddof</em> is different to the default value (0) used
+by other ddof containing functions, such as <code class="docutils literal notranslate"><span class="pre">np.std</span></code> and <code class="docutils literal notranslate"><span class="pre">np.nanstd</span></code>.</p>
+<p class="rubric">Examples</p>
+<p>Find the geometric standard deviation of a log-normally distributed sample.
+Note that the standard deviation of the distribution is one, on a
+log scale this evaluates to approximately <code class="docutils literal notranslate"><span class="pre">exp(1)</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gstd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gstd</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="go">2.7217860664589946</span>
+</pre></div>
+</div>
+<p>Compute the geometric standard deviation of a multidimensional array and
+of a given axis.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gstd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">2.2944076136018947</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gstd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[1.82424757, 1.22436866, 1.13183117],</span>
+<span class="go">       [1.09348306, 1.07244798, 1.05914985]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gstd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">array([2.12939215, 1.22120169])</span>
+</pre></div>
+</div>
+<p>The geometric standard deviation further handles masked arrays.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span>
+<span class="go">masked_array(</span>
+<span class="go">  data=[[[1, 2, 3, 4],</span>
+<span class="go">         [5, 6, 7, 8],</span>
+<span class="go">         [9, 10, 11, 12]],</span>
+<span class="go">        [[13, 14, 15, 16],</span>
+<span class="go">         [--, --, --, --],</span>
+<span class="go">         [--, --, --, --]]],</span>
+<span class="go">  mask=[[[False, False, False, False],</span>
+<span class="go">         [False, False, False, False],</span>
+<span class="go">         [False, False, False, False]],</span>
+<span class="go">        [[False, False, False, False],</span>
+<span class="go">         [ True,  True,  True,  True],</span>
+<span class="go">         [ True,  True,  True,  True]]],</span>
+<span class="go">  fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gstd</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">masked_array(</span>
+<span class="go">  data=[[1.8242475707663655, 1.2243686572447428, 1.1318311657788478],</span>
+<span class="go">        [1.0934830582350938, --, --]],</span>
+<span class="go">  mask=[[False, False, False],</span>
+<span class="go">        [False,  True,  True]],</span>
+<span class="go">  fill_value=999999)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.trim_mean.html"
+                        title="previous chapter">scipy.stats.trim_mean</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.iqr.html"
+                        title="next chapter">scipy.stats.iqr</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

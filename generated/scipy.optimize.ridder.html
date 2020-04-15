@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.ridder &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.bisect" href="scipy.optimize.bisect.html" >
+    <link rel="prev" title="scipy.optimize.brenth" href="scipy.optimize.brenth.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.bisect.html" title="scipy.optimize.bisect"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.brenth.html" title="scipy.optimize.brenth"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-ridder">
+<h1>scipy.optimize.ridder<a class="headerlink" href="#scipy-optimize-ridder" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.optimize.ridder">
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">ridder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">xtol</span><span class="o">=</span><span class="default_value">2e-12</span></em>, <em class="sig-param"><span class="n">rtol</span><span class="o">=</span><span class="default_value">8.881784197001252e-16</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">full_output</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disp</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/zeros.py#L553-L647"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.ridder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a root of a function in an interval using Ridder’s method.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>f</strong><span class="classifier">function</span></dt><dd><p>Python function returning a number. f must be continuous, and f(a) and
+f(b) must have opposite signs.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier">scalar</span></dt><dd><p>One end of the bracketing interval [a,b].</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">scalar</span></dt><dd><p>The other end of the bracketing interval [a,b].</p>
+</dd>
+<dt><strong>xtol</strong><span class="classifier">number, optional</span></dt><dd><p>The computed root <code class="docutils literal notranslate"><span class="pre">x0</span></code> will satisfy <code class="docutils literal notranslate"><span class="pre">np.allclose(x,</span> <span class="pre">x0,</span>
+<span class="pre">atol=xtol,</span> <span class="pre">rtol=rtol)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the exact root. The
+parameter must be nonnegative.</p>
+</dd>
+<dt><strong>rtol</strong><span class="classifier">number, optional</span></dt><dd><p>The computed root <code class="docutils literal notranslate"><span class="pre">x0</span></code> will satisfy <code class="docutils literal notranslate"><span class="pre">np.allclose(x,</span> <span class="pre">x0,</span>
+<span class="pre">atol=xtol,</span> <span class="pre">rtol=rtol)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the exact root. The
+parameter cannot be smaller than its default value of
+<code class="docutils literal notranslate"><span class="pre">4*np.finfo(float).eps</span></code>.</p>
+</dd>
+<dt><strong>maxiter</strong><span class="classifier">int, optional</span></dt><dd><p>If convergence is not achieved in <em class="xref py py-obj">maxiter</em> iterations, an error is
+raised. Must be &gt;= 0.</p>
+</dd>
+<dt><strong>args</strong><span class="classifier">tuple, optional</span></dt><dd><p>Containing extra arguments for the function <em class="xref py py-obj">f</em>.
+<em class="xref py py-obj">f</em> is called by <code class="docutils literal notranslate"><span class="pre">apply(f,</span> <span class="pre">(x)+args)</span></code>.</p>
+</dd>
+<dt><strong>full_output</strong><span class="classifier">bool, optional</span></dt><dd><p>If <em class="xref py py-obj">full_output</em> is False, the root is returned. If <em class="xref py py-obj">full_output</em> is
+True, the return value is <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">r)</span></code>, where <em class="xref py py-obj">x</em> is the root, and <em class="xref py py-obj">r</em> is
+a <a class="reference internal" href="scipy.optimize.RootResults.html#scipy.optimize.RootResults" title="scipy.optimize.RootResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RootResults</span></code></a> object.</p>
+</dd>
+<dt><strong>disp</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, raise RuntimeError if the algorithm didn’t converge.
+Otherwise, the convergence status is recorded in any <a class="reference internal" href="scipy.optimize.RootResults.html#scipy.optimize.RootResults" title="scipy.optimize.RootResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RootResults</span></code></a>
+return object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>x0</strong><span class="classifier">float</span></dt><dd><p>Zero of <em class="xref py py-obj">f</em> between <em class="xref py py-obj">a</em> and <em class="xref py py-obj">b</em>.</p>
+</dd>
+<dt><strong>r</strong><span class="classifier"><a class="reference internal" href="scipy.optimize.RootResults.html#scipy.optimize.RootResults" title="scipy.optimize.RootResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RootResults</span></code></a> (present if <code class="docutils literal notranslate"><span class="pre">full_output</span> <span class="pre">=</span> <span class="pre">True</span></code>)</span></dt><dd><p>Object containing information about the convergence.
+In particular, <code class="docutils literal notranslate"><span class="pre">r.converged</span></code> is True if the routine converged.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.optimize.brentq.html#scipy.optimize.brentq" title="scipy.optimize.brentq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brentq</span></code></a>, <a class="reference internal" href="scipy.optimize.brenth.html#scipy.optimize.brenth" title="scipy.optimize.brenth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brenth</span></code></a>, <a class="reference internal" href="scipy.optimize.bisect.html#scipy.optimize.bisect" title="scipy.optimize.bisect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bisect</span></code></a>, <a class="reference internal" href="scipy.optimize.newton.html#scipy.optimize.newton" title="scipy.optimize.newton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">newton</span></code></a></dt><dd><p>1-D root-finding</p>
+</dd>
+<dt><a class="reference internal" href="scipy.optimize.fixed_point.html#scipy.optimize.fixed_point" title="scipy.optimize.fixed_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fixed_point</span></code></a></dt><dd><p>scalar fixed-point finder</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Uses <a class="reference internal" href="#rb24f4e0f7574-ridders1979" id="id1">[Ridders1979]</a> method to find a zero of the function <em class="xref py py-obj">f</em> between the
+arguments <em class="xref py py-obj">a</em> and <em class="xref py py-obj">b</em>. Ridders’ method is faster than bisection, but not
+generally as fast as the Brent routines. <a class="reference internal" href="#rb24f4e0f7574-ridders1979" id="id2">[Ridders1979]</a> provides the
+classic description and source of the algorithm. A description can also be
+found in any recent edition of Numerical Recipes.</p>
+<p>The routine used here diverges slightly from standard presentations in
+order to be a bit more careful of tolerance.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rb24f4e0f7574-ridders1979"><span class="brackets">Ridders1979</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Ridders, C. F. J. “A New Algorithm for Computing a
+Single Root of a Real Continuous Function.”
+IEEE Trans. Circuits Systems 26, 979-980, 1979.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">ridder</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">root</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">ridder</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">root</span>
+<span class="go">-1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.brenth.html"
+                        title="previous chapter">scipy.optimize.brenth</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.bisect.html"
+                        title="next chapter">scipy.optimize.bisect</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.power_divergence &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.ks_2samp" href="scipy.stats.ks_2samp.html" >
+    <link rel="prev" title="scipy.stats.chisquare" href="scipy.stats.chisquare.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.ks_2samp.html" title="scipy.stats.ks_2samp"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.chisquare.html" title="scipy.stats.chisquare"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-power-divergence">
+<h1>scipy.stats.power_divergence<a class="headerlink" href="#scipy-stats-power-divergence" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.power_divergence">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">power_divergence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_obs</span></em>, <em class="sig-param"><span class="n">f_exp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ddof</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">lambda_</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L5508-L5704"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.power_divergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cressie-Read power divergence statistic and goodness of fit test.</p>
+<p>This function tests the null hypothesis that the categorical data
+has the given frequencies, using the Cressie-Read power divergence
+statistic.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>f_obs</strong><span class="classifier">array_like</span></dt><dd><p>Observed frequencies in each category.</p>
+</dd>
+<dt><strong>f_exp</strong><span class="classifier">array_like, optional</span></dt><dd><p>Expected frequencies in each category.  By default the categories are
+assumed to be equally likely.</p>
+</dd>
+<dt><strong>ddof</strong><span class="classifier">int, optional</span></dt><dd><p>“Delta degrees of freedom”: adjustment to the degrees of freedom
+for the p-value.  The p-value is computed using a chi-squared
+distribution with <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">-</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">ddof</span></code> degrees of freedom, where <em class="xref py py-obj">k</em>
+is the number of observed frequencies.  The default value of <em class="xref py py-obj">ddof</em>
+is 0.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int or None, optional</span></dt><dd><p>The axis of the broadcast result of <em class="xref py py-obj">f_obs</em> and <em class="xref py py-obj">f_exp</em> along which to
+apply the test.  If axis is None, all values in <em class="xref py py-obj">f_obs</em> are treated
+as a single data set.  Default is 0.</p>
+</dd>
+<dt><strong>lambda_</strong><span class="classifier">float or str, optional</span></dt><dd><p>The power in the Cressie-Read power divergence statistic.  The default
+is 1.  For convenience, <em class="xref py py-obj">lambda_</em> may be assigned one of the following
+strings, in which case the corresponding numerical value is used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>String              Value   Description
+&quot;pearson&quot;             1     Pearson&#39;s chi-squared statistic.
+                            In this case, the function is
+                            equivalent to `stats.chisquare`.
+&quot;log-likelihood&quot;      0     Log-likelihood ratio. Also known as
+                            the G-test [Rf6c2a1ea428c-3]_.
+&quot;freeman-tukey&quot;      -1/2   Freeman-Tukey statistic.
+&quot;mod-log-likelihood&quot; -1     Modified log-likelihood ratio.
+&quot;neyman&quot;             -2     Neyman&#39;s statistic.
+&quot;cressie-read&quot;        2/3   The power recommended in [Rf6c2a1ea428c-5]_.
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>statistic</strong><span class="classifier">float or ndarray</span></dt><dd><p>The Cressie-Read power divergence test statistic.  The value is
+a float if <em class="xref py py-obj">axis</em> is None or if` <em class="xref py py-obj">f_obs</em> and <em class="xref py py-obj">f_exp</em> are 1-D.</p>
+</dd>
+<dt><strong>pvalue</strong><span class="classifier">float or ndarray</span></dt><dd><p>The p-value of the test.  The value is a float if <em class="xref py py-obj">ddof</em> and the
+return value <a class="reference external" href="https://docs.python.org/dev/library/stat.html#module-stat" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stat</span></code></a> are scalars.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.chisquare.html#scipy.stats.chisquare" title="scipy.stats.chisquare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chisquare</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This test is invalid when the observed or expected frequencies in each
+category are too small.  A typical rule is that all of the observed
+and expected frequencies should be at least 5.</p>
+<p>When <em class="xref py py-obj">lambda_</em> is less than zero, the formula for the statistic involves
+dividing by <em class="xref py py-obj">f_obs</em>, so a warning or error may be generated if any value
+in <em class="xref py py-obj">f_obs</em> is 0.</p>
+<p>Similarly, a warning or error may be generated if any value in <em class="xref py py-obj">f_exp</em> is
+zero when <em class="xref py py-obj">lambda_</em> &gt;= 0.</p>
+<p>The default degrees of freedom, k-1, are for the case when no parameters
+of the distribution are estimated. If p parameters are estimated by
+efficient maximum likelihood then the correct degrees of freedom are
+k-1-p. If the parameters are estimated in a different way, then the
+dof can be between k-1-p and k-1. However, it is also possible that
+the asymptotic distribution is not a chisquare, in which case this
+test is not appropriate.</p>
+<p>This function handles masked arrays.  If an element of <em class="xref py py-obj">f_obs</em> or <em class="xref py py-obj">f_exp</em>
+is masked, then data at that position is ignored, and does not count
+towards the size of the data set.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.13.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rf6c2a1ea428c-1"><span class="brackets">1</span></dt>
+<dd><p>Lowry, Richard.  “Concepts and Applications of Inferential
+Statistics”. Chapter 8.
+<a class="reference external" href="https://web.archive.org/web/20171015035606/http://faculty.vassar.edu/lowry/ch8pt1.html">https://web.archive.org/web/20171015035606/http://faculty.vassar.edu/lowry/ch8pt1.html</a></p>
+</dd>
+<dt class="label" id="rf6c2a1ea428c-2"><span class="brackets">2</span></dt>
+<dd><p>“Chi-squared test”, <a class="reference external" href="https://en.wikipedia.org/wiki/Chi-squared_test">https://en.wikipedia.org/wiki/Chi-squared_test</a></p>
+</dd>
+<dt class="label" id="rf6c2a1ea428c-3"><span class="brackets">3</span></dt>
+<dd><p>“G-test”, <a class="reference external" href="https://en.wikipedia.org/wiki/G-test">https://en.wikipedia.org/wiki/G-test</a></p>
+</dd>
+<dt class="label" id="rf6c2a1ea428c-4"><span class="brackets">4</span></dt>
+<dd><p>Sokal, R. R. and Rohlf, F. J. “Biometry: the principles and
+practice of statistics in biological research”, New York: Freeman
+(1981)</p>
+</dd>
+<dt class="label" id="rf6c2a1ea428c-5"><span class="brackets">5</span></dt>
+<dd><p>Cressie, N. and Read, T. R. C., “Multinomial Goodness-of-Fit
+Tests”, J. Royal Stat. Soc. Series B, Vol. 46, No. 3 (1984),
+pp. 440-464.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>(See <a class="reference internal" href="scipy.stats.chisquare.html#scipy.stats.chisquare" title="scipy.stats.chisquare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chisquare</span></code></a> for more examples.)</p>
+<p>When just <em class="xref py py-obj">f_obs</em> is given, it is assumed that the expected frequencies
+are uniform and given by the mean of the observed frequencies.  Here we
+perform a G-test (i.e. use the log-likelihood ratio statistic):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">power_divergence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">lambda_</span><span class="o">=</span><span class="s1">&#39;log-likelihood&#39;</span><span class="p">)</span>
+<span class="go">(2.006573162632538, 0.84823476779463769)</span>
+</pre></div>
+</div>
+<p>The expected frequencies can be given with the <em class="xref py py-obj">f_exp</em> argument:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="n">f_exp</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="n">lambda_</span><span class="o">=</span><span class="s1">&#39;log-likelihood&#39;</span><span class="p">)</span>
+<span class="go">(3.3281031458963746, 0.6495419288047497)</span>
+</pre></div>
+</div>
+<p>When <em class="xref py py-obj">f_obs</em> is 2-D, by default the test is applied to each column.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">24</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(6, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="s2">&quot;log-likelihood&quot;</span><span class="p">)</span>
+<span class="go">(array([ 2.00657316,  6.77634498]), array([ 0.84823477,  0.23781225]))</span>
+</pre></div>
+</div>
+<p>By setting <code class="docutils literal notranslate"><span class="pre">axis=None</span></code>, the test is applied to all data in the array,
+which is equivalent to applying the test to the flattened array.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">(23.31034482758621, 0.015975692534127565)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">(</span><span class="n">obs</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="go">(23.31034482758621, 0.015975692534127565)</span>
+</pre></div>
+</div>
+<p><em class="xref py py-obj">ddof</em> is the change to make to the default degrees of freedom.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(2.0, 0.73575888234288467)</span>
+</pre></div>
+</div>
+<p>The calculation of the p-values is done by broadcasting the
+test statistic with <em class="xref py py-obj">ddof</em>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">(2.0, array([ 0.84914504,  0.73575888,  0.5724067 ]))</span>
+</pre></div>
+</div>
+<p><em class="xref py py-obj">f_obs</em> and <em class="xref py py-obj">f_exp</em> are also broadcast.  In the following, <em class="xref py py-obj">f_obs</em> has
+shape (6,) and <em class="xref py py-obj">f_exp</em> has shape (2, 6), so the result of broadcasting
+<em class="xref py py-obj">f_obs</em> and <em class="xref py py-obj">f_exp</em> has shape (2, 6).  To compute the desired chi-squared
+statistics, we must use <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">power_divergence</span><span class="p">([</span><span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="n">f_exp</span><span class="o">=</span><span class="p">[[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>                        <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">]],</span>
+<span class="gp">... </span>                 <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(array([ 3.5 ,  9.25]), array([ 0.62338763,  0.09949846]))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.chisquare.html"
+                        title="previous chapter">scipy.stats.chisquare</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.ks_2samp.html"
+                        title="next chapter">scipy.stats.ks_2samp</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

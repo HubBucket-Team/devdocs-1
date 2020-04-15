@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.kstatvar &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.tmean" href="scipy.stats.tmean.html" >
+    <link rel="prev" title="scipy.stats.kstat" href="scipy.stats.kstat.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.tmean.html" title="scipy.stats.tmean"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.kstat.html" title="scipy.stats.kstat"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-kstatvar">
+<h1>scipy.stats.kstatvar<a class="headerlink" href="#scipy-stats-kstatvar" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.kstatvar">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">kstatvar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/morestats.py#L307-L356"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.kstatvar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an unbiased estimator of the variance of the k-statistic.</p>
+<p>See <a class="reference internal" href="scipy.stats.kstat.html#scipy.stats.kstat" title="scipy.stats.kstat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kstat</span></code></a> for more details of the k-statistic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">array_like</span></dt><dd><p>Input array. Note that n-D input gets flattened.</p>
+</dd>
+<dt><strong>n</strong><span class="classifier">int, {1, 2}, optional</span></dt><dd><p>Default is equal to 2.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>kstatvar</strong><span class="classifier">float</span></dt><dd><p>The nth k-statistic variance.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.kstat.html#scipy.stats.kstat" title="scipy.stats.kstat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kstat</span></code></a></dt><dd><p>Returns the n-th k-statistic.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.stats.moment.html#scipy.stats.moment" title="scipy.stats.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a></dt><dd><p>Returns the n-th central moment about the mean for a sample.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The variances of the first few k-statistics are given by:</p>
+<div class="math notranslate nohighlight">
+\[var(k_{1}) = \frac{\kappa^2}{n}
+var(k_{2}) = \frac{\kappa^4}{n} + \frac{2\kappa^2_{2}}{n - 1}
+var(k_{3}) = \frac{\kappa^6}{n} + \frac{9 \kappa_2 \kappa_4}{n - 1} +
+             \frac{9 \kappa^2_{3}}{n - 1} +
+             \frac{6 n \kappa^3_{2}}{(n-1) (n-2)}
+var(k_{4}) = \frac{\kappa^8}{n} + \frac{16 \kappa_2 \kappa_6}{n - 1} +
+             \frac{48 \kappa_{3} \kappa_5}{n - 1} +
+             \frac{34 \kappa^2_{4}}{n-1} + \frac{72 n \kappa^2_{2} \kappa_4}{(n - 1) (n - 2)} +
+             \frac{144 n \kappa_{2} \kappa^2_{3}}{(n - 1) (n - 2)} +
+             \frac{24 (n + 1) n \kappa^4_{2}}{(n - 1) (n - 2) (n - 3)}\]</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.kstat.html"
+                        title="previous chapter">scipy.stats.kstat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.tmean.html"
+                        title="next chapter">scipy.stats.tmean</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

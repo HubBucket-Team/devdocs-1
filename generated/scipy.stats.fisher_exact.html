@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.fisher_exact &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.ppcc_max" href="scipy.stats.ppcc_max.html" >
+    <link rel="prev" title="scipy.stats.contingency.margins" href="scipy.stats.contingency.margins.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.ppcc_max.html" title="scipy.stats.ppcc_max"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.contingency.margins.html" title="scipy.stats.contingency.margins"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-fisher-exact">
+<h1>scipy.stats.fisher_exact<a class="headerlink" href="#scipy-stats-fisher-exact" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.fisher_exact">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">fisher_exact</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table</span></em>, <em class="sig-param"><span class="n">alternative</span><span class="o">=</span><span class="default_value">'two-sided'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L3474-L3633"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.fisher_exact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a Fisher exact test on a 2x2 contingency table.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>table</strong><span class="classifier">array_like of ints</span></dt><dd><p>A 2x2 contingency table.  Elements should be non-negative integers.</p>
+</dd>
+<dt><strong>alternative</strong><span class="classifier">{‘two-sided’, ‘less’, ‘greater’}, optional</span></dt><dd><p>Defines the alternative hypothesis.
+The following options are available (default is ‘two-sided’):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘two-sided’</p></li>
+<li><p>‘less’: one-sided</p></li>
+<li><p>‘greater’: one-sided</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>oddsratio</strong><span class="classifier">float</span></dt><dd><p>This is prior odds ratio and not a posterior estimate.</p>
+</dd>
+<dt><strong>p_value</strong><span class="classifier">float</span></dt><dd><p>P-value, the probability of obtaining a distribution at least as
+extreme as the one that was actually observed, assuming that the
+null hypothesis is true.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.chi2_contingency.html#scipy.stats.chi2_contingency" title="scipy.stats.chi2_contingency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2_contingency</span></code></a></dt><dd><p>Chi-square test of independence of variables in a contingency table.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The calculated odds ratio is different from the one R uses. This scipy
+implementation returns the (more common) “unconditional Maximum
+Likelihood Estimate”, while R uses the “conditional Maximum Likelihood
+Estimate”.</p>
+<p>For tables with large numbers, the (inexact) chi-square test implemented
+in the function <a class="reference internal" href="scipy.stats.chi2_contingency.html#scipy.stats.chi2_contingency" title="scipy.stats.chi2_contingency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2_contingency</span></code></a> can also be used.</p>
+<p class="rubric">Examples</p>
+<p>Say we spend a few days counting whales and sharks in the Atlantic and
+Indian oceans. In the Atlantic ocean we find 8 whales and 1 shark, in the
+Indian ocean 2 whales and 5 sharks. Then our contingency table is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="n">Atlantic</span>  <span class="n">Indian</span>
+<span class="n">whales</span>     <span class="mi">8</span>        <span class="mi">2</span>
+<span class="n">sharks</span>     <span class="mi">1</span>        <span class="mi">5</span>
+</pre></div>
+</div>
+<p>We use this table to find the p-value:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oddsratio</span><span class="p">,</span> <span class="n">pvalue</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">fisher_exact</span><span class="p">([[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pvalue</span>
+<span class="go">0.0349...</span>
+</pre></div>
+</div>
+<p>The probability that we would observe this or an even more imbalanced ratio
+by chance is about 3.5%.  A commonly used significance level is 5%–if we
+adopt that, we can therefore conclude that our observed imbalance is
+statistically significant; whales prefer the Atlantic while sharks prefer
+the Indian ocean.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.contingency.margins.html"
+                        title="previous chapter">scipy.stats.contingency.margins</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.ppcc_max.html"
+                        title="next chapter">scipy.stats.ppcc_max</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

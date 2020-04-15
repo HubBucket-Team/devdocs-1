@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.ttest_ind_from_stats &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.ttest_rel" href="scipy.stats.ttest_rel.html" >
+    <link rel="prev" title="scipy.stats.ttest_ind" href="scipy.stats.ttest_ind.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.ttest_rel.html" title="scipy.stats.ttest_rel"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.ttest_ind.html" title="scipy.stats.ttest_ind"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-ttest-ind-from-stats">
+<h1>scipy.stats.ttest_ind_from_stats<a class="headerlink" href="#scipy-stats-ttest-ind-from-stats" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.ttest_ind_from_stats">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">ttest_ind_from_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mean1</span></em>, <em class="sig-param"><span class="n">std1</span></em>, <em class="sig-param"><span class="n">nobs1</span></em>, <em class="sig-param"><span class="n">mean2</span></em>, <em class="sig-param"><span class="n">std2</span></em>, <em class="sig-param"><span class="n">nobs2</span></em>, <em class="sig-param"><span class="n">equal_var</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L4971-L5079"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.ttest_ind_from_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>T-test for means of two independent samples from descriptive statistics.</p>
+<p>This is a two-sided test for the null hypothesis that two independent
+samples have identical average (expected) values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mean1</strong><span class="classifier">array_like</span></dt><dd><p>The mean(s) of sample 1.</p>
+</dd>
+<dt><strong>std1</strong><span class="classifier">array_like</span></dt><dd><p>The standard deviation(s) of sample 1.</p>
+</dd>
+<dt><strong>nobs1</strong><span class="classifier">array_like</span></dt><dd><p>The number(s) of observations of sample 1.</p>
+</dd>
+<dt><strong>mean2</strong><span class="classifier">array_like</span></dt><dd><p>The mean(s) of sample 2.</p>
+</dd>
+<dt><strong>std2</strong><span class="classifier">array_like</span></dt><dd><p>The standard deviations(s) of sample 2.</p>
+</dd>
+<dt><strong>nobs2</strong><span class="classifier">array_like</span></dt><dd><p>The number(s) of observations of sample 2.</p>
+</dd>
+<dt><strong>equal_var</strong><span class="classifier">bool, optional</span></dt><dd><p>If True (default), perform a standard independent 2 sample test
+that assumes equal population variances <a class="reference internal" href="#r24a95fcea38c-1" id="id1">[1]</a>.
+If False, perform Welch’s t-test, which does not assume equal
+population variance <a class="reference internal" href="#r24a95fcea38c-2" id="id2">[2]</a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>statistic</strong><span class="classifier">float or array</span></dt><dd><p>The calculated t-statistics.</p>
+</dd>
+<dt><strong>pvalue</strong><span class="classifier">float or array</span></dt><dd><p>The two-tailed p-value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.ttest_ind.html#scipy.stats.ttest_ind" title="scipy.stats.ttest_ind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.ttest_ind</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.16.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r24a95fcea38c-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/T-test#Independent_two-sample_t-test">https://en.wikipedia.org/wiki/T-test#Independent_two-sample_t-test</a></p>
+</dd>
+<dt class="label" id="r24a95fcea38c-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Welch%27s_t-test">https://en.wikipedia.org/wiki/Welch%27s_t-test</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Suppose we have the summary data for two samples, as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                 <span class="n">Sample</span>   <span class="n">Sample</span>
+           <span class="n">Size</span>   <span class="n">Mean</span>   <span class="n">Variance</span>
+<span class="n">Sample</span> <span class="mi">1</span>    <span class="mi">13</span>    <span class="mf">15.0</span>     <span class="mf">87.5</span>
+<span class="n">Sample</span> <span class="mi">2</span>    <span class="mi">11</span>    <span class="mf">12.0</span>     <span class="mf">39.0</span>
+</pre></div>
+</div>
+<p>Apply the t-test to this data (with the assumption that the population
+variances are equal):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind_from_stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ttest_ind_from_stats</span><span class="p">(</span><span class="n">mean1</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">std1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">87.5</span><span class="p">),</span> <span class="n">nobs1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">mean2</span><span class="o">=</span><span class="mf">12.0</span><span class="p">,</span> <span class="n">std2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">39.0</span><span class="p">),</span> <span class="n">nobs2</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="go">Ttest_indResult(statistic=0.9051358093310269, pvalue=0.3751996797581487)</span>
+</pre></div>
+</div>
+<p>For comparison, here is the data from which those summary statistics
+were taken.  With this data, we can compute the same result using
+<a class="reference internal" href="scipy.stats.ttest_ind.html#scipy.stats.ttest_ind" title="scipy.stats.ttest_ind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.ttest_ind</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">26</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">Ttest_indResult(statistic=0.905135809331027, pvalue=0.3751996797581486)</span>
+</pre></div>
+</div>
+<p>Suppose we instead have binary data and would like to apply a t-test to
+compare the proportion of 1s in two independent groups:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                  <span class="n">Number</span> <span class="n">of</span>    <span class="n">Sample</span>     <span class="n">Sample</span>
+            <span class="n">Size</span>    <span class="n">ones</span>        <span class="n">Mean</span>     <span class="n">Variance</span>
+<span class="n">Sample</span> <span class="mi">1</span>    <span class="mi">150</span>      <span class="mi">30</span>         <span class="mf">0.2</span>        <span class="mf">0.16</span>
+<span class="n">Sample</span> <span class="mi">2</span>    <span class="mi">200</span>      <span class="mi">45</span>         <span class="mf">0.225</span>      <span class="mf">0.174375</span>
+</pre></div>
+</div>
+<p>The sample mean <span class="math notranslate nohighlight">\(\hat{p}\)</span> is the proportion of ones in the sample
+and the variance for a binary observation is estimated by
+<span class="math notranslate nohighlight">\(\hat{p}(1-\hat{p})\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ttest_ind_from_stats</span><span class="p">(</span><span class="n">mean1</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">std1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.16</span><span class="p">),</span> <span class="n">nobs1</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">mean2</span><span class="o">=</span><span class="mf">0.225</span><span class="p">,</span> <span class="n">std2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.17437</span><span class="p">),</span> <span class="n">nobs2</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="go">Ttest_indResult(statistic=-0.564327545549774, pvalue=0.5728947691244874)</span>
+</pre></div>
+</div>
+<p>For comparison, we could compute the t statistic and p-value using
+arrays of 0s and 1s and <em class="xref py py-obj">scipy.stat.ttest_ind</em>, as above.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">30</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">150</span><span class="o">-</span><span class="mi">30</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">45</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">200</span><span class="o">-</span><span class="mi">45</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">group1</span><span class="p">,</span> <span class="n">group2</span><span class="p">)</span>
+<span class="go">Ttest_indResult(statistic=-0.5627179589855622, pvalue=0.573989277115258)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.ttest_ind.html"
+                        title="previous chapter">scipy.stats.ttest_ind</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.ttest_rel.html"
+                        title="next chapter">scipy.stats.ttest_rel</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

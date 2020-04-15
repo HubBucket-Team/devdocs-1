@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Running SciPy Tests Locally &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="next" title="Benchmarking SciPy with airspeed velocity" href="benchmarking.html" >
+    <link rel="prev" title="Rendering Documentation with Sphinx" href="rendering_documentation.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="benchmarking.html" title="Benchmarking SciPy with airspeed velocity"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="rendering_documentation.html" title="Rendering Documentation with Sphinx"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="running-scipy-tests-locally">
+<span id="runtests"></span><h1>Running SciPy Tests Locally<a class="headerlink" href="#running-scipy-tests-locally" title="Permalink to this headline">¶</a></h1>
+<p>Basic test writing and execution from within the Python interpreter is
+documented in the <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/TESTS.rst.txt">NumPy/SciPy Testing Guidelines</a>. This page includes
+information about running tests from the command line using SciPy’s
+<code class="docutils literal notranslate"><span class="pre">runtests.py</span></code>, which permits greater control. <em>Note: Before beginning,
+ensure that</em> <a class="reference external" href="https://docs.pytest.org/en/latest/"><code class="docutils literal notranslate"><span class="pre">pytest</span></code></a> <em>is installed.</em></p>
+<p>To run all tests, navigate to the root SciPy directory at the command
+line and execute</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">-v</span></code> activates the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option. This builds SciPy (or
+updates an existing build) and runs the tests.</p>
+<p>To run tests on a particular submodule, such as <code class="docutils literal notranslate"><span class="pre">optimize</span></code>, use the
+<code class="docutils literal notranslate"><span class="pre">--submodule</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">s</span> <span class="n">optimize</span>
+</pre></div>
+</div>
+<p>To run a particular test module, such as
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/scipy/optimize/tests/test_linprog.py"><code class="docutils literal notranslate"><span class="pre">scipy/optimize/tests/test_linprog.py</span></code></a>, use the <code class="docutils literal notranslate"><span class="pre">--test</span></code> option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">scipy</span><span class="o">/</span><span class="n">optimize</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_linprog</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>To run a test class, such as <code class="docutils literal notranslate"><span class="pre">TestLinprogIPDense</span></code> from
+<code class="docutils literal notranslate"><span class="pre">test_linprog.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">scipy</span><span class="o">/</span><span class="n">optimize</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_linprog</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">TestLinprogIPDense</span>
+</pre></div>
+</div>
+<p>To run a particular test, such as <code class="docutils literal notranslate"><span class="pre">test_unknown_solver</span></code> from
+<code class="docutils literal notranslate"><span class="pre">test_linprog.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">scipy</span><span class="o">/</span><span class="n">optimize</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_linprog</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">test_unknown_solver</span>
+</pre></div>
+</div>
+<p>For tests within a class, you need to specify the class name and the
+test name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">t</span> <span class="n">scipy</span><span class="o">/</span><span class="n">optimize</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">test_linprog</span><span class="o">.</span><span class="n">py</span><span class="p">::</span><span class="n">TestLinprogIPDense</span><span class="p">::</span><span class="n">test_nontrivial_problem</span>
+</pre></div>
+</div>
+<p>Other useful options include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--coverage</span></code> to generate a test coverage report in
+<code class="docutils literal notranslate"><span class="pre">scipy/build/coverage/index.html</span></code>. <em>Note:</em> <a class="reference external" href="https://pypi.org/project/pytest-cov/"><code class="docutils literal notranslate"><span class="pre">pytest-cov</span></code></a> <em>must be
+installed.</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--doc</span></code> to build the docs in <code class="docutils literal notranslate"><span class="pre">scipy/doc/build</span></code>. By default,
+docs are built only in the <code class="docutils literal notranslate"><span class="pre">html-scipyorg</span></code> format, but you can
+change this by appending the name of the desired format
+(e.g. <code class="docutils literal notranslate"><span class="pre">--doc</span> <span class="pre">latex</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-build</span></code> to prevent SciPy from updating the build
+before testing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-j</span></code> or <code class="docutils literal notranslate"><span class="pre">--parallel</span></code> <em>n</em> to engage <em>n</em> cores when building SciPy;
+e.g. <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">runtests.py</span> <span class="pre">-j</span> <span class="pre">4</span></code> engages four cores. As of <a class="reference external" href="https://github.com/scipy/scipy/pull/10172">#10172</a>
+this also runs the tests on four cores if <a class="reference external" href="https://pypi.org/project/pytest-xdist/"><code class="docutils literal notranslate"><span class="pre">pytest-xdist</span></code></a> is installed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-m</span></code> or <code class="docutils literal notranslate"><span class="pre">--mode</span></code> <code class="docutils literal notranslate"><span class="pre">full</span></code> to run the full test suite, including slow
+tests. For example, <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">runtests.py</span> <span class="pre">-m</span> <span class="pre">full</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--</span></code> to send remaining command line arguments to <code class="docutils literal notranslate"><span class="pre">pytest</span></code> instead of
+<code class="docutils literal notranslate"><span class="pre">runtest.py</span></code>. For instance, while <code class="docutils literal notranslate"><span class="pre">-n</span></code> sent to <code class="docutils literal notranslate"><span class="pre">pytest.py</span></code> activates
+the <code class="docutils literal notranslate"><span class="pre">--no-build</span></code> option, <code class="docutils literal notranslate"><span class="pre">-n</span></code> sent to <code class="docutils literal notranslate"><span class="pre">pytest</span></code> runs the tests on
+multiple cores; e.g. <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">runtests.py</span> <span class="pre">--</span> <span class="pre">-n</span> <span class="pre">4</span></code> runs tests using
+four cores. <em>Note:</em> <a class="reference external" href="https://pypi.org/project/pytest-xdist/"><code class="docutils literal notranslate"><span class="pre">pytest-xdist</span></code></a> <em>must be installed for testing on
+multiple cores.</em></p></li>
+</ul>
+<p>Other options not documented here are listed in the <code class="docutils literal notranslate"><span class="pre">main</span></code> function of
+the source code for <a class="reference external" href="https://github.com/scipy/scipy/blob/master/runtests.py"><code class="docutils literal notranslate"><span class="pre">runtests.py</span></code></a>. For much more information about
+<code class="docutils literal notranslate"><span class="pre">pytest</span></code>, see the <code class="docutils literal notranslate"><span class="pre">pytest</span></code>
+<a class="reference external" href="https://docs.pytest.org/en/latest/usage.html">documentation</a>.</p>
+<div class="section" id="tips">
+<h2>Tips:<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<p>If you built SciPy from source but are having trouble running tests
+after a change to the codebase, try deleting the <code class="docutils literal notranslate"><span class="pre">scipy/build</span></code>
+directory. This forces <code class="docutils literal notranslate"><span class="pre">runtest.py</span></code> to completely rebuild SciPy before
+performing tests.</p>
+<p>There is an additional level of very slow tests (several minutes),
+which are disabled even when calling <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">runtests.py</span> <span class="pre">-m</span> <span class="pre">full</span></code>.
+They can be enabled by setting the environment variable <code class="docutils literal notranslate"><span class="pre">SCIPY_XSLOW=1</span></code>
+before running the test suite.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Running SciPy Tests Locally</a><ul>
+<li><a class="reference internal" href="#tips">Tips:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="rendering_documentation.html"
+                        title="previous chapter">Rendering Documentation with Sphinx</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="benchmarking.html"
+                        title="next chapter">Benchmarking SciPy with airspeed velocity</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

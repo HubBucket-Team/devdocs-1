@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.misc.derivative &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Miscellaneous routines (scipy.misc)" href="../misc.html" >
+    <link rel="next" title="scipy.misc.face" href="scipy.misc.face.html" >
+    <link rel="prev" title="scipy.misc.central_diff_weights" href="scipy.misc.central_diff_weights.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../misc.html" accesskey="U">Miscellaneous routines (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.misc</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.misc.face.html" title="scipy.misc.face"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.misc.central_diff_weights.html" title="scipy.misc.central_diff_weights"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-misc-derivative">
+<h1>scipy.misc.derivative<a class="headerlink" href="#scipy-misc-derivative" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.misc.derivative">
+<code class="sig-prename descclassname">scipy.misc.</code><code class="sig-name descname">derivative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">dx</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/misc/common.py#L75-L145"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.misc.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the nth derivative of a function at a point.</p>
+<p>Given a function, use a central difference formula with spacing <em class="xref py py-obj">dx</em> to
+compute the nth derivative at <em class="xref py py-obj">x0</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>func</strong><span class="classifier">function</span></dt><dd><p>Input function.</p>
+</dd>
+<dt><strong>x0</strong><span class="classifier">float</span></dt><dd><p>The point at which the nth derivative is found.</p>
+</dd>
+<dt><strong>dx</strong><span class="classifier">float, optional</span></dt><dd><p>Spacing.</p>
+</dd>
+<dt><strong>n</strong><span class="classifier">int, optional</span></dt><dd><p>Order of the derivative. Default is 1.</p>
+</dd>
+<dt><strong>args</strong><span class="classifier">tuple, optional</span></dt><dd><p>Arguments</p>
+</dd>
+<dt><strong>order</strong><span class="classifier">int, optional</span></dt><dd><p>Number of points to use, must be odd.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Decreasing the step size too small can result in round-off error.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">derivative</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="go">4.9999999999217337</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.misc.central_diff_weights.html"
+                        title="previous chapter">scipy.misc.central_diff_weights</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.misc.face.html"
+                        title="next chapter">scipy.misc.face</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

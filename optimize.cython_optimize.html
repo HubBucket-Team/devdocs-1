@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Cython optimize zeros API &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="optimize.html" >
+    <link rel="next" title="Signal processing (scipy.signal)" href="signal.html" >
+    <link rel="prev" title="Nonlinear solvers" href="optimize.nonlin.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="index.html">
+      <img style="border: 0;" alt="SciPy" src="_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="signal.html" title="Signal processing (scipy.signal)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="optimize.nonlin.html" title="Nonlinear solvers"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <span class="target" id="module-scipy.optimize.cython_optimize"></span><div class="section" id="cython-optimize-zeros-api">
+<h1>Cython optimize zeros API<a class="headerlink" href="#cython-optimize-zeros-api" title="Permalink to this headline">¶</a></h1>
+<p>The underlying C functions for the following root finders can be accessed
+directly using Cython:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="generated/scipy.optimize.bisect.html#scipy.optimize.bisect" title="scipy.optimize.bisect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bisect</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/scipy.optimize.ridder.html#scipy.optimize.ridder" title="scipy.optimize.ridder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ridder</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/scipy.optimize.brenth.html#scipy.optimize.brenth" title="scipy.optimize.brenth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brenth</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/scipy.optimize.brentq.html#scipy.optimize.brentq" title="scipy.optimize.brentq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brentq</span></code></a></p></li>
+</ul>
+<p>The Cython API for the zeros functions is similar except there is no <code class="docutils literal notranslate"><span class="pre">disp</span></code>
+argument. Import the zeros functions using <code class="docutils literal notranslate"><span class="pre">cimport</span></code> from
+<a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.cython_optimize</span></code></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize.cython_optimize</span> <span class="n">cimport</span> <span class="n">bisect</span><span class="p">,</span> <span class="n">ridder</span><span class="p">,</span> <span class="n">brentq</span><span class="p">,</span> <span class="n">brenth</span>
+</pre></div>
+</div>
+<div class="section" id="callback-signature">
+<h2>Callback signature<a class="headerlink" href="#callback-signature" title="Permalink to this headline">¶</a></h2>
+<p>The zeros functions in <a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cython_optimize</span></code></a> expect a callback that
+takes a double for the scalar independent variable as the 1st argument and a
+user defined <code class="docutils literal notranslate"><span class="pre">struct</span></code> with any extra parameters as the 2nd argument.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="p">(</span><span class="o">*</span><span class="n">callback_type</span><span class="p">)(</span><span class="n">double</span><span class="p">,</span> <span class="n">void</span><span class="o">*</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Usage of <a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cython_optimize</span></code></a> requires Cython to write callbacks
+that are compiled into C. For more information on compiling Cython, see the
+<a class="reference external" href="http://docs.cython.org/en/latest/index.html">Cython Documentation</a>.</p>
+<p>These are the basic steps:</p>
+<ol class="arabic">
+<li><p>Create a Cython <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> file, for example: <code class="docutils literal notranslate"><span class="pre">myexample.pyx</span></code>.</p></li>
+<li><p>Import the desired root finder from <a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cython_optimize</span></code></a>.</p></li>
+<li><p>Write the callback function, and call the selected zeros function passing
+the callback, any extra arguments, and the other solver parameters.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize.cython_optimize</span> <span class="n">cimport</span> <span class="n">brentq</span>
+
+<span class="c1"># import math from Cython</span>
+<span class="kn">from</span> <span class="nn">libc</span> <span class="n">cimport</span> <span class="n">math</span>
+
+<span class="n">myargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C0&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">}</span>  <span class="c1"># a dictionary of extra arguments</span>
+<span class="n">XLO</span><span class="p">,</span> <span class="n">XHI</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span>  <span class="c1"># lower and upper search boundaries</span>
+<span class="n">XTOL</span><span class="p">,</span> <span class="n">RTOL</span><span class="p">,</span> <span class="n">MITR</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="mi">10</span>  <span class="c1"># other solver parameters</span>
+
+<span class="c1"># user-defined struct for extra parameters</span>
+<span class="n">ctypedef</span> <span class="n">struct</span> <span class="n">test_params</span><span class="p">:</span>
+    <span class="n">double</span> <span class="n">C0</span>
+    <span class="n">double</span> <span class="n">C1</span>
+
+
+<span class="c1"># user-defined callback</span>
+<span class="n">cdef</span> <span class="n">double</span> <span class="n">f</span><span class="p">(</span><span class="n">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">cdef</span> <span class="n">test_params</span> <span class="o">*</span><span class="n">myargs</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">test_params</span> <span class="o">*&gt;</span> <span class="n">args</span>
+    <span class="k">return</span> <span class="n">myargs</span><span class="o">.</span><span class="n">C0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">myargs</span><span class="o">.</span><span class="n">C1</span><span class="p">))</span>
+
+
+<span class="c1"># Cython wrapper function</span>
+<span class="n">cdef</span> <span class="n">double</span> <span class="n">brentq_wrapper_example</span><span class="p">(</span><span class="nb">dict</span> <span class="n">args</span><span class="p">,</span> <span class="n">double</span> <span class="n">xa</span><span class="p">,</span> <span class="n">double</span> <span class="n">xb</span><span class="p">,</span>
+                                   <span class="n">double</span> <span class="n">xtol</span><span class="p">,</span> <span class="n">double</span> <span class="n">rtol</span><span class="p">,</span> <span class="nb">int</span> <span class="n">mitr</span><span class="p">):</span>
+    <span class="c1"># Cython automatically casts dictionary to struct</span>
+    <span class="n">cdef</span> <span class="n">test_params</span> <span class="n">myargs</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="k">return</span> <span class="n">brentq</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">test_params</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">myargs</span><span class="p">,</span> <span class="n">xtol</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">mitr</span><span class="p">,</span> <span class="n">NULL</span><span class="p">)</span>
+
+
+<span class="c1"># Python function</span>
+<span class="k">def</span> <span class="nf">brentq_example</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">myargs</span><span class="p">,</span> <span class="n">xa</span><span class="o">=</span><span class="n">XLO</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="n">XHI</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="n">XTOL</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">RTOL</span><span class="p">,</span>
+                   <span class="n">mitr</span><span class="o">=</span><span class="n">MITR</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calls Cython wrapper from Python.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">brentq_wrapper_example</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xtol</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">mitr</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you want to call your function from Python, create a Cython wrapper, and
+a Python function that calls the wrapper, or use <code class="docutils literal notranslate"><span class="pre">cpdef</span></code>. Then, in Python,
+you can import and run the example.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">myexample</span> <span class="kn">import</span> <span class="n">brentq_example</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">brentq_example</span><span class="p">()</span>
+<span class="c1"># 0.6999942848231314</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a Cython <code class="docutils literal notranslate"><span class="pre">.pxd</span></code> file if you need to export any Cython functions.</p></li>
+</ol>
+</div>
+<div class="section" id="full-output">
+<h2>Full output<a class="headerlink" href="#full-output" title="Permalink to this headline">¶</a></h2>
+<p>The  functions in <a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cython_optimize</span></code></a> can also copy the full
+output from the solver to a C <code class="docutils literal notranslate"><span class="pre">struct</span></code> that is passed as its last argument.
+If you don’t want the full output, just pass <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. The full output
+<code class="docutils literal notranslate"><span class="pre">struct</span></code> must be type <code class="docutils literal notranslate"><span class="pre">zeros_full_output</span></code>, which is defined in
+<a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.cython_optimize</span></code></a> with the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">funcalls</span></code>: number of function calls</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">iterations</span></code>: number of iterations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">error_num</span></code>: error number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">double</span> <span class="pre">root</span></code>: root of function</p></li>
+</ul>
+<p>The root is copied by <a class="reference internal" href="#module-scipy.optimize.cython_optimize" title="scipy.optimize.cython_optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cython_optimize</span></code></a> to the full output
+<code class="docutils literal notranslate"><span class="pre">struct</span></code>. An error number of -1 means a sign error, -2 means a convergence
+error, and 0 means the solver converged. Continuing from the previous example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize.cython_optimize</span> <span class="n">cimport</span> <span class="n">zeros_full_output</span>
+
+
+<span class="c1"># cython brentq solver with full output</span>
+<span class="n">cdef</span> <span class="n">brent_full_output</span> <span class="n">brentq_full_output_wrapper_example</span><span class="p">(</span>
+        <span class="nb">dict</span> <span class="n">args</span><span class="p">,</span> <span class="n">double</span> <span class="n">xa</span><span class="p">,</span> <span class="n">double</span> <span class="n">xb</span><span class="p">,</span> <span class="n">double</span> <span class="n">xtol</span><span class="p">,</span> <span class="n">double</span> <span class="n">rtol</span><span class="p">,</span>
+        <span class="nb">int</span> <span class="n">mitr</span><span class="p">):</span>
+    <span class="n">cdef</span> <span class="n">test_params</span> <span class="n">myargs</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="n">cdef</span> <span class="n">zeros_full_output</span> <span class="n">my_full_output</span>
+    <span class="c1"># use my_full_output instead of NULL</span>
+    <span class="n">brentq</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">myargs</span><span class="p">,</span> <span class="n">xtol</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">mitr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_full_output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">my_full_output</span>
+
+
+<span class="c1"># Python function</span>
+<span class="k">def</span> <span class="nf">brent_full_output_example</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">myargs</span><span class="p">,</span> <span class="n">xa</span><span class="o">=</span><span class="n">XLO</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="n">XHI</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="n">XTOL</span><span class="p">,</span>
+                              <span class="n">rtol</span><span class="o">=</span><span class="n">RTOL</span><span class="p">,</span> <span class="n">mitr</span><span class="o">=</span><span class="n">MITR</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Returns full output&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">brentq_full_output_wrapper_example</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xtol</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span>
+                                              <span class="n">mitr</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">brent_full_output_example</span><span class="p">()</span>
+<span class="c1"># {&#39;error_num&#39;: 0,</span>
+<span class="c1">#  &#39;funcalls&#39;: 6,</span>
+<span class="c1">#  &#39;iterations&#39;: 5,</span>
+<span class="c1">#  &#39;root&#39;: 0.6999942848231314}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cython optimize zeros API</a><ul>
+<li><a class="reference internal" href="#callback-signature">Callback signature</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#full-output">Full output</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optimize.nonlin.html"
+                        title="previous chapter">Nonlinear solvers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signal.html"
+                        title="next chapter">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

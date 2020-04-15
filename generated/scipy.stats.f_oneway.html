@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.f_oneway &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.pearsonr" href="scipy.stats.pearsonr.html" >
+    <link rel="prev" title="scipy.stats.binned_statistic_dd" href="scipy.stats.binned_statistic_dd.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.pearsonr.html" title="scipy.stats.pearsonr"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.binned_statistic_dd.html" title="scipy.stats.binned_statistic_dd"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-f-oneway">
+<h1>scipy.stats.f_oneway<a class="headerlink" href="#scipy-stats-f-oneway" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.f_oneway">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">f_oneway</code><span class="sig-paren">(</span><em class="sig-param">\*args</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L3136-L3267"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.f_oneway" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform one-way ANOVA.</p>
+<p>The one-way ANOVA tests the null hypothesis that two or more groups have
+the same population mean.  The test is applied to samples from two or
+more groups, possibly with differing sizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sample1, sample2, …</strong><span class="classifier">array_like</span></dt><dd><p>The sample measurements for each group.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>statistic</strong><span class="classifier">float</span></dt><dd><p>The computed F-value of the test.</p>
+</dd>
+<dt><strong>pvalue</strong><span class="classifier">float</span></dt><dd><p>The associated p-value from the F-distribution.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Warns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>F_onewayConstantInputWarning</dt><dd><p>Raised if each of the input arrays is constant array.
+In this case F-value is either infinite or isn’t defined, so
+<code class="docutils literal notranslate"><span class="pre">np.inf</span></code> or <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> is returned for F-value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The ANOVA test has important assumptions that must be satisfied in order
+for the associated p-value to be valid.</p>
+<ol class="arabic simple">
+<li><p>The samples are independent.</p></li>
+<li><p>Each sample is from a normally distributed population.</p></li>
+<li><p>The population standard deviations of the groups are all equal.  This
+property is known as homoscedasticity.</p></li>
+</ol>
+<p>If these assumptions are not true for a given set of data, it may still be
+possible to use the Kruskal-Wallis H-test (<a class="reference internal" href="scipy.stats.kruskal.html#scipy.stats.kruskal" title="scipy.stats.kruskal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.kruskal</span></code></a>) although
+with some loss of power.</p>
+<p>If each group is made of constant values, and</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>There exist at least two groups with different values</dt><dd><p>the function returns (<code class="docutils literal notranslate"><span class="pre">np.inf</span></code>, 0)</p>
+</dd>
+</dl>
+</li>
+<li><p>All values in all groups are the same, function returns (<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>, <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>)</p></li>
+</ul>
+<p>The algorithm is from Heiman[2], pp.394-7.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r74f03ee7d776-1"><span class="brackets">1</span></dt>
+<dd><p>R. Lowry, “Concepts and Applications of Inferential Statistics”,
+Chapter 14, 2014, <a class="reference external" href="http://vassarstats.net/textbook/">http://vassarstats.net/textbook/</a></p>
+</dd>
+<dt class="label" id="r74f03ee7d776-2"><span class="brackets">2</span></dt>
+<dd><p>G.W. Heiman, “Understanding research methods and statistics: An
+integrated introduction for psychology”, Houghton, Mifflin and
+Company, 2001.</p>
+</dd>
+<dt class="label" id="r74f03ee7d776-3"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>G.H. McDonald, “Handbook of Biological Statistics”, One-way ANOVA.
+<a class="reference external" href="http://www.biostathandbook.com/onewayanova.html">http://www.biostathandbook.com/onewayanova.html</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#r74f03ee7d776-3" id="id4">[3]</a> Here are some data on a shell measurement (the length of the anterior
+adductor muscle scar, standardized by dividing by length) in the mussel
+Mytilus trossulus from five locations: Tillamook, Oregon; Newport, Oregon;
+Petersburg, Alaska; Magadan, Russia; and Tvarminne, Finland, taken from a
+much larger data set used in McDonald et al. (1991).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tillamook</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0571</span><span class="p">,</span> <span class="mf">0.0813</span><span class="p">,</span> <span class="mf">0.0831</span><span class="p">,</span> <span class="mf">0.0976</span><span class="p">,</span> <span class="mf">0.0817</span><span class="p">,</span> <span class="mf">0.0859</span><span class="p">,</span> <span class="mf">0.0735</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="mf">0.0659</span><span class="p">,</span> <span class="mf">0.0923</span><span class="p">,</span> <span class="mf">0.0836</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newport</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0873</span><span class="p">,</span> <span class="mf">0.0662</span><span class="p">,</span> <span class="mf">0.0672</span><span class="p">,</span> <span class="mf">0.0819</span><span class="p">,</span> <span class="mf">0.0749</span><span class="p">,</span> <span class="mf">0.0649</span><span class="p">,</span> <span class="mf">0.0835</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="mf">0.0725</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">petersburg</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0974</span><span class="p">,</span> <span class="mf">0.1352</span><span class="p">,</span> <span class="mf">0.0817</span><span class="p">,</span> <span class="mf">0.1016</span><span class="p">,</span> <span class="mf">0.0968</span><span class="p">,</span> <span class="mf">0.1064</span><span class="p">,</span> <span class="mf">0.105</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">magadan</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1033</span><span class="p">,</span> <span class="mf">0.0915</span><span class="p">,</span> <span class="mf">0.0781</span><span class="p">,</span> <span class="mf">0.0685</span><span class="p">,</span> <span class="mf">0.0677</span><span class="p">,</span> <span class="mf">0.0697</span><span class="p">,</span> <span class="mf">0.0764</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="mf">0.0689</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tvarminne</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0703</span><span class="p">,</span> <span class="mf">0.1026</span><span class="p">,</span> <span class="mf">0.0956</span><span class="p">,</span> <span class="mf">0.0973</span><span class="p">,</span> <span class="mf">0.1039</span><span class="p">,</span> <span class="mf">0.1045</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">f_oneway</span><span class="p">(</span><span class="n">tillamook</span><span class="p">,</span> <span class="n">newport</span><span class="p">,</span> <span class="n">petersburg</span><span class="p">,</span> <span class="n">magadan</span><span class="p">,</span> <span class="n">tvarminne</span><span class="p">)</span>
+<span class="go">(7.1210194716424473, 0.00028122423145345439)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.binned_statistic_dd.html"
+                        title="previous chapter">scipy.stats.binned_statistic_dd</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.pearsonr.html"
+                        title="next chapter">scipy.stats.pearsonr</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

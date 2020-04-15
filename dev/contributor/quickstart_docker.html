@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Development environment quickstart guide (Docker) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="development-environment-quickstart-guide-docker">
+<span id="quickstart-docker"></span><h1>Development environment quickstart guide (Docker)<a class="headerlink" href="#development-environment-quickstart-guide-docker" title="Permalink to this headline">¶</a></h1>
+<p>This document shows how to start developing SciPy in a Docker container.
+These instructions should be considered a work in progress.</p>
+<div class="section" id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>Docker is a program for running Linux virtual machines within a host
+operating system. According to the <a class="reference external" href="https://www.docker.com/resources/what-container">Docker website</a>:</p>
+<blockquote>
+<div><p>A Docker container image is a lightweight, standalone, executable package of
+software that includes everything needed to run an application: code, runtime,
+system tools, system libraries and settings.
+Container images become containers at runtime and in the case of Docker
+containers - images become containers when they run on Docker Engine.
+Available for both Linux and Windows-based applications, containerized
+software will always run the same, regardless of the infrastructure.</p>
+</div></blockquote>
+<p>Docker makes setting up a development environment easy and reliable: we
+provide a Docker image with suitable compilers already installed; you
+use the Docker engine to execute the image as a container, add the latest
+development version of SciPy and its build-time dependencies, and build
+SciPy.
+There are Docker hosts for several OS’s including:
+macOS, Linux, and Windows. Please follow the appropriate
+installation instructions for your operating system at <a class="reference external" href="https://docs.docker.com/install/">docs.docker.com</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have a version of an operating system that doesn’t meet the
+requirements of Docker Desktop, such as Windows 10 Home,
+try <a class="reference external" href="https://docs.docker.com/toolbox/">Docker Toolbox</a> .</p>
+</div>
+</div>
+<div class="section" id="cloning-scipy">
+<h2>Cloning SciPy<a class="headerlink" href="#cloning-scipy" title="Permalink to this headline">¶</a></h2>
+<p>Before starting SciPy’s Docker container, you should create a copy of the
+SciPy source code on your computer. That way, you’ll be able to access the
+same files both from your native operating system and within the container.</p>
+<p><em>Note: below we will use</em> terminal window <em>as a
+collective term that includes the Windows Command Prompt.</em></p>
+<ol class="arabic simple">
+<li><p>Browse to the <a class="reference external" href="https://github.com/scipy/scipy">SciPy repository on GitHub</a> and <a class="reference external" href="https://help.github.com/en/articles/fork-a-repo">create your own fork</a>.
+You’ll need to create a GitHub account if you don’t
+already have one.</p></li>
+<li><p>Browse to your fork. Your fork will have a URL like
+<a class="reference external" href="https://github.com/andyfaff/scipy">https://github.com/andyfaff/scipy</a>, except with your GitHub username
+in place of “andyfaff”.</p></li>
+<li><p>Click the big, green “Clone or download” button, and copy the “.git”
+URL to the clipboard. The URL will be the same as your fork’s URL,
+except it will end in “.git”.</p></li>
+<li><p>Create a folder for the SciPy source code in a convenient place on
+your computer. <a class="reference external" href="https://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line">Navigate</a> to it in the terminal window.</p></li>
+<li><p>Enter the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> followed by your fork’s .git URL.
+Note that this creates in the terminal’s working directory a
+<code class="docutils literal notranslate"><span class="pre">scipy</span></code> folder containing the SciPy source code. This assumes that
+you have a <code class="docutils literal notranslate"><span class="pre">git</span></code> command line client that is available on your
+PATH; if not, you can follow these <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">instructions to install a git client</a>.</p></li>
+</ol>
+</div>
+<div class="section" id="starting-docker">
+<h2>Starting Docker<a class="headerlink" href="#starting-docker" title="Permalink to this headline">¶</a></h2>
+<p>Instructions for getting started with Docker can be found <a class="reference external" href="https://docs.docker.com/get-started/">here</a>. After
+ensuring that Docker is working correctly, follow the instructions below to
+start a Docker container for SciPy development. You’ll follow the same
+instructions each time you want to start the container, as changes made to a
+container do not persist after you close it.</p>
+<ol class="arabic">
+<li><p>In a terminal window, change the directory (using the <code class="docutils literal notranslate"><span class="pre">cd</span></code> command)
+to root folder of the SciPy git repository, which contains the file
+<code class="docutils literal notranslate"><span class="pre">setup.py</span></code>.</p></li>
+<li><p>Ensure that Docker Desktop (or Docker Toolbox) is running, and start up the
+SciPy Docker container by entering the following command in a terminal
+window:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -it --rm -v $PWD/:/home/scipy scipy/scipy-dev /bin/bash
+</pre></div>
+</div>
+<p>This command starts (<code class="docutils literal notranslate"><span class="pre">run</span></code>) an interactive (<code class="docutils literal notranslate"><span class="pre">-it</span></code>) Docker container
+named <code class="docutils literal notranslate"><span class="pre">scipy-dev</span></code> (based on Ubuntu Bionic) from the <code class="docutils literal notranslate"><span class="pre">scipy</span></code>
+<a class="reference external" href="https://cloud.docker.com/repository/docker/scipy/scipy-dev">Docker Hub repository</a>. When the Docker container starts, the
+<code class="docutils literal notranslate"><span class="pre">scipy</span></code> directory from the current directory of the host (<code class="docutils literal notranslate"><span class="pre">$PWD</span></code>) is
+made available in the container as <code class="docutils literal notranslate"><span class="pre">/home/scipy</span></code>. The changes you make
+from the container to any of the files in that directory are also
+visible in the host, and vice versa.</p>
+</li>
+<li><p>You should now be in the container, with something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">@</span><span class="mf">468e1</span><span class="n">b9564e4</span><span class="p">:</span><span class="o">/</span><span class="c1">#</span>
+</pre></div>
+</div>
+<p>as a prompt.</p>
+</li>
+<li><p>Navigate to the SciPy source directory, which is shared with the host OS.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">scipy</span>
+</pre></div>
+</div>
+</li>
+<li><p>The container has both Python 3.6 and Python 3.7 available. To start
+using/building SciPy, we need to install some dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span><span class="o">.</span><span class="mi">7</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">cython</span> <span class="n">pytest</span> <span class="n">pybind11</span>
+</pre></div>
+</div>
+<p>If you want to work with Python 3.6 use the <code class="docutils literal notranslate"><span class="pre">pip3.6</span></code> command instead.</p>
+</li>
+<li><p>Do an in-place build by entering:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span>
+</pre></div>
+</div>
+<p>This will compile the C,
+C++, and Fortran code that comes with SciPy. <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> is a
+script in the root directory of SciPy, which is why you have to be
+in the SciPy root directory to call it. <code class="docutils literal notranslate"><span class="pre">build_ext</span></code> is a command
+defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">--inplace</span></code> is an option we’ll use to
+ensure that the compiling happens in the SciPy directory you already
+have rather than some other folder on your computer. If you want to
+work with Python 3.6, replace <code class="docutils literal notranslate"><span class="pre">python3.7</span></code> with <code class="docutils literal notranslate"><span class="pre">python3.6</span></code>.</p>
+</li>
+<li><p>Test the build by entering:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">runtests.py</span></code> is another script in the SciPy root directory. It runs a
+suite of tests that make sure SciPy is working as it should, and <code class="docutils literal notranslate"><span class="pre">-v</span></code>
+activates the <code class="docutils literal notranslate"><span class="pre">–verbose</span></code> option to show all the test output.</p>
+</li>
+<li><p>If you want to <a class="reference internal" href="rendering_documentation.html#rendering-documentation"><span class="std std-ref">build the documentation</span></a>
+or import SciPy from any directory other than the SciPy root, you should
+set up SciPy for development:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>From here, you can start a Python console (e.g., enter <code class="docutils literal notranslate"><span class="pre">python3.7</span></code>) or
+execute Python scripts from the command line (e.g.,
+<code class="docutils literal notranslate"><span class="pre">python3.7</span> <span class="pre">scriptname.py</span></code>).</p>
+<p>You can make changes to files in the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> directory in a text editor/IDE
+in your host OS, and those changes will be reflected
+within the container. Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">vi</span></code>
+text editor within the container to make changes. No changes made
+within the container are retained when the container is exited; only
+changes made to files/folders within mounted volumes are kept.
+If you would like to contribute changes to the SciPy project, please see
+<a class="reference internal" href="development_workflow.html#development-workflow"><span class="std std-ref">Development workflow</span></a>.</p>
+<p>Finally, although Python and pip are pre-installed on the provided
+Docker image, you are welcome to install a different
+Python distribution and package manager, such as Anaconda. In this case, you
+can adapt the instructions from <a class="reference internal" href="quickstart_ubuntu.html#quickstart-ubuntu"><span class="std std-ref">Development environment quickstart guide (Ubuntu 16.04)</span></a>, using the
+container as you would any other Linux terminal. You’ve already cloned
+SciPy on your computer, and git and all required compilers are already
+installed, so you can simply skip the corresponding steps.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development environment quickstart guide (Docker)</a><ul>
+<li><a class="reference internal" href="#docker">Docker</a></li>
+<li><a class="reference internal" href="#cloning-scipy">Cloning SciPy</a></li>
+<li><a class="reference internal" href="#starting-docker">Starting Docker</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

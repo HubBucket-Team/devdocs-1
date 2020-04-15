@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.odr.Output &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Orthogonal distance regression (scipy.odr)" href="../odr.html" >
+    <link rel="next" title="scipy.odr.Output.pprint" href="scipy.odr.Output.pprint.html" >
+    <link rel="prev" title="scipy.odr.ODR.set_job" href="scipy.odr.ODR.set_job.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../odr.html" accesskey="U">Orthogonal distance regression (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.odr</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.odr.Output.pprint.html" title="scipy.odr.Output.pprint"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.odr.ODR.set_job.html" title="scipy.odr.ODR.set_job"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-odr-output">
+<h1>scipy.odr.Output<a class="headerlink" href="#scipy-odr-output" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.odr.Output">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.odr.</code><code class="sig-name descname">Output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/odr/odrpack.py#L543-L614"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.odr.Output" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Output class stores the output of an ODR run.</p>
+<p class="rubric">Notes</p>
+<p>Takes one argument for initialization, the return value from the
+function <a class="reference internal" href="scipy.odr.odr.html#scipy.odr.odr" title="scipy.odr.odr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">odr</span></code></a>. The attributes listed as “optional” above are
+only present if <a class="reference internal" href="scipy.odr.odr.html#scipy.odr.odr" title="scipy.odr.odr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">odr</span></code></a> was run with <code class="docutils literal notranslate"><span class="pre">full_output=1</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>beta</strong><span class="classifier">ndarray</span></dt><dd><p>Estimated parameter values, of shape (q,).</p>
+</dd>
+<dt><strong>sd_beta</strong><span class="classifier">ndarray</span></dt><dd><p>Standard errors of the estimated parameters, of shape (p,).</p>
+</dd>
+<dt><strong>cov_beta</strong><span class="classifier">ndarray</span></dt><dd><p>Covariance matrix of the estimated parameters, of shape (p,p).</p>
+</dd>
+<dt><strong>delta</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Array of estimated errors in input variables, of same shape as <em class="xref py py-obj">x</em>.</p>
+</dd>
+<dt><strong>eps</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Array of estimated errors in response variables, of same shape as <em class="xref py py-obj">y</em>.</p>
+</dd>
+<dt><strong>xplus</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Array of <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">delta</span></code>.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Array <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">fcn(x</span> <span class="pre">+</span> <span class="pre">delta)</span></code>.</p>
+</dd>
+<dt><strong>res_var</strong><span class="classifier">float, optional</span></dt><dd><p>Residual variance.</p>
+</dd>
+<dt><strong>sum_square</strong><span class="classifier">float, optional</span></dt><dd><p>Sum of squares error.</p>
+</dd>
+<dt><strong>sum_square_delta</strong><span class="classifier">float, optional</span></dt><dd><p>Sum of squares of delta error.</p>
+</dd>
+<dt><strong>sum_square_eps</strong><span class="classifier">float, optional</span></dt><dd><p>Sum of squares of eps error.</p>
+</dd>
+<dt><strong>inv_condnum</strong><span class="classifier">float, optional</span></dt><dd><p>Inverse condition number (cf. ODRPACK UG p. 77).</p>
+</dd>
+<dt><strong>rel_error</strong><span class="classifier">float, optional</span></dt><dd><p>Relative error in function values computed within fcn.</p>
+</dd>
+<dt><strong>work</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Final work array.</p>
+</dd>
+<dt><strong>work_ind</strong><span class="classifier">dict, optional</span></dt><dd><p>Indices into work for drawing out values (cf. ODRPACK UG p. 83).</p>
+</dd>
+<dt><strong>info</strong><span class="classifier">int, optional</span></dt><dd><p>Reason for returning, as output by ODRPACK (cf. ODRPACK UG p. 38).</p>
+</dd>
+<dt><strong>stopreason</strong><span class="classifier">list of str, optional</span></dt><dd><p><em class="xref py py-obj">info</em> interpreted into English.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.odr.Output.pprint.html#scipy.odr.Output.pprint" title="scipy.odr.Output.pprint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pprint</span></code></a>(self)</p></td>
+<td><p>Pretty-print important results.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.odr.ODR.set_job.html"
+                        title="previous chapter">scipy.odr.ODR.set_job</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.odr.Output.pprint.html"
+                        title="next chapter">scipy.odr.Output.pprint</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

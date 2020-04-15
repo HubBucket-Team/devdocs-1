@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>SciPy Roadmap &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="index.html" >
+    <link rel="next" title="Detailed SciPy Roadmap" href="roadmap-detailed.html" >
+    <link rel="prev" title="SciPy contributor guide" href="dev/contributor/contributor_toc.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="index.html">
+      <img style="border: 0;" alt="SciPy" src="_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="roadmap-detailed.html" title="Detailed SciPy Roadmap"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="dev/contributor/contributor_toc.html" title="SciPy contributor guide"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-roadmap">
+<span id="id1"></span><h1>SciPy Roadmap<a class="headerlink" href="#scipy-roadmap" title="Permalink to this headline">¶</a></h1>
+<p>This roadmap page contains only the most important ideas and needs for SciPy
+going forward.  For a more detailed roadmap, including per-subpackage status,
+many more ideas, API stability and more, see <a class="reference internal" href="roadmap-detailed.html#scipy-roadmap-detailed"><span class="std std-ref">Detailed SciPy Roadmap</span></a>.</p>
+<div class="section" id="evolve-blas-and-lapack-support">
+<h2>Evolve BLAS and LAPACK support<a class="headerlink" href="#evolve-blas-and-lapack-support" title="Permalink to this headline">¶</a></h2>
+<p>The Python and Cython interfaces to BLAS and LAPACK in <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code> are one
+of the most important things that SciPy provides. In general <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code>
+is in good shape, however we can make a number of improvements:</p>
+<p>1. Library support. Our released wheels now ship with OpenBLAS, which is
+currently the only feasible performant option (ATLAS is too slow, MKL cannot be
+the default due to licensing issues, Accelerate support is dropped because
+Apple doesn’t update Accelerate anymore). OpenBLAS isn’t very stable though,
+sometimes its releases break things and it has issues with threading (currently
+the only issue for using SciPy with PyPy3).  We need at the very least better
+support for debugging OpenBLAS issues, and better documentation on how to build
+SciPy with it.  An option is to use BLIS for a BLAS interface (see <a class="reference external" href="https://github.com/numpy/numpy/issues/7372">numpy
+gh-7372</a>).</p>
+<p>2. Support for newer LAPACK features.  In SciPy 1.2.0 we increased the minimum
+supported version of LAPACK to 3.4.0.  Now that we dropped Python 2.7, we can
+increase that version further (MKL + Python 2.7 was the blocker for &gt;3.4.0
+previously) and start adding support for new features in LAPACK.</p>
+</div>
+<div class="section" id="implement-sparse-arrays-in-addition-to-sparse-matrices">
+<h2>Implement sparse arrays in addition to sparse matrices<a class="headerlink" href="#implement-sparse-arrays-in-addition-to-sparse-matrices" title="Permalink to this headline">¶</a></h2>
+<p>The sparse matrix formats are mostly feature-complete, however the main issue
+is that they act like <code class="docutils literal notranslate"><span class="pre">numpy.matrix</span></code> (which will be deprecated in NumPy at
+some point).  What we want is sparse <em>arrays</em> that act like <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.
+This is being worked on in <a class="reference external" href="https://github.com/pydata/sparse">https://github.com/pydata/sparse</a>, which is quite far
+along.  The tentative plan is:</p>
+<ul class="simple">
+<li><p>Start depending on <code class="docutils literal notranslate"><span class="pre">pydata/sparse</span></code> once it’s feature-complete enough (it
+still needs a CSC/CSR equivalent) and okay performance-wise.</p></li>
+<li><p>Add support for <code class="docutils literal notranslate"><span class="pre">pydata/sparse</span></code> to <code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code> (and perhaps to
+<code class="docutils literal notranslate"><span class="pre">scipy.sparse.csgraph</span></code> after that).</p></li>
+<li><p>Indicate in the documentation that for new code users should prefer
+<code class="docutils literal notranslate"><span class="pre">pydata/sparse</span></code> over sparse matrices.</p></li>
+<li><p>When NumPy deprecates <code class="docutils literal notranslate"><span class="pre">numpy.matrix</span></code>, vendor that or maintain it as a
+stand-alone package.</p></li>
+</ul>
+</div>
+<div class="section" id="fourier-transform-enhancements">
+<h2>Fourier transform enhancements<a class="headerlink" href="#fourier-transform-enhancements" title="Permalink to this headline">¶</a></h2>
+<p>The new <code class="docutils literal notranslate"><span class="pre">scipy.fft</span></code> subpackage should be extended to add a backend system with
+support for PyFFTW and mkl-fft.</p>
+</div>
+<div class="section" id="support-for-distributed-arrays-and-gpu-arrays">
+<h2>Support for distributed arrays and GPU arrays<a class="headerlink" href="#support-for-distributed-arrays-and-gpu-arrays" title="Permalink to this headline">¶</a></h2>
+<p>NumPy is splitting its API from its execution engine with
+<code class="docutils literal notranslate"><span class="pre">__array_function__</span></code> and <code class="docutils literal notranslate"><span class="pre">__array_ufunc__</span></code>.  This will enable parts of SciPy
+to accept distributed arrays (e.g. <code class="docutils literal notranslate"><span class="pre">dask.array.Array</span></code>) and GPU arrays (e.g.
+<code class="docutils literal notranslate"><span class="pre">cupy.ndarray</span></code>) that implement the <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> interface.  At the moment it is
+not yet clear which algorithms will work out of the box, and if there are
+significant performance gains when they do.  We want to create a map of which
+parts of the SciPy API work, and improve support over time.</p>
+<p>In addition to making use of NumPy protocols like <code class="docutils literal notranslate"><span class="pre">__array_function__</span></code>, we can
+make use of these protocols in SciPy as well.  That will make it possible to
+(re)implement SciPy functions like, e.g., those in <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code> for Dask
+or GPU arrays (see
+<a class="reference external" href="http://www.numpy.org/neps/nep-0018-array-function-protocol.html#use-outside-of-numpy">NEP 18 - use outside of NumPy</a>).</p>
+</div>
+<div class="section" id="improve-source-builds-on-windows">
+<h2>Improve source builds on Windows<a class="headerlink" href="#improve-source-builds-on-windows" title="Permalink to this headline">¶</a></h2>
+<p>SciPy critically relies on Fortran code. This is still problematic on Windows.
+There are currently only two options: using Intel Fortran, or using
+MSVC + gfortran.  The former is expensive, while the latter works (it’s what we
+use for releases) but is quite hard to do correctly.  For allowing contributors
+and end users to reliably build SciPy on Windows, using the Flang compiler
+looks like the best way forward long-term.  Until Flang support materializes,
+we need to streamline and better document the MSVC + gfortran build.</p>
+</div>
+<div class="section" id="statistics-enhancements">
+<h2>Statistics enhancements<a class="headerlink" href="#statistics-enhancements" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="stats.html#module-scipy.stats" title="scipy.stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> enhancements listed in the <a class="reference internal" href="roadmap-detailed.html#scipy-roadmap-detailed"><span class="std std-ref">Detailed SciPy Roadmap</span></a> are of
+particularly high importance to the project.</p>
+<ul class="simple">
+<li><p>Improve the options for fitting a probability distribution to data.</p></li>
+<li><p>Expand the set of hypothesis tests.  In particular, include all the basic
+variations of analysis of variance.</p></li>
+<li><p>Add confidence intervals for all statistical tests.</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SciPy Roadmap</a><ul>
+<li><a class="reference internal" href="#evolve-blas-and-lapack-support">Evolve BLAS and LAPACK support</a></li>
+<li><a class="reference internal" href="#implement-sparse-arrays-in-addition-to-sparse-matrices">Implement sparse arrays in addition to sparse matrices</a></li>
+<li><a class="reference internal" href="#fourier-transform-enhancements">Fourier transform enhancements</a></li>
+<li><a class="reference internal" href="#support-for-distributed-arrays-and-gpu-arrays">Support for distributed arrays and GPU arrays</a></li>
+<li><a class="reference internal" href="#improve-source-builds-on-windows">Improve source builds on Windows</a></li>
+<li><a class="reference internal" href="#statistics-enhancements">Statistics enhancements</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dev/contributor/contributor_toc.html"
+                        title="previous chapter">SciPy contributor guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="roadmap-detailed.html"
+                        title="next chapter">Detailed SciPy Roadmap</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

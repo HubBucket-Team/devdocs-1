@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.theilslopes &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.multiscale_graphcorr" href="scipy.stats.multiscale_graphcorr.html" >
+    <link rel="prev" title="scipy.stats.siegelslopes" href="scipy.stats.siegelslopes.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.multiscale_graphcorr.html" title="scipy.stats.multiscale_graphcorr"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.siegelslopes.html" title="scipy.stats.siegelslopes"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-theilslopes">
+<h1>scipy.stats.theilslopes<a class="headerlink" href="#scipy-stats-theilslopes" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.theilslopes">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">theilslopes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.95</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/_stats_mstats_common.py#L147-L266"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.theilslopes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Theil-Sen estimator for a set of points (x, y).</p>
+<p><a class="reference internal" href="#scipy.stats.theilslopes" title="scipy.stats.theilslopes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">theilslopes</span></code></a> implements a method for robust linear regression.  It
+computes the slope as the median of all slopes between paired values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>y</strong><span class="classifier">array_like</span></dt><dd><p>Dependent variable.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">array_like or None, optional</span></dt><dd><p>Independent variable. If None, use <code class="docutils literal notranslate"><span class="pre">arange(len(y))</span></code> instead.</p>
+</dd>
+<dt><strong>alpha</strong><span class="classifier">float, optional</span></dt><dd><p>Confidence degree between 0 and 1. Default is 95% confidence.
+Note that <a class="reference internal" href="scipy.stats.alpha.html#scipy.stats.alpha" title="scipy.stats.alpha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alpha</span></code></a> is symmetric around 0.5, i.e. both 0.1 and 0.9 are
+interpreted as “find the 90% confidence interval”.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>medslope</strong><span class="classifier">float</span></dt><dd><p>Theil slope.</p>
+</dd>
+<dt><strong>medintercept</strong><span class="classifier">float</span></dt><dd><p>Intercept of the Theil line, as <code class="docutils literal notranslate"><span class="pre">median(y)</span> <span class="pre">-</span> <span class="pre">medslope*median(x)</span></code>.</p>
+</dd>
+<dt><strong>lo_slope</strong><span class="classifier">float</span></dt><dd><p>Lower bound of the confidence interval on <em class="xref py py-obj">medslope</em>.</p>
+</dd>
+<dt><strong>up_slope</strong><span class="classifier">float</span></dt><dd><p>Upper bound of the confidence interval on <em class="xref py py-obj">medslope</em>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.siegelslopes.html#scipy.stats.siegelslopes" title="scipy.stats.siegelslopes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">siegelslopes</span></code></a></dt><dd><p>a similar technique using repeated medians</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The implementation of <a class="reference internal" href="#scipy.stats.theilslopes" title="scipy.stats.theilslopes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">theilslopes</span></code></a> follows <a class="reference internal" href="#r907add447232-1" id="id1">[1]</a>. The intercept is
+not defined in <a class="reference internal" href="#r907add447232-1" id="id2">[1]</a>, and here it is defined as <code class="docutils literal notranslate"><span class="pre">median(y)</span> <span class="pre">-</span>
+<span class="pre">medslope*median(x)</span></code>, which is given in <a class="reference internal" href="#r907add447232-3" id="id3">[3]</a>. Other definitions of
+the intercept exist in the literature. A confidence interval for
+the intercept is not given as this question is not addressed in
+<a class="reference internal" href="#r907add447232-1" id="id4">[1]</a>.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r907add447232-1"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id4">3</a>)</span></dt>
+<dd><p>P.K. Sen, “Estimates of the regression coefficient based on Kendall’s tau”,
+J. Am. Stat. Assoc., Vol. 63, pp. 1379-1389, 1968.</p>
+</dd>
+<dt class="label" id="r907add447232-2"><span class="brackets">2</span></dt>
+<dd><p>H. Theil, “A rank-invariant method of linear and polynomial
+regression analysis I, II and III”,  Nederl. Akad. Wetensch., Proc.
+53:, pp. 386-392, pp. 521-525, pp. 1397-1412, 1950.</p>
+</dd>
+<dt class="label" id="r907add447232-3"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>W.L. Conover, “Practical nonparametric statistics”, 2nd ed.,
+John Wiley and Sons, New York, pp. 493.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>  <span class="c1"># add outliers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span> <span class="o">-=</span> <span class="mi">7</span>
+</pre></div>
+</div>
+<p>Compute the slope, intercept and 90% confidence interval.  For comparison,
+also compute the least-squares fit with <a class="reference internal" href="scipy.stats.linregress.html#scipy.stats.linregress" title="scipy.stats.linregress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linregress</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">theilslopes</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lsq_res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plot the results. The Theil-Sen regression line is shown in red, with the
+dashed red lines illustrating the confidence interval of the slope (note
+that the dashed red lines are not the confidence interval of the regression
+as the confidence interval of the intercept is not included). The green
+line shows the least-squares fit for comparison.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lsq_res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lsq_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-stats-theilslopes-1.png" src="../_images/scipy-stats-theilslopes-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.siegelslopes.html"
+                        title="previous chapter">scipy.stats.siegelslopes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.multiscale_graphcorr.html"
+                        title="next chapter">scipy.stats.multiscale_graphcorr</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

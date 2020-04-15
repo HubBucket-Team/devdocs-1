@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.lfiltic &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.lfilter_zi" href="scipy.signal.lfilter_zi.html" >
+    <link rel="prev" title="scipy.signal.lfilter" href="scipy.signal.lfilter.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.lfilter_zi.html" title="scipy.signal.lfilter_zi"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.lfilter.html" title="scipy.signal.lfilter"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-lfiltic">
+<h1>scipy.signal.lfiltic<a class="headerlink" href="#scipy-signal-lfiltic" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.lfiltic">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">lfiltic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/signaltools.py#L1921-L1986"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.lfiltic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct initial conditions for lfilter given input and output vectors.</p>
+<p>Given a linear filter (b, a) and initial conditions on the output <em class="xref py py-obj">y</em>
+and the input <em class="xref py py-obj">x</em>, return the initial conditions on the state vector zi
+which is used by <a class="reference internal" href="scipy.signal.lfilter.html#scipy.signal.lfilter" title="scipy.signal.lfilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lfilter</span></code></a> to generate the output given the input.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>b</strong><span class="classifier">array_like</span></dt><dd><p>Linear filter term.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier">array_like</span></dt><dd><p>Linear filter term.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">array_like</span></dt><dd><p>Initial conditions.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">len(a)</span> <span class="pre">-</span> <span class="pre">1</span></code>, then <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">{y[-1],</span> <span class="pre">y[-2],</span> <span class="pre">...,</span> <span class="pre">y[-N]}</span></code>.</p>
+<p>If <em class="xref py py-obj">y</em> is too short, it is padded with zeros.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">array_like, optional</span></dt><dd><p>Initial conditions.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">len(b)</span> <span class="pre">-</span> <span class="pre">1</span></code>, then <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">{x[-1],</span> <span class="pre">x[-2],</span> <span class="pre">...,</span> <span class="pre">x[-M]}</span></code>.</p>
+<p>If <em class="xref py py-obj">x</em> is not given, its initial conditions are assumed zero.</p>
+<p>If <em class="xref py py-obj">x</em> is too short, it is padded with zeros.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>zi</strong><span class="classifier">ndarray</span></dt><dd><p>The state vector <code class="docutils literal notranslate"><span class="pre">zi</span> <span class="pre">=</span> <span class="pre">{z_0[-1],</span> <span class="pre">z_1[-1],</span> <span class="pre">...,</span> <span class="pre">z_K-1[-1]}</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">K</span> <span class="pre">=</span> <span class="pre">max(M,</span> <span class="pre">N)</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.lfilter.html#scipy.signal.lfilter" title="scipy.signal.lfilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lfilter</span></code></a>, <a class="reference internal" href="scipy.signal.lfilter_zi.html#scipy.signal.lfilter_zi" title="scipy.signal.lfilter_zi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lfilter_zi</span></code></a></dt><dd></dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.lfilter.html"
+                        title="previous chapter">scipy.signal.lfilter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.lfilter_zi.html"
+                        title="next chapter">scipy.signal.lfilter_zi</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

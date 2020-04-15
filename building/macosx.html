@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Building from source on Mac OSX &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="building-from-source-on-mac-osx">
+<h1>Building from source on Mac OSX<a class="headerlink" href="#building-from-source-on-mac-osx" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document has not been maintained and is retained for reference only.
+For building on macOS, please see <a class="reference internal" href="../dev/contributor/quickstart_mac.html#quickstart-mac"><span class="std std-ref">Development environment quickstart guide (macOS)</span></a>.</p>
+</div>
+<p>These instructions describe how to build NumPy and SciPy libraries from
+source.</p>
+<p>If you just want to use NumPy or SciPy, install pre-built binaries as described
+in <a class="reference internal" href="../install_upgrade.html#installing-upgrading"><span class="std std-ref">Installing and upgrading</span></a>.</p>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>Apple ships its own version of Python with OS X. However, we
+<em>strongly</em> recommend installing the <a class="reference external" href="https://www.python.org/downloads/">official Python distribution</a>.</p>
+<p>Alternatively, use Python from one of the OS X package managers
+(Homebrew, MacPorts, Fink).</p>
+</div>
+<div class="section" id="compilers-c-c-fortran-cython">
+<h2>Compilers (C/C++/FORTRAN/Cython)<a class="headerlink" href="#compilers-c-c-fortran-cython" title="Permalink to this headline">¶</a></h2>
+<p>Though virtually any commercial C/C++ compiler may be used with SciPy, Clang C/C++ compiler,
+which is a Xcode command line tool, can be used for OS X.
+The only thing missing is the GNU FORTRAN compiler.</p>
+<p>We recommend gfortran; this is a free, open source, F95 compiler. We suggest you
+use the following binaries:</p>
+<ul class="simple">
+<li><p>gfortran installed via <a class="reference external" href="https://brew.sh/">Homebrew</a>, or,</p></li>
+<li><p><a class="reference external" href="http://r.research.att.com/tools/gcc-42-5666.3-darwin11.pkg">http://r.research.att.com/tools/gcc-42-5666.3-darwin11.pkg</a> (for Xcode
+4.2 or higher)</p></li>
+</ul>
+<p>See <a class="reference external" href="http://r.research.att.com/tools/">this site</a> for the most recent links.</p>
+<p>Unless you are building from released source packages, the <a class="reference external" href="https://cython.org/">Cython</a> compiler is also needed.</p>
+</div>
+<div class="section" id="blas-lapack-installation">
+<h2>BLAS/LAPACK Installation<a class="headerlink" href="#blas-lapack-installation" title="Permalink to this headline">¶</a></h2>
+<p>You will also need to install a library providing the BLAS and LAPACK
+interfaces. ATLAS, OpenBLAS, and MKL all work. OpenBLAS can be installed
+via <em class="xref py py-obj">Homebrew</em>.</p>
+<p>As of SciPy version 1.2.0, we do not support compiling against the system
+Accelerate library for BLAS and LAPACK. It does not support a sufficiently
+recent LAPACK interface.</p>
+</div>
+<div class="section" id="version-specific-notes">
+<h2>Version-specific notes<a class="headerlink" href="#version-specific-notes" title="Permalink to this headline">¶</a></h2>
+<p>This section notes only things specific to one version of OS X or Python.
+The build instructions in <a class="reference internal" href="#osx-obtaining-and-building"><span class="std std-ref">Obtaining and Building NumPy and SciPy</span></a> apply to all versions.</p>
+</div>
+<div class="section" id="obtaining-and-building-numpy-and-scipy">
+<span id="osx-obtaining-and-building"></span><h2>Obtaining and Building NumPy and SciPy<a class="headerlink" href="#obtaining-and-building-numpy-and-scipy" title="Permalink to this headline">¶</a></h2>
+<p>You may install NumPy and SciPy either by checking out the source
+files or downloading a source archive file from
+<a class="reference external" href="https://github.com/scipy/scipy">GitHub</a>. If you choose the latter,
+simply expand the archive (generally a gzipped tar file), otherwise
+check out the following branches from the repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/numpy/numpy.git
+$ git clone https://github.com/scipy/scipy.git
+</pre></div>
+</div>
+<p>Both NumPy and SciPy are built as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python setup.py build
+$ python setup.py install
+</pre></div>
+</div>
+<p>The above applies to the <a class="reference external" href="https://www.python.org/downloads/">official Python distribution</a>, which is 32-bit
+only for 2.6 while 32/64-bit bundles are available for 2.7 and
+3.x. For alternative 64-bit Pythons (either from Apple or home-built)
+on Snow Leopard, you may need to extend your build flags to specify
+the architecture by setting LDFLAGS and FFLAGS.</p>
+<p>Note that with distutils (setup.py) given build flags like LDFLAGS
+<strong>do not extend but override the defaults</strong>, so you have to specify
+all necessary flags. Only try this if you know what you’re doing!</p>
+<p>After a successful build, you may try running the built-in unit tests
+for SciPy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; np.test(&#39;full&#39;)
+&gt;&gt;&gt; import scipy
+&gt;&gt;&gt; scipy.test()
+</pre></div>
+</div>
+<p>Be sure not to import numpy or scipy while you’re in the numpy/scipy
+source tree. Change directory first.</p>
+<p>If you have any problems installing SciPy on your Mac
+based on these instructions, please check the <a class="reference external" href="https://www.scipy.org/scipylib/mailing-lists.html">scipy-users and
+scipy-dev mailing list archives</a>
+for possible solutions. If you
+are still stuck, feel free to join scipy-users for further
+assistance. Please have the following information ready:</p>
+<ul class="simple">
+<li><p>Your OS version</p></li>
+<li><p>The versions of gcc and gfortran and where you obtained gfortran</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">gcc</span> <span class="pre">--version</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">gfortran</span> <span class="pre">--version</span></code></p></li>
+</ul>
+</li>
+<li><p>The versions of numpy and scipy that you are trying to install</p></li>
+<li><p>The full output of <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">build</span></code></p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Building from source on Mac OSX</a><ul>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#compilers-c-c-fortran-cython">Compilers (C/C++/FORTRAN/Cython)</a></li>
+<li><a class="reference internal" href="#blas-lapack-installation">BLAS/LAPACK Installation</a></li>
+<li><a class="reference internal" href="#version-specific-notes">Version-specific notes</a></li>
+<li><a class="reference internal" href="#obtaining-and-building-numpy-and-scipy">Obtaining and Building NumPy and SciPy</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.expm1 &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.cosm1" href="scipy.special.cosm1.html" >
+    <link rel="prev" title="scipy.special.log1p" href="scipy.special.log1p.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.cosm1.html" title="scipy.special.cosm1"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.log1p.html" title="scipy.special.log1p"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-expm1">
+<h1>scipy.special.expm1<a class="headerlink" href="#scipy-special-expm1" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.expm1">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">expm1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'expm1'&gt;</em><a class="headerlink" href="#scipy.special.expm1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>When <em class="xref py py-obj">x</em> is near zero, <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code> is near 1, so the numerical calculation
+of <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code> can suffer from catastrophic loss of precision.
+<code class="docutils literal notranslate"><span class="pre">expm1(x)</span></code> is implemented to avoid the loss of precision that occurs when
+<em class="xref py py-obj">x</em> is near zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p><em class="xref py py-obj">x</em> must contain real numbers.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p><code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code> computed element-wise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">expm1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expm1</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">1.7182818284590451</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expm1</span><span class="p">([</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="go">array([-0.18126925, -0.09516258,  0.        ,  0.10517092,  0.22140276])</span>
+</pre></div>
+</div>
+<p>The exact value of <code class="docutils literal notranslate"><span class="pre">exp(7.5e-13)</span> <span class="pre">-</span> <span class="pre">1</span></code> is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">7.5000000000028125000000007031250000001318</span><span class="o">...*</span><span class="mi">10</span><span class="o">**-</span><span class="mf">13.</span>
+</pre></div>
+</div>
+<p>Here is what <code class="docutils literal notranslate"><span class="pre">expm1(7.5e-13)</span></code> gives:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expm1</span><span class="p">(</span><span class="mf">7.5e-13</span><span class="p">)</span>
+<span class="go">7.5000000000028135e-13</span>
+</pre></div>
+</div>
+<p>Compare that to <code class="docutils literal notranslate"><span class="pre">exp(7.5e-13)</span> <span class="pre">-</span> <span class="pre">1</span></code>, where the subtraction results in
+a “catastrophic” loss of precision:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">7.5e-13</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="go">7.5006667543675576e-13</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.log1p.html"
+                        title="previous chapter">scipy.special.log1p</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.cosm1.html"
+                        title="next chapter">scipy.special.cosm1</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

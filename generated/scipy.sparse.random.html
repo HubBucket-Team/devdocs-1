@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.sparse.random &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Sparse matrices (scipy.sparse)" href="../sparse.html" >
+    <link rel="next" title="scipy.sparse.save_npz" href="scipy.sparse.save_npz.html" >
+    <link rel="prev" title="scipy.sparse.rand" href="scipy.sparse.rand.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../sparse.html" accesskey="U">Sparse matrices (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.save_npz.html" title="scipy.sparse.save_npz"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.rand.html" title="scipy.sparse.rand"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-sparse-random">
+<h1>scipy.sparse.random<a class="headerlink" href="#scipy-sparse-random" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.sparse.random">
+<code class="sig-prename descclassname">scipy.sparse.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">density</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">'coo'</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">data_rvs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/sparse/construct.py#L676-L790"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.sparse.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a sparse matrix of the given shape and density with randomly
+distributed values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>m, n</strong><span class="classifier">int</span></dt><dd><p>shape of the matrix</p>
+</dd>
+<dt><strong>density</strong><span class="classifier">real, optional</span></dt><dd><p>density of the generated matrix: density equal to one means a full
+matrix, density of 0 means a matrix with no non-zero items.</p>
+</dd>
+<dt><strong>format</strong><span class="classifier">str, optional</span></dt><dd><p>sparse matrix format.</p>
+</dd>
+<dt><strong>dtype</strong><span class="classifier">dtype, optional</span></dt><dd><p>type of the returned matrix values.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">{numpy.random.RandomState, int}, optional</span></dt><dd><p>Random number generator or random seed. If not given, the singleton
+numpy.random will be used. This random state will be used
+for sampling the sparsity structure, but not necessarily for sampling
+the values of the structurally nonzero entries of the matrix.</p>
+</dd>
+<dt><strong>data_rvs</strong><span class="classifier">callable, optional</span></dt><dd><p>Samples a requested number of random values.
+This function should take a single argument specifying the length
+of the ndarray that it will return. The structurally nonzero entries
+of the sparse random matrix will be taken from the array sampled
+by this function. By default, uniform [0, 1) random values will be
+sampled using the same random state as is used for sampling
+the sparsity structure.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>res</strong><span class="classifier">sparse matrix</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Only float types are supported for now.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">CustomRandomState</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">randint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rs</span> <span class="o">=</span> <span class="n">CustomRandomState</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rvs</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rs</span><span class="p">,</span> <span class="n">data_rvs</span><span class="o">=</span><span class="n">rvs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">.</span><span class="n">A</span>
+<span class="go">array([[ 36.,   0.,  33.,   0.],   # random</span>
+<span class="go">       [  0.,   0.,   0.,   0.],</span>
+<span class="go">       [  0.,   0.,  36.,   0.]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">rv_continuous</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">CustomDistribution</span><span class="p">(</span><span class="n">rv_continuous</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">_rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random_state</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">CustomDistribution</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2906</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">X</span><span class="p">()</span>  <span class="c1"># get a frozen version of the distribution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">2906</span><span class="p">,</span> <span class="n">data_rvs</span><span class="o">=</span><span class="n">Y</span><span class="o">.</span><span class="n">rvs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="o">.</span><span class="n">A</span>
+<span class="go">array([[ 0.        ,  0.        ,  0.        ,  0.        ],</span>
+<span class="go">       [ 0.13569738,  1.9467163 , -0.81205367,  0.        ],</span>
+<span class="go">       [ 0.        ,  0.        ,  0.        ,  0.        ]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.sparse.rand.html"
+                        title="previous chapter">scipy.sparse.rand</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.sparse.save_npz.html"
+                        title="next chapter">scipy.sparse.save_npz</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

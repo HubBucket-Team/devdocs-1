@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Hypergeometric Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Discrete Statistical Distributions" href="discrete.html" >
+    <link rel="next" title="Zipf (Zeta) Distribution" href="discrete_zipf.html" >
+    <link rel="prev" title="Negative Binomial Distribution" href="discrete_nbinom.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="discrete.html" accesskey="U">Discrete Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="discrete_zipf.html" title="Zipf (Zeta) Distribution"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="discrete_nbinom.html" title="Negative Binomial Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="hypergeometric-distribution">
+<span id="discrete-hypergeom"></span><h1>Hypergeometric Distribution<a class="headerlink" href="#hypergeometric-distribution" title="Permalink to this headline">¶</a></h1>
+<p>The hypergeometric random variable with parameters <span class="math notranslate nohighlight">\(\left(M,n,N\right)\)</span> counts the number of “good “objects in a sample of size <span class="math notranslate nohighlight">\(N\)</span> chosen without replacement from a population of <span class="math notranslate nohighlight">\(M\)</span> objects where <span class="math notranslate nohighlight">\(n\)</span> is the number of “good “objects in the total population.</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} p\left(k;N,n,M\right) &amp; = &amp; \frac{\left(\begin{array}{c} n\\ k\end{array}\right)\left(\begin{array}{c} M-n\\ N-k\end{array}\right)}{\left(\begin{array}{c} M\\ N\end{array}\right)}\quad N-\left(M-n\right)\leq k\leq\min\left(n,N\right)\\ F\left(x;N,n,M\right) &amp; = &amp; \sum_{k=0}^{\left\lfloor x\right\rfloor }\frac{\left(\begin{array}{c} m\\ k\end{array}\right)\left(\begin{array}{c} N-m\\ n-k\end{array}\right)}{\left(\begin{array}{c} N\\ n\end{array}\right)},\\ \mu &amp; = &amp; \frac{nN}{M}\\ \mu_{2} &amp; = &amp; \frac{nN\left(M-n\right)\left(M-N\right)}{M^{2}\left(M-1\right)}\\ \gamma_{1} &amp; = &amp; \frac{\left(M-2n\right)\left(M-2N\right)}{M-2}\sqrt{\frac{M-1}{nN\left(M-m\right)\left(M-n\right)}}\\ \gamma_{2} &amp; = &amp; \frac{g\left(N,n,M\right)}{nN\left(M-n\right)\left(M-3\right)\left(M-2\right)\left(N-M\right)}\end{eqnarray*}</div><p>where (defining <span class="math notranslate nohighlight">\(m=M-n\)</span> )</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} g\left(N,n,M\right) &amp; = &amp; m^{3}-m^{5}+3m^{2}n-6m^{3}n+m^{4}n+3mn^{2}\\  &amp;  &amp; -12m^{2}n^{2}+8m^{3}n^{2}+n^{3}-6mn^{3}+8m^{2}n^{3}\\  &amp;  &amp; +mn^{4}-n^{5}-6m^{3}N+6m^{4}N+18m^{2}nN\\  &amp;  &amp; -6m^{3}nN+18mn^{2}N-24m^{2}n^{2}N-6n^{3}N\\  &amp;  &amp; -6mn^{3}N+6n^{4}N+6m^{2}N^{2}-6m^{3}N^{2}-24mnN^{2}\\  &amp;  &amp; +12m^{2}nN^{2}+6n^{2}N^{2}+12mn^{2}N^{2}-6n^{3}N^{2}.\end{eqnarray*}</div><p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.hypergeom.html#scipy.stats.hypergeom" title="scipy.stats.hypergeom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.hypergeom</span></code></a></p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="discrete_nbinom.html"
+                        title="previous chapter">Negative Binomial Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="discrete_zipf.html"
+                        title="next chapter">Zipf (Zeta) Distribution</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

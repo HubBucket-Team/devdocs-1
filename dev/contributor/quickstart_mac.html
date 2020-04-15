@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Development environment quickstart guide (macOS) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="next" title="Development environment quickstart guide (Ubuntu 16.04)" href="quickstart_ubuntu.html" >
+    <link rel="prev" title="SciPy Project Governance" href="../governance/governance.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="quickstart_ubuntu.html" title="Development environment quickstart guide (Ubuntu 16.04)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../governance/governance.html" title="SciPy Project Governance"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="development-environment-quickstart-guide-macos">
+<span id="quickstart-mac"></span><h1>Development environment quickstart guide (macOS)<a class="headerlink" href="#development-environment-quickstart-guide-macos" title="Permalink to this headline">¶</a></h1>
+<p>This quickstart guide will cover:</p>
+<ul class="simple">
+<li><p>setting up and maintaining a development environment, including installing
+compilers and SciPy build dependencies</p></li>
+<li><p>creating a personal fork of the SciPy repository on GitHub</p></li>
+<li><p>using git to manage a local repository with development branches</p></li>
+<li><p>performing an in-place build of SciPy</p></li>
+<li><p>creating a virtual environment that adds this development version of SciPy to
+the Python path</p></li>
+</ul>
+<p>in macOS.</p>
+<p>Its companion videos <a class="reference external" href="https://youtu.be/1rPOSNd0ULI">Anaconda SciPy Dev: Part I (macOS)</a> and
+<a class="reference external" href="https://youtu.be/Faz29u5xIZc">Anaconda SciPy Dev: Part II (macOS)</a> show many of the steps being performed.
+This guide may diverge slightly from the videos over time, with the goal of keeping
+this guide the simplest, up-to-date procedure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This guide does not present the only way to set up a development environment;
+there are many valid choices of Python distribution, C/Fortran compiler, and
+installation options. The steps here can often be adapted for other choices,
+but we cannot provide documentation tailored for them.</p>
+<p>This guide assumes that you are starting without an existing Python 3 installation.
+If you already have Python 3, you might want to uninstall it first to avoid
+ambiguity over which Python version is being used at the command line.</p>
+</div>
+<div class="section" id="building-scipy">
+<span id="quickstart-mac-build"></span><h2>Building SciPy<a class="headerlink" href="#building-scipy" title="Permalink to this headline">¶</a></h2>
+<p><em>Consider following along with the companion video</em> <a class="reference external" href="https://youtu.be/1rPOSNd0ULI">Anaconda SciPy Dev: Part I (macOS)</a></p>
+<ol class="arabic simple">
+<li><p>Download, install, and test the latest release of the <a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda Distribution of Python</a>.
+In addition to the latest version of Python 3, the Anaconda distribution includes
+dozens of the most popular Python packages for scientific computing, the Spyder
+integrated development environment (IDE), the <code class="docutils literal notranslate"><span class="pre">conda</span></code> package manager, and tools
+for managing virtual environments.</p></li>
+<li><p>Install Apple Developer Tools. An easy way to do this is to <a class="reference external" href="https://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line">open a terminal
+window</a>,
+enter the command <code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code>, and follow the prompts. Apple
+Developer Tools includes <a class="reference external" href="https://git-scm.com/">git</a>, the software we need to
+download and manage the SciPy source code.</p></li>
+<li><p>Browse to the <a class="reference external" href="https://github.com/scipy/scipy">SciPy repository on GitHub</a>
+and <a class="reference external" href="https://help.github.com/en/articles/fork-a-repo">create your own fork</a>.
+You’ll need to create a GitHub account if you don’t already have one.</p></li>
+<li><p>Browse to your fork. Your fork will have a URL like
+<a class="reference external" href="https://github.com/mdhaber/scipy">https://github.com/mdhaber/scipy</a>,
+except with your GitHub username in place of “mdhaber”.</p></li>
+<li><p>Click on the big, green “Clone or download” button, and copy the “.git” URL to
+the clipboard. The URL will be the same as your fork’s URL, except it will end in “.git”.</p></li>
+<li><p>Create a folder for the SciPy source code in a convenient place on your computer.
+<a class="reference external" href="https://blog.teamtreehouse.com/introduction-to-the-mac-os-x-command-line">Navigate to it in the terminal</a>.</p></li>
+<li><p>Enter the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> followed by your fork’s .git URL. Note that
+this creates in the terminal’s working directory a <code class="docutils literal notranslate"><span class="pre">scipy</span></code> folder containing
+the SciPy source code.</p></li>
+<li><p>In the terminal, navigate to the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> root directory (e.g., <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">scipy</span></code>).</p></li>
+<li><p>Install <a class="reference external" href="https://brew.sh/">Homebrew</a>. Enter into the terminal
+<br> <code class="docutils literal notranslate"><span class="pre">/usr/bin/ruby</span> <span class="pre">-e</span> <span class="pre">&quot;$(curl</span> <span class="pre">-fsSL</span> <span class="pre">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span></code> <br>
+or follow the installation instructions listed on the <a class="reference external" href="https://brew.sh">Homebrew website</a>.
+Homebrew is a package manager for macOS that will help you download <code class="docutils literal notranslate"><span class="pre">gcc</span></code>,
+the software we will use to compile C, C++, and Fortran code included in SciPy.</p></li>
+<li><p>Use Homebrew to install <code class="docutils literal notranslate"><span class="pre">gcc</span></code> by entering the command <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">gcc</span></code>.</p></li>
+<li><p>In the terminal, ensure that all of SciPy’s build dependencies are up to
+date: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pybind11</span></code>, then <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">cython</span> <span class="pre">numpy</span> <span class="pre">pytest</span>
+<span class="pre">pybind11</span></code>.</p></li>
+<li><p>(Optional) Check your present working directory by entering <code class="docutils literal notranslate"><span class="pre">pwd</span></code> at the
+terminal. You should be in the root <code class="docutils literal notranslate"><span class="pre">/scipy</span></code> directory, not in a directory
+ending <code class="docutils literal notranslate"><span class="pre">/scipy/scipy</span></code>.</p></li>
+<li><p>Do an in-place build: enter <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">setup.py</span> <span class="pre">build_ext</span> <span class="pre">--inplace</span></code>. <br>
+This will compile the C, C++, and Fortran code that comes with SciPy.
+We installed <code class="docutils literal notranslate"><span class="pre">python3</span></code> with Anaconda. <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> is a script in the root
+directory of SciPy, which is why you have to be in the SciPy root directory to
+call it. <code class="docutils literal notranslate"><span class="pre">build_ext</span></code> is a command defined in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">--inplace</span></code>
+is an option we’ll use to ensure that the compiling happens in the SciPy
+directory you already have rather than the default location for Python packages.
+By building in-place, you avoid having to re-build SciPy before you can test
+changes to the Python code.</p></li>
+<li><p>Test the build: enter <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">runtests.py</span> <span class="pre">-v</span></code>. <code class="docutils literal notranslate"><span class="pre">runtests.py</span></code> is another
+script in the SciPy root directory. It runs a suite of tests that make sure
+SciPy is working as it should, and <code class="docutils literal notranslate"><span class="pre">-v</span></code> activates the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option
+to show all the test output.</p></li>
+</ol>
+<p>If the tests were successful, you now have a working development build of SciPy!
+You could stop here, but you would only be able to use this development build
+from within the SciPy root directory. This would be inconvenient, for instance,
+if you wrote a script that performs an <code class="docutils literal notranslate"><span class="pre">import</span></code> of something you changed in
+SciPy but wanted to save it elsewhere on your computer. Without taking
+additional steps to add this version of SciPy to the <a class="reference external" href="https://docs.python.org/3/using/cmdline.html#environment-variables"><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> ,
+this script would <code class="docutils literal notranslate"><span class="pre">import</span></code> from the version of SciPy distributed with
+Anaconda rather than the development version you just built.
+(See <a class="reference external" href="https://chrisyeh96.github.io/2017/08/08/definitive-guide-python-imports.html">here</a>
+for much more information about how Python imports modules.)</p>
+</div>
+<div class="section" id="installing-scipy">
+<span id="quickstart-mac-install"></span><h2>Installing SciPy<a class="headerlink" href="#installing-scipy" title="Permalink to this headline">¶</a></h2>
+<p><em>Consider following along with the companion video</em> <a class="reference external" href="https://youtu.be/Faz29u5xIZc">Anaconda SciPy Dev: Part II (macOS)</a></p>
+<p>Currently we have <em>two</em> versions of SciPy: the latest release as installed by
+Anaconda, and the development version we just built. Ideally, we’d like to be
+able to switch between the two as needed. <a class="reference external" href="https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c">Virtual environments</a>
+can do just that. With a few keystrokes in the terminal or even the click of an
+icon, we can enable or disable our development version. Let’s set that up.</p>
+<ol class="arabic">
+<li><p>In a terminal window, enter <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code>. <br> This shows a list of all
+the Python packages that came with the Anaconda distribution of Python. Note
+the latest released version of SciPy is among them; this is not the cutting-edge
+development version you just built and can modify.</p></li>
+<li><p>Enter <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">scipydev</span></code>. <br> This tells <code class="docutils literal notranslate"><span class="pre">conda</span></code> to
+create a virtual environment named <code class="docutils literal notranslate"><span class="pre">scipydev</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">scipydev</span></code> can
+be replaced by any name you’d like to refer to your virtual environment.</p></li>
+<li><p>You’re still in the base environment. Activate your new virtual environment
+by entering <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">scipydev</span></code>. <br> If you’re working with an old
+version of <code class="docutils literal notranslate"><span class="pre">conda</span></code>, you might need to type <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">scipydev</span></code>
+instead (see <a class="reference external" href="https://stackoverflow.com/questions/49600611/python-anaconda-should-i-use-conda-activate-or-source-activate-in-linux)">here</a>.</p></li>
+<li><p>(Optional) Enter <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> again. Note that the new virtual environment
+has no packages installed. If you were to open a Python interpreter now, you
+wouldn’t be able to import <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, etc.</p></li>
+<li><p>Enter <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">cython</span> <span class="pre">numpy</span> <span class="pre">pytest</span> <span class="pre">spyder</span> <span class="pre">pybind11</span></code>. <br> Note
+that we’re only installing SciPy’s build dependencies (and Spyder so we can
+use the IDE), but not SciPy itself.</p></li>
+<li><p>Enter <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">develop</span> <span class="pre">/scipy</span></code>, where <code class="docutils literal notranslate"><span class="pre">scipy</span></code> is to be replaced with the
+full path of the SciPy root directory. <br> This will allow us to <code class="docutils literal notranslate"><span class="pre">import</span></code>
+the development version of SciPy in Python regardless of Python’s working
+directory. <em>Note: this step replace the steps shown in</em>
+<a class="reference external" href="https://youtu.be/Faz29u5xIZc">Anaconda SciPy Dev: Part II (macOS)</a> <em>that modify the ``PYTHONPATH``
+environment variable when the ``scipydev`` virtual environment is activated.
+You can ignore that part of the video from 0:38 to 1:38; this is much simpler!</em></p></li>
+<li><p>In a new terminal window, test your setup. If you activate your virtual
+environment (e.g., <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">scipydev</span></code>) and run Python code that imports
+from SciPy, any changes you make to the SciPy code should be reflected when
+the code runs. After deactivating the virtual environment (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code>),
+Python imports from the version of SciPy installed by Anaconda. You can also
+check which version of SciPy you’re using by executing in Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you have successfully imported a development version of SciPy, the word
+<code class="docutils literal notranslate"><span class="pre">dev</span></code> will appear in the output, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.4</span><span class="o">.</span><span class="mf">0.</span><span class="n">dev0</span><span class="o">+</span><span class="n">be97f1a</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development environment quickstart guide (macOS)</a><ul>
+<li><a class="reference internal" href="#building-scipy">Building SciPy</a></li>
+<li><a class="reference internal" href="#installing-scipy">Installing SciPy</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../governance/governance.html"
+                        title="previous chapter">SciPy Project Governance</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quickstart_ubuntu.html"
+                        title="next chapter">Development environment quickstart guide (Ubuntu 16.04)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

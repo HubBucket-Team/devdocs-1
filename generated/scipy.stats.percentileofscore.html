@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.percentileofscore &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.scoreatpercentile" href="scipy.stats.scoreatpercentile.html" >
+    <link rel="prev" title="scipy.stats.itemfreq" href="scipy.stats.itemfreq.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.scoreatpercentile.html" title="scipy.stats.scoreatpercentile"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.itemfreq.html" title="scipy.stats.itemfreq"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-percentileofscore">
+<h1>scipy.stats.percentileofscore<a class="headerlink" href="#scipy-stats-percentileofscore" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.percentileofscore">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">percentileofscore</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">score</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'rank'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L1832-L1919"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.percentileofscore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the percentile rank of a score relative to a list of scores.</p>
+<p>A <a class="reference internal" href="#scipy.stats.percentileofscore" title="scipy.stats.percentileofscore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">percentileofscore</span></code></a> of, for example, 80% means that 80% of the
+scores in <em class="xref py py-obj">a</em> are below the given score. In the case of gaps or
+ties, the exact definition depends on the optional keyword, <em class="xref py py-obj">kind</em>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>a</strong><span class="classifier">array_like</span></dt><dd><p>Array of scores to which <em class="xref py py-obj">score</em> is compared.</p>
+</dd>
+<dt><strong>score</strong><span class="classifier">int or float</span></dt><dd><p>Score that is compared to the elements in <em class="xref py py-obj">a</em>.</p>
+</dd>
+<dt><strong>kind</strong><span class="classifier">{‘rank’, ‘weak’, ‘strict’, ‘mean’}, optional</span></dt><dd><p>Specifies the interpretation of the resulting score.
+The following options are available (default is ‘rank’):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘rank’: Average percentage ranking of score.  In case of multiple
+matches, average the percentage rankings of all matching scores.</p></li>
+<li><p>‘weak’: This kind corresponds to the definition of a cumulative
+distribution function.  A percentileofscore of 80% means that 80%
+of values are less than or equal to the provided score.</p></li>
+<li><p>‘strict’: Similar to “weak”, except that only values that are
+strictly less than the given score are counted.</p></li>
+<li><p>‘mean’: The average of the “weak” and “strict” scores, often used
+in testing.  See <a class="reference external" href="https://en.wikipedia.org/wiki/Percentile_rank">https://en.wikipedia.org/wiki/Percentile_rank</a></p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>pcos</strong><span class="classifier">float</span></dt><dd><p>Percentile-position of score (0-100) relative to <em class="xref py py-obj">a</em>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.percentile.html#numpy.percentile" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.percentile</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Three-quarters of the given values lie below a given score:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">percentileofscore</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">75.0</span>
+</pre></div>
+</div>
+<p>With multiple matches, note how the scores of the two matches, 0.6
+and 0.8 respectively, are averaged:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">percentileofscore</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">70.0</span>
+</pre></div>
+</div>
+<p>Only 2/5 values are strictly less than 3:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">percentileofscore</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">)</span>
+<span class="go">40.0</span>
+</pre></div>
+</div>
+<p>But 4/5 values are less than or equal to 3:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">percentileofscore</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">)</span>
+<span class="go">80.0</span>
+</pre></div>
+</div>
+<p>The average between the weak and the strict scores is:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">percentileofscore</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<span class="go">60.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.itemfreq.html"
+                        title="previous chapter">scipy.stats.itemfreq</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.scoreatpercentile.html"
+                        title="next chapter">scipy.stats.scoreatpercentile</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

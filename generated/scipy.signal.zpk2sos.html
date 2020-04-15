@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.zpk2sos &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.zpk2ss" href="scipy.signal.zpk2ss.html" >
+    <link rel="prev" title="scipy.signal.zpk2tf" href="scipy.signal.zpk2tf.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.zpk2ss.html" title="scipy.signal.zpk2ss"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.zpk2tf.html" title="scipy.signal.zpk2tf"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-zpk2sos">
+<h1>scipy.signal.zpk2sos<a class="headerlink" href="#scipy-signal-zpk2sos" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.zpk2sos">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">zpk2sos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">pairing</span><span class="o">=</span><span class="default_value">'nearest'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/filter_design.py#L1257-L1519"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.zpk2sos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return second-order sections from zeros, poles, and gain of a system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>z</strong><span class="classifier">array_like</span></dt><dd><p>Zeros of the transfer function.</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">array_like</span></dt><dd><p>Poles of the transfer function.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">float</span></dt><dd><p>System gain.</p>
+</dd>
+<dt><strong>pairing</strong><span class="classifier">{‘nearest’, ‘keep_odd’}, optional</span></dt><dd><p>The method to use to combine pairs of poles and zeros into sections.
+See Notes below.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sos</strong><span class="classifier">ndarray</span></dt><dd><p>Array of second-order filter coefficients, with shape
+<code class="docutils literal notranslate"><span class="pre">(n_sections,</span> <span class="pre">6)</span></code>. See <a class="reference internal" href="scipy.signal.sosfilt.html#scipy.signal.sosfilt" title="scipy.signal.sosfilt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sosfilt</span></code></a> for the SOS filter format
+specification.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.sosfilt.html#scipy.signal.sosfilt" title="scipy.signal.sosfilt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sosfilt</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The algorithm used to convert ZPK to SOS format is designed to
+minimize errors due to numerical precision issues. The pairing
+algorithm attempts to minimize the peak gain of each biquadratic
+section. This is done by pairing poles with the nearest zeros, starting
+with the poles closest to the unit circle.</p>
+<p><em>Algorithms</em></p>
+<p>The current algorithms are designed specifically for use with digital
+filters. (The output coefficients are not correct for analog filters.)</p>
+<p>The steps in the <code class="docutils literal notranslate"><span class="pre">pairing='nearest'</span></code> and <code class="docutils literal notranslate"><span class="pre">pairing='keep_odd'</span></code>
+algorithms are mostly shared. The <code class="docutils literal notranslate"><span class="pre">nearest</span></code> algorithm attempts to
+minimize the peak gain, while <code class="docutils literal notranslate"><span class="pre">'keep_odd'</span></code> minimizes peak gain under
+the constraint that odd-order systems should retain one section
+as first order. The algorithm steps and are as follows:</p>
+<p>As a pre-processing step, add poles or zeros to the origin as
+necessary to obtain the same number of poles and zeros for pairing.
+If <code class="docutils literal notranslate"><span class="pre">pairing</span> <span class="pre">==</span> <span class="pre">'nearest'</span></code> and there are an odd number of poles,
+add an additional pole and a zero at the origin.</p>
+<p>The following steps are then iterated over until no more poles or
+zeros remain:</p>
+<ol class="arabic">
+<li><p>Take the (next remaining) pole (complex or real) closest to the
+unit circle to begin a new filter section.</p></li>
+<li><p>If the pole is real and there are no other remaining real poles <a class="footnote-reference brackets" href="#id2" id="id1">1</a>,
+add the closest real zero to the section and leave it as a first
+order section. Note that after this step we are guaranteed to be
+left with an even number of real poles, complex poles, real zeros,
+and complex zeros for subsequent pairing iterations.</p></li>
+<li><p>Else:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>If the pole is complex and the zero is the only remaining real
+zero*, then pair the pole with the <em>next</em> closest zero
+(guaranteed to be complex). This is necessary to ensure that
+there will be a real zero remaining to eventually create a
+first-order section (thus keeping the odd order).</p></li>
+<li><p>Else pair the pole with the closest remaining zero (complex or
+real).</p></li>
+<li><p>Proceed to complete the second-order section by adding another
+pole and zero to the current pole and zero in the section:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>If the current pole and zero are both complex, add their
+conjugates.</p></li>
+<li><p>Else if the pole is complex and the zero is real, add the
+conjugate pole and the next closest real zero.</p></li>
+<li><p>Else if the pole is real and the zero is complex, add the
+conjugate zero and the real pole closest to those zeros.</p></li>
+<li><p>Else (we must have a real pole and real zero) add the next
+real pole closest to the unit circle, and then add the real
+zero closest to that pole.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>This conditional can only be met for specific odd-order inputs
+with the <code class="docutils literal notranslate"><span class="pre">pairing</span> <span class="pre">==</span> <span class="pre">'keep_odd'</span></code> method.</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.16.0.</span></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Design a 6th order low-pass elliptic digital filter for a system with a
+sampling rate of 8000 Hz that has a pass-band corner frequency of
+1000 Hz. The ripple in the pass-band should not exceed 0.087 dB, and
+the attenuation in the stop-band should be at least 90 dB.</p>
+<p>In the following call to <em class="xref py py-obj">signal.ellip</em>, we could use <code class="docutils literal notranslate"><span class="pre">output='sos'</span></code>,
+but for this example, we’ll use <code class="docutils literal notranslate"><span class="pre">output='zpk'</span></code>, and then convert to SOS
+format with <a class="reference internal" href="#scipy.signal.zpk2sos" title="scipy.signal.zpk2sos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpk2sos</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">ellip</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">0.087</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1000</span><span class="o">/</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">8000</span><span class="p">),</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;zpk&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now convert to SOS format.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sos</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">zpk2sos</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The coefficients of the numerators of the sections:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">array([[ 0.0014154 ,  0.00248707,  0.0014154 ],</span>
+<span class="go">       [ 1.        ,  0.72965193,  1.        ],</span>
+<span class="go">       [ 1.        ,  0.17594966,  1.        ]])</span>
+</pre></div>
+</div>
+<p>The symmetry in the coefficients occurs because all the zeros are on the
+unit circle.</p>
+<p>The coefficients of the denominators of the sections:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sos</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:]</span>
+<span class="go">array([[ 1.        , -1.32543251,  0.46989499],</span>
+<span class="go">       [ 1.        , -1.26117915,  0.6262586 ],</span>
+<span class="go">       [ 1.        , -1.25707217,  0.86199667]])</span>
+</pre></div>
+</div>
+<p>The next example shows the effect of the <em class="xref py py-obj">pairing</em> option.  We have a
+system with three poles and three zeros, so the SOS array will have
+shape (2, 6). The means there is, in effect, an extra pole and an extra
+zero at the origin in the SOS representation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">-</span><span class="mf">0.5</span><span class="n">j</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">0.5</span><span class="n">j</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.8</span><span class="o">+</span><span class="mf">0.1</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.8</span><span class="o">-</span><span class="mf">0.1</span><span class="n">j</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">pairing='nearest'</span></code> (the default), we obtain</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">zpk2sos</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[ 1.  ,  1.  ,  0.5 ,  1.  , -0.75,  0.  ],</span>
+<span class="go">       [ 1.  ,  1.  ,  0.  ,  1.  , -1.6 ,  0.65]])</span>
+</pre></div>
+</div>
+<p>The first section has the zeros {-0.5-0.05j, -0.5+0.5j} and the poles
+{0, 0.75}, and the second section has the zeros {-1, 0} and poles
+{0.8+0.1j, 0.8-0.1j}. Note that the extra pole and zero at the origin
+have been assigned to different sections.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">pairing='keep_odd'</span></code>, we obtain:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">zpk2sos</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pairing</span><span class="o">=</span><span class="s1">&#39;keep_odd&#39;</span><span class="p">)</span>
+<span class="go">array([[ 1.  ,  1.  ,  0.  ,  1.  , -0.75,  0.  ],</span>
+<span class="go">       [ 1.  ,  1.  ,  0.5 ,  1.  , -1.6 ,  0.65]])</span>
+</pre></div>
+</div>
+<p>The extra pole and zero at the origin are in the same section.
+The first section is, in effect, a first-order section.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.zpk2tf.html"
+                        title="previous chapter">scipy.signal.zpk2tf</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.zpk2ss.html"
+                        title="next chapter">scipy.signal.zpk2ss</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

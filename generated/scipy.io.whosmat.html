@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.io.whosmat &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Input and output (scipy.io)" href="../io.html" >
+    <link rel="next" title="scipy.io.readsav" href="scipy.io.readsav.html" >
+    <link rel="prev" title="scipy.io.savemat" href="scipy.io.savemat.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../io.html" accesskey="U">Input and output (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.io</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.io.readsav.html" title="scipy.io.readsav"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.io.savemat.html" title="scipy.io.savemat"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-io-whosmat">
+<h1>scipy.io.whosmat<a class="headerlink" href="#scipy-io-whosmat" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.io.whosmat">
+<code class="sig-prename descclassname">scipy.io.</code><code class="sig-name descname">whosmat</code><span class="sig-paren">(</span><em class="sig-param">file_name</em>, <em class="sig-param">appendmat=True</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/io/matlab/mio.py#L282-L317"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.io.whosmat" title="Permalink to this definition">¶</a></dt>
+<dd><p>List variables inside a MATLAB file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>Name of the mat file (do not need .mat extension if
+appendmat==True) Can also pass open file-like object.</p>
+</dd>
+<dt><strong>appendmat</strong><span class="classifier">bool, optional</span></dt><dd><p>True to append the .mat extension to the end of the given
+filename, if not already present.</p>
+</dd>
+<dt><strong>byte_order</strong><span class="classifier">str or None, optional</span></dt><dd><p>None by default, implying byte order guessed from mat
+file. Otherwise can be one of (‘native’, ‘=’, ‘little’, ‘&lt;’,
+‘BIG’, ‘&gt;’).</p>
+</dd>
+<dt><strong>mat_dtype</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, return arrays in same dtype as would be loaded into
+MATLAB (instead of the dtype with which they are saved).</p>
+</dd>
+<dt><strong>squeeze_me</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to squeeze unit matrix dimensions or not.</p>
+</dd>
+<dt><strong>chars_as_strings</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to convert char arrays to string arrays.</p>
+</dd>
+<dt><strong>matlab_compatible</strong><span class="classifier">bool, optional</span></dt><dd><p>Returns matrices as would be loaded by MATLAB (implies
+squeeze_me=False, chars_as_strings=False, mat_dtype=True,
+struct_as_record=True).</p>
+</dd>
+<dt><strong>struct_as_record</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to load MATLAB structs as NumPy record arrays, or as
+old-style NumPy arrays with dtype=object. Setting this flag to
+False replicates the behavior of SciPy version 0.7.x (returning
+numpy object arrays). The default setting is True, because it
+allows easier round-trip load and save of MATLAB files.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>variables</strong><span class="classifier">list of tuples</span></dt><dd><p>A list of tuples, where each tuple holds the matrix name (a string),
+its shape (tuple of ints), and its data class (a string).
+Possible data classes are: int8, uint8, int16, uint16, int32, uint32,
+int64, uint64, single, double, cell, struct, object, char, sparse,
+function, opaque, logical, unknown.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>v4 (Level 1.0), v6 and v7 to 7.2 matfiles are supported.</p>
+<p>You will need an HDF5 python library to read matlab 7.3 format mat
+files. Because SciPy does not supply one, we do not implement the
+HDF5 / 7.3 interface here.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.12.0.</span></p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.io.savemat.html"
+                        title="previous chapter">scipy.io.savemat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.io.readsav.html"
+                        title="next chapter">scipy.io.readsav</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

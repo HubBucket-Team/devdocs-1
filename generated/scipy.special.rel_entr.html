@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.rel_entr &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.kl_div" href="scipy.special.kl_div.html" >
+    <link rel="prev" title="scipy.special.entr" href="scipy.special.entr.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.kl_div.html" title="scipy.special.kl_div"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.entr.html" title="scipy.special.entr"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-rel-entr">
+<h1>scipy.special.rel_entr<a class="headerlink" href="#scipy-special-rel-entr" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.rel_entr">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">rel_entr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">out</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'rel_entr'&gt;</em><a class="headerlink" href="#scipy.special.rel_entr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Elementwise function for computing relative entropy.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathrm{rel\_entr}(x, y) =
+    \begin{cases}
+        x \log(x / y) &amp; x &gt; 0, y &gt; 0 \\
+        0 &amp; x = 0, y \ge 0 \\
+        \infty &amp; \text{otherwise}
+    \end{cases}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x, y</strong><span class="classifier">array_like</span></dt><dd><p>Input arrays</p>
+</dd>
+<dt><strong>out</strong><span class="classifier">ndarray, optional</span></dt><dd><p>Optional output array for the function results</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>scalar or ndarray</dt><dd><p>Relative entropy of the inputs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.special.entr.html#scipy.special.entr" title="scipy.special.entr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">entr</span></code></a>, <a class="reference internal" href="scipy.special.kl_div.html#scipy.special.kl_div" title="scipy.special.kl_div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kl_div</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.15.0.</span></p>
+</div>
+<p>This function is jointly convex in x and y.</p>
+<p>The origin of this function is in convex programming; see
+<a class="reference internal" href="#r27be2019009a-1" id="id1">[1]</a>. Given two discrete probability distributions <span class="math notranslate nohighlight">\(p_1,
+\ldots, p_n\)</span> and <span class="math notranslate nohighlight">\(q_1, \ldots, q_n\)</span>, to get the relative
+entropy of statistics compute the sum</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i = 1}^n \mathrm{rel\_entr}(p_i, q_i).\]</div>
+<p>See <a class="reference internal" href="#r27be2019009a-2" id="id2">[2]</a> for details.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r27be2019009a-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Grant, Boyd, and Ye, “CVX: Matlab Software for Disciplined Convex
+Programming”, <a class="reference external" href="http://cvxr.com/cvx/">http://cvxr.com/cvx/</a></p>
+</dd>
+<dt class="label" id="r27be2019009a-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Kullback-Leibler divergence,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.entr.html"
+                        title="previous chapter">scipy.special.entr</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.kl_div.html"
+                        title="next chapter">scipy.special.kl_div</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

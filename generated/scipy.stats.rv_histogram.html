@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.rv_histogram &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.rv_histogram.__call__" href="scipy.stats.rv_histogram.__call__.html" >
+    <link rel="prev" title="scipy.stats.rv_discrete.support" href="scipy.stats.rv_discrete.support.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.rv_histogram.__call__.html" title="scipy.stats.rv_histogram.__call__"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.rv_discrete.support.html" title="scipy.stats.rv_discrete.support"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-rv-histogram">
+<h1>scipy.stats.rv_histogram<a class="headerlink" href="#scipy-stats-rv-histogram" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.stats.rv_histogram">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">rv_histogram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">histogram</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/_continuous_distns.py#L8191-L8329"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.rv_histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a distribution given by a histogram.
+This is useful to generate a template distribution from a binned
+datasample.</p>
+<p>As a subclass of the <a class="reference internal" href="scipy.stats.rv_continuous.html#scipy.stats.rv_continuous" title="scipy.stats.rv_continuous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rv_continuous</span></code></a> class, <a class="reference internal" href="#scipy.stats.rv_histogram" title="scipy.stats.rv_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rv_histogram</span></code></a> inherits from it
+a collection of generic methods (see <a class="reference internal" href="scipy.stats.rv_continuous.html#scipy.stats.rv_continuous" title="scipy.stats.rv_continuous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rv_continuous</span></code></a> for the full list),
+and implements them based on the properties of the provided binned
+datasample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>histogram</strong><span class="classifier">tuple of array_like</span></dt><dd><p>Tuple containing two array_like objects
+The first containing the content of n bins
+The second containing the (n+1) bin boundaries
+In particular the return value np.histogram is accepted</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>There are no additional shape parameters except for the loc and scale.
+The pdf is defined as a stepwise function from the provided histogram
+The cdf is a linear interpolation of the pdf.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Create a scipy.stats distribution from a numpy histogram</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">rv_histogram</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Behaves like an ordinary scipy rv_continuous distribution</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">0.20538577847618705</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="go">0.90818568543056499</span>
+</pre></div>
+</div>
+<p>PDF is zero above (below) the highest (lowest) bin of the histogram,
+defined by the max (min) of the original dataset</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">7.7591907244498314e-05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>PDF and CDF follow the histogram</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PDF from Template&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">hist_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">hist_dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-stats-rv_histogram-1.png" src="../_images/scipy-stats-rv_histogram-1.png" />
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.rv_histogram.random_state.html#scipy.stats.rv_histogram.random_state" title="scipy.stats.rv_histogram.random_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_state</span></code></a></dt><dd><p>Get or set the RandomState object for generating random variates.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.__call__.html#scipy.stats.rv_histogram.__call__" title="scipy.stats.rv_histogram.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Freeze the distribution for the given arguments.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.cdf.html#scipy.stats.rv_histogram.cdf" title="scipy.stats.rv_histogram.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(self, x, \*args, \*\*kwds)</p></td>
+<td><p>Cumulative distribution function of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.entropy.html#scipy.stats.rv_histogram.entropy" title="scipy.stats.rv_histogram.entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">entropy</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Differential entropy of the RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.expect.html#scipy.stats.rv_histogram.expect" title="scipy.stats.rv_histogram.expect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expect</span></code></a>(self[, func, args, loc, scale, lb, …])</p></td>
+<td><p>Calculate expected value of a function with respect to the distribution by numerical integration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.fit.html#scipy.stats.rv_histogram.fit" title="scipy.stats.rv_histogram.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(self, data, \*args, \*\*kwds)</p></td>
+<td><p>Return MLEs for shape (if applicable), location, and scale parameters from data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.fit_loc_scale.html#scipy.stats.rv_histogram.fit_loc_scale" title="scipy.stats.rv_histogram.fit_loc_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_loc_scale</span></code></a>(self, data, \*args)</p></td>
+<td><p>Estimate loc and scale parameters from data using 1st and 2nd moments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.freeze.html#scipy.stats.rv_histogram.freeze" title="scipy.stats.rv_histogram.freeze"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freeze</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Freeze the distribution for the given arguments.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.interval.html#scipy.stats.rv_histogram.interval" title="scipy.stats.rv_histogram.interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval</span></code></a>(self, alpha, \*args, \*\*kwds)</p></td>
+<td><p>Confidence interval with equal areas around the median.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.isf.html#scipy.stats.rv_histogram.isf" title="scipy.stats.rv_histogram.isf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isf</span></code></a>(self, q, \*args, \*\*kwds)</p></td>
+<td><p>Inverse survival function (inverse of <a class="reference internal" href="scipy.stats.rv_histogram.sf.html#scipy.stats.rv_histogram.sf" title="scipy.stats.rv_histogram.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>) at q of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.logcdf.html#scipy.stats.rv_histogram.logcdf" title="scipy.stats.rv_histogram.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(self, x, \*args, \*\*kwds)</p></td>
+<td><p>Log of the cumulative distribution function at x of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.logpdf.html#scipy.stats.rv_histogram.logpdf" title="scipy.stats.rv_histogram.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(self, x, \*args, \*\*kwds)</p></td>
+<td><p>Log of the probability density function at x of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.logsf.html#scipy.stats.rv_histogram.logsf" title="scipy.stats.rv_histogram.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(self, x, \*args, \*\*kwds)</p></td>
+<td><p>Log of the survival function of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.mean.html#scipy.stats.rv_histogram.mean" title="scipy.stats.rv_histogram.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Mean of the distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.median.html#scipy.stats.rv_histogram.median" title="scipy.stats.rv_histogram.median"><code class="xref py py-obj docutils literal notranslate"><span class="pre">median</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Median of the distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.moment.html#scipy.stats.rv_histogram.moment" title="scipy.stats.rv_histogram.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a>(self, n, \*args, \*\*kwds)</p></td>
+<td><p>n-th order non-central moment of distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.nnlf.html#scipy.stats.rv_histogram.nnlf" title="scipy.stats.rv_histogram.nnlf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nnlf</span></code></a>(self, theta, x)</p></td>
+<td><p>Return negative loglikelihood function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.pdf.html#scipy.stats.rv_histogram.pdf" title="scipy.stats.rv_histogram.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(self, x, \*args, \*\*kwds)</p></td>
+<td><p>Probability density function at x of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.ppf.html#scipy.stats.rv_histogram.ppf" title="scipy.stats.rv_histogram.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(self, q, \*args, \*\*kwds)</p></td>
+<td><p>Percent point function (inverse of <a class="reference internal" href="scipy.stats.rv_histogram.cdf.html#scipy.stats.rv_histogram.cdf" title="scipy.stats.rv_histogram.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>) at q of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.rvs.html#scipy.stats.rv_histogram.rvs" title="scipy.stats.rv_histogram.rvs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rvs</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Random variates of given type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.sf.html#scipy.stats.rv_histogram.sf" title="scipy.stats.rv_histogram.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(self, x, \*args, \*\*kwds)</p></td>
+<td><p>Survival function (1 - <a class="reference internal" href="scipy.stats.rv_histogram.cdf.html#scipy.stats.rv_histogram.cdf" title="scipy.stats.rv_histogram.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>) at x of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.stats.html#scipy.stats.rv_histogram.stats" title="scipy.stats.rv_histogram.stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stats</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Some statistics of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.std.html#scipy.stats.rv_histogram.std" title="scipy.stats.rv_histogram.std"><code class="xref py py-obj docutils literal notranslate"><span class="pre">std</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Standard deviation of the distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.support.html#scipy.stats.rv_histogram.support" title="scipy.stats.rv_histogram.support"><code class="xref py py-obj docutils literal notranslate"><span class="pre">support</span></code></a>(self, \*args, \*\*kwargs)</p></td>
+<td><p>Return the support of the distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_histogram.var.html#scipy.stats.rv_histogram.var" title="scipy.stats.rv_histogram.var"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Variance of the distribution.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.rv_discrete.support.html"
+                        title="previous chapter">scipy.stats.rv_discrete.support</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.rv_histogram.__call__.html"
+                        title="next chapter">scipy.stats.rv_histogram.__call__</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

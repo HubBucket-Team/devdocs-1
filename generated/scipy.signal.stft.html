@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.stft &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.istft" href="scipy.signal.istft.html" >
+    <link rel="prev" title="scipy.signal.vectorstrength" href="scipy.signal.vectorstrength.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.istft.html" title="scipy.signal.istft"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.vectorstrength.html" title="scipy.signal.vectorstrength"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-stft">
+<h1>scipy.signal.stft<a class="headerlink" href="#scipy-signal-stft" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.stft">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">stft</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">fs</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">window</span><span class="o">=</span><span class="default_value">'hann'</span></em>, <em class="sig-param"><span class="n">nperseg</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">noverlap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nfft</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">detrend</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">return_onesided</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">boundary</span><span class="o">=</span><span class="default_value">'zeros'</span></em>, <em class="sig-param"><span class="n">padded</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/spectral.py#L1022-L1175"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.stft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Short Time Fourier Transform (STFT).</p>
+<p>STFTs can be used as a way of quantifying the change of a
+nonstationary signal’s frequency and phase content over time.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Time series of measurement values</p>
+</dd>
+<dt><strong>fs</strong><span class="classifier">float, optional</span></dt><dd><p>Sampling frequency of the <em class="xref py py-obj">x</em> time series. Defaults to 1.0.</p>
+</dd>
+<dt><strong>window</strong><span class="classifier">str or tuple or array_like, optional</span></dt><dd><p>Desired window to use. If <em class="xref py py-obj">window</em> is a string or tuple, it is
+passed to <a class="reference internal" href="scipy.signal.get_window.html#scipy.signal.get_window" title="scipy.signal.get_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window</span></code></a> to generate the window values, which are
+DFT-even by default. See <a class="reference internal" href="scipy.signal.get_window.html#scipy.signal.get_window" title="scipy.signal.get_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window</span></code></a> for a list of windows and
+required parameters. If <em class="xref py py-obj">window</em> is array_like it will be used
+directly as the window and its length must be nperseg. Defaults
+to a Hann window.</p>
+</dd>
+<dt><strong>nperseg</strong><span class="classifier">int, optional</span></dt><dd><p>Length of each segment. Defaults to 256.</p>
+</dd>
+<dt><strong>noverlap</strong><span class="classifier">int, optional</span></dt><dd><p>Number of points to overlap between segments. If <em class="xref py py-obj">None</em>,
+<code class="docutils literal notranslate"><span class="pre">noverlap</span> <span class="pre">=</span> <span class="pre">nperseg</span> <span class="pre">//</span> <span class="pre">2</span></code>. Defaults to <em class="xref py py-obj">None</em>. When
+specified, the COLA constraint must be met (see Notes below).</p>
+</dd>
+<dt><strong>nfft</strong><span class="classifier">int, optional</span></dt><dd><p>Length of the FFT used, if a zero padded FFT is desired. If
+<em class="xref py py-obj">None</em>, the FFT length is <em class="xref py py-obj">nperseg</em>. Defaults to <em class="xref py py-obj">None</em>.</p>
+</dd>
+<dt><strong>detrend</strong><span class="classifier">str or function or <em class="xref py py-obj">False</em>, optional</span></dt><dd><p>Specifies how to detrend each segment. If <a class="reference internal" href="scipy.signal.detrend.html#scipy.signal.detrend" title="scipy.signal.detrend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detrend</span></code></a> is a
+string, it is passed as the <em class="xref py py-obj">type</em> argument to the <a class="reference internal" href="scipy.signal.detrend.html#scipy.signal.detrend" title="scipy.signal.detrend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detrend</span></code></a>
+function. If it is a function, it takes a segment and returns a
+detrended segment. If <a class="reference internal" href="scipy.signal.detrend.html#scipy.signal.detrend" title="scipy.signal.detrend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detrend</span></code></a> is <em class="xref py py-obj">False</em>, no detrending is
+done. Defaults to <em class="xref py py-obj">False</em>.</p>
+</dd>
+<dt><strong>return_onesided</strong><span class="classifier">bool, optional</span></dt><dd><p>If <em class="xref py py-obj">True</em>, return a one-sided spectrum for real data. If
+<em class="xref py py-obj">False</em> return a two-sided spectrum. Defaults to <em class="xref py py-obj">True</em>, but for
+complex data, a two-sided spectrum is always returned.</p>
+</dd>
+<dt><strong>boundary</strong><span class="classifier">str or None, optional</span></dt><dd><p>Specifies whether the input signal is extended at both ends, and
+how to generate the new values, in order to center the first
+windowed segment on the first input point. This has the benefit
+of enabling reconstruction of the first input point when the
+employed window function starts at zero. Valid options are
+<code class="docutils literal notranslate"><span class="pre">['even',</span> <span class="pre">'odd',</span> <span class="pre">'constant',</span> <span class="pre">'zeros',</span> <span class="pre">None]</span></code>. Defaults to
+‘zeros’, for zero padding extension. I.e. <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4]</span></code> is
+extended to <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">0]</span></code> for <code class="docutils literal notranslate"><span class="pre">nperseg=3</span></code>.</p>
+</dd>
+<dt><strong>padded</strong><span class="classifier">bool, optional</span></dt><dd><p>Specifies whether the input signal is zero-padded at the end to
+make the signal fit exactly into an integer number of window
+segments, so that all of the signal is included in the output.
+Defaults to <em class="xref py py-obj">True</em>. Padding occurs after boundary extension, if
+<em class="xref py py-obj">boundary</em> is not <em class="xref py py-obj">None</em>, and <em class="xref py py-obj">padded</em> is <em class="xref py py-obj">True</em>, as is the
+default.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int, optional</span></dt><dd><p>Axis along which the STFT is computed; the default is over the
+last axis (i.e. <code class="docutils literal notranslate"><span class="pre">axis=-1</span></code>).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>f</strong><span class="classifier">ndarray</span></dt><dd><p>Array of sample frequencies.</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">ndarray</span></dt><dd><p>Array of segment times.</p>
+</dd>
+<dt><strong>Zxx</strong><span class="classifier">ndarray</span></dt><dd><p>STFT of <em class="xref py py-obj">x</em>. By default, the last axis of <em class="xref py py-obj">Zxx</em> corresponds
+to the segment times.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.istft.html#scipy.signal.istft" title="scipy.signal.istft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">istft</span></code></a></dt><dd><p>Inverse Short Time Fourier Transform</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.check_COLA.html#scipy.signal.check_COLA" title="scipy.signal.check_COLA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_COLA</span></code></a></dt><dd><p>Check whether the Constant OverLap Add (COLA) constraint is met</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.check_NOLA.html#scipy.signal.check_NOLA" title="scipy.signal.check_NOLA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_NOLA</span></code></a></dt><dd><p>Check whether the Nonzero Overlap Add (NOLA) constraint is met</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.welch.html#scipy.signal.welch" title="scipy.signal.welch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">welch</span></code></a></dt><dd><p>Power spectral density by Welch’s method.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.spectrogram.html#scipy.signal.spectrogram" title="scipy.signal.spectrogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spectrogram</span></code></a></dt><dd><p>Spectrogram by Welch’s method.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.csd.html#scipy.signal.csd" title="scipy.signal.csd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csd</span></code></a></dt><dd><p>Cross spectral density by Welch’s method.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.lombscargle.html#scipy.signal.lombscargle" title="scipy.signal.lombscargle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lombscargle</span></code></a></dt><dd><p>Lomb-Scargle periodogram for unevenly sampled data</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>In order to enable inversion of an STFT via the inverse STFT in
+<a class="reference internal" href="scipy.signal.istft.html#scipy.signal.istft" title="scipy.signal.istft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">istft</span></code></a>, the signal windowing must obey the constraint of “Nonzero
+OverLap Add” (NOLA), and the input signal must have complete
+windowing coverage (i.e. <code class="docutils literal notranslate"><span class="pre">(x.shape[axis]</span> <span class="pre">-</span> <span class="pre">nperseg)</span> <span class="pre">%</span>
+<span class="pre">(nperseg-noverlap)</span> <span class="pre">==</span> <span class="pre">0</span></code>). The <em class="xref py py-obj">padded</em> argument may be used to
+accomplish this.</p>
+<p>Given a time-domain signal <span class="math notranslate nohighlight">\(x[n]\)</span>, a window <span class="math notranslate nohighlight">\(w[n]\)</span>, and a hop
+size <span class="math notranslate nohighlight">\(H\)</span> = <em class="xref py py-obj">nperseg - noverlap</em>, the windowed frame at time index
+<span class="math notranslate nohighlight">\(t\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[x_{t}[n]=x[n]w[n-tH]\]</div>
+<p>The overlap-add (OLA) reconstruction equation is given by</p>
+<div class="math notranslate nohighlight">
+\[x[n]=\frac{\sum_{t}x_{t}[n]w[n-tH]}{\sum_{t}w^{2}[n-tH]}\]</div>
+<p>The NOLA constraint ensures that every normalization term that appears
+in the denomimator of the OLA reconstruction equation is nonzero. Whether a
+choice of <em class="xref py py-obj">window</em>, <em class="xref py py-obj">nperseg</em>, and <em class="xref py py-obj">noverlap</em> satisfy this constraint can
+be tested with <a class="reference internal" href="scipy.signal.check_NOLA.html#scipy.signal.check_NOLA" title="scipy.signal.check_NOLA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_NOLA</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="radb2bb20bd27-1"><span class="brackets">1</span></dt>
+<dd><p>Oppenheim, Alan V., Ronald W. Schafer, John R. Buck
+“Discrete-Time Signal Processing”, Prentice Hall, 1999.</p>
+</dd>
+<dt class="label" id="radb2bb20bd27-2"><span class="brackets">2</span></dt>
+<dd><p>Daniel W. Griffin, Jae S. Lim “Signal Estimation from
+Modified Short-Time Fourier Transform”, IEEE 1984,
+10.1109/TASSP.1984.1164317</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>Generate a test signal, a 2 Vrms sine wave whose frequency is slowly
+modulated around 3kHz, corrupted by white noise of exponentially
+decreasing magnitude sampled at 10 kHz.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fs</span> <span class="o">=</span> <span class="mf">10e3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mf">1e5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amp</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noise_power</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">fs</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mod</span> <span class="o">=</span> <span class="mi">500</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mf">0.25</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">carrier</span> <span class="o">=</span> <span class="n">amp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mf">3e3</span><span class="o">*</span><span class="n">time</span> <span class="o">+</span> <span class="n">mod</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">noise_power</span><span class="p">),</span>
+<span class="gp">... </span>                         <span class="n">size</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noise</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">time</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">carrier</span> <span class="o">+</span> <span class="n">noise</span>
+</pre></div>
+</div>
+<p>Compute and plot the STFT’s magnitude.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">Zxx</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">stft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">nperseg</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Zxx</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">amp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;STFT Magnitude&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency [Hz]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [sec]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-stft-1.png" src="../_images/scipy-signal-stft-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.vectorstrength.html"
+                        title="previous chapter">scipy.signal.vectorstrength</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.istft.html"
+                        title="next chapter">scipy.signal.istft</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

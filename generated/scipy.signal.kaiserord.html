@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.kaiserord &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.minimum_phase" href="scipy.signal.minimum_phase.html" >
+    <link rel="prev" title="scipy.signal.kaiser_beta" href="scipy.signal.kaiser_beta.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.minimum_phase.html" title="scipy.signal.minimum_phase"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.kaiser_beta.html" title="scipy.signal.kaiser_beta"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-kaiserord">
+<h1>scipy.signal.kaiserord<a class="headerlink" href="#scipy-signal-kaiserord" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.kaiserord">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">kaiserord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ripple</span></em>, <em class="sig-param"><span class="n">width</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/fir_filter_design.py#L128-L258"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.kaiserord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the filter window parameters for the Kaiser window method.</p>
+<p>The parameters returned by this function are generally used to create
+a finite impulse response filter using the window method, with either
+<a class="reference internal" href="scipy.signal.firwin.html#scipy.signal.firwin" title="scipy.signal.firwin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">firwin</span></code></a> or <a class="reference internal" href="scipy.signal.firwin2.html#scipy.signal.firwin2" title="scipy.signal.firwin2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">firwin2</span></code></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>ripple</strong><span class="classifier">float</span></dt><dd><p>Upper bound for the deviation (in dB) of the magnitude of the
+filter’s frequency response from that of the desired filter (not
+including frequencies in any transition intervals). That is, if w
+is the frequency expressed as a fraction of the Nyquist frequency,
+A(w) is the actual frequency response of the filter and D(w) is the
+desired frequency response, the design requirement is that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="n">D</span><span class="p">(</span><span class="n">w</span><span class="p">)))</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">ripple</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>for 0 &lt;= w &lt;= 1 and w not in a transition interval.</p>
+</dd>
+<dt><strong>width</strong><span class="classifier">float</span></dt><dd><p>Width of transition region, normalized so that 1 corresponds to pi
+radians / sample. That is, the frequency is expressed as a fraction
+of the Nyquist frequency.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>numtaps</strong><span class="classifier">int</span></dt><dd><p>The length of the Kaiser window.</p>
+</dd>
+<dt><strong>beta</strong><span class="classifier">float</span></dt><dd><p>The beta parameter for the Kaiser window.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.kaiser_beta.html#scipy.signal.kaiser_beta" title="scipy.signal.kaiser_beta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kaiser_beta</span></code></a>, <a class="reference internal" href="scipy.signal.kaiser_atten.html#scipy.signal.kaiser_atten" title="scipy.signal.kaiser_atten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kaiser_atten</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>There are several ways to obtain the Kaiser window:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">signal.kaiser(numtaps,</span> <span class="pre">beta,</span> <span class="pre">sym=True)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">signal.get_window(beta,</span> <span class="pre">numtaps)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">signal.get_window(('kaiser',</span> <span class="pre">beta),</span> <span class="pre">numtaps)</span></code></p></li>
+</ul>
+<p>The empirical equations discovered by Kaiser are used.</p>
+<p class="rubric">References</p>
+<p>Oppenheim, Schafer, “Discrete-Time Signal Processing”, pp.475-476.</p>
+<p class="rubric">Examples</p>
+<p>We will use the Kaiser window method to design a lowpass FIR filter
+for a signal that is sampled at 1000 Hz.</p>
+<p>We want at least 65 dB rejection in the stop band, and in the pass
+band the gain should vary no more than 0.5%.</p>
+<p>We want a cutoff frequency of 175 Hz, with a transition between the
+pass band and the stop band of 24 Hz. That is, in the band [0, 163],
+the gain varies no more than 0.5%, and in the band [187, 500], the
+signal is attenuated by at least 65 dB.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">kaiserord</span><span class="p">,</span> <span class="n">firwin</span><span class="p">,</span> <span class="n">freqz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fs</span> <span class="o">=</span> <span class="mf">1000.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cutoff</span> <span class="o">=</span> <span class="mi">175</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">width</span> <span class="o">=</span> <span class="mi">24</span>
+</pre></div>
+</div>
+<p>The Kaiser method accepts just a single parameter to control the pass
+band ripple and the stop band rejection, so we use the more restrictive
+of the two. In this case, the pass band ripple is 0.005, or 46.02 dB,
+so we will use 65 dB as the design parameter.</p>
+<p>Use <a class="reference internal" href="#scipy.signal.kaiserord" title="scipy.signal.kaiserord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kaiserord</span></code></a> to determine the length of the filter and the
+parameter for the Kaiser window.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numtaps</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">kaiserord</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="n">width</span><span class="o">/</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">fs</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numtaps</span>
+<span class="go">167</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span>
+<span class="go">6.20426</span>
+</pre></div>
+</div>
+<p>Use <a class="reference internal" href="scipy.signal.firwin.html#scipy.signal.firwin" title="scipy.signal.firwin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">firwin</span></code></a> to create the FIR filter.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">taps</span> <span class="o">=</span> <span class="n">firwin</span><span class="p">(</span><span class="n">numtaps</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;kaiser&#39;</span><span class="p">,</span> <span class="n">beta</span><span class="p">),</span>
+<span class="gp">... </span>              <span class="n">scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nyq</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">fs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Compute the frequency response of the filter.  <code class="docutils literal notranslate"><span class="pre">w</span></code> is the array of
+frequencies, and <code class="docutils literal notranslate"><span class="pre">h</span></code> is the corresponding complex array of frequency
+responses.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">freqz</span><span class="p">(</span><span class="n">taps</span><span class="p">,</span> <span class="n">worN</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">*=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">fs</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># Convert w to Hz.</span>
+</pre></div>
+</div>
+<p>Compute the deviation of the magnitude of the filter’s response from
+that of the ideal lowpass filter. Values in the transition region are
+set to <code class="docutils literal notranslate"><span class="pre">nan</span></code>, so they won’t appear in the plot.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ideal</span> <span class="o">=</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">cutoff</span>  <span class="c1"># The &quot;ideal&quot; frequency response.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deviation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">ideal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deviation</span><span class="p">[(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="n">cutoff</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">width</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="n">cutoff</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+<p>Plot the deviation. A close look at the left end of the stop band shows
+that the requirement for 65 dB attenuation is violated in the first lobe
+by about 0.125 dB. This is not unusual for the Kaiser window method.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">deviation</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">fs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Deviation from ideal (dB)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Lowpass Filter Frequency Response&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-kaiserord-1.png" src="../_images/scipy-signal-kaiserord-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.kaiser_beta.html"
+                        title="previous chapter">scipy.signal.kaiser_beta</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.minimum_phase.html"
+                        title="next chapter">scipy.signal.minimum_phase</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

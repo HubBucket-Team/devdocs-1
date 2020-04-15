@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Benchmarking SciPy with airspeed velocity &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="next" title="Adding Cython to SciPy" href="cython.html" >
+    <link rel="prev" title="Running SciPy Tests Locally" href="runtests.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="cython.html" title="Adding Cython to SciPy"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="runtests.html" title="Running SciPy Tests Locally"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="benchmarking-scipy-with-airspeed-velocity">
+<span id="benchmarking-with-asv"></span><h1>Benchmarking SciPy with airspeed velocity<a class="headerlink" href="#benchmarking-scipy-with-airspeed-velocity" title="Permalink to this headline">¶</a></h1>
+<p><em>This document introduces benchmarking, including reviewing SciPy
+benchmark test results online, writing a benchmark test, and running it
+locally. For a video run-through of writing a test and running it
+locally, see</em> <a class="reference external" href="https://youtu.be/edLQ8KRpupQ">Benchmarking SciPy</a><em>.</em></p>
+<p>As written in the <a class="reference external" href="https://asv.readthedocs.io/en/stable/">airspeed velocity (asv) documentation</a>:</p>
+<blockquote>
+<div><p>Airspeed velocity (asv) is a tool for benchmarking Python packages over their
+lifetime. Runtime, memory consumption, and even custom-computed values
+may be tracked. The results are displayed in an interactive web frontend
+that requires only a basic static webserver to host.</p>
+</div></blockquote>
+<p>To see what this means, take a look at <a class="reference external" href="https://pv.github.io/scipy-bench/">airspeed velocity of an unladen
+scipy</a>. Each plot summarizes the execution time of a particular test
+over the commit history of the project; that is, as each commit is
+merged, the benchmark test is run, its execution time is measured, and
+the elapsed time is plotted. In addition to tracking the performance of
+the code, a commit is <em>intended</em> to affect, running <em>all</em> benchmarks for
+each commit is helpful for identifying unintentional regressions:
+significant increases in the execution time of one or more benchmark
+tests. As SciPy is a web of interconnected code, the repercussions of a
+small change may not be immediately obvious to a contributor, so this
+benchmark suite makes it easier to detect regressions and identify the
+commit that caused them. When you contribute a substantial new feature -
+or notice a feature that doesn’t already have a benchmark test - please
+consider writing benchmarks.</p>
+<div class="section" id="writing-benchmarks">
+<h2>Writing benchmarks<a class="headerlink" href="#writing-benchmarks" title="Permalink to this headline">¶</a></h2>
+<p><em>The</em> <a class="reference external" href="https://asv.readthedocs.io/en/stable/writing_benchmarks.html#writing-benchmarks" title="(in airspeed velocity v0.4.1)"><span class="xref std std-ref">Writing benchmarks</span></a> <em>section of the
+airspeed velocity documentation is the definitive guide to writing benchmarks.
+Please see also the</em> <a class="reference external" href="https://github.com/scipy/scipy/blob/master/benchmarks/README.rst">SciPy benchmarks readme</a><em>.</em></p>
+<p>To see how benchmarks are written, take a look at
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/benchmarks/benchmarks/optimize_linprog.py"><code class="docutils literal notranslate"><span class="pre">scipy/benchmarks/benchmarks/optimize_linprog.py</span></code></a>. Each subclass of
+<code class="docutils literal notranslate"><span class="pre">Benchmark</span></code> defines a benchmark test. For example, the <code class="docutils literal notranslate"><span class="pre">KleeMinty</span></code>
+class defines a benchmark test based on the <a class="reference external" href="https://en.wikipedia.org/wiki/Klee%E2%80%93Minty_cube">Klee-Minty hypercube
+problem</a>, a diabolical test of the simplex algorithm for linear
+programming. The class has four parts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setup</span></code> prepares the benchmark to run. The execution time of this
+function is <em>not</em> counted in the benchmark results, so this is a good
+place to set up all variables that define the problem. In the <code class="docutils literal notranslate"><span class="pre">KleeMinty</span></code>
+example, this involves generating arrays <code class="docutils literal notranslate"><span class="pre">c</span></code>, <code class="docutils literal notranslate"><span class="pre">A_ub</span></code>, and <code class="docutils literal notranslate"><span class="pre">b_ub</span></code>
+corresponding with a Klee-Minty hypercube in <code class="docutils literal notranslate"><span class="pre">dims</span></code> dimensions and
+storing them as instance variables.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_klee_minty</span></code> actually runs the benchmark test. This function
+executes after a <code class="docutils literal notranslate"><span class="pre">KleeMinty</span></code> object has been instantiated and
+<code class="docutils literal notranslate"><span class="pre">setup</span></code> has run, so it gets the arrays defining the problem from
+<code class="docutils literal notranslate"><span class="pre">self</span></code>. Note that the prefix <code class="docutils literal notranslate"><span class="pre">time</span></code> in the function name
+indicates to <code class="docutils literal notranslate"><span class="pre">asv</span></code> that the execution time of this function <em>is</em> to
+be counted in the benchmark results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">params</span></code> is a list of lists defining parameters of the test.
+Benchmarks are run for all possible combinations of these parameters.
+For example, the first time the benchmark is run, the first element
+of <code class="docutils literal notranslate"><span class="pre">methods</span></code> (<code class="docutils literal notranslate"><span class="pre">simplex</span></code>) is passed into <code class="docutils literal notranslate"><span class="pre">setup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">time_klee_minty</span></code> as the first argument, <code class="docutils literal notranslate"><span class="pre">meth</span></code>, and the first
+element of <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">6,</span> <span class="pre">9]</span></code> (<code class="docutils literal notranslate"><span class="pre">3</span></code>) is passed into <code class="docutils literal notranslate"><span class="pre">setup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">time_klee_minty</span></code> as the second argument, <code class="docutils literal notranslate"><span class="pre">dims</span></code>. The next time
+the benchmark is run, <code class="docutils literal notranslate"><span class="pre">setup</span></code> and <code class="docutils literal notranslate"><span class="pre">time_klee_minty</span></code> are passed
+<code class="docutils literal notranslate"><span class="pre">revised</span> <span class="pre">simplex</span></code> and <code class="docutils literal notranslate"><span class="pre">6</span></code> as arguments, and so this continues
+until all combinations of parameters have been used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">param_names</span></code> is a list of human-readable names for each element of
+the <code class="docutils literal notranslate"><span class="pre">params</span></code> list. These are used for presenting results.</p></li>
+</ul>
+<p>Results of this benchmark over the past few years are available by
+clicking on the <a class="reference external" href="https://pv.github.io/scipy-bench/#optimize_linprog.KleeMinty.time_klee_minty">KleeMinty.time_klee_minty</a> link at <a class="reference external" href="https://pv.github.io/scipy-bench/">airspeed velocity
+of an unladen scipy</a>. Note that each trace of the plot corresponds with
+a combination of benchmark parameters and environment settings
+(e.g., the Cython version), and that the visibility of the traces can be
+toggled using the control panel on the left.</p>
+</div>
+<div class="section" id="running-benchmarks-locally">
+<h2>Running benchmarks locally<a class="headerlink" href="#running-benchmarks-locally" title="Permalink to this headline">¶</a></h2>
+<p><em>Before beginning, ensure that</em> <a class="reference external" href="https://github.com/airspeed-velocity/asv">airspeed velocity</a> <em>is
+installed.</em></p>
+<p>After contributing new benchmarks, you should test them locally before
+submitting a pull request.</p>
+<p>To run all benchmarks, navigate to the root SciPy directory at the
+command line and execute:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python runtests.py --bench</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">--bench</span></code> activates the benchmark suite instead of the test
+suite. This builds SciPy and runs the benchmarks. (<em>Note: this could
+take a while. Benchmarks often take longer to run than unit tests, and
+each benchmark is run multiple times to measure the distribution in
+execution times.</em>)</p>
+<p>To run benchmarks from a particular benchmark module, such as
+<code class="docutils literal notranslate"><span class="pre">optimize_linprog.py</span></code>, simply append the filename without the
+extension:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python runtests.py --bench optimize_linprog</span>
+</pre></div>
+</div>
+<p>To run a benchmark defined in a class, such as <code class="docutils literal notranslate"><span class="pre">KleeMinty</span></code> from
+<code class="docutils literal notranslate"><span class="pre">optimize_linprog.py</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python runtests.py --bench optimize_linprog.KleeMinty</span>
+</pre></div>
+</div>
+<p>To compare benchmark results between the active branch and another, such
+as <code class="docutils literal notranslate"><span class="pre">master</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python runtests.py --bench-compare master optimize_linprog.KleeMinty</span>
+</pre></div>
+</div>
+<p>All of the commands above display the results in plain text in the
+console, and the results are not saved for comparison with future
+commits. For greater control, a graphical view, and to have results
+saved for future comparison, you can use <a class="reference external" href="https://github.com/scipy/scipy/blob/master/benchmarks/run.py"><code class="docutils literal notranslate"><span class="pre">scipy/benchmarks/run.py</span></code></a>
+to run the benchmarks.</p>
+<p><code class="docutils literal notranslate"><span class="pre">run.py</span></code> is a “wrapper” for the <code class="docutils literal notranslate"><span class="pre">asv</span></code> terminal command, the use of
+which is described in <a class="reference external" href="https://asv.readthedocs.io/en/stable/using.html#running-benchmarks">Using airspeed velocity</a>. <code class="docutils literal notranslate"><span class="pre">run.py</span></code> simply sets
+some environment variables for you, then sends all remaining command
+line arguments to <code class="docutils literal notranslate"><span class="pre">asv</span></code>.</p>
+<p>To use it, navigate to <code class="docutils literal notranslate"><span class="pre">scipy/benchmarks</span></code> in the console and then
+execute:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python run.py run</span>
+</pre></div>
+</div>
+<p>Just like <code class="docutils literal notranslate"><span class="pre">asv</span> <span class="pre">run</span></code> from the asv documentation, this command runs the
+whole benchmark suite and saves the results for comparison against
+future commits.</p>
+<p>To run only a single benchmark, such as <code class="docutils literal notranslate"><span class="pre">KleeMinty</span></code> from
+<code class="docutils literal notranslate"><span class="pre">optimize_linprog.py</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python run.py run --bench optimize_linprog.KleeMinty</span>
+</pre></div>
+</div>
+<p>(Note that the <code class="docutils literal notranslate"><span class="pre">--bench</span></code> option here is sent to <code class="docutils literal notranslate"><span class="pre">asv</span></code>; its meaning
+is different than the <code class="docutils literal notranslate"><span class="pre">--bench</span></code> option for <code class="docutils literal notranslate"><span class="pre">runtests.py</span></code>.)</p>
+<p>One great feature of <code class="docutils literal notranslate"><span class="pre">asv</span></code> is that it can automatically run a
+benchmark not just for the current commit, but for every commit in a
+range. <code class="docutils literal notranslate"><span class="pre">linprog</span></code> <code class="docutils literal notranslate"><span class="pre">method='interior-point'</span></code> was merged into SciPy
+with commit <a class="reference external" href="https://github.com/scipy/scipy/commit/7fa17f2369e0e5ad055b23cc1a5ee079f9e8ca32"><code class="docutils literal notranslate"><span class="pre">7fa17f2369e0e5ad055b23cc1a5ee079f9e8ca32</span></code></a>, so let’s
+run the <code class="docutils literal notranslate"><span class="pre">KleeMinty</span></code> benchmark for 10 commits between then and now to
+track its performance over time:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python run.py run --bench optimize_linprog.KleeMinty --steps 10 7fa17f..</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will take a while, because SciPy has to be rebuilt for each
+commit! For more information about specifying ranges of commits, see
+the <a class="reference external" href="https://git-scm.com/docs/gitrevisions#_specifying_ranges">git revisions documentation</a>.</p>
+</div>
+<p>To “publish” the results (prepare them to be viewed) and “preview” them
+in an interactive console:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python run.py publish</span>
+<span class="go">python run.py preview</span>
+</pre></div>
+</div>
+<p>ASV will report that it is running a server. Using any browser, you can
+review the results by navigating to <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> (local
+machine, port 8080).</p>
+<p>For much more information about the <code class="docutils literal notranslate"><span class="pre">asv</span></code> commands accessible via
+<code class="docutils literal notranslate"><span class="pre">run.py</span></code>, see the airspeed velocity <a class="reference external" href="https://asv.readthedocs.io/en/stable/commands.html#commands">Commands</a> documentation. (Tip:
+check out the <code class="docutils literal notranslate"><span class="pre">asv</span> <span class="pre">find</span></code> command and the <code class="docutils literal notranslate"><span class="pre">--quick</span></code>,
+<code class="docutils literal notranslate"><span class="pre">--skip-existing-commits</span></code>, and <code class="docutils literal notranslate"><span class="pre">--profile</span></code> options for <code class="docutils literal notranslate"><span class="pre">asv</span> <span class="pre">run</span></code>.)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Benchmarking SciPy with airspeed velocity</a><ul>
+<li><a class="reference internal" href="#writing-benchmarks">Writing benchmarks</a></li>
+<li><a class="reference internal" href="#running-benchmarks-locally">Running benchmarks locally</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="runtests.html"
+                        title="previous chapter">Running SciPy Tests Locally</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cython.html"
+                        title="next chapter">Adding Cython to SciPy</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

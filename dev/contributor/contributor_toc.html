@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>SciPy contributor guide &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="next" title="SciPy Roadmap" href="../../roadmap.html" >
+    <link rel="prev" title="Ways to Contribute" href="../../hacking.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="../../roadmap.html" title="SciPy Roadmap"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../../hacking.html" title="Ways to Contribute"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-contributor-guide">
+<span id="contributor-toc"></span><h1>SciPy contributor guide<a class="headerlink" href="#scipy-contributor-guide" title="Permalink to this headline">¶</a></h1>
+<p>This guide is designed to help you quickly find the information you need about SciPy development after you’ve reviewed the introductory material in <a class="reference internal" href="../../hacking.html#hacking"><span class="std std-ref">Ways to Contribute</span></a>. If you’re new to this and want to start coding ASAP, you’ve found the right place.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#dev-env"><span class="std std-ref">Development environment</span></a> - how to set up and maintain a development environment, including installing compilers and SciPy dependencies, creating a personal fork of the SciPy repository on GitHub, using git to manage a local repository with development branches, performing an in-place build of SciPy, and creating a virtual environment that adds this development version of SciPy to the Python path</p></li>
+<li><p><a class="reference internal" href="#editing-scipy"><span class="std std-ref">Editing SciPy</span></a> - how to edit SciPy Python code, with tips on finding which module contains SciPy functionality to be edited, adding new modules to SciPy, and complying with PEP8 style standards</p></li>
+<li><p><a class="reference internal" href="#unit-tests"><span class="std std-ref">Unit tests</span></a> - how to write and run unit tests for SciPy with the pytest framework</p></li>
+<li><p><a class="reference internal" href="#docs"><span class="std std-ref">Documentation</span></a> - how to write reStructuredText documentation that complies with docstring standards, build documentation locally with Sphinx, and view documentation built during continuous integration checks</p></li>
+<li><p><a class="reference internal" href="#toc-benchmarking"><span class="std std-ref">Benchmarks</span></a> - how to benchmark code with airspeed velocity</p></li>
+<li><p><a class="reference internal" href="#toc-cython"><span class="std std-ref">Compiled code</span></a> - how to add fast, compiled code to SciPy</p></li>
+</ul>
+<div class="section" id="development-environment">
+<span id="dev-env"></span><h2>Development environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="quickstart_mac.html#quickstart-mac"><span class="std std-ref">Development environment quickstart guide (macOS)</span></a> presents a step-by-step process for setting up a convenient SciPy development environment in macOS</p></li>
+<li><p><a class="reference internal" href="quickstart_ubuntu.html#quickstart-ubuntu"><span class="std std-ref">Development environment quickstart guide (Ubuntu 16.04)</span></a> presents a step-by-step process for setting up a convenient SciPy development environment in Ubuntu</p></li>
+<li><p><a class="reference internal" href="quickstart_docker.html#quickstart-docker"><span class="std std-ref">Development environment quickstart guide (Docker)</span></a> presents a step-by-step process for building SciPy using Docker; if you don’t have macOS or Ubuntu, or if you have trouble with the instructions above, this may be your best option</p></li>
+<li><p><a class="reference internal" href="../../building/index.html#building"><span class="std std-ref">Building from sources</span></a> may have some helpful hints if you need to deviate from the guides above</p></li>
+<li><p><a class="reference internal" href="recommended_development_setup.html#recommended-development-setup"><span class="std std-ref">Recommended development setup</span></a> includes additional notes about the development setup; all of this information is contained elsewhere, but it is retained as a legacy document</p></li>
+</ul>
+</div>
+<div class="section" id="editing-scipy">
+<span id="id1"></span><h2>Editing SciPy<a class="headerlink" href="#editing-scipy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="development_workflow.html#development-workflow"><span class="std std-ref">Development workflow</span></a> lays out what to do after your development environment is set up</p></li>
+<li><p><a class="reference external" href="https://youtu.be/HgU01gJbzMY">SciPy Development Workflow</a> is a five-minute video example of fixing a bug and submitting a pull request</p></li>
+<li><p><a class="reference internal" href="pep8.html#pep8-scipy"><span class="std std-ref">PEP8 and SciPy</span></a> gives some tips for ensuring that your code is PEP8 compliant</p></li>
+<li><p><a class="reference internal" href="../gitwash/gitwash.html#git-development"><span class="std std-ref">Git for development</span></a> is a guide to using <code class="docutils literal notranslate"><span class="pre">git</span></code>, the distributed version-control system used to manage the changes made to SciPy code from around the world</p></li>
+<li><p><a class="reference internal" href="../../api.html#scipy-api"><span class="std std-ref">SciPy API</span></a> contains some important notes about how SciPy code is organized and documents the structure of the SciPy API; if you are going to import other SciPy code, read this first</p></li>
+<li><p><a class="reference internal" href="reviewing_prs.html#reviewing-prs"><span class="std std-ref">Reviewing Pull Requests</span></a> explains how to review another author’s SciPy code locally</p></li>
+<li><p><a class="reference external" href="https://numpy.org/devdocs/reference/distutils_guide.html" title="(in NumPy v1.19.dev0)"><span>NumPy Distutils - Users Guide</span></a> - check this out before adding any new files to SciPy</p></li>
+<li><p><a class="reference internal" href="adding_new.html#adding-new"><span class="std std-ref">Adding New Methods, Functions, and Classes</span></a> has information on how to add new methods, functions and classes</p></li>
+<li><p><a class="reference internal" href="../core-dev/index.html#core-dev-guide"><span class="std std-ref">SciPy Core Developer Guide</span></a> has background information including how decisions are made and how a release is prepared; it’s geared toward <a class="reference internal" href="../governance/governance.html#governance"><span class="std std-ref">Core Developers</span></a>, but contains useful information for all contributors</p></li>
+</ul>
+</div>
+<div class="section" id="unit-tests">
+<span id="id2"></span><h2>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/devdocs/reference/testing.html" title="(in NumPy v1.19.dev0)"><span>Testing Guidelines</span></a> is the definitive guide to writing unit tests of SciPy code</p></li>
+<li><p><a class="reference internal" href="runtests.html#runtests"><span class="std std-ref">Running SciPy Tests Locally</span></a> documents <code class="docutils literal notranslate"><span class="pre">runtests.py</span></code>, a convenient script for building SciPy and running tests locally</p></li>
+</ul>
+</div>
+<div class="section" id="documentation">
+<span id="docs"></span><h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/devdocs/docs/howto_document.html#howto-document" title="(in NumPy v1.19.dev0)"><span>A Guide to NumPy/SciPy Documentation</span></a> contains everything you need to know about writing docstrings, which are rendered to produce HTML documentation using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a></p></li>
+<li><p><a class="reference internal" href="rendering_documentation.html#rendering-documentation"><span class="std std-ref">Rendering Documentation with Sphinx</span></a> it’s important to check how changes to the documentation render before merging a PR; this document explains how you can do that</p></li>
+</ul>
+</div>
+<div class="section" id="benchmarks">
+<span id="toc-benchmarking"></span><h2>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="benchmarking.html#benchmarking-with-asv"><span class="std std-ref">Benchmarking SciPy with airspeed velocity</span></a> explains how to add benchmarks to SciPy using <a class="reference external" href="https://asv.readthedocs.io/en/stable/">airspeed velocity</a></p></li>
+</ul>
+</div>
+<div class="section" id="compiled-code">
+<span id="toc-cython"></span><span id="id3"></span><h2>Compiled code<a class="headerlink" href="#compiled-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="cython.html#adding-cython"><span class="std std-ref">Adding Cython to SciPy</span></a> extending and compiling Python code with <a class="reference external" href="https://cython.org/">Cython</a> can significantly improve its performance; this document helps you get started</p></li>
+<li><p><a class="reference internal" href="compiled_code.html#other-languages"><span class="std std-ref">Beyond Python</span></a> discusses the use of C, C++, and Fortran code in SciPy</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SciPy contributor guide</a><ul>
+<li><a class="reference internal" href="#development-environment">Development environment</a></li>
+<li><a class="reference internal" href="#editing-scipy">Editing SciPy</a></li>
+<li><a class="reference internal" href="#unit-tests">Unit tests</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#benchmarks">Benchmarks</a></li>
+<li><a class="reference internal" href="#compiled-code">Compiled code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../hacking.html"
+                        title="previous chapter">Ways to Contribute</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../roadmap.html"
+                        title="next chapter">SciPy Roadmap</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

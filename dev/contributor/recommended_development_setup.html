@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Recommended development setup &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="recommended-development-setup">
+<span id="id1"></span><h1>Recommended development setup<a class="headerlink" href="#recommended-development-setup" title="Permalink to this headline">¶</a></h1>
+<p><em>This document does not include detailed explanations. For more step-by-step
+procedures, see</em> <a class="reference internal" href="quickstart_mac.html#quickstart-mac"><span class="std std-ref">Development environment quickstart guide (macOS)</span></a> <em>or</em> <a class="reference internal" href="../../building/index.html#building"><span class="std std-ref">Building from sources</span></a>.</p>
+<p>Since SciPy contains parts written in C, C++, and Fortran that need to be
+compiled before use, make sure you have the necessary compilers and Python
+development headers installed.  Having compiled code also means that importing
+SciPy from the development sources needs some additional steps, which are
+explained below.</p>
+<p>First fork a copy of the main SciPy repository in Github onto your own
+account and then create your local repository via:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone git@github.com:YOURUSERNAME/scipy.git scipy
+<span class="gp">$</span> <span class="nb">cd</span> scipy
+<span class="gp">$</span> git remote add upstream git://github.com/scipy/scipy.git
+</pre></div>
+</div>
+<p>Second to code review pull requests it is helpful to have a local copy of the
+code changes in the pull request. The preferred method to bring a PR from the
+github repository to your local repo in a new branch:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git fetch upstream pull/PULL_REQUEST_ID/head:NEW_BRANCH_NAME
+</pre></div>
+</div>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">PULL_REQUEST_ID</span></code> will be the PR number and the
+<code class="docutils literal notranslate"><span class="pre">NEW_BRANCH_NAME</span></code> will be the name of the branch in your local repository
+where the diffs will reside.</p>
+<p>Now you have a branch in your local development area to code review in Python.</p>
+<p>To build the development version of SciPy and run tests, spawn
+interactive shells with the Python import paths properly set up etc.,
+do one of:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python runtests.py -v
+<span class="gp">$</span> python runtests.py -v -s optimize
+<span class="gp">$</span> python runtests.py -v -t scipy.special.tests.test_basic::test_xlogy
+<span class="gp">$</span> python runtests.py --ipython
+<span class="gp">$</span> python runtests.py --python somescript.py
+<span class="gp">$</span> python runtests.py --bench
+</pre></div>
+</div>
+<p>This builds SciPy first, so the first time it may take some time.  If
+you specify <code class="docutils literal notranslate"><span class="pre">-n</span></code>, the tests are run against the version of SciPy (if
+any) found on current PYTHONPATH.  <em>Note: if you run into a build issue,
+more detailed build documentation can be found in</em> <a class="reference internal" href="../../building/index.html#building"><span class="std std-ref">Building from sources</span></a>.</p>
+<p>Some of the tests in SciPy are very slow and need to be separately
+enabled. See <a class="reference internal" href="runtests.html#runtests"><span class="std std-ref">Running SciPy Tests Locally</span></a> for details.</p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

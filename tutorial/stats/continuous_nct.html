@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Noncentral t Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Continuous Statistical Distributions" href="continuous.html" >
+    <link rel="next" title="Normal Distribution" href="continuous_norm.html" >
+    <link rel="prev" title="Noncentral F Distribution" href="continuous_ncf.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="continuous.html" accesskey="U">Continuous Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="continuous_norm.html" title="Normal Distribution"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="continuous_ncf.html" title="Noncentral F Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="noncentral-t-distribution">
+<span id="continuous-nct"></span><h1>Noncentral t Distribution<a class="headerlink" href="#noncentral-t-distribution" title="Permalink to this headline">¶</a></h1>
+<p>The distribution of the ratio</p>
+<div class="math notranslate nohighlight">
+\[\frac{U+\lambda}{\chi_{\nu}/\sqrt{\nu}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(\chi_{\nu}\)</span> are independent and distributed as a standard normal and chi with <span class="math notranslate nohighlight">\(\nu\)</span> degrees of freedom. Note <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span> and <span class="math notranslate nohighlight">\(\nu&gt;0\)</span> .</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} f\left(x;\lambda,\nu\right) &amp; = &amp; \frac{\nu^{\nu/2}\Gamma\left(\nu+1\right)}{2^{\nu}e^{\lambda^{2}/2}\left(\nu+x^{2}\right)^{\nu/2}\Gamma\left(\nu/2\right)}\\
+  &amp;  &amp; \times\left\{ \frac{\sqrt{2}\lambda x\,_{1}F_{1}\left(\frac{\nu}{2}+1;\frac{3}{2};\frac{\lambda^{2}x^{2}}{2\left(\nu+x^{2}\right)}\right)}{\left(\nu+x^{2}\right)\Gamma\left(\frac{\nu+1}{2}\right)}\right.\\
+  &amp;  &amp; -\left.\frac{\,_{1}F_{1}\left(\frac{\nu+1}{2};\frac{1}{2};\frac{\lambda^{2}x^{2}}{2\left(\nu+x^{2}\right)}\right)}{\sqrt{\nu+x^{2}}\Gamma\left(\frac{\nu}{2}+1\right)}\right\} \\
+  &amp; = &amp; \frac{\Gamma\left(\nu+1\right)}{2^{\left(\nu-1\right)/2}\sqrt{\pi\nu}\Gamma\left(\nu/2\right)}\exp\left[-\frac{\nu\lambda^{2}}{\nu+x^{2}}\right]\\
+  &amp;  &amp; \times\left(\frac{\nu}{\nu+x^{2}}\right)^{\left(\nu-1\right)/2}Hh_{\nu}\left(-\frac{\lambda x}{\sqrt{\nu+x^{2}}}\right)\\
+  F\left(x;\lambda,\nu\right) &amp; = &amp; \left\{
+                               \begin{array}{cc}
+                                 {\tilde{F}}_{{\nu ,\mu }}(x) &amp; x\geq0 \\
+                                 1 - {\tilde{F}}_{{\nu ,-\mu }}(x) &amp; x&lt;0
+                                 \end{array}
+                              \right. \\
+ \text{where} \\
+  {\tilde{F}}_{{\nu ,\mu }}(x) &amp; = &amp; \Phi (-\mu )+{\frac{1}{2}}\sum _{{j=0}}^{\infty }\left[p_{j}I_{y}\left(j+{\frac{1}{2}},{\frac{\nu }{2}}\right)+q_{j}I_{y}\left(j+1,{\frac{\nu }{2}}\right)\right]\\
+  y &amp; = &amp; \frac{x^2}{x^2+\nu}\\
+  p_{j} &amp; = &amp; \frac{e^{\left( -\frac{\mu^2}{2} \right)} }{j!} \left(\frac{\mu^2}{2}\right)^{j}\\
+  q_{j} &amp; = &amp; {\frac{\mu e^{\left( -\frac{\mu^2}{2} \right)} } {\sqrt{2}\Gamma(j+3/2)}} \left({\frac{\mu^2}{2}}\right)^{j} \end{eqnarray*}</div><p>where <span class="math notranslate nohighlight">\(I_{y}(a,b)\)</span> is the regularized incomplete beta function and
+Airy’s Hh function is <span class="math notranslate nohighlight">\(Hh_{\nu}(x)=\frac{1}{\Gamma(\nu+1)}\int_0^\infty t^\nu e^{\frac{-(t+x)^2}{2}}dt\)</span>.</p>
+<p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.nct.html#scipy.stats.nct" title="scipy.stats.nct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.nct</span></code></a></p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous_ncf.html"
+                        title="previous chapter">Noncentral F Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="continuous_norm.html"
+                        title="next chapter">Normal Distribution</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

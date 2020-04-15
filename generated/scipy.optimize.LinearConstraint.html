@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.LinearConstraint &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.Bounds" href="scipy.optimize.Bounds.html" >
+    <link rel="prev" title="scipy.optimize.NonlinearConstraint" href="scipy.optimize.NonlinearConstraint.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.Bounds.html" title="scipy.optimize.Bounds"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.NonlinearConstraint.html" title="scipy.optimize.NonlinearConstraint"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-linearconstraint">
+<h1>scipy.optimize.LinearConstraint<a class="headerlink" href="#scipy-optimize-linearconstraint" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.optimize.LinearConstraint">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">LinearConstraint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">lb</span></em>, <em class="sig-param"><span class="n">ub</span></em>, <em class="sig-param"><span class="n">keep_feasible</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/_constraints.py#L112-L147"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.LinearConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear constraint on the variables.</p>
+<p>The constraint has the general inequality form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lb</span> <span class="o">&lt;=</span> <span class="n">A</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">ub</span>
+</pre></div>
+</div>
+<p>Here the vector of independent variables x is passed as ndarray of shape
+(n,) and the matrix A has shape (m, n).</p>
+<p>It is possible to use equal bounds to represent an equality constraint or
+infinite bounds to represent a one-sided constraint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>A</strong><span class="classifier">{array_like, sparse matrix}, shape (m, n)</span></dt><dd><p>Matrix defining the constraint.</p>
+</dd>
+<dt><strong>lb, ub</strong><span class="classifier">array_like</span></dt><dd><p>Lower and upper bounds on the constraint. Each array must have the
+shape (m,) or be a scalar, in the latter case a bound will be the same
+for all components of the constraint. Use <code class="docutils literal notranslate"><span class="pre">np.inf</span></code> with an
+appropriate sign to specify a one-sided constraint.
+Set components of <em class="xref py py-obj">lb</em> and <em class="xref py py-obj">ub</em> equal to represent an equality
+constraint. Note that you can mix constraints of different types:
+interval, one-sided or equality, by setting different components of
+<em class="xref py py-obj">lb</em> and <em class="xref py py-obj">ub</em> as  necessary.</p>
+</dd>
+<dt><strong>keep_feasible</strong><span class="classifier">array_like of bool, optional</span></dt><dd><p>Whether to keep the constraint components feasible throughout
+iterations. A single value set this property for all components.
+Default is False. Has no effect for equality constraints.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.NonlinearConstraint.html"
+                        title="previous chapter">scipy.optimize.NonlinearConstraint</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.Bounds.html"
+                        title="next chapter">scipy.optimize.Bounds</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

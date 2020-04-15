@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.linalg.ldl &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Linear algebra (scipy.linalg)" href="../linalg.html" >
+    <link rel="next" title="scipy.linalg.cholesky" href="scipy.linalg.cholesky.html" >
+    <link rel="prev" title="scipy.linalg.null_space" href="scipy.linalg.null_space.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../linalg.html" accesskey="U">Linear algebra (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.linalg</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.linalg.cholesky.html" title="scipy.linalg.cholesky"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.linalg.null_space.html" title="scipy.linalg.null_space"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-linalg-ldl">
+<h1>scipy.linalg.ldl<a class="headerlink" href="#scipy-linalg-ldl" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.linalg.ldl">
+<code class="sig-prename descclassname">scipy.linalg.</code><code class="sig-name descname">ldl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">lower</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">hermitian</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">overwrite_a</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_finite</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/linalg/_decomp_ldl.py#L12-L154"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.linalg.ldl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the LDLt or Bunch-Kaufman factorization of a symmetric/
+hermitian matrix.</p>
+<p>This function returns a block diagonal matrix D consisting blocks of size
+at most 2x2 and also a possibly permuted unit lower triangular matrix
+<code class="docutils literal notranslate"><span class="pre">L</span></code> such that the factorization <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">L</span> <span class="pre">D</span> <span class="pre">L^H</span></code> or <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">L</span> <span class="pre">D</span> <span class="pre">L^T</span></code>
+holds. If <code class="docutils literal notranslate"><span class="pre">lower</span></code> is False then (again possibly permuted) upper
+triangular matrices are returned as outer factors.</p>
+<p>The permutation array can be used to triangularize the outer factors
+simply by a row shuffle, i.e., <code class="docutils literal notranslate"><span class="pre">lu[perm,</span> <span class="pre">:]</span></code> is an upper/lower
+triangular matrix. This is also equivalent to multiplication with a
+permutation matrix <code class="docutils literal notranslate"><span class="pre">P.dot(lu)</span></code>, where <code class="docutils literal notranslate"><span class="pre">P</span></code> is a column-permuted
+identity matrix <code class="docutils literal notranslate"><span class="pre">I[:,</span> <span class="pre">perm]</span></code>.</p>
+<p>Depending on the value of the boolean <code class="docutils literal notranslate"><span class="pre">lower</span></code>, only upper or lower
+triangular part of the input array is referenced. Hence, a triangular
+matrix on entry would give the same result as if the full matrix is
+supplied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>a</strong><span class="classifier">array_like</span></dt><dd><p>Square input array</p>
+</dd>
+<dt><strong>lower</strong><span class="classifier">bool, optional</span></dt><dd><p>This switches between the lower and upper triangular outer factors of
+the factorization. Lower triangular (<code class="docutils literal notranslate"><span class="pre">lower=True</span></code>) is the default.</p>
+</dd>
+<dt><strong>hermitian</strong><span class="classifier">bool, optional</span></dt><dd><p>For complex-valued arrays, this defines whether <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">a.conj().T</span></code> or
+<code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">a.T</span></code> is assumed. For real-valued arrays, this switch has no
+effect.</p>
+</dd>
+<dt><strong>overwrite_a</strong><span class="classifier">bool, optional</span></dt><dd><p>Allow overwriting data in <code class="docutils literal notranslate"><span class="pre">a</span></code> (may enhance performance). The default
+is False.</p>
+</dd>
+<dt><strong>check_finite</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to check that the input matrices contain only finite numbers.
+Disabling may give a performance gain, but may result in problems
+(crashes, non-termination) if the inputs do contain infinities or NaNs.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>lu</strong><span class="classifier">ndarray</span></dt><dd><p>The (possibly) permuted upper/lower triangular outer factor of the
+factorization.</p>
+</dd>
+<dt><strong>d</strong><span class="classifier">ndarray</span></dt><dd><p>The block diagonal multiplier of the factorization.</p>
+</dd>
+<dt><strong>perm</strong><span class="classifier">ndarray</span></dt><dd><p>The row-permutation index array that brings lu into triangular form.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If input array is not square.</p>
+</dd>
+<dt>ComplexWarning</dt><dd><p>If a complex-valued array with nonzero imaginary parts on the
+diagonal is given and hermitian is set to True.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.linalg.cholesky.html#scipy.linalg.cholesky" title="scipy.linalg.cholesky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cholesky</span></code></a>, <a class="reference internal" href="scipy.linalg.lu.html#scipy.linalg.lu" title="scipy.linalg.lu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lu</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function uses <code class="docutils literal notranslate"><span class="pre">?SYTRF</span></code> routines for symmetric matrices and
+<code class="docutils literal notranslate"><span class="pre">?HETRF</span></code> routines for Hermitian matrices from LAPACK. See <a class="reference internal" href="#rf62cefc694bc-1" id="id1">[1]</a> for
+the algorithm details.</p>
+<p>Depending on the <code class="docutils literal notranslate"><span class="pre">lower</span></code> keyword value, only lower or upper triangular
+part of the input array is referenced. Moreover, this keyword also defines
+the structure of the outer factors of the factorization.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rf62cefc694bc-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>J.R. Bunch, L. Kaufman, Some stable methods for calculating
+inertia and solving symmetric linear systems, Math. Comput. Vol.31,
+1977. DOI: 10.2307/2005787</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Given an upper triangular array <em class="xref py py-obj">a</em> that represents the full symmetric
+array with its entries, obtain <em class="xref py py-obj">l</em>, ‘d’ and the permutation vector <em class="xref py py-obj">perm</em>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">ldl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lu</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">perm</span> <span class="o">=</span> <span class="n">ldl</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Use the upper part</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lu</span>
+<span class="go">array([[ 0. ,  0. ,  1. ],</span>
+<span class="go">       [ 0. ,  1. , -0.5],</span>
+<span class="go">       [ 1. ,  1. ,  1.5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">array([[-5. ,  0. ,  0. ],</span>
+<span class="go">       [ 0. ,  1.5,  0. ],</span>
+<span class="go">       [ 0. ,  0. ,  2. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">perm</span>
+<span class="go">array([2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lu</span><span class="p">[</span><span class="n">perm</span><span class="p">,</span> <span class="p">:]</span>
+<span class="go">array([[ 1. ,  1. ,  1.5],</span>
+<span class="go">       [ 0. ,  1. , -0.5],</span>
+<span class="go">       [ 0. ,  0. ,  1. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lu</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">lu</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="go">array([[ 2., -1.,  3.],</span>
+<span class="go">       [-1.,  2.,  0.],</span>
+<span class="go">       [ 3.,  0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.linalg.null_space.html"
+                        title="previous chapter">scipy.linalg.null_space</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.linalg.cholesky.html"
+                        title="next chapter">scipy.linalg.cholesky</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

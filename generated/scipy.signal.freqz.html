@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.freqz &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.freqz_zpk" href="scipy.signal.freqz_zpk.html" >
+    <link rel="prev" title="scipy.signal.freqs_zpk" href="scipy.signal.freqs_zpk.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.freqz_zpk.html" title="scipy.signal.freqz_zpk"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.freqs_zpk.html" title="scipy.signal.freqs_zpk"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-freqz">
+<h1>scipy.signal.freqz<a class="headerlink" href="#scipy-signal-freqz" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.freqz">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">freqz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">a</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">worN</span><span class="o">=</span><span class="default_value">512</span></em>, <em class="sig-param"><span class="n">whole</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fs</span><span class="o">=</span><span class="default_value">6.283185307179586</span></em>, <em class="sig-param"><span class="n">include_nyquist</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/filter_design.py#L273-L481"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.freqz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the frequency response of a digital filter.</p>
+<p>Given the M-order numerator <em class="xref py py-obj">b</em> and N-order denominator <em class="xref py py-obj">a</em> of a digital
+filter, compute its frequency response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>            <span class="n">jw</span>                 <span class="o">-</span><span class="n">jw</span>              <span class="o">-</span><span class="n">jwM</span>
+   <span class="n">jw</span>    <span class="n">B</span><span class="p">(</span><span class="n">e</span>  <span class="p">)</span>    <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="n">e</span>    <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">M</span><span class="p">]</span><span class="n">e</span>
+<span class="n">H</span><span class="p">(</span><span class="n">e</span>  <span class="p">)</span> <span class="o">=</span> <span class="o">------</span> <span class="o">=</span> <span class="o">-----------------------------------</span>
+            <span class="n">jw</span>                 <span class="o">-</span><span class="n">jw</span>              <span class="o">-</span><span class="n">jwN</span>
+         <span class="n">A</span><span class="p">(</span><span class="n">e</span>  <span class="p">)</span>    <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="n">e</span>    <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="n">e</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>b</strong><span class="classifier">array_like</span></dt><dd><p>Numerator of a linear filter. If <em class="xref py py-obj">b</em> has dimension greater than 1,
+it is assumed that the coefficients are stored in the first dimension,
+and <code class="docutils literal notranslate"><span class="pre">b.shape[1:]</span></code>, <code class="docutils literal notranslate"><span class="pre">a.shape[1:]</span></code>, and the shape of the frequencies
+array must be compatible for broadcasting.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier">array_like</span></dt><dd><p>Denominator of a linear filter. If <em class="xref py py-obj">b</em> has dimension greater than 1,
+it is assumed that the coefficients are stored in the first dimension,
+and <code class="docutils literal notranslate"><span class="pre">b.shape[1:]</span></code>, <code class="docutils literal notranslate"><span class="pre">a.shape[1:]</span></code>, and the shape of the frequencies
+array must be compatible for broadcasting.</p>
+</dd>
+<dt><strong>worN</strong><span class="classifier">{None, int, array_like}, optional</span></dt><dd><p>If a single integer, then compute at that many frequencies (default is
+N=512). This is a convenient alternative to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fs</span> <span class="k">if</span> <span class="n">whole</span> <span class="k">else</span> <span class="n">fs</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">include_nyquist</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using a number that is fast for FFT computations can result in
+faster computations (see Notes).</p>
+<p>If an array_like, compute the response at the frequencies given.
+These are in the same units as <em class="xref py py-obj">fs</em>.</p>
+</dd>
+<dt><strong>whole</strong><span class="classifier">bool, optional</span></dt><dd><p>Normally, frequencies are computed from 0 to the Nyquist frequency,
+fs/2 (upper-half of unit-circle). If <em class="xref py py-obj">whole</em> is True, compute
+frequencies from 0 to fs. Ignored if w is array_like.</p>
+</dd>
+<dt><strong>plot</strong><span class="classifier">callable</span></dt><dd><p>A callable that takes two arguments. If given, the return parameters
+<em class="xref py py-obj">w</em> and <em class="xref py py-obj">h</em> are passed to plot. Useful for plotting the frequency
+response inside <a class="reference internal" href="#scipy.signal.freqz" title="scipy.signal.freqz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqz</span></code></a>.</p>
+</dd>
+<dt><strong>fs</strong><span class="classifier">float, optional</span></dt><dd><p>The sampling frequency of the digital system. Defaults to 2*pi
+radians/sample (so w is from 0 to pi).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.0.</span></p>
+</div>
+</dd>
+<dt><strong>include_nyquist</strong><span class="classifier">bool, optional</span></dt><dd><p>If <em class="xref py py-obj">whole</em> is False and <em class="xref py py-obj">worN</em> is an integer, setting <em class="xref py py-obj">include_nyquist</em> to True
+will include the last frequency (Nyquist frequency) and is otherwise ignored.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>w</strong><span class="classifier">ndarray</span></dt><dd><p>The frequencies at which <em class="xref py py-obj">h</em> was computed, in the same units as <em class="xref py py-obj">fs</em>.
+By default, <em class="xref py py-obj">w</em> is normalized to the range [0, pi) (radians/sample).</p>
+</dd>
+<dt><strong>h</strong><span class="classifier">ndarray</span></dt><dd><p>The frequency response, as complex numbers.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.freqz_zpk.html#scipy.signal.freqz_zpk" title="scipy.signal.freqz_zpk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqz_zpk</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.signal.sosfreqz.html#scipy.signal.sosfreqz" title="scipy.signal.sosfreqz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sosfreqz</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Using Matplotlib’s <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.2.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code></a> function as the callable
+for <em class="xref py py-obj">plot</em> produces unexpected results, as this plots the real part of the
+complex transfer function, not the magnitude.
+Try <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">w,</span> <span class="pre">h:</span> <span class="pre">plot(w,</span> <span class="pre">np.abs(h))</span></code>.</p>
+<p>A direct computation via (R)FFT is used to compute the frequency response
+when the following conditions are met:</p>
+<ol class="arabic simple">
+<li><p>An integer value is given for <em class="xref py py-obj">worN</em>.</p></li>
+<li><p><em class="xref py py-obj">worN</em> is fast to compute via FFT (i.e.,
+<a class="reference internal" href="scipy.fft.next_fast_len.html#scipy.fft.next_fast_len" title="scipy.fft.next_fast_len"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_fast_len(worN)</span></code></a> equals <em class="xref py py-obj">worN</em>).</p></li>
+<li><p>The denominator coefficients are a single value (<code class="docutils literal notranslate"><span class="pre">a.shape[0]</span> <span class="pre">==</span> <span class="pre">1</span></code>).</p></li>
+<li><p><em class="xref py py-obj">worN</em> is at least as long as the numerator coefficients
+(<code class="docutils literal notranslate"><span class="pre">worN</span> <span class="pre">&gt;=</span> <span class="pre">b.shape[0]</span></code>).</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">b.ndim</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>, then <code class="docutils literal notranslate"><span class="pre">b.shape[-1]</span> <span class="pre">==</span> <span class="pre">1</span></code>.</p></li>
+</ol>
+<p>For long FIR filters, the FFT approach can have lower error and be much
+faster than the equivalent direct polynomial calculation.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">firwin</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;kaiser&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Digital filter frequency response&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)),</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude [dB]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency [rad/sample]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Angle (radians)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-freqz-1_00_00.png" src="../_images/scipy-signal-freqz-1_00_00.png" />
+</div>
+<p>Broadcasting Examples</p>
+<p>Suppose we have two FIR filters whose coefficients are stored in the
+rows of an array with shape (2, 25). For this demonstration, we’ll
+use random data:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To compute the frequency response for these two filters with one call
+to <a class="reference internal" href="#scipy.signal.freqz" title="scipy.signal.freqz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqz</span></code></a>, we must pass in <code class="docutils literal notranslate"><span class="pre">b.T</span></code>, because <a class="reference internal" href="#scipy.signal.freqz" title="scipy.signal.freqz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqz</span></code></a> expects the first
+axis to hold the coefficients. We must then extend the shape with a
+trivial dimension of length 1 to allow broadcasting with the array
+of frequencies.  That is, we pass in <code class="docutils literal notranslate"><span class="pre">b.T[...,</span> <span class="pre">np.newaxis]</span></code>, which has
+shape (25, 2, 1):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">worN</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1024,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 1024)</span>
+</pre></div>
+</div>
+<p>Now, suppose we have two transfer functions, with the same numerator
+coefficients <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">[0.5,</span> <span class="pre">0.5]</span></code>. The coefficients for the two denominators
+are stored in the first dimension of the 2-D array  <em class="xref py py-obj">a</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span>   <span class="mi">1</span>      <span class="mi">1</span>  <span class="p">]</span>
+    <span class="p">[</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span> <span class="p">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Only <em class="xref py py-obj">a</em> is more than 1-D. To make it compatible for
+broadcasting with the frequencies, we extend it with a trivial dimension
+in the call to <a class="reference internal" href="#scipy.signal.freqz" title="scipy.signal.freqz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqz</span></code></a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">worN</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1024,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 1024)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.freqs_zpk.html"
+                        title="previous chapter">scipy.signal.freqs_zpk</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.freqz_zpk.html"
+                        title="next chapter">scipy.signal.freqz_zpk</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

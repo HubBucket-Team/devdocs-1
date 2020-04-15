@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.integrate.complex_ode.integrate &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="scipy.integrate.complex_ode" href="scipy.integrate.complex_ode.html" >
+    <link rel="next" title="scipy.integrate.complex_ode.set_f_params" href="scipy.integrate.complex_ode.set_f_params.html" >
+    <link rel="prev" title="scipy.integrate.complex_ode.get_return_code" href="scipy.integrate.complex_ode.get_return_code.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../integrate.html" >Integration and ODEs (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code>)</a></li>
+          <li class="active"><a href="scipy.integrate.complex_ode.html" accesskey="U">scipy.integrate.complex_ode</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.integrate.complex_ode.set_f_params.html" title="scipy.integrate.complex_ode.set_f_params"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.integrate.complex_ode.get_return_code.html" title="scipy.integrate.complex_ode.get_return_code"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-integrate-complex-ode-integrate">
+<h1>scipy.integrate.complex_ode.integrate<a class="headerlink" href="#scipy-integrate-complex-ode-integrate" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="scipy.integrate.complex_ode.integrate">
+<code class="sig-prename descclassname">complex_ode.</code><code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">step</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">relax</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/integrate/_ode.py#L694-L721"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.integrate.complex_ode.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find y=y(t), set y as an initial condition, and return y.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>t</strong><span class="classifier">float</span></dt><dd><p>The endpoint of the integration step.</p>
+</dd>
+<dt><strong>step</strong><span class="classifier">bool</span></dt><dd><p>If True, and if the integrator supports the step method,
+then perform a single integration step and return.
+This parameter is provided in order to expose internals of
+the implementation, and should not be changed from its default
+value in most cases.</p>
+</dd>
+<dt><strong>relax</strong><span class="classifier">bool</span></dt><dd><p>If True and if the integrator supports the run_relax method,
+then integrate until t_1 &gt;= t and return. <code class="docutils literal notranslate"><span class="pre">relax</span></code> is not
+referenced if <code class="docutils literal notranslate"><span class="pre">step=True</span></code>.
+This parameter is provided in order to expose internals of
+the implementation, and should not be changed from its default
+value in most cases.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>y</strong><span class="classifier">float</span></dt><dd><p>The integrated value at t</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.integrate.complex_ode.get_return_code.html"
+                        title="previous chapter">scipy.integrate.complex_ode.get_return_code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.integrate.complex_ode.set_f_params.html"
+                        title="next chapter">scipy.integrate.complex_ode.set_f_params</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

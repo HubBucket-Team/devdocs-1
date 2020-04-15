@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.sparse.bsr_matrix.reshape &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="scipy.sparse.bsr_matrix" href="scipy.sparse.bsr_matrix.html" >
+    <link rel="next" title="scipy.sparse.bsr_matrix.resize" href="scipy.sparse.bsr_matrix.resize.html" >
+    <link rel="prev" title="scipy.sparse.bsr_matrix.rad2deg" href="scipy.sparse.bsr_matrix.rad2deg.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../sparse.html" >Sparse matrices (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code>)</a></li>
+          <li class="active"><a href="scipy.sparse.bsr_matrix.html" accesskey="U">scipy.sparse.bsr_matrix</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.bsr_matrix.resize.html" title="scipy.sparse.bsr_matrix.resize"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.bsr_matrix.rad2deg.html" title="scipy.sparse.bsr_matrix.rad2deg"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-sparse-bsr-matrix-reshape">
+<h1>scipy.sparse.bsr_matrix.reshape<a class="headerlink" href="#scipy-sparse-bsr-matrix-reshape" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="scipy.sparse.bsr_matrix.reshape">
+<code class="sig-prename descclassname">bsr_matrix.</code><code class="sig-name descname">reshape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">shape</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">'C'</span></em>, <em class="sig-param"><span class="n">copy</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/sparse/base.py#L86-L127"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.sparse.bsr_matrix.reshape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a new shape to a sparse matrix without changing its data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>shape</strong><span class="classifier">length-2 tuple of ints</span></dt><dd><p>The new shape should be compatible with the original shape.</p>
+</dd>
+<dt><strong>order</strong><span class="classifier">{‘C’, ‘F’}, optional</span></dt><dd><p>Read the elements using this index order. ‘C’ means to read and
+write the elements using C-like index order; e.g., read entire first
+row, then second row, etc. ‘F’ means to read and write the elements
+using Fortran-like index order; e.g., read entire first column, then
+second column, etc.</p>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, optional</span></dt><dd><p>Indicates whether or not attributes of self should be copied
+whenever possible. The degree to which attributes are copied varies
+depending on the type of sparse matrix being used.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>reshaped_matrix</strong><span class="classifier">sparse matrix</span></dt><dd><p>A sparse matrix with the given <a class="reference internal" href="scipy.sparse.bsr_matrix.shape.html#scipy.sparse.bsr_matrix.shape" title="scipy.sparse.bsr_matrix.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a>, not necessarily of the same
+format as the current object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matrix.reshape.html#numpy.matrix.reshape" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.matrix.reshape</span></code></a></dt><dd><p>NumPy’s implementation of ‘reshape’ for matrices</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.sparse.bsr_matrix.rad2deg.html"
+                        title="previous chapter">scipy.sparse.bsr_matrix.rad2deg</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.sparse.bsr_matrix.resize.html"
+                        title="next chapter">scipy.sparse.bsr_matrix.resize</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

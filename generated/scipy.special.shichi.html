@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.shichi &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.sici" href="scipy.special.sici.html" >
+    <link rel="prev" title="scipy.special.factorialk" href="scipy.special.factorialk.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.sici.html" title="scipy.special.sici"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.factorialk.html" title="scipy.special.factorialk"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-shichi">
+<h1>scipy.special.shichi<a class="headerlink" href="#scipy-special-shichi" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.shichi">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">shichi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">out</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'shichi'&gt;</em><a class="headerlink" href="#scipy.special.shichi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyperbolic sine and cosine integrals.</p>
+<p>The hyperbolic sine integral is</p>
+<div class="math notranslate nohighlight">
+\[\int_0^x \frac{\sinh{t}}{t}dt\]</div>
+<p>and the hyperbolic cosine integral is</p>
+<div class="math notranslate nohighlight">
+\[\gamma + \log(x) + \int_0^x \frac{\cosh{t} - 1}{t} dt\]</div>
+<p>where <span class="math notranslate nohighlight">\(\gamma\)</span> is Euler’s constant and <span class="math notranslate nohighlight">\(\log\)</span> is the
+principle branch of the logarithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Real or complex points at which to compute the hyperbolic sine
+and cosine integrals.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>si</strong><span class="classifier">ndarray</span></dt><dd><p>Hyperbolic sine integral at <code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+</dd>
+<dt><strong>ci</strong><span class="classifier">ndarray</span></dt><dd><p>Hyperbolic cosine integral at <code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For real arguments with <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">chi</span></code> is the real part of the
+hyperbolic cosine integral. For such points <code class="docutils literal notranslate"><span class="pre">chi(x)</span></code> and <code class="docutils literal notranslate"><span class="pre">chi(x</span>
+<span class="pre">+</span> <span class="pre">0j)</span></code> differ by a factor of <code class="docutils literal notranslate"><span class="pre">1j*pi</span></code>.</p>
+<p>For real arguments the function is computed by calling Cephes’
+<a class="reference internal" href="#r0586b30b06e8-1" id="id1">[1]</a> <em>shichi</em> routine. For complex arguments the algorithm is based
+on Mpmath’s <a class="reference internal" href="#r0586b30b06e8-2" id="id2">[2]</a> <em>shi</em> and <em>chi</em> routines.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r0586b30b06e8-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Cephes Mathematical Functions Library,
+<a class="reference external" href="http://www.netlib.org/cephes/">http://www.netlib.org/cephes/</a></p>
+</dd>
+<dt class="label" id="r0586b30b06e8-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Fredrik Johansson and others.
+“mpmath: a Python library for arbitrary-precision floating-point arithmetic”
+(Version 0.19) <a class="reference external" href="http://mpmath.org/">http://mpmath.org/</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.factorialk.html"
+                        title="previous chapter">scipy.special.factorialk</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.sici.html"
+                        title="next chapter">scipy.special.sici</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

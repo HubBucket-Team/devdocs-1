@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.sparse.linalg.onenormest &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Sparse linear algebra (scipy.sparse.linalg)" href="../sparse.linalg.html" >
+    <link rel="next" title="scipy.sparse.linalg.spsolve" href="scipy.sparse.linalg.spsolve.html" >
+    <link rel="prev" title="scipy.sparse.linalg.norm" href="scipy.sparse.linalg.norm.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../sparse.linalg.html" accesskey="U">Sparse linear algebra (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.linalg.spsolve.html" title="scipy.sparse.linalg.spsolve"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.linalg.norm.html" title="scipy.sparse.linalg.norm"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-sparse-linalg-onenormest">
+<h1>scipy.sparse.linalg.onenormest<a class="headerlink" href="#scipy-sparse-linalg-onenormest" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.sparse.linalg.onenormest">
+<code class="sig-prename descclassname">scipy.sparse.linalg.</code><code class="sig-name descname">onenormest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">t</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">itmax</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">compute_v</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">compute_w</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/sparse/linalg/_onenormest.py#L11-L117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.sparse.linalg.onenormest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a lower bound of the 1-norm of a sparse matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>A</strong><span class="classifier">ndarray or other linear operator</span></dt><dd><p>A linear operator that can be transposed and that can
+produce matrix products.</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">int, optional</span></dt><dd><p>A positive parameter controlling the tradeoff between
+accuracy versus time and memory usage.
+Larger values take longer and use more memory
+but give more accurate output.</p>
+</dd>
+<dt><strong>itmax</strong><span class="classifier">int, optional</span></dt><dd><p>Use at most this many iterations.</p>
+</dd>
+<dt><strong>compute_v</strong><span class="classifier">bool, optional</span></dt><dd><p>Request a norm-maximizing linear operator input vector if True.</p>
+</dd>
+<dt><strong>compute_w</strong><span class="classifier">bool, optional</span></dt><dd><p>Request a norm-maximizing linear operator output vector if True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>est</strong><span class="classifier">float</span></dt><dd><p>An underestimate of the 1-norm of the sparse matrix.</p>
+</dd>
+<dt><strong>v</strong><span class="classifier">ndarray, optional</span></dt><dd><p>The vector such that ||Av||_1 == est*||v||_1.
+It can be thought of as an input to the linear operator
+that gives an output with particularly large norm.</p>
+</dd>
+<dt><strong>w</strong><span class="classifier">ndarray, optional</span></dt><dd><p>The vector Av which has relatively large 1-norm.
+It can be thought of as an output of the linear operator
+that is relatively large in norm compared to the input.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is algorithm 2.4 of [1].</p>
+<p>In [2] it is described as follows.
+“This algorithm typically requires the evaluation of
+about 4t matrix-vector products and almost invariably
+produces a norm estimate (which is, in fact, a lower
+bound on the norm) correct to within a factor 3.”</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.13.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="ra6c5fe47e5e5-1"><span class="brackets">1</span></dt>
+<dd><p>Nicholas J. Higham and Francoise Tisseur (2000),
+“A Block Algorithm for Matrix 1-Norm Estimation,
+with an Application to 1-Norm Pseudospectra.”
+SIAM J. Matrix Anal. Appl. Vol. 21, No. 4, pp. 1185-1201.</p>
+</dd>
+<dt class="label" id="ra6c5fe47e5e5-2"><span class="brackets">2</span></dt>
+<dd><p>Awad H. Al-Mohy and Nicholas J. Higham (2009),
+“A new scaling and squaring algorithm for the matrix exponential.”
+SIAM J. Matrix Anal. Appl. Vol. 31, No. 3, pp. 970-989.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csc_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">onenormest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">csc_matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 1.,  0.,  0.],</span>
+<span class="go">        [ 5.,  8.,  2.],</span>
+<span class="go">        [ 0., -1.,  0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">onenormest</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="go">9.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">(),</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">9.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.sparse.linalg.norm.html"
+                        title="previous chapter">scipy.sparse.linalg.norm</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.sparse.linalg.spsolve.html"
+                        title="next chapter">scipy.sparse.linalg.spsolve</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

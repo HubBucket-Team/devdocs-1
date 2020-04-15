@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.linprog_verbose_callback &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.linear_sum_assignment" href="scipy.optimize.linear_sum_assignment.html" >
+    <link rel="prev" title="linprog(method=’revised simplex’)" href="../optimize.linprog-revised_simplex.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.linear_sum_assignment.html" title="scipy.optimize.linear_sum_assignment"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../optimize.linprog-revised_simplex.html" title="linprog(method=’revised simplex’)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-linprog-verbose-callback">
+<h1>scipy.optimize.linprog_verbose_callback<a class="headerlink" href="#scipy-optimize-linprog-verbose-callback" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.optimize.linprog_verbose_callback">
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">linprog_verbose_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">res</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/_linprog.py#L34-L108"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.linprog_verbose_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sample callback function demonstrating the linprog callback interface.
+This callback produces detailed output to sys.stdout before each iteration
+and after the final iteration of the simplex algorithm.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>res</strong><span class="classifier">A <a class="reference internal" href="scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult" title="scipy.optimize.OptimizeResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.OptimizeResult</span></code></a> consisting of the following fields:</span></dt><dd><dl>
+<dt>x<span class="classifier">1-D array</span></dt><dd><p>The independent variable vector which optimizes the linear
+programming problem.</p>
+</dd>
+<dt>fun<span class="classifier">float</span></dt><dd><p>Value of the objective function.</p>
+</dd>
+<dt>success<span class="classifier">bool</span></dt><dd><p>True if the algorithm succeeded in finding an optimal solution.</p>
+</dd>
+<dt>slack<span class="classifier">1-D array</span></dt><dd><p>The values of the slack variables. Each slack variable corresponds
+to an inequality constraint. If the slack is zero, then the
+corresponding constraint is active.</p>
+</dd>
+<dt>con<span class="classifier">1-D array</span></dt><dd><p>The (nominally zero) residuals of the equality constraints, that is,
+<code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">-</span> <span class="pre">A_eq</span> <span class="pre">&#64;</span> <span class="pre">x</span></code></p>
+</dd>
+<dt>phase<span class="classifier">int</span></dt><dd><p>The phase of the optimization being executed. In phase 1 a basic
+feasible solution is sought and the T has an additional row
+representing an alternate objective function.</p>
+</dd>
+<dt>status<span class="classifier">int</span></dt><dd><p>An integer representing the exit status of the optimization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="p">:</span> <span class="n">Optimization</span> <span class="n">terminated</span> <span class="n">successfully</span>
+<span class="mi">1</span> <span class="p">:</span> <span class="n">Iteration</span> <span class="n">limit</span> <span class="n">reached</span>
+<span class="mi">2</span> <span class="p">:</span> <span class="n">Problem</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">be</span> <span class="n">infeasible</span>
+<span class="mi">3</span> <span class="p">:</span> <span class="n">Problem</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">be</span> <span class="n">unbounded</span>
+<span class="mi">4</span> <span class="p">:</span> <span class="n">Serious</span> <span class="n">numerical</span> <span class="n">difficulties</span> <span class="n">encountered</span>
+</pre></div>
+</div>
+</dd>
+<dt>nit<span class="classifier">int</span></dt><dd><p>The number of iterations performed.</p>
+</dd>
+<dt>message<span class="classifier">str</span></dt><dd><p>A string descriptor of the exit status of the optimization.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../optimize.linprog-revised_simplex.html"
+                        title="previous chapter">linprog(method=’revised simplex’)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.linear_sum_assignment.html"
+                        title="next chapter">scipy.optimize.linear_sum_assignment</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

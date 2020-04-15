@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Fourier Transforms (scipy.fft) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="SciPy Tutorial" href="index.html" >
+    <link rel="next" title="Signal Processing (scipy.signal)" href="signal.html" >
+    <link rel="prev" title="Interpolation (scipy.interpolate)" href="interpolate.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="index.html" accesskey="U">SciPy Tutorial</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="signal.html" title="Signal Processing (scipy.signal)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="interpolate.html" title="Interpolation (scipy.interpolate)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="fourier-transforms-scipy-fft">
+<h1><a class="toc-backref" href="#id8">Fourier Transforms (<a class="reference internal" href="../fft.html#module-scipy.fft" title="scipy.fft"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.fft</span></code></a>)</a><a class="headerlink" href="#fourier-transforms-scipy-fft" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#fourier-transforms-scipy-fft" id="id8">Fourier Transforms (<a class="reference internal" href="../fft.html#module-scipy.fft" title="scipy.fft"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.fft</span></code></a>)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fast-fourier-transforms" id="id9">Fast Fourier transforms</a></p>
+<ul>
+<li><p><a class="reference internal" href="#d-discrete-fourier-transforms" id="id10">1-D discrete Fourier transforms</a></p></li>
+<li><p><a class="reference internal" href="#and-n-d-discrete-fourier-transforms" id="id11">2- and N-D discrete Fourier transforms</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#discrete-cosine-transforms" id="id12">Discrete Cosine Transforms</a></p>
+<ul>
+<li><p><a class="reference internal" href="#type-i-dct" id="id13">Type I DCT</a></p></li>
+<li><p><a class="reference internal" href="#type-ii-dct" id="id14">Type II DCT</a></p></li>
+<li><p><a class="reference internal" href="#type-iii-dct" id="id15">Type III DCT</a></p></li>
+<li><p><a class="reference internal" href="#dct-and-idct" id="id16">DCT and IDCT</a></p></li>
+<li><p><a class="reference internal" href="#example" id="id17">Example</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#discrete-sine-transforms" id="id18">Discrete Sine Transforms</a></p>
+<ul>
+<li><p><a class="reference internal" href="#type-i-dst" id="id19">Type I DST</a></p></li>
+<li><p><a class="reference internal" href="#type-ii-dst" id="id20">Type II DST</a></p></li>
+<li><p><a class="reference internal" href="#type-iii-dst" id="id21">Type III DST</a></p></li>
+<li><p><a class="reference internal" href="#dst-and-idst" id="id22">DST and IDST</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#references" id="id23">References</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Fourier analysis is a method for expressing a function as a sum of periodic
+components, and for recovering the signal from those components. When both
+the function and its Fourier transform are replaced with discretized
+counterparts, it is called the discrete Fourier transform (DFT). The DFT has
+become a mainstay of numerical computing in part because of a very fast
+algorithm for computing it, called the Fast Fourier Transform (FFT), which was
+known to Gauss (1805) and was brought to light in its current form by Cooley
+and Tukey <a class="reference internal" href="#ct65" id="id1"><span>[CT65]</span></a>. Press et al. <a class="reference internal" href="#nr07" id="id2"><span>[NR07]</span></a> provide an accessible introduction to
+Fourier analysis and its applications.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://hgomersall.github.io/pyFFTW/">PyFFTW</a> provides a way to replace a number of functions in <a class="reference internal" href="../fft.html#module-scipy.fft" title="scipy.fft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.fft</span></code></a>
+with its own functions, which are usually significantly faster, via
+<a class="reference external" href="https://hgomersall.github.io/pyFFTW/pyfftw/interfaces/interfaces.html">pyfftw.interfaces</a>. Because <a class="reference external" href="https://hgomersall.github.io/pyFFTW/">PyFFTW</a> relies on the GPL-licensed <a class="reference external" href="http://www.fftw.org/">FFTW</a> it
+cannot be included in SciPy. Users for whom the speed of FFT routines is
+critical should consider installing <a class="reference external" href="https://hgomersall.github.io/pyFFTW/">PyFFTW</a>.</p>
+</div>
+<div class="section" id="fast-fourier-transforms">
+<h2><a class="toc-backref" href="#id9">Fast Fourier transforms</a><a class="headerlink" href="#fast-fourier-transforms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="d-discrete-fourier-transforms">
+<h3><a class="toc-backref" href="#id10">1-D discrete Fourier transforms</a><a class="headerlink" href="#d-discrete-fourier-transforms" title="Permalink to this headline">¶</a></h3>
+<p>The FFT <em class="xref py py-obj">y[k]</em> of length <span class="math notranslate nohighlight">\(N\)</span> of the length-<span class="math notranslate nohighlight">\(N\)</span> sequence <em class="xref py py-obj">x[n]</em> is
+defined as</p>
+<div class="math notranslate nohighlight">
+\[y[k] = \sum_{n=0}^{N-1} e^{-2 \pi j \frac{k n}{N} } x[n] \, ,\]</div>
+<p>and the inverse transform is defined as follows</p>
+<div class="math notranslate nohighlight">
+\[x[n] = \frac{1}{N} \sum_{k=0}^{N-1} e^{2 \pi j \frac{k n}{N} } y[k] \, .\]</div>
+<p>These transforms can be calculated by means of <a class="reference internal" href="../generated/scipy.fft.fft.html#scipy.fft.fft" title="scipy.fft.fft"><code class="xref py py-func docutils literal notranslate"><span class="pre">fft</span></code></a> and <a class="reference internal" href="../generated/scipy.fft.ifft.html#scipy.fft.ifft" title="scipy.fft.ifft"><code class="xref py py-func docutils literal notranslate"><span class="pre">ifft</span></code></a>,
+respectively, as shown in the following example.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([ 4.5       +0.j        ,  2.08155948-1.65109876j,</span>
+<span class="go">       -1.83155948+1.60822041j, -1.83155948-1.60822041j,</span>
+<span class="go">        2.08155948+1.65109876j])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yinv</span> <span class="o">=</span> <span class="n">ifft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yinv</span>
+<span class="go">array([ 1.0+0.j,  2.0+0.j,  1.0+0.j, -1.0+0.j,  1.5+0.j])</span>
+</pre></div>
+</div>
+<p>From the definition of the FFT it can be seen that</p>
+<div class="math notranslate nohighlight">
+\[y[0] = \sum_{n=0}^{N-1} x[n] \, .\]</div>
+<p>In the example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">4.5</span>
+</pre></div>
+</div>
+<p>which corresponds to <span class="math notranslate nohighlight">\(y[0]\)</span>. For N even, the elements
+<span class="math notranslate nohighlight">\(y[1]...y[N/2-1]\)</span> contain the positive-frequency terms, and the elements
+<span class="math notranslate nohighlight">\(y[N/2]...y[N-1]\)</span> contain the negative-frequency terms, in order of
+decreasingly negative frequency. For N odd, the elements
+<span class="math notranslate nohighlight">\(y[1]...y[(N-1)/2]\)</span> contain the positive-frequency terms, and the
+elements <span class="math notranslate nohighlight">\(y[(N+1)/2]...y[N-1]\)</span> contain the negative-frequency terms, in
+order of decreasingly negative frequency.</p>
+<p>In case the sequence x is real-valued, the values of <span class="math notranslate nohighlight">\(y[n]\)</span> for positive
+frequencies is the conjugate of the values <span class="math notranslate nohighlight">\(y[n]\)</span> for negative
+frequencies (because the spectrum is symmetric). Typically, only the FFT
+corresponding to positive frequencies is plotted.</p>
+<p>The example plots the FFT of the sum of two sines.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Number of sample points</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># sample spacing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">800.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">50.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">80.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">T</span><span class="p">),</span> <span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="mf">2.0</span><span class="o">/</span><span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/fft-1.png" src="../_images/fft-1.png" />
+</div>
+<p>The FFT input signal is inherently truncated. This truncation can be modeled
+as multiplication of an infinite signal with a rectangular window function. In
+the spectral domain this multiplication becomes convolution of the signal
+spectrum with the window function spectrum, being of form <span class="math notranslate nohighlight">\(\sin(x)/x\)</span>.
+This convolution is the cause of an effect called spectral leakage (see
+<a class="reference internal" href="#wpw" id="id3"><span>[WPW]</span></a>). Windowing the signal with a dedicated window function helps mitigate
+spectral leakage. The example below uses a Blackman window from scipy.signal
+and shows the effect of windowing (the zero component of the FFT has been
+truncated for illustrative purposes).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Number of sample points</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># sample spacing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">800.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">50.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">80.0</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">blackman</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">blackman</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ywf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">w</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">T</span><span class="p">),</span> <span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="mf">2.0</span><span class="o">/</span><span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]),</span> <span class="s1">&#39;-b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">],</span> <span class="mf">2.0</span><span class="o">/</span><span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ywf</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]),</span> <span class="s1">&#39;-r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;FFT&#39;</span><span class="p">,</span> <span class="s1">&#39;FFT w. window&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/fft-2.png" src="../_images/fft-2.png" />
+</div>
+<p>In case the sequence x is complex-valued, the spectrum is no longer symmetric.
+To simplify working with the FFT functions, scipy provides the following two
+helper functions.</p>
+<p>The function <a class="reference internal" href="../generated/scipy.fft.fftfreq.html#scipy.fft.fftfreq" title="scipy.fft.fftfreq"><code class="xref py py-func docutils literal notranslate"><span class="pre">fftfreq</span></code></a> returns the FFT sample frequency points.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fftfreq</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">0.125</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span>
+<span class="go">array([ 0., 1., 2., 3., -4., -3., -2., -1.])</span>
+</pre></div>
+</div>
+<p>In a similar spirit, the function <a class="reference internal" href="../generated/scipy.fft.fftshift.html#scipy.fft.fftshift" title="scipy.fft.fftshift"><code class="xref py py-func docutils literal notranslate"><span class="pre">fftshift</span></code></a> allows swapping the lower
+and upper halves of a vector, so that it becomes suitable for display.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fftshift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fftshift</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([4, 5, 6, 7, 0, 1, 2, 3])</span>
+</pre></div>
+</div>
+<p>The example below plots the FFT of two complex exponentials; note the
+asymmetric spectrum.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftfreq</span><span class="p">,</span> <span class="n">fftshift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># number of signal points</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># sample spacing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">800.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">50.0</span> <span class="o">*</span> <span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">80.0</span> <span class="o">*</span> <span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">fftshift</span><span class="p">(</span><span class="n">xf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yplot</span> <span class="o">=</span> <span class="n">fftshift</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">N</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yplot</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/fft-3.png" src="../_images/fft-3.png" />
+</div>
+<p>The function <a class="reference internal" href="../generated/scipy.fft.rfft.html#scipy.fft.rfft" title="scipy.fft.rfft"><code class="xref py py-func docutils literal notranslate"><span class="pre">rfft</span></code></a> calculates the FFT of a real sequence and outputs the
+complex FFT coefficients <span class="math notranslate nohighlight">\(y[n]\)</span> for only half of the frequency range. The
+remaining negative frequency components are implied by the Hermitian symmetry of
+the FFT for a real input (<code class="docutils literal notranslate"><span class="pre">y[n]</span> <span class="pre">=</span> <span class="pre">conj(y[-n])</span></code>). In case of N being even:
+<span class="math notranslate nohighlight">\([Re(y[0]) + 0j, y[1], ..., Re(y[N/2]) + 0j]\)</span>; in case of N being odd
+<span class="math notranslate nohighlight">\([Re(y[0]) + 0j, y[1], ..., y[N/2]\)</span>. The terms shown explicitly as
+<span class="math notranslate nohighlight">\(Re(y[k]) + 0j\)</span> are restricted to be purely real since, by the hermitian
+property, they are their own complex conjugate.</p>
+<p>The corresponding function <a class="reference internal" href="../generated/scipy.fft.irfft.html#scipy.fft.irfft" title="scipy.fft.irfft"><code class="xref py py-func docutils literal notranslate"><span class="pre">irfft</span></code></a> calculates the IFFT of the FFT
+coefficients with this special ordering.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">rfft</span><span class="p">,</span> <span class="n">irfft</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([ 5.5 +0.j        ,  2.25-0.4330127j , -2.75-1.29903811j,</span>
+<span class="go">        1.5 +0.j        , -2.75+1.29903811j,  2.25+0.4330127j ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yr</span> <span class="o">=</span> <span class="n">rfft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yr</span>
+<span class="go">array([ 5.5 +0.j        ,  2.25-0.4330127j , -2.75-1.29903811j,</span>
+<span class="go">        1.5 +0.j        ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">irfft</span><span class="p">(</span><span class="n">yr</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5,  1. ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([ 4.5       +0.j        ,  2.08155948-1.65109876j,</span>
+<span class="go">       -1.83155948+1.60822041j, -1.83155948-1.60822041j,</span>
+<span class="go">        2.08155948+1.65109876j])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yr</span> <span class="o">=</span> <span class="n">rfft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yr</span>
+<span class="go">array([ 4.5       +0.j        ,  2.08155948-1.65109876j,</span>
+<span class="go">        -1.83155948+1.60822041j])</span>
+</pre></div>
+</div>
+<p>Notice that the <a class="reference internal" href="../generated/scipy.fft.rfft.html#scipy.fft.rfft" title="scipy.fft.rfft"><code class="xref py py-func docutils literal notranslate"><span class="pre">rfft</span></code></a> of odd and even length signals are of the same shape.
+By default, <a class="reference internal" href="../generated/scipy.fft.irfft.html#scipy.fft.irfft" title="scipy.fft.irfft"><code class="xref py py-func docutils literal notranslate"><span class="pre">irfft</span></code></a> assumes the output signal should be of even length. And
+so, for odd signals, it will give the wrong result:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">irfft</span><span class="p">(</span><span class="n">yr</span><span class="p">)</span>
+<span class="go">array([ 1.70788987,  2.40843925, -0.37366961,  0.75734049])</span>
+</pre></div>
+</div>
+<p>To recover the original odd-length signal, we <strong>must</strong> pass the output shape by
+the <em class="xref py py-obj">n</em> parameter.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">irfft</span><span class="p">(</span><span class="n">yr</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="and-n-d-discrete-fourier-transforms">
+<h3><a class="toc-backref" href="#id11">2- and N-D discrete Fourier transforms</a><a class="headerlink" href="#and-n-d-discrete-fourier-transforms" title="Permalink to this headline">¶</a></h3>
+<p>The functions <a class="reference internal" href="../generated/scipy.fft.fft2.html#scipy.fft.fft2" title="scipy.fft.fft2"><code class="xref py py-func docutils literal notranslate"><span class="pre">fft2</span></code></a> and <a class="reference internal" href="../generated/scipy.fft.ifft2.html#scipy.fft.ifft2" title="scipy.fft.ifft2"><code class="xref py py-func docutils literal notranslate"><span class="pre">ifft2</span></code></a> provide 2-D FFT and
+IFFT, respectively. Similarly, <a class="reference internal" href="../generated/scipy.fft.fftn.html#scipy.fft.fftn" title="scipy.fft.fftn"><code class="xref py py-func docutils literal notranslate"><span class="pre">fftn</span></code></a> and <a class="reference internal" href="../generated/scipy.fft.ifftn.html#scipy.fft.ifftn" title="scipy.fft.ifftn"><code class="xref py py-func docutils literal notranslate"><span class="pre">ifftn</span></code></a> provide
+N-D FFT, and IFFT, respectively.</p>
+<p>For real-input signals, similarly to <a class="reference internal" href="../generated/scipy.fft.rfft.html#scipy.fft.rfft" title="scipy.fft.rfft"><code class="xref py py-func docutils literal notranslate"><span class="pre">rfft</span></code></a>, we have the functions
+<a class="reference internal" href="../generated/scipy.fft.rfft2.html#scipy.fft.rfft2" title="scipy.fft.rfft2"><code class="xref py py-func docutils literal notranslate"><span class="pre">rfft2</span></code></a> and <a class="reference internal" href="../generated/scipy.fft.irfft2.html#scipy.fft.irfft2" title="scipy.fft.irfft2"><code class="xref py py-func docutils literal notranslate"><span class="pre">irfft2</span></code></a> for 2-D real transforms;
+<a class="reference internal" href="../generated/scipy.fft.rfftn.html#scipy.fft.rfftn" title="scipy.fft.rfftn"><code class="xref py py-func docutils literal notranslate"><span class="pre">rfftn</span></code></a> and <a class="reference internal" href="../generated/scipy.fft.irfftn.html#scipy.fft.irfftn" title="scipy.fft.irfftn"><code class="xref py py-func docutils literal notranslate"><span class="pre">irfftn</span></code></a> for N-D real transforms.</p>
+<p>The example below demonstrates a 2-D IFFT and plots the resulting
+(2-D) time-domain signals.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">ifftn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="p">((</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">),</span> <span class="p">(</span><span class="n">ax4</span><span class="p">,</span> <span class="n">ax5</span><span class="p">,</span> <span class="n">ax6</span><span class="p">))</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="s1">&#39;row&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">ifftn</span><span class="p">(</span><span class="n">xf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax4</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">ifftn</span><span class="p">(</span><span class="n">xf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax5</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xf</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">N</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">ifftn</span><span class="p">(</span><span class="n">xf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xf</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax6</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Z</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/fft-4.png" src="../_images/fft-4.png" />
+</div>
+</div>
+</div>
+<div class="section" id="discrete-cosine-transforms">
+<h2><a class="toc-backref" href="#id12">Discrete Cosine Transforms</a><a class="headerlink" href="#discrete-cosine-transforms" title="Permalink to this headline">¶</a></h2>
+<p>SciPy provides a DCT with the function <a class="reference internal" href="../generated/scipy.fft.dct.html#scipy.fft.dct" title="scipy.fft.dct"><code class="xref py py-func docutils literal notranslate"><span class="pre">dct</span></code></a> and a corresponding IDCT
+with the function <a class="reference internal" href="../generated/scipy.fft.idct.html#scipy.fft.idct" title="scipy.fft.idct"><code class="xref py py-func docutils literal notranslate"><span class="pre">idct</span></code></a>. There are 8 types of the DCT <a class="reference internal" href="#wpc" id="id4"><span>[WPC]</span></a>, <a class="reference internal" href="#mak" id="id5"><span>[Mak]</span></a>;
+however, only the first 3 types are implemented in scipy. “The” DCT generally
+refers to DCT type 2, and “the” Inverse DCT generally refers to DCT type 3. In
+addition, the DCT coefficients can be normalized differently (for most types,
+scipy provides <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">ortho</span></code>). Two parameters of the dct/idct
+function calls allow setting the DCT type and coefficient normalization.</p>
+<p>For a single dimension array x, dct(x, norm=’ortho’) is equal to
+MATLAB dct(x).</p>
+<div class="section" id="type-i-dct">
+<h3><a class="toc-backref" href="#id13">Type I DCT</a><a class="headerlink" href="#type-i-dct" title="Permalink to this headline">¶</a></h3>
+<p>SciPy uses the following definition of the unnormalized DCT-I
+(<code class="docutils literal notranslate"><span class="pre">norm=None</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[y[k] = x_0 + (-1)^k x_{N-1} + 2\sum_{n=1}^{N-2} x[n]
+\cos\left(\frac{\pi nk}{N-1}\right),
+\qquad 0 \le k &lt; N.\]</div>
+<p>Note that the DCT-I is only supported for input size &gt; 1.</p>
+</div>
+<div class="section" id="type-ii-dct">
+<h3><a class="toc-backref" href="#id14">Type II DCT</a><a class="headerlink" href="#type-ii-dct" title="Permalink to this headline">¶</a></h3>
+<p>SciPy uses the following definition of the unnormalized DCT-II
+(<code class="docutils literal notranslate"><span class="pre">norm=None</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[y[k] = 2 \sum_{n=0}^{N-1} x[n] \cos \left({\pi(2n+1)k \over 2N} \right)
+\qquad 0 \le k &lt; N.\]</div>
+<p>In case of the normalized DCT (<code class="docutils literal notranslate"><span class="pre">norm='ortho'</span></code>), the DCT coefficients
+<span class="math notranslate nohighlight">\(y[k]\)</span> are multiplied by a scaling factor <em class="xref py py-obj">f</em>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f = \begin{cases} \sqrt{1/(4N)}, &amp; \text{if $k = 0$} \\    \sqrt{1/(2N)},
+&amp; \text{otherwise} \end{cases} \, .\end{split}\]</div>
+<p>In this case, the DCT “base functions” <span class="math notranslate nohighlight">\(\phi_k[n] = 2 f \cos
+\left({\pi(2n+1)k \over 2N} \right)\)</span> become orthonormal:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{n=0}^{N-1} \phi_k[n] \phi_l[n] = \delta_{lk}.\]</div>
+</div>
+<div class="section" id="type-iii-dct">
+<h3><a class="toc-backref" href="#id15">Type III DCT</a><a class="headerlink" href="#type-iii-dct" title="Permalink to this headline">¶</a></h3>
+<p>SciPy uses the following definition of the unnormalized DCT-III
+(<code class="docutils literal notranslate"><span class="pre">norm=None</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[y[k] = x_0 + 2 \sum_{n=1}^{N-1} x[n] \cos\left({\pi n(2k+1) \over 2N}\right)
+\qquad 0 \le k &lt; N,\]</div>
+<p>or, for <code class="docutils literal notranslate"><span class="pre">norm='ortho'</span></code>:</p>
+<div class="math notranslate nohighlight">
+\[y[k] = {x_0\over\sqrt{N}} + {2\over\sqrt{N}} \sum_{n=1}^{N-1} x[n]
+\cos\left({\pi n(2k+1) \over 2N}\right) \qquad 0 \le k &lt; N.\]</div>
+</div>
+<div class="section" id="dct-and-idct">
+<h3><a class="toc-backref" href="#id16">DCT and IDCT</a><a class="headerlink" href="#dct-and-idct" title="Permalink to this headline">¶</a></h3>
+<p>The (unnormalized) DCT-III is the inverse of the (unnormalized) DCT-II, up to a
+factor of <em class="xref py py-obj">2N</em>. The orthonormalized DCT-III is exactly the inverse of the
+orthonormalized DCT- II. The function <a class="reference internal" href="../generated/scipy.fft.idct.html#scipy.fft.idct" title="scipy.fft.idct"><code class="xref py py-func docutils literal notranslate"><span class="pre">idct</span></code></a> performs the mappings between
+the DCT and IDCT types, as well as the correct normalization.</p>
+<p>The following example shows the relation between DCT and IDCT for different
+types and normalizations.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">dct</span><span class="p">,</span> <span class="n">idct</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The DCT-II and DCT-III are each other’s inverses, so for an orthonormal transform
+we return back to the original signal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+<p>Doing the same under default normalization, however, we pick up an extra scaling
+factor of <span class="math notranslate nohighlight">\(2N=10\)</span> since the forward transform is unnormalized.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([ 10.,  20.,  10., -10.,  15.])</span>
+</pre></div>
+</div>
+<p>For this reason, we should use the function <a class="reference internal" href="../generated/scipy.fft.idct.html#scipy.fft.idct" title="scipy.fft.idct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idct</span></code></a> using the same type for both,
+giving a correctly normalized result.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Normalized inverse: no scaling factor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+<p>Analogous results can be seen for the DCT-I, which is its own inverse up to a
+factor of <span class="math notranslate nohighlight">\(2(N-1)\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Unnormalized round-trip via DCT-I: scaling factor 2*(N-1) = 8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 8. ,  16.,  8. , -8. ,  12.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Normalized inverse: no scaling factor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+<p>And for the DCT-IV, which is also its own inverse up to a factor of <span class="math notranslate nohighlight">\(2N\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Unnormalized round-trip via DCT-IV: scaling factor 2*N = 10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 10.,  20.,  10., -10.,  15.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Normalized inverse: no scaling factor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h3><a class="toc-backref" href="#id17">Example</a><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The DCT exhibits the “energy compaction property”, meaning that for many
+signals only the first few DCT coefficients have significant magnitude.
+Zeroing out the other coefficients leads to a small reconstruction error, a
+fact which is exploited in lossy signal compression (e.g. JPEG compression).</p>
+<p>The example below shows a signal x and two reconstructions (<span class="math notranslate nohighlight">\(x_{20}\)</span> and
+<span class="math notranslate nohighlight">\(x_{15}\)</span>) from the signal’s DCT coefficients. The signal <span class="math notranslate nohighlight">\(x_{20}\)</span>
+is reconstructed from the first 20 DCT coefficients, <span class="math notranslate nohighlight">\(x_{15}\)</span> is
+reconstructed from the first 15 DCT coefficients. It can be seen that the
+relative error of using 20 coefficients is still very small (~0.1%), but
+provides a five-fold compression rate.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">dct</span><span class="p">,</span> <span class="n">idct</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">dct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yr</span> <span class="o">=</span> <span class="n">idct</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">yr</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0.0010901402257</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;-bx&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yr</span> <span class="o">=</span> <span class="n">idct</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">window</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">yr</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0.0718818065008</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="s1">&#39;g+&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;$x_</span><span class="si">{20}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="s1">&#39;$x_</span><span class="si">{15}</span><span class="s1">$&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/fft-5.png" src="../_images/fft-5.png" />
+</div>
+</div>
+</div>
+<div class="section" id="discrete-sine-transforms">
+<h2><a class="toc-backref" href="#id18">Discrete Sine Transforms</a><a class="headerlink" href="#discrete-sine-transforms" title="Permalink to this headline">¶</a></h2>
+<p>SciPy provides a DST <a class="reference internal" href="#mak" id="id6"><span>[Mak]</span></a> with the function <a class="reference internal" href="../generated/scipy.fft.dst.html#scipy.fft.dst" title="scipy.fft.dst"><code class="xref py py-func docutils literal notranslate"><span class="pre">dst</span></code></a> and a corresponding IDST
+with the function <a class="reference internal" href="../generated/scipy.fft.idst.html#scipy.fft.idst" title="scipy.fft.idst"><code class="xref py py-func docutils literal notranslate"><span class="pre">idst</span></code></a>.</p>
+<p>There are, theoretically, 8 types of the DST for different combinations of
+even/odd boundary conditions and boundary off sets <a class="reference internal" href="#wps" id="id7"><span>[WPS]</span></a>, only the first 3
+types are implemented in scipy.</p>
+<div class="section" id="type-i-dst">
+<h3><a class="toc-backref" href="#id19">Type I DST</a><a class="headerlink" href="#type-i-dst" title="Permalink to this headline">¶</a></h3>
+<p>DST-I assumes the input is odd around n=-1 and n=N. SciPy uses the following
+definition of the unnormalized DST-I (<code class="docutils literal notranslate"><span class="pre">norm=None</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[y[k] = 2\sum_{n=0}^{N-1} x[n]  \sin\left( \pi {(n+1) (k+1)}\over{N+1}
+\right), \qquad 0 \le k &lt; N.\]</div>
+<p>Note also that the DST-I is only supported for input size &gt; 1. The
+(unnormalized) DST-I is its own inverse, up to a factor of <em class="xref py py-obj">2(N+1)</em>.</p>
+</div>
+<div class="section" id="type-ii-dst">
+<h3><a class="toc-backref" href="#id20">Type II DST</a><a class="headerlink" href="#type-ii-dst" title="Permalink to this headline">¶</a></h3>
+<p>DST-II assumes the input is odd around n=-1/2 and even around n=N. SciPy uses
+the following definition of the unnormalized DST-II (<code class="docutils literal notranslate"><span class="pre">norm=None</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[y[k] = 2 \sum_{n=0}^{N-1} x[n]  \sin\left( {\pi (n+1/2)(k+1)} \over N
+\right), \qquad 0 \le k &lt; N.\]</div>
+</div>
+<div class="section" id="type-iii-dst">
+<h3><a class="toc-backref" href="#id21">Type III DST</a><a class="headerlink" href="#type-iii-dst" title="Permalink to this headline">¶</a></h3>
+<p>DST-III assumes the input is odd around n=-1 and even around n=N-1. SciPy uses
+the following definition of the unnormalized DST-III (<code class="docutils literal notranslate"><span class="pre">norm=None</span></code>):</p>
+<div class="math notranslate nohighlight">
+\[y[k] = (-1)^k x[N-1] + 2 \sum_{n=0}^{N-2} x[n] \sin \left( {\pi
+(n+1)(k+1/2)} \over N \right), \qquad 0 \le k &lt; N.\]</div>
+</div>
+<div class="section" id="dst-and-idst">
+<h3><a class="toc-backref" href="#id22">DST and IDST</a><a class="headerlink" href="#dst-and-idst" title="Permalink to this headline">¶</a></h3>
+<p>The following example shows the relation between DST and IDST for
+different types and normalizations.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">dst</span><span class="p">,</span> <span class="n">idst</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The DST-II and DST-III are each other’s inverses, so for an orthonormal transform
+we return back to the original signal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+<p>Doing the same under default normalization, however, we pick up an extra scaling
+factor of <span class="math notranslate nohighlight">\(2N=10\)</span> since the forward transform is unnormalized.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([ 10.,  20.,  10., -10.,  15.])</span>
+</pre></div>
+</div>
+<p>For this reason, we should use the function <a class="reference internal" href="../generated/scipy.fft.idst.html#scipy.fft.idst" title="scipy.fft.idst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idst</span></code></a> using the same type for both,
+giving a correctly normalized result.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+<p>Analogous results can be seen for the DST-I, which is its own inverse up to a
+factor of <span class="math notranslate nohighlight">\(2(N-1)\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c1"># scaling factor 2*(N+1) = 12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 12.,  24.,  12., -12.,  18.])</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c1"># no scaling factor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+<p>And for the DST-IV, which is also its own inverse up to a factor of <span class="math notranslate nohighlight">\(2N\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c1"># scaling factor 2*N = 10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 10.,  20.,  10., -10.,  15.])</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="c1"># no scaling factor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idst</span><span class="p">(</span><span class="n">dst</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="nb">type</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2. ,  1. , -1. ,  1.5])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#id23">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<dl class="citation">
+<dt class="label" id="ct65"><span class="brackets"><a class="fn-backref" href="#id1">CT65</a></span></dt>
+<dd><p>Cooley, James W., and John W. Tukey, 1965, “An algorithm for the
+machine calculation of complex Fourier series,” <em>Math. Comput.</em>
+19: 297-301.</p>
+</dd>
+<dt class="label" id="nr07"><span class="brackets"><a class="fn-backref" href="#id2">NR07</a></span></dt>
+<dd><p>Press, W., Teukolsky, S., Vetterline, W.T., and Flannery, B.P.,
+2007, <em>Numerical Recipes: The Art of Scientific Computing</em>, ch.
+12-13.  Cambridge Univ. Press, Cambridge, UK.</p>
+</dd>
+<dt class="label" id="mak"><span class="brackets">Mak</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>J. Makhoul, 1980, ‘A Fast Cosine Transform in One and Two Dimensions’,
+<em class="xref py py-obj">IEEE Transactions on acoustics, speech and signal processing</em>
+vol. 28(1), pp. 27-34, <a class="reference external" href="https://doi.org/10.1109/TASSP.1980.1163351">DOI:10.1109/TASSP.1980.1163351</a></p>
+</dd>
+<dt class="label" id="wpw"><span class="brackets"><a class="fn-backref" href="#id3">WPW</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Window_function">https://en.wikipedia.org/wiki/Window_function</a></p>
+</dd>
+<dt class="label" id="wpc"><span class="brackets"><a class="fn-backref" href="#id4">WPC</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Discrete_cosine_transform">https://en.wikipedia.org/wiki/Discrete_cosine_transform</a></p>
+</dd>
+<dt class="label" id="wps"><span class="brackets"><a class="fn-backref" href="#id7">WPS</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Discrete_sine_transform">https://en.wikipedia.org/wiki/Discrete_sine_transform</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Fourier Transforms (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.fft</span></code>)</a><ul>
+<li><a class="reference internal" href="#fast-fourier-transforms">Fast Fourier transforms</a><ul>
+<li><a class="reference internal" href="#d-discrete-fourier-transforms">1-D discrete Fourier transforms</a></li>
+<li><a class="reference internal" href="#and-n-d-discrete-fourier-transforms">2- and N-D discrete Fourier transforms</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#discrete-cosine-transforms">Discrete Cosine Transforms</a><ul>
+<li><a class="reference internal" href="#type-i-dct">Type I DCT</a></li>
+<li><a class="reference internal" href="#type-ii-dct">Type II DCT</a></li>
+<li><a class="reference internal" href="#type-iii-dct">Type III DCT</a></li>
+<li><a class="reference internal" href="#dct-and-idct">DCT and IDCT</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#discrete-sine-transforms">Discrete Sine Transforms</a><ul>
+<li><a class="reference internal" href="#type-i-dst">Type I DST</a></li>
+<li><a class="reference internal" href="#type-ii-dst">Type II DST</a></li>
+<li><a class="reference internal" href="#type-iii-dst">Type III DST</a></li>
+<li><a class="reference internal" href="#dst-and-idst">DST and IDST</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="interpolate.html"
+                        title="previous chapter">Interpolation (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code>)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="signal.html"
+                        title="next chapter">Signal Processing (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.rv_discrete &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.rv_discrete.rvs" href="scipy.stats.rv_discrete.rvs.html" >
+    <link rel="prev" title="scipy.stats.rv_continuous.support" href="scipy.stats.rv_continuous.support.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.rv_discrete.rvs.html" title="scipy.stats.rv_discrete.rvs"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.rv_continuous.support.html" title="scipy.stats.rv_continuous.support"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-rv-discrete">
+<h1>scipy.stats.rv_discrete<a class="headerlink" href="#scipy-stats-rv-discrete" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.stats.rv_discrete">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">rv_discrete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">b</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">badvalue</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">moment_tol</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">values</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inc</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">longname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">shapes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extradoc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/_distn_infrastructure.py#L2675-L3385"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.rv_discrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generic discrete random variable class meant for subclassing.</p>
+<p><a class="reference internal" href="#scipy.stats.rv_discrete" title="scipy.stats.rv_discrete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rv_discrete</span></code></a> is a base class to construct specific distribution classes
+and instances for discrete random variables. It can also be used
+to construct an arbitrary distribution defined by a list of support
+points and corresponding probabilities.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>a</strong><span class="classifier">float, optional</span></dt><dd><p>Lower bound of the support of the distribution, default: 0</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">float, optional</span></dt><dd><p>Upper bound of the support of the distribution, default: plus infinity</p>
+</dd>
+<dt><strong>moment_tol</strong><span class="classifier">float, optional</span></dt><dd><p>The tolerance for the generic calculation of moments.</p>
+</dd>
+<dt><strong>values</strong><span class="classifier">tuple of two array_like, optional</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">(xk,</span> <span class="pre">pk)</span></code> where <code class="docutils literal notranslate"><span class="pre">xk</span></code> are integers and <code class="docutils literal notranslate"><span class="pre">pk</span></code> are the non-zero
+probabilities between 0 and 1 with <code class="docutils literal notranslate"><span class="pre">sum(pk)</span> <span class="pre">=</span> <span class="pre">1</span></code>. <code class="docutils literal notranslate"><span class="pre">xk</span></code>
+and <code class="docutils literal notranslate"><span class="pre">pk</span></code> must have the same shape.</p>
+</dd>
+<dt><strong>inc</strong><span class="classifier">integer, optional</span></dt><dd><p>Increment for the support of the distribution.
+Default is 1. (other values have not been tested)</p>
+</dd>
+<dt><strong>badvalue</strong><span class="classifier">float, optional</span></dt><dd><p>The value in a result arrays that indicates a value that for which
+some argument restriction is violated, default is np.nan.</p>
+</dd>
+<dt><strong>name</strong><span class="classifier">str, optional</span></dt><dd><p>The name of the instance. This string is used to construct the default
+example for distributions.</p>
+</dd>
+<dt><strong>longname</strong><span class="classifier">str, optional</span></dt><dd><p>This string is used as part of the first line of the docstring returned
+when a subclass has no docstring of its own. Note: <em class="xref py py-obj">longname</em> exists
+for backwards compatibility, do not use for new subclasses.</p>
+</dd>
+<dt><strong>shapes</strong><span class="classifier">str, optional</span></dt><dd><p>The shape of the distribution. For example “m, n” for a distribution
+that takes two integers as the two shape arguments for all its methods
+If not provided, shape parameters will be inferred from
+the signatures of the private methods, <code class="docutils literal notranslate"><span class="pre">_pmf</span></code> and <code class="docutils literal notranslate"><span class="pre">_cdf</span></code> of
+the instance.</p>
+</dd>
+<dt><strong>extradoc</strong><span class="classifier">str, optional</span></dt><dd><p>This string is used as the last part of the docstring returned when a
+subclass has no docstring of its own. Note: <em class="xref py py-obj">extradoc</em> exists for
+backwards compatibility, do not use for new subclasses.</p>
+</dd>
+<dt><strong>seed</strong><span class="classifier">{None, int, <em class="xref py py-obj">RandomState</em>, <em class="xref py py-obj">Generator</em>}, optional</span></dt><dd><p>This parameter defines the object to use for drawing random variates.
+If <em class="xref py py-obj">seed</em> is <em class="xref py py-obj">None</em> the <em class="xref py py-obj">RandomState</em> singleton is used.
+If <em class="xref py py-obj">seed</em> is an int, a new <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> instance is used, seeded
+with seed.
+If <em class="xref py py-obj">seed</em> is already a <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> or <code class="docutils literal notranslate"><span class="pre">Generator</span></code> instance,
+then that object is used.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This class is similar to <a class="reference internal" href="scipy.stats.rv_continuous.html#scipy.stats.rv_continuous" title="scipy.stats.rv_continuous"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rv_continuous</span></code></a>. Whether a shape parameter is
+valid is decided by an <code class="docutils literal notranslate"><span class="pre">_argcheck</span></code> method (which defaults to checking
+that its arguments are strictly positive.)
+The main differences are:</p>
+<ul class="simple">
+<li><p>the support of the distribution is a set of integers</p></li>
+<li><p>instead of the probability density function, <code class="docutils literal notranslate"><span class="pre">pdf</span></code> (and the
+corresponding private <code class="docutils literal notranslate"><span class="pre">_pdf</span></code>), this class defines the
+<em>probability mass function</em>, <a class="reference internal" href="scipy.stats.rv_discrete.pmf.html#scipy.stats.rv_discrete.pmf" title="scipy.stats.rv_discrete.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a> (and the corresponding
+private <code class="docutils literal notranslate"><span class="pre">_pmf</span></code>.)</p></li>
+<li><p>scale parameter is not defined.</p></li>
+</ul>
+<p>To create a new discrete distribution, we would do the following:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">rv_discrete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">poisson_gen</span><span class="p">(</span><span class="n">rv_discrete</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="s2">&quot;Poisson distribution&quot;</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">_pmf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="n">mu</span><span class="o">**</span><span class="n">k</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and create an instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">poisson</span> <span class="o">=</span> <span class="n">poisson_gen</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;poisson&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that above we defined the Poisson distribution in the standard form.
+Shifting the distribution can be done by providing the <code class="docutils literal notranslate"><span class="pre">loc</span></code> parameter
+to the methods of the instance. For example, <code class="docutils literal notranslate"><span class="pre">poisson.pmf(x,</span> <span class="pre">mu,</span> <span class="pre">loc)</span></code>
+delegates the work to <code class="docutils literal notranslate"><span class="pre">poisson._pmf(x-loc,</span> <span class="pre">mu)</span></code>.</p>
+<p><strong>Discrete distributions from a list of probabilities</strong></p>
+<p>Alternatively, you can construct an arbitrary discrete rv defined
+on a finite set of values <code class="docutils literal notranslate"><span class="pre">xk</span></code> with <code class="docutils literal notranslate"><span class="pre">Prob{X=xk}</span> <span class="pre">=</span> <span class="pre">pk</span></code> by using the
+<code class="docutils literal notranslate"><span class="pre">values</span></code> keyword argument to the <a class="reference internal" href="#scipy.stats.rv_discrete" title="scipy.stats.rv_discrete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rv_discrete</span></code></a> constructor.</p>
+<p class="rubric">Examples</p>
+<p>Custom made discrete distribution:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pk</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">custm</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">rv_discrete</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;custm&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">pk</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="n">custm</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xk</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">mec</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">xk</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">custm</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xk</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-stats-rv_discrete-1_00_00.png" src="../_images/scipy-stats-rv_discrete-1_00_00.png" />
+</div>
+<p>Random number generation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">custm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.rv_discrete.random_state.html#scipy.stats.rv_discrete.random_state" title="scipy.stats.rv_discrete.random_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_state</span></code></a></dt><dd><p>Get or set the RandomState object for generating random variates.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.rvs.html#scipy.stats.rv_discrete.rvs" title="scipy.stats.rv_discrete.rvs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rvs</span></code></a>(self, \*args, \*\*kwargs)</p></td>
+<td><p>Random variates of given type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.pmf.html#scipy.stats.rv_discrete.pmf" title="scipy.stats.rv_discrete.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(self, k, \*args, \*\*kwds)</p></td>
+<td><p>Probability mass function at k of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.logpmf.html#scipy.stats.rv_discrete.logpmf" title="scipy.stats.rv_discrete.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(self, k, \*args, \*\*kwds)</p></td>
+<td><p>Log of the probability mass function at k of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.cdf.html#scipy.stats.rv_discrete.cdf" title="scipy.stats.rv_discrete.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(self, k, \*args, \*\*kwds)</p></td>
+<td><p>Cumulative distribution function of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.logcdf.html#scipy.stats.rv_discrete.logcdf" title="scipy.stats.rv_discrete.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(self, k, \*args, \*\*kwds)</p></td>
+<td><p>Log of the cumulative distribution function at k of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.sf.html#scipy.stats.rv_discrete.sf" title="scipy.stats.rv_discrete.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(self, k, \*args, \*\*kwds)</p></td>
+<td><p>Survival function (1 - <a class="reference internal" href="scipy.stats.rv_discrete.cdf.html#scipy.stats.rv_discrete.cdf" title="scipy.stats.rv_discrete.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>) at k of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.logsf.html#scipy.stats.rv_discrete.logsf" title="scipy.stats.rv_discrete.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(self, k, \*args, \*\*kwds)</p></td>
+<td><p>Log of the survival function of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.ppf.html#scipy.stats.rv_discrete.ppf" title="scipy.stats.rv_discrete.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(self, q, \*args, \*\*kwds)</p></td>
+<td><p>Percent point function (inverse of <a class="reference internal" href="scipy.stats.rv_discrete.cdf.html#scipy.stats.rv_discrete.cdf" title="scipy.stats.rv_discrete.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>) at q of the given RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.isf.html#scipy.stats.rv_discrete.isf" title="scipy.stats.rv_discrete.isf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isf</span></code></a>(self, q, \*args, \*\*kwds)</p></td>
+<td><p>Inverse survival function (inverse of <a class="reference internal" href="scipy.stats.rv_discrete.sf.html#scipy.stats.rv_discrete.sf" title="scipy.stats.rv_discrete.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>) at q of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.moment.html#scipy.stats.rv_discrete.moment" title="scipy.stats.rv_discrete.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a>(self, n, \*args, \*\*kwds)</p></td>
+<td><p>n-th order non-central moment of distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.stats.html#scipy.stats.rv_discrete.stats" title="scipy.stats.rv_discrete.stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stats</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Some statistics of the given RV.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.entropy.html#scipy.stats.rv_discrete.entropy" title="scipy.stats.rv_discrete.entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">entropy</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Differential entropy of the RV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.expect.html#scipy.stats.rv_discrete.expect" title="scipy.stats.rv_discrete.expect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expect</span></code></a>(self[, func, args, loc, lb, ub, …])</p></td>
+<td><p>Calculate expected value of a function with respect to the distribution for discrete distribution by numerical summation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.median.html#scipy.stats.rv_discrete.median" title="scipy.stats.rv_discrete.median"><code class="xref py py-obj docutils literal notranslate"><span class="pre">median</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Median of the distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.mean.html#scipy.stats.rv_discrete.mean" title="scipy.stats.rv_discrete.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Mean of the distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.std.html#scipy.stats.rv_discrete.std" title="scipy.stats.rv_discrete.std"><code class="xref py py-obj docutils literal notranslate"><span class="pre">std</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Standard deviation of the distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.var.html#scipy.stats.rv_discrete.var" title="scipy.stats.rv_discrete.var"><code class="xref py py-obj docutils literal notranslate"><span class="pre">var</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Variance of the distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.interval.html#scipy.stats.rv_discrete.interval" title="scipy.stats.rv_discrete.interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval</span></code></a>(self, alpha, \*args, \*\*kwds)</p></td>
+<td><p>Confidence interval with equal areas around the median.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.__call__.html#scipy.stats.rv_discrete.__call__" title="scipy.stats.rv_discrete.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(self, \*args, \*\*kwds)</p></td>
+<td><p>Freeze the distribution for the given arguments.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.stats.rv_discrete.support.html#scipy.stats.rv_discrete.support" title="scipy.stats.rv_discrete.support"><code class="xref py py-obj docutils literal notranslate"><span class="pre">support</span></code></a>(self, \*args, \*\*kwargs)</p></td>
+<td><p>Return the support of the distribution.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.rv_continuous.support.html"
+                        title="previous chapter">scipy.stats.rv_continuous.support</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.rv_discrete.rvs.html"
+                        title="next chapter">scipy.stats.rv_discrete.rvs</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

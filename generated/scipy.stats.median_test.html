@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.median_test &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.mood" href="scipy.stats.mood.html" >
+    <link rel="prev" title="scipy.stats.fligner" href="scipy.stats.fligner.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.mood.html" title="scipy.stats.mood"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.fligner.html" title="scipy.stats.fligner"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-median-test">
+<h1>scipy.stats.median_test<a class="headerlink" href="#scipy-stats-median-test" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.median_test">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">median_test</code><span class="sig-paren">(</span><em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwds</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/morestats.py#L2940-L3161"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.median_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a Mood’s median test.</p>
+<p>Test that two or more samples come from populations with the same median.</p>
+<p>Let <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">len(args)</span></code> be the number of samples.  The “grand median” of
+all the data is computed, and a contingency table is formed by
+classifying the values in each sample as being above or below the grand
+median.  The contingency table, along with <em class="xref py py-obj">correction</em> and <em class="xref py py-obj">lambda_</em>,
+are passed to <a class="reference internal" href="scipy.stats.chi2_contingency.html#scipy.stats.chi2_contingency" title="scipy.stats.chi2_contingency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.chi2_contingency</span></code></a> to compute the test statistic
+and p-value.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>sample1, sample2, …</strong><span class="classifier">array_like</span></dt><dd><p>The set of samples.  There must be at least two samples.
+Each sample must be a one-dimensional sequence containing at least
+one value.  The samples are not required to have the same length.</p>
+</dd>
+<dt><strong>ties</strong><span class="classifier">str, optional</span></dt><dd><p>Determines how values equal to the grand median are classified in
+the contingency table.  The string must be one of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;below&quot;</span><span class="p">:</span>
+    <span class="n">Values</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">grand</span> <span class="n">median</span> <span class="n">are</span> <span class="n">counted</span> <span class="k">as</span> <span class="s2">&quot;below&quot;</span><span class="o">.</span>
+<span class="s2">&quot;above&quot;</span><span class="p">:</span>
+    <span class="n">Values</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">grand</span> <span class="n">median</span> <span class="n">are</span> <span class="n">counted</span> <span class="k">as</span> <span class="s2">&quot;above&quot;</span><span class="o">.</span>
+<span class="s2">&quot;ignore&quot;</span><span class="p">:</span>
+    <span class="n">Values</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">grand</span> <span class="n">median</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">counted</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The default is “below”.</p>
+</dd>
+<dt><strong>correction</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, <em>and</em> there are just two samples, apply Yates’ correction
+for continuity when computing the test statistic associated with
+the contingency table.  Default is True.</p>
+</dd>
+<dt><strong>lambda_</strong><span class="classifier">float or str, optional</span></dt><dd><p>By default, the statistic computed in this test is Pearson’s
+chi-squared statistic.  <em class="xref py py-obj">lambda_</em> allows a statistic from the
+Cressie-Read power divergence family to be used instead.  See
+<a class="reference internal" href="scipy.stats.power_divergence.html#scipy.stats.power_divergence" title="scipy.stats.power_divergence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_divergence</span></code></a> for details.
+Default is 1 (Pearson’s chi-squared statistic).</p>
+</dd>
+<dt><strong>nan_policy</strong><span class="classifier">{‘propagate’, ‘raise’, ‘omit’}, optional</span></dt><dd><p>Defines how to handle when input contains nan. ‘propagate’ returns nan,
+‘raise’ throws an error, ‘omit’ performs the calculations ignoring nan
+values. Default is ‘propagate’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>stat</strong><span class="classifier">float</span></dt><dd><p>The test statistic.  The statistic that is returned is determined by
+<em class="xref py py-obj">lambda_</em>.  The default is Pearson’s chi-squared statistic.</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">float</span></dt><dd><p>The p-value of the test.</p>
+</dd>
+<dt><strong>m</strong><span class="classifier">float</span></dt><dd><p>The grand median.</p>
+</dd>
+<dt><strong>table</strong><span class="classifier">ndarray</span></dt><dd><p>The contingency table.  The shape of the table is (2, n), where
+n is the number of samples.  The first row holds the counts of the
+values above the grand median, and the second row holds the counts
+of the values below the grand median.  The table allows further
+analysis with, for example, <a class="reference internal" href="scipy.stats.chi2_contingency.html#scipy.stats.chi2_contingency" title="scipy.stats.chi2_contingency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.chi2_contingency</span></code></a>, or with
+<a class="reference internal" href="scipy.stats.fisher_exact.html#scipy.stats.fisher_exact" title="scipy.stats.fisher_exact"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.fisher_exact</span></code></a> if there are two samples, without having
+to recompute the table.  If <code class="docutils literal notranslate"><span class="pre">nan_policy</span></code> is “propagate” and there
+are nans in the input, the return value for <code class="docutils literal notranslate"><span class="pre">table</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.stats.kruskal.html#scipy.stats.kruskal" title="scipy.stats.kruskal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kruskal</span></code></a></dt><dd><p>Compute the Kruskal-Wallis H-test for independent samples.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.stats.mannwhitneyu.html#scipy.stats.mannwhitneyu" title="scipy.stats.mannwhitneyu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mannwhitneyu</span></code></a></dt><dd><p>Computes the Mann-Whitney rank test on samples x and y.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.15.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r179d06480509-1"><span class="brackets">1</span></dt>
+<dd><p>Mood, A. M., Introduction to the Theory of Statistics. McGraw-Hill
+(1950), pp. 394-399.</p>
+</dd>
+<dt class="label" id="r179d06480509-2"><span class="brackets">2</span></dt>
+<dd><p>Zar, J. H., Biostatistical Analysis, 5th ed. Prentice Hall (2010).
+See Sections 8.12 and 10.15.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A biologist runs an experiment in which there are three groups of plants.
+Group 1 has 16 plants, group 2 has 15 plants, and group 3 has 17 plants.
+Each plant produces a number of seeds.  The seed counts for each group
+are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">10</span> <span class="mi">14</span> <span class="mi">14</span> <span class="mi">18</span> <span class="mi">20</span> <span class="mi">22</span> <span class="mi">24</span> <span class="mi">25</span> <span class="mi">31</span> <span class="mi">31</span> <span class="mi">32</span> <span class="mi">39</span> <span class="mi">43</span> <span class="mi">43</span> <span class="mi">48</span> <span class="mi">49</span>
+<span class="n">Group</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">28</span> <span class="mi">30</span> <span class="mi">31</span> <span class="mi">33</span> <span class="mi">34</span> <span class="mi">35</span> <span class="mi">36</span> <span class="mi">40</span> <span class="mi">44</span> <span class="mi">55</span> <span class="mi">57</span> <span class="mi">61</span> <span class="mi">91</span> <span class="mi">92</span> <span class="mi">99</span>
+<span class="n">Group</span> <span class="mi">3</span><span class="p">:</span>  <span class="mi">0</span>  <span class="mi">3</span>  <span class="mi">9</span> <span class="mi">22</span> <span class="mi">23</span> <span class="mi">25</span> <span class="mi">25</span> <span class="mi">33</span> <span class="mi">34</span> <span class="mi">34</span> <span class="mi">40</span> <span class="mi">45</span> <span class="mi">46</span> <span class="mi">48</span> <span class="mi">62</span> <span class="mi">67</span> <span class="mi">84</span>
+</pre></div>
+</div>
+<p>The following code applies Mood’s median test to these samples.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">84</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">median_test</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stat</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">tbl</span> <span class="o">=</span> <span class="n">median_test</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The median is</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">med</span>
+<span class="go">34.0</span>
+</pre></div>
+</div>
+<p>and the contingency table is</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go">array([[ 5, 10,  7],</span>
+<span class="go">       [11,  5, 10]])</span>
+</pre></div>
+</div>
+<p><em class="xref py py-obj">p</em> is too large to conclude that the medians are not the same:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">0.12609082774093244</span>
+</pre></div>
+</div>
+<p>The “G-test” can be performed by passing <code class="docutils literal notranslate"><span class="pre">lambda_=&quot;log-likelihood&quot;</span></code> to
+<a class="reference internal" href="#scipy.stats.median_test" title="scipy.stats.median_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">median_test</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">tbl</span> <span class="o">=</span> <span class="n">median_test</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="s2">&quot;log-likelihood&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">0.12224779737117837</span>
+</pre></div>
+</div>
+<p>The median occurs several times in the data, so we’ll get a different
+result if, for example, <code class="docutils literal notranslate"><span class="pre">ties=&quot;above&quot;</span></code> is used:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stat</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">tbl</span> <span class="o">=</span> <span class="n">median_test</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">,</span> <span class="n">ties</span><span class="o">=</span><span class="s2">&quot;above&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">0.063873276069553273</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go">array([[ 5, 11,  9],</span>
+<span class="go">       [11,  4,  8]])</span>
+</pre></div>
+</div>
+<p>This example demonstrates that if the data set is not large and there
+are values equal to the median, the p-value can be sensitive to the
+choice of <em class="xref py py-obj">ties</em>.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.fligner.html"
+                        title="previous chapter">scipy.stats.fligner</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.mood.html"
+                        title="next chapter">scipy.stats.mood</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

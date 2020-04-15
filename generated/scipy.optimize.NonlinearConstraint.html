@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.NonlinearConstraint &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.LinearConstraint" href="scipy.optimize.LinearConstraint.html" >
+    <link rel="prev" title="minimize(method=’trust-exact’)" href="../optimize.minimize-trustexact.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.LinearConstraint.html" title="scipy.optimize.LinearConstraint"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../optimize.minimize-trustexact.html" title="minimize(method=’trust-exact’)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-nonlinearconstraint">
+<h1>scipy.optimize.NonlinearConstraint<a class="headerlink" href="#scipy-optimize-nonlinearconstraint" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.optimize.NonlinearConstraint">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">NonlinearConstraint</code><span class="sig-paren">(</span><em class="sig-param">fun</em>, <em class="sig-param">lb</em>, <em class="sig-param">ub</em>, <em class="sig-param">jac='2-point'</em>, <em class="sig-param">hess=&lt;scipy.optimize._hessian_update_strategy.BFGS object&gt;</em>, <em class="sig-param">keep_feasible=False</em>, <em class="sig-param">finite_diff_rel_step=None</em>, <em class="sig-param">finite_diff_jac_sparsity=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/_constraints.py#L11-L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.NonlinearConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nonlinear constraint on the variables.</p>
+<p>The constraint has the general inequality form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lb</span> <span class="o">&lt;=</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">ub</span>
+</pre></div>
+</div>
+<p>Here the vector of independent variables x is passed as ndarray of shape
+(n,) and <code class="docutils literal notranslate"><span class="pre">fun</span></code> returns a vector with m components.</p>
+<p>It is possible to use equal bounds to represent an equality constraint or
+infinite bounds to represent a one-sided constraint.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>fun</strong><span class="classifier">callable</span></dt><dd><p>The function defining the constraint.
+The signature is <code class="docutils literal notranslate"><span class="pre">fun(x)</span> <span class="pre">-&gt;</span> <span class="pre">array_like,</span> <span class="pre">shape</span> <span class="pre">(m,)</span></code>.</p>
+</dd>
+<dt><strong>lb, ub</strong><span class="classifier">array_like</span></dt><dd><p>Lower and upper bounds on the constraint. Each array must have the
+shape (m,) or be a scalar, in the latter case a bound will be the same
+for all components of the constraint. Use <code class="docutils literal notranslate"><span class="pre">np.inf</span></code> with an
+appropriate sign to specify a one-sided constraint.
+Set components of <em class="xref py py-obj">lb</em> and <em class="xref py py-obj">ub</em> equal to represent an equality
+constraint. Note that you can mix constraints of different types:
+interval, one-sided or equality, by setting different components of
+<em class="xref py py-obj">lb</em> and <em class="xref py py-obj">ub</em> as  necessary.</p>
+</dd>
+<dt><strong>jac</strong><span class="classifier">{callable,  ‘2-point’, ‘3-point’, ‘cs’}, optional</span></dt><dd><p>Method of computing the Jacobian matrix (an m-by-n matrix,
+where element (i, j) is the partial derivative of f[i] with
+respect to x[j]).  The keywords {‘2-point’, ‘3-point’,
+‘cs’} select a finite difference scheme for the numerical estimation.
+A callable must have the following signature:
+<code class="docutils literal notranslate"><span class="pre">jac(x)</span> <span class="pre">-&gt;</span> <span class="pre">{ndarray,</span> <span class="pre">sparse</span> <span class="pre">matrix},</span> <span class="pre">shape</span> <span class="pre">(m,</span> <span class="pre">n)</span></code>.
+Default is ‘2-point’.</p>
+</dd>
+<dt><strong>hess</strong><span class="classifier">{callable, ‘2-point’, ‘3-point’, ‘cs’, HessianUpdateStrategy, None}, optional</span></dt><dd><p>Method for computing the Hessian matrix. The keywords
+{‘2-point’, ‘3-point’, ‘cs’} select a finite difference scheme for
+numerical  estimation.  Alternatively, objects implementing
+<a class="reference internal" href="scipy.optimize.HessianUpdateStrategy.html#scipy.optimize.HessianUpdateStrategy" title="scipy.optimize.HessianUpdateStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HessianUpdateStrategy</span></code></a> interface can be used to approximate the
+Hessian. Currently available implementations are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="scipy.optimize.BFGS.html#scipy.optimize.BFGS" title="scipy.optimize.BFGS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BFGS</span></code></a> (default option)</p></li>
+<li><p><a class="reference internal" href="scipy.optimize.SR1.html#scipy.optimize.SR1" title="scipy.optimize.SR1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SR1</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>A callable must return the Hessian matrix of <code class="docutils literal notranslate"><span class="pre">dot(fun,</span> <span class="pre">v)</span></code> and
+must have the following signature:
+<code class="docutils literal notranslate"><span class="pre">hess(x,</span> <span class="pre">v)</span> <span class="pre">-&gt;</span> <span class="pre">{LinearOperator,</span> <span class="pre">sparse</span> <span class="pre">matrix,</span> <span class="pre">array_like},</span> <span class="pre">shape</span> <span class="pre">(n,</span> <span class="pre">n)</span></code>.
+Here <code class="docutils literal notranslate"><span class="pre">v</span></code> is ndarray with shape (m,) containing Lagrange multipliers.</p>
+</dd>
+<dt><strong>keep_feasible</strong><span class="classifier">array_like of bool, optional</span></dt><dd><p>Whether to keep the constraint components feasible throughout
+iterations. A single value set this property for all components.
+Default is False. Has no effect for equality constraints.</p>
+</dd>
+<dt><strong>finite_diff_rel_step: None or array_like, optional</strong></dt><dd><p>Relative step size for the finite difference approximation. Default is
+None, which will select a reasonable value automatically depending
+on a finite difference scheme.</p>
+</dd>
+<dt><strong>finite_diff_jac_sparsity: {None, array_like, sparse matrix}, optional</strong></dt><dd><p>Defines the sparsity structure of the Jacobian matrix for finite
+difference estimation, its shape must be (m, n). If the Jacobian has
+only few non-zero elements in <em>each</em> row, providing the sparsity
+structure will greatly speed up the computations. A zero entry means
+that a corresponding element in the Jacobian is identically zero.
+If provided, forces the use of ‘lsmr’ trust-region solver.
+If None (default) then dense differencing will be used.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Finite difference schemes {‘2-point’, ‘3-point’, ‘cs’} may be used for
+approximating either the Jacobian or the Hessian. We, however, do not allow
+its use for approximating both simultaneously. Hence whenever the Jacobian
+is estimated via finite-differences, we require the Hessian to be estimated
+using one of the quasi-Newton strategies.</p>
+<p>The scheme ‘cs’ is potentially the most accurate, but requires the function
+to correctly handles complex inputs and be analytically continuable to the
+complex plane. The scheme ‘3-point’ is more accurate than ‘2-point’ but
+requires twice as many operations.</p>
+<p class="rubric">Examples</p>
+<p>Constrain <code class="docutils literal notranslate"><span class="pre">x[0]</span> <span class="pre">&lt;</span> <span class="pre">sin(x[1])</span> <span class="pre">+</span> <span class="pre">1.9</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">NonlinearConstraint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">con</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nlc</span> <span class="o">=</span> <span class="n">NonlinearConstraint</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../optimize.minimize-trustexact.html"
+                        title="previous chapter">minimize(method=’trust-exact’)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.LinearConstraint.html"
+                        title="next chapter">scipy.optimize.LinearConstraint</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

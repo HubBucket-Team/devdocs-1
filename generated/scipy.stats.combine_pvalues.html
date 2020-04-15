@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.combine_pvalues &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.jarque_bera" href="scipy.stats.jarque_bera.html" >
+    <link rel="prev" title="scipy.stats.brunnermunzel" href="scipy.stats.brunnermunzel.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.jarque_bera.html" title="scipy.stats.jarque_bera"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.brunnermunzel.html" title="scipy.stats.brunnermunzel"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-combine-pvalues">
+<h1>scipy.stats.combine_pvalues<a class="headerlink" href="#scipy-stats-combine-pvalues" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.combine_pvalues">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">combine_pvalues</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pvalues</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'fisher'</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L6786-L6895"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.combine_pvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine p-values from independent tests bearing upon the same hypothesis.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>pvalues</strong><span class="classifier">array_like, 1-D</span></dt><dd><p>Array of p-values assumed to come from independent tests.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">{‘fisher’, ‘pearson’, ‘tippett’, ‘stouffer’, ‘mudholkar_george’}, optional</span></dt><dd><p>Name of method to use to combine p-values.
+The following methods are available (default is ‘fisher’):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘fisher’: Fisher’s method (Fisher’s combined probability test), the
+sum of the logarithm of the p-values</p></li>
+<li><p>‘pearson’: Pearson’s method (similar to Fisher’s but uses sum of the
+complement of the p-values inside the logarithms)</p></li>
+<li><p>‘tippett’: Tippett’s method (minimum of p-values)</p></li>
+<li><p>‘stouffer’: Stouffer’s Z-score method</p></li>
+<li><p>‘mudholkar_george’: the difference of Fisher’s and Pearson’s methods
+divided by 2</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>weights</strong><span class="classifier">array_like, 1-D, optional</span></dt><dd><p>Optional array of weights used only for Stouffer’s Z-score method.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>statistic: float</dt><dd><p>The statistic calculated by the specified method.</p>
+</dd>
+<dt>pval: float</dt><dd><p>The combined p-value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Fisher’s method (also known as Fisher’s combined probability test) <a class="reference internal" href="#rc356e4bdcefb-1" id="id1">[1]</a> uses
+a chi-squared statistic to compute a combined p-value. The closely related
+Stouffer’s Z-score method <a class="reference internal" href="#rc356e4bdcefb-2" id="id2">[2]</a> uses Z-scores rather than p-values. The
+advantage of Stouffer’s method is that it is straightforward to introduce
+weights, which can make Stouffer’s method more powerful than Fisher’s
+method when the p-values are from studies of different size <a class="reference internal" href="#rc356e4bdcefb-6" id="id3">[6]</a> <a class="reference internal" href="#rc356e4bdcefb-7" id="id4">[7]</a>.
+The Pearson’s method uses <span class="math notranslate nohighlight">\(log(1-p_i)\)</span> inside the sum whereas Fisher’s
+method uses <span class="math notranslate nohighlight">\(log(p_i)\)</span> <a class="reference internal" href="#rc356e4bdcefb-4" id="id5">[4]</a>. For Fisher’s and Pearson’s method, the
+sum of the logarithms is multiplied by -2 in the implementation. This
+quantity has a chi-square distribution that determines the p-value. The
+<em class="xref py py-obj">mudholkar_george</em> method is the difference of the Fisher’s and Pearson’s
+test statistics, each of which include the -2 factor <a class="reference internal" href="#rc356e4bdcefb-4" id="id6">[4]</a>. However, the
+<em class="xref py py-obj">mudholkar_george</em> method does not include these -2 factors. The test
+statistic of <em class="xref py py-obj">mudholkar_george</em> is the sum of logisitic random variables and
+equation 3.6 in <a class="reference internal" href="#rc356e4bdcefb-3" id="id7">[3]</a> is used to approximate the p-value based on Student’s
+t-distribution.</p>
+<p>Fisher’s method may be extended to combine p-values from dependent tests
+<a class="reference internal" href="#rc356e4bdcefb-5" id="id8">[5]</a>. Extensions such as Brown’s method and Kost’s method are not currently
+implemented.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.15.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rc356e4bdcefb-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fisher%27s_method">https://en.wikipedia.org/wiki/Fisher%27s_method</a></p>
+</dd>
+<dt class="label" id="rc356e4bdcefb-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fisher%27s_method#Relation_to_Stouffer.27s_Z-score_method">https://en.wikipedia.org/wiki/Fisher%27s_method#Relation_to_Stouffer.27s_Z-score_method</a></p>
+</dd>
+<dt class="label" id="rc356e4bdcefb-3"><span class="brackets"><a class="fn-backref" href="#id7">3</a></span></dt>
+<dd><p>George, E. O., and G. S. Mudholkar. “On the convolution of logistic
+random variables.” Metrika 30.1 (1983): 1-13.</p>
+</dd>
+<dt class="label" id="rc356e4bdcefb-4"><span class="brackets">4</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>Heard, N. and Rubin-Delanchey, P. “Choosing between methods of
+combining p-values.”  Biometrika 105.1 (2018): 239-246.</p>
+</dd>
+<dt class="label" id="rc356e4bdcefb-5"><span class="brackets"><a class="fn-backref" href="#id8">5</a></span></dt>
+<dd><p>Whitlock, M. C. “Combining probability from independent tests: the
+weighted Z-method is superior to Fisher’s approach.” Journal of
+Evolutionary Biology 18, no. 5 (2005): 1368-1373.</p>
+</dd>
+<dt class="label" id="rc356e4bdcefb-6"><span class="brackets"><a class="fn-backref" href="#id3">6</a></span></dt>
+<dd><p>Zaykin, Dmitri V. “Optimally weighted Z-test is a powerful method
+for combining probabilities in meta-analysis.” Journal of
+Evolutionary Biology 24, no. 8 (2011): 1836-1841.</p>
+</dd>
+<dt class="label" id="rc356e4bdcefb-7"><span class="brackets"><a class="fn-backref" href="#id4">7</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Extensions_of_Fisher%27s_method">https://en.wikipedia.org/wiki/Extensions_of_Fisher%27s_method</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.brunnermunzel.html"
+                        title="previous chapter">scipy.stats.brunnermunzel</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.jarque_bera.html"
+                        title="next chapter">scipy.stats.jarque_bera</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

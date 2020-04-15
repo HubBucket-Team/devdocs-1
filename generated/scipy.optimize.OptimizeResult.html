@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.OptimizeResult &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.OptimizeResult.__getitem__" href="scipy.optimize.OptimizeResult.__getitem__.html" >
+    <link rel="prev" title="scipy.optimize.show_options" href="scipy.optimize.show_options.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.OptimizeResult.__getitem__.html" title="scipy.optimize.OptimizeResult.__getitem__"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.show_options.html" title="scipy.optimize.show_options"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-optimizeresult">
+<h1>scipy.optimize.OptimizeResult<a class="headerlink" href="#scipy-optimize-optimizeresult" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.optimize.OptimizeResult">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">OptimizeResult</code><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/optimize.py#L77-L133"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.OptimizeResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the optimization result.</p>
+<p class="rubric">Notes</p>
+<p>There may be additional attributes not listed above depending of the
+specific solver. Since this class is essentially a subclass of dict
+with attribute accessors, one can see which attributes are available
+using the <em class="xref py py-obj">keys()</em> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">ndarray</span></dt><dd><p>The solution of the optimization.</p>
+</dd>
+<dt><strong>success</strong><span class="classifier">bool</span></dt><dd><p>Whether or not the optimizer exited successfully.</p>
+</dd>
+<dt><strong>status</strong><span class="classifier">int</span></dt><dd><p>Termination status of the optimizer. Its value depends on the
+underlying solver. Refer to <em class="xref py py-obj">message</em> for details.</p>
+</dd>
+<dt><strong>message</strong><span class="classifier">str</span></dt><dd><p>Description of the cause of the termination.</p>
+</dd>
+<dt><strong>fun, jac, hess: ndarray</strong></dt><dd><p>Values of objective function, its Jacobian and its Hessian (if
+available). The Hessians may be approximations, see the documentation
+of the function in question.</p>
+</dd>
+<dt><strong>hess_inv</strong><span class="classifier">object</span></dt><dd><p>Inverse of the objective function’s Hessian; may be an approximation.
+Not available for all solvers. The type of this attribute may be
+either np.ndarray or scipy.sparse.linalg.LinearOperator.</p>
+</dd>
+<dt><strong>nfev, njev, nhev</strong><span class="classifier">int</span></dt><dd><p>Number of evaluations of the objective functions and of its
+Jacobian and Hessian.</p>
+</dd>
+<dt><strong>nit</strong><span class="classifier">int</span></dt><dd><p>Number of iterations performed by the optimizer.</p>
+</dd>
+<dt><strong>maxcv</strong><span class="classifier">float</span></dt><dd><p>The maximum constraint violation.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.__getitem__.html#scipy.optimize.OptimizeResult.__getitem__" title="scipy.optimize.OptimizeResult.__getitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code></a>()</p></td>
+<td><p>x.__getitem__(y) &lt;==&gt; x[y]</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.__len__.html#scipy.optimize.OptimizeResult.__len__" title="scipy.optimize.OptimizeResult.__len__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__len__</span></code></a>(self, /)</p></td>
+<td><p>Return len(self).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.clear.html#scipy.optimize.OptimizeResult.clear" title="scipy.optimize.OptimizeResult.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.copy.html#scipy.optimize.OptimizeResult.copy" title="scipy.optimize.OptimizeResult.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.fromkeys.html#scipy.optimize.OptimizeResult.fromkeys" title="scipy.optimize.OptimizeResult.fromkeys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromkeys</span></code></a>(iterable[, value])</p></td>
+<td><p>Create a new dictionary with keys from iterable and values set to value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.get.html#scipy.optimize.OptimizeResult.get" title="scipy.optimize.OptimizeResult.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(self, key[, default])</p></td>
+<td><p>Return the value for key if key is in the dictionary, else default.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.items.html#scipy.optimize.OptimizeResult.items" title="scipy.optimize.OptimizeResult.items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">items</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.keys.html#scipy.optimize.OptimizeResult.keys" title="scipy.optimize.OptimizeResult.keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.pop.html#scipy.optimize.OptimizeResult.pop" title="scipy.optimize.OptimizeResult.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>()</p></td>
+<td><p>If key is not found, d is returned if given, otherwise KeyError is raised</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.popitem.html#scipy.optimize.OptimizeResult.popitem" title="scipy.optimize.OptimizeResult.popitem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">popitem</span></code></a>()</p></td>
+<td><p>2-tuple; but raise KeyError if D is empty.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.setdefault.html#scipy.optimize.OptimizeResult.setdefault" title="scipy.optimize.OptimizeResult.setdefault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setdefault</span></code></a>(self, key[, default])</p></td>
+<td><p>Insert key with a value of default if key is not in the dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.update.html#scipy.optimize.OptimizeResult.update" title="scipy.optimize.OptimizeResult.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>()</p></td>
+<td><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k] If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v In either case, this is followed by: for k in F:  D[k] = F[k]</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.OptimizeResult.values.html#scipy.optimize.OptimizeResult.values" title="scipy.optimize.OptimizeResult.values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">values</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.show_options.html"
+                        title="previous chapter">scipy.optimize.show_options</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.OptimizeResult.__getitem__.html"
+                        title="next chapter">scipy.optimize.OptimizeResult.__getitem__</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

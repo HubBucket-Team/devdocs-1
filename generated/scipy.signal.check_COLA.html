@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.check_COLA &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.check_NOLA" href="scipy.signal.check_NOLA.html" >
+    <link rel="prev" title="scipy.signal.istft" href="scipy.signal.istft.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.check_NOLA.html" title="scipy.signal.check_NOLA"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.istft.html" title="scipy.signal.istft"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-check-cola">
+<h1>scipy.signal.check_COLA<a class="headerlink" href="#scipy-signal-check-cola" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.check_COLA">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">check_COLA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span></em>, <em class="sig-param"><span class="n">nperseg</span></em>, <em class="sig-param"><span class="n">noverlap</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1e-10</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/spectral.py#L771-L892"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.check_COLA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the Constant OverLap Add (COLA) constraint is met</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>window</strong><span class="classifier">str or tuple or array_like</span></dt><dd><p>Desired window to use. If <em class="xref py py-obj">window</em> is a string or tuple, it is
+passed to <a class="reference internal" href="scipy.signal.get_window.html#scipy.signal.get_window" title="scipy.signal.get_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window</span></code></a> to generate the window values, which are
+DFT-even by default. See <a class="reference internal" href="scipy.signal.get_window.html#scipy.signal.get_window" title="scipy.signal.get_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_window</span></code></a> for a list of windows and
+required parameters. If <em class="xref py py-obj">window</em> is array_like it will be used
+directly as the window and its length must be nperseg.</p>
+</dd>
+<dt><strong>nperseg</strong><span class="classifier">int</span></dt><dd><p>Length of each segment.</p>
+</dd>
+<dt><strong>noverlap</strong><span class="classifier">int</span></dt><dd><p>Number of points to overlap between segments.</p>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float, optional</span></dt><dd><p>The allowed variance of a bin’s weighted sum from the median bin
+sum.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>verdict</strong><span class="classifier">bool</span></dt><dd><p><em class="xref py py-obj">True</em> if chosen combination satisfies COLA within <em class="xref py py-obj">tol</em>,
+<em class="xref py py-obj">False</em> otherwise</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.check_NOLA.html#scipy.signal.check_NOLA" title="scipy.signal.check_NOLA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_NOLA</span></code></a></dt><dd><p>Check whether the Nonzero Overlap Add (NOLA) constraint is met</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.stft.html#scipy.signal.stft" title="scipy.signal.stft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stft</span></code></a></dt><dd><p>Short Time Fourier Transform</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.istft.html#scipy.signal.istft" title="scipy.signal.istft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">istft</span></code></a></dt><dd><p>Inverse Short Time Fourier Transform</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>In order to enable inversion of an STFT via the inverse STFT in
+<a class="reference internal" href="scipy.signal.istft.html#scipy.signal.istft" title="scipy.signal.istft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">istft</span></code></a>, it is sufficient that the signal windowing obeys the constraint of
+“Constant OverLap Add” (COLA). This ensures that every point in the input
+data is equally weighted, thereby avoiding aliasing and allowing full
+reconstruction.</p>
+<dl class="simple">
+<dt>Some examples of windows that satisfy COLA:</dt><dd><ul class="simple">
+<li><p>Rectangular window at overlap of 0, 1/2, 2/3, 3/4, …</p></li>
+<li><p>Bartlett window at overlap of 1/2, 3/4, 5/6, …</p></li>
+<li><p>Hann window at 1/2, 2/3, 3/4, …</p></li>
+<li><p>Any Blackman family window at 2/3 overlap</p></li>
+<li><p>Any window with <code class="docutils literal notranslate"><span class="pre">noverlap</span> <span class="pre">=</span> <span class="pre">nperseg-1</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>A very comprehensive list of other windows may be found in <a class="reference internal" href="#ra15974cde8a2-2" id="id1">[2]</a>,
+wherein the COLA condition is satisfied when the “Amplitude
+Flatness” is unity.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="ra15974cde8a2-1"><span class="brackets">1</span></dt>
+<dd><p>Julius O. Smith III, “Spectral Audio Signal Processing”, W3K
+Publishing, 2011,ISBN 978-0-9745607-3-1.</p>
+</dd>
+<dt class="label" id="ra15974cde8a2-2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>G. Heinzel, A. Ruediger and R. Schilling, “Spectrum and
+spectral density estimation by the Discrete Fourier transform
+(DFT), including a comprehensive list of window functions and
+some new at-top windows”, 2002,
+<a class="reference external" href="http://hdl.handle.net/11858/00-001M-0000-0013-557A-5">http://hdl.handle.net/11858/00-001M-0000-0013-557A-5</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+</pre></div>
+</div>
+<p>Confirm COLA condition for rectangular window of 75% (3/4) overlap:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">check_COLA</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">boxcar</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>COLA is not true for 25% (1/4) overlap, though:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">check_COLA</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">boxcar</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>“Symmetrical” Hann window (for filter design) is not COLA:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">check_COLA</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">hann</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>“Periodic” or “DFT-even” Hann window (for FFT analysis) is COLA for
+overlap of 1/2, 2/3, 3/4, etc.:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">check_COLA</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">hann</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">check_COLA</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">hann</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span><span class="o">.</span><span class="n">check_COLA</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">hann</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.istft.html"
+                        title="previous chapter">scipy.signal.istft</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.check_NOLA.html"
+                        title="next chapter">scipy.signal.check_NOLA</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

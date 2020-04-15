@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.dual_annealing &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.least_squares" href="scipy.optimize.least_squares.html" >
+    <link rel="prev" title="scipy.optimize.shgo" href="scipy.optimize.shgo.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.least_squares.html" title="scipy.optimize.least_squares"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.shgo.html" title="scipy.optimize.shgo"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-dual-annealing">
+<h1>scipy.optimize.dual_annealing<a class="headerlink" href="#scipy-optimize-dual-annealing" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.optimize.dual_annealing">
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">dual_annealing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">bounds</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">local_search_options</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">initial_temp</span><span class="o">=</span><span class="default_value">5230.0</span></em>, <em class="sig-param"><span class="n">restart_temp_ratio</span><span class="o">=</span><span class="default_value">2e-05</span></em>, <em class="sig-param"><span class="n">visit</span><span class="o">=</span><span class="default_value">2.62</span></em>, <em class="sig-param"><span class="n">accept</span><span class="o">=</span><span class="default_value">- 5.0</span></em>, <em class="sig-param"><span class="n">maxfun</span><span class="o">=</span><span class="default_value">10000000.0</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">no_local_search</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/_dual_annealing.py#L427-L689"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.dual_annealing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the global minimum of a function using Dual Annealing.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier">callable</span></dt><dd><p>The objective function to be minimized. Must be in the form
+<code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">*args)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the argument in the form of a 1-D array
+and <code class="docutils literal notranslate"><span class="pre">args</span></code> is a  tuple of any additional fixed parameters needed to
+completely specify the function.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier">sequence, shape (n, 2)</span></dt><dd><p>Bounds for variables.  <code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code> pairs for each element in <code class="docutils literal notranslate"><span class="pre">x</span></code>,
+defining bounds for the objective function parameter.</p>
+</dd>
+<dt><strong>args</strong><span class="classifier">tuple, optional</span></dt><dd><p>Any additional fixed parameters needed to completely specify the
+objective function.</p>
+</dd>
+<dt><strong>maxiter</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum number of global search iterations. Default value is 1000.</p>
+</dd>
+<dt><strong>local_search_options</strong><span class="classifier">dict, optional</span></dt><dd><p>Extra keyword arguments to be passed to the local minimizer
+(<a class="reference internal" href="scipy.optimize.minimize.html#scipy.optimize.minimize" title="scipy.optimize.minimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimize</span></code></a>). Some important options could be:
+<code class="docutils literal notranslate"><span class="pre">method</span></code> for the minimizer method to use and <code class="docutils literal notranslate"><span class="pre">args</span></code> for
+objective function additional arguments.</p>
+</dd>
+<dt><strong>initial_temp</strong><span class="classifier">float, optional</span></dt><dd><p>The initial temperature, use higher values to facilitates a wider
+search of the energy landscape, allowing dual_annealing to escape
+local minima that it is trapped in. Default value is 5230. Range is
+(0.01, 5.e4].</p>
+</dd>
+<dt><strong>restart_temp_ratio</strong><span class="classifier">float, optional</span></dt><dd><p>During the annealing process, temperature is decreasing, when it
+reaches <code class="docutils literal notranslate"><span class="pre">initial_temp</span> <span class="pre">*</span> <span class="pre">restart_temp_ratio</span></code>, the reannealing process
+is triggered. Default value of the ratio is 2e-5. Range is (0, 1).</p>
+</dd>
+<dt><strong>visit</strong><span class="classifier">float, optional</span></dt><dd><p>Parameter for visiting distribution. Default value is 2.62. Higher
+values give the visiting distribution a heavier tail, this makes
+the algorithm jump to a more distant region. The value range is (0, 3].</p>
+</dd>
+<dt><strong>accept</strong><span class="classifier">float, optional</span></dt><dd><p>Parameter for acceptance distribution. It is used to control the
+probability of acceptance. The lower the acceptance parameter, the
+smaller the probability of acceptance. Default value is -5.0 with
+a range (-1e4, -5].</p>
+</dd>
+<dt><strong>maxfun</strong><span class="classifier">int, optional</span></dt><dd><p>Soft limit for the number of objective function calls. If the
+algorithm is in the middle of a local search, this number will be
+exceeded, the algorithm will stop just after the local search is
+done. Default value is 1e7.</p>
+</dd>
+<dt><strong>seed</strong><span class="classifier">{int, <a class="reference external" href="https://numpy.org/devdocs/reference/random/legacy.html#numpy.random.RandomState" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RandomState</span></code></a>, <a class="reference external" href="https://numpy.org/devdocs/reference/random/generator.html#numpy.random.Generator" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Generator</span></code></a>}, optional</span></dt><dd><p>If <em class="xref py py-obj">seed</em> is not specified the <a class="reference external" href="https://numpy.org/devdocs/reference/random/legacy.html#numpy.random.RandomState" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RandomState</span></code></a> singleton is
+used.
+If <em class="xref py py-obj">seed</em> is an int, a new <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> instance is used, seeded
+with <em class="xref py py-obj">seed</em>.
+If <em class="xref py py-obj">seed</em> is already a <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> or <code class="docutils literal notranslate"><span class="pre">Generator</span></code> instance, then
+that instance is used.
+Specify <em class="xref py py-obj">seed</em> for repeatable minimizations. The random numbers
+generated with this seed only affect the visiting distribution function
+and new coordinates generation.</p>
+</dd>
+<dt><strong>no_local_search</strong><span class="classifier">bool, optional</span></dt><dd><p>If <em class="xref py py-obj">no_local_search</em> is set to True, a traditional Generalized
+Simulated Annealing will be performed with no local search
+strategy applied.</p>
+</dd>
+<dt><strong>callback</strong><span class="classifier">callable, optional</span></dt><dd><p>A callback function with signature <code class="docutils literal notranslate"><span class="pre">callback(x,</span> <span class="pre">f,</span> <span class="pre">context)</span></code>,
+which will be called for all minima found.
+<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">f</span></code> are the coordinates and function value of the
+latest minimum found, and <code class="docutils literal notranslate"><span class="pre">context</span></code> has value in [0, 1, 2], with the
+following meaning:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>0: minimum detected in the annealing process.</p></li>
+<li><p>1: detection occurred in the local search process.</p></li>
+<li><p>2: detection done in the dual annealing process.</p></li>
+</ul>
+</div></blockquote>
+<p>If the callback implementation returns True, the algorithm will stop.</p>
+</dd>
+<dt><strong>x0</strong><span class="classifier">ndarray, shape(n,), optional</span></dt><dd><p>Coordinates of a single N-D starting point.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>res</strong><span class="classifier">OptimizeResult</span></dt><dd><p>The optimization result represented as a <a class="reference internal" href="scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult" title="scipy.optimize.OptimizeResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a> object.
+Important attributes are: <code class="docutils literal notranslate"><span class="pre">x</span></code> the solution array, <code class="docutils literal notranslate"><span class="pre">fun</span></code> the value
+of the function at the solution, and <code class="docutils literal notranslate"><span class="pre">message</span></code> which describes the
+cause of the termination.
+See <a class="reference internal" href="scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult" title="scipy.optimize.OptimizeResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimizeResult</span></code></a> for a description of other attributes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function implements the Dual Annealing optimization. This stochastic
+approach derived from <a class="reference internal" href="#rbaa258a99356-3" id="id1">[3]</a> combines the generalization of CSA (Classical
+Simulated Annealing) and FSA (Fast Simulated Annealing) <a class="reference internal" href="#rbaa258a99356-1" id="id2">[1]</a> <a class="reference internal" href="#rbaa258a99356-2" id="id3">[2]</a> coupled
+to a strategy for applying a local search on accepted locations <a class="reference internal" href="#rbaa258a99356-4" id="id4">[4]</a>.
+An alternative implementation of this same algorithm is described in <a class="reference internal" href="#rbaa258a99356-5" id="id5">[5]</a>
+and benchmarks are presented in <a class="reference internal" href="#rbaa258a99356-6" id="id6">[6]</a>. This approach introduces an advanced
+method to refine the solution found by the generalized annealing
+process. This algorithm uses a distorted Cauchy-Lorentz visiting
+distribution, with its shape controlled by the parameter <span class="math notranslate nohighlight">\(q_{v}\)</span></p>
+<div class="math notranslate nohighlight">
+\[g_{q_{v}}(\Delta x(t)) \propto \frac{ \
+\left[T_{q_{v}}(t) \right]^{-\frac{D}{3-q_{v}}}}{ \
+\left[{1+(q_{v}-1)\frac{(\Delta x(t))^{2}} { \
+\left[T_{q_{v}}(t)\right]^{\frac{2}{3-q_{v}}}}}\right]^{ \
+\frac{1}{q_{v}-1}+\frac{D-1}{2}}}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(t\)</span> is the artificial time. This visiting distribution is used
+to generate a trial jump distance <span class="math notranslate nohighlight">\(\Delta x(t)\)</span> of variable
+<span class="math notranslate nohighlight">\(x(t)\)</span> under artificial temperature <span class="math notranslate nohighlight">\(T_{q_{v}}(t)\)</span>.</p>
+<p>From the starting point, after calling the visiting distribution
+function, the acceptance probability is computed as follows:</p>
+<div class="math notranslate nohighlight">
+\[p_{q_{a}} = \min{\{1,\left[1-(1-q_{a}) \beta \Delta E \right]^{ \
+\frac{1}{1-q_{a}}}\}}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(q_{a}\)</span> is a acceptance parameter. For <span class="math notranslate nohighlight">\(q_{a}&lt;1\)</span>, zero
+acceptance probability is assigned to the cases where</p>
+<div class="math notranslate nohighlight">
+\[[1-(1-q_{a}) \beta \Delta E] &lt; 0\]</div>
+<p>The artificial temperature <span class="math notranslate nohighlight">\(T_{q_{v}}(t)\)</span> is decreased according to</p>
+<div class="math notranslate nohighlight">
+\[T_{q_{v}}(t) = T_{q_{v}}(1) \frac{2^{q_{v}-1}-1}{\left( \
+1 + t\right)^{q_{v}-1}-1}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(q_{v}\)</span> is the visiting parameter.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rbaa258a99356-1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>Tsallis C. Possible generalization of Boltzmann-Gibbs
+statistics. Journal of Statistical Physics, 52, 479-487 (1998).</p>
+</dd>
+<dt class="label" id="rbaa258a99356-2"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>Tsallis C, Stariolo DA. Generalized Simulated Annealing.
+Physica A, 233, 395-406 (1996).</p>
+</dd>
+<dt class="label" id="rbaa258a99356-3"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p>Xiang Y, Sun DY, Fan W, Gong XG. Generalized Simulated
+Annealing Algorithm and Its Application to the Thomson Model.
+Physics Letters A, 233, 216-220 (1997).</p>
+</dd>
+<dt class="label" id="rbaa258a99356-4"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dd><p>Xiang Y, Gong XG. Efficiency of Generalized Simulated
+Annealing. Physical Review E, 62, 4473 (2000).</p>
+</dd>
+<dt class="label" id="rbaa258a99356-5"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dd><p>Xiang Y, Gubian S, Suomela B, Hoeng J. Generalized
+Simulated Annealing for Efficient Global Optimization: the GenSA
+Package for R. The R Journal, Volume 5/1 (2013).</p>
+</dd>
+<dt class="label" id="rbaa258a99356-6"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dd><p>Mullen, K. Continuous Global Optimization in R. Journal of
+Statistical Software, 60(6), 1 - 45, (2014). DOI:10.18637/jss.v060.i06</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The following example is a 10-D problem, with many local minima.
+The function involved is called Rastrigin
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Rastrigin_function">https://en.wikipedia.org/wiki/Rastrigin_function</a>)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">dual_annealing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lw</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">5.12</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.12</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ret</span> <span class="o">=</span> <span class="n">dual_annealing</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">lw</span><span class="p">,</span> <span class="n">up</span><span class="p">)),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ret</span><span class="o">.</span><span class="n">x</span>
+<span class="go">array([-4.26437714e-09, -3.91699361e-09, -1.86149218e-09, -3.97165720e-09,</span>
+<span class="go">       -6.29151648e-09, -6.53145322e-09, -3.93616815e-09, -6.55623025e-09,</span>
+<span class="go">       -6.05775280e-09, -5.00668935e-09]) # may vary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ret</span><span class="o">.</span><span class="n">fun</span>
+<span class="go">0.000000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.shgo.html"
+                        title="previous chapter">scipy.optimize.shgo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.least_squares.html"
+                        title="next chapter">scipy.optimize.least_squares</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

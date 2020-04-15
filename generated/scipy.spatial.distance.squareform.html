@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.spatial.distance.squareform &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Distance computations (scipy.spatial.distance)" href="../spatial.distance.html" >
+    <link rel="next" title="scipy.spatial.distance.directed_hausdorff" href="scipy.spatial.distance.directed_hausdorff.html" >
+    <link rel="prev" title="scipy.spatial.distance.cdist" href="scipy.spatial.distance.cdist.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../spatial.html" >Spatial algorithms and data structures (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial</span></code>)</a></li>
+          <li class="active"><a href="../spatial.distance.html" accesskey="U">Distance computations (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial.distance</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.spatial.distance.directed_hausdorff.html" title="scipy.spatial.distance.directed_hausdorff"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.spatial.distance.cdist.html" title="scipy.spatial.distance.cdist"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-spatial-distance-squareform">
+<h1>scipy.spatial.distance.squareform<a class="headerlink" href="#scipy-spatial-distance-squareform" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.spatial.distance.squareform">
+<code class="sig-prename descclassname">scipy.spatial.distance.</code><code class="sig-name descname">squareform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">'no'</span></em>, <em class="sig-param"><span class="n">checks</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/spatial/distance.py#L2090-L2207"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.spatial.distance.squareform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a vector-form distance vector to a square-form distance
+matrix, and vice-versa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>X</strong><span class="classifier">ndarray</span></dt><dd><p>Either a condensed or redundant distance matrix.</p>
+</dd>
+<dt><strong>force</strong><span class="classifier">str, optional</span></dt><dd><p>As with MATLAB(TM), if force is equal to <code class="docutils literal notranslate"><span class="pre">'tovector'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'tomatrix'</span></code>, the input will be treated as a distance matrix or
+distance vector respectively.</p>
+</dd>
+<dt><strong>checks</strong><span class="classifier">bool, optional</span></dt><dd><p>If set to False, no checks will be made for matrix
+symmetry nor zero diagonals. This is useful if it is known that
+<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">-</span> <span class="pre">X.T1</span></code> is small and <code class="docutils literal notranslate"><span class="pre">diag(X)</span></code> is close to zero.
+These values are ignored any way so they do not disrupt the
+squareform transformation.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>Y</strong><span class="classifier">ndarray</span></dt><dd><p>If a condensed distance matrix is passed, a redundant one is
+returned, or if a redundant one is passed, a condensed distance
+matrix is returned.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic">
+<li><p>v = squareform(X)</p>
+<p>Given a square d-by-d symmetric distance matrix X,
+<code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">squareform(X)</span></code> returns a <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">*</span> <span class="pre">(d-1)</span> <span class="pre">/</span> <span class="pre">2</span></code> (or
+<span class="math notranslate nohighlight">\({n \choose 2}\)</span>) sized vector v.</p>
+</li>
+</ol>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(v[{n \choose 2}-{n-i \choose 2} + (j-i-1)]\)</span> is the distance
+between points i and j. If X is non-square or asymmetric, an error
+is returned.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>X = squareform(v)</p></li>
+</ol>
+<blockquote>
+<div><p>Given a <code class="docutils literal notranslate"><span class="pre">d*(d-1)/2</span></code> sized v for some integer <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code> encoding
+distances as described, <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">squareform(v)</span></code> returns a d by d distance
+matrix X.  The <code class="docutils literal notranslate"><span class="pre">X[i,</span> <span class="pre">j]</span></code> and <code class="docutils literal notranslate"><span class="pre">X[j,</span> <span class="pre">i]</span></code> values are set to
+<span class="math notranslate nohighlight">\(v[{n \choose 2}-{n-i \choose 2} + (j-i-1)]\)</span> and all
+diagonal elements are zero.</p>
+</div></blockquote>
+<p>In SciPy 0.19.0, <code class="docutils literal notranslate"><span class="pre">squareform</span></code> stopped casting all input types to
+float64, and started returning arrays of the same dtype as the input.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.spatial.distance.cdist.html"
+                        title="previous chapter">scipy.spatial.distance.cdist</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.spatial.distance.directed_hausdorff.html"
+                        title="next chapter">scipy.spatial.distance.directed_hausdorff</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

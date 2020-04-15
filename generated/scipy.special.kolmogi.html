@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.kolmogi &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.tklmbda" href="scipy.special.tklmbda.html" >
+    <link rel="prev" title="scipy.special.kolmogorov" href="scipy.special.kolmogorov.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.tklmbda.html" title="scipy.special.tklmbda"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.kolmogorov.html" title="scipy.special.kolmogorov"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-kolmogi">
+<h1>scipy.special.kolmogi<a class="headerlink" href="#scipy-special-kolmogi" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.kolmogi">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">kolmogi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'kolmogi'&gt;</em><a class="headerlink" href="#scipy.special.kolmogi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse Survival Function of Kolmogorov distribution</p>
+<p>It is the inverse function to <a class="reference internal" href="scipy.special.kolmogorov.html#scipy.special.kolmogorov" title="scipy.special.kolmogorov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kolmogorov</span></code></a>.
+Returns y such that <code class="docutils literal notranslate"><span class="pre">kolmogorov(y)</span> <span class="pre">==</span> <span class="pre">p</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>p</strong><span class="classifier">float array_like</span></dt><dd><p>Probability</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>The value(s) of kolmogi(p)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.special.kolmogorov.html#scipy.special.kolmogorov" title="scipy.special.kolmogorov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kolmogorov</span></code></a></dt><dd><p>The Survival Function for the distribution</p>
+</dd>
+<dt><a class="reference internal" href="scipy.stats.kstwobign.html#scipy.stats.kstwobign" title="scipy.stats.kstwobign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.kstwobign</span></code></a></dt><dd><p>Provides the functionality as a continuous distribution</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.smirnov.html#scipy.special.smirnov" title="scipy.special.smirnov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smirnov</span></code></a>, <a class="reference internal" href="scipy.special.smirnovi.html#scipy.special.smirnovi" title="scipy.special.smirnovi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smirnovi</span></code></a></dt><dd><p>Functions for the one-sided distribution</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p><a class="reference internal" href="scipy.special.kolmogorov.html#scipy.special.kolmogorov" title="scipy.special.kolmogorov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kolmogorov</span></code></a> is used by <em class="xref py py-obj">stats.kstest</em> in the application of the
+Kolmogorov-Smirnov Goodness of Fit test. For historial reasons this
+function is exposed in <em class="xref py py-obj">scpy.special</em>, but the recommended way to achieve
+the most accurate CDF/SF/PDF/PPF/ISF computations is to use the
+<em class="xref py py-obj">stats.kstwobign</em> distribution.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">kolmogi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kolmogi</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="go">array([        inf,  1.22384787,  1.01918472,  0.82757356,  0.67644769,</span>
+<span class="go">        0.57117327,  0.        ])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.kolmogorov.html"
+                        title="previous chapter">scipy.special.kolmogorov</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.tklmbda.html"
+                        title="next chapter">scipy.special.tklmbda</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

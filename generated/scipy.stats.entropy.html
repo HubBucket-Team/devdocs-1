@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.entropy &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.median_absolute_deviation" href="scipy.stats.median_absolute_deviation.html" >
+    <link rel="prev" title="scipy.stats.mvsdist" href="scipy.stats.mvsdist.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.median_absolute_deviation.html" title="scipy.stats.median_absolute_deviation"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.mvsdist.html" title="scipy.stats.mvsdist"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-entropy">
+<h1>scipy.stats.entropy<a class="headerlink" href="#scipy-stats-entropy" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.entropy">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">entropy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pk</span></em>, <em class="sig-param"><span class="n">qk</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">base</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/_distn_infrastructure.py#L2605-L2669"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.entropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the entropy of a distribution for given probability values.</p>
+<p>If only probabilities <em class="xref py py-obj">pk</em> are given, the entropy is calculated as
+<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">-sum(pk</span> <span class="pre">*</span> <span class="pre">log(pk),</span> <span class="pre">axis=axis)</span></code>.</p>
+<p>If <em class="xref py py-obj">qk</em> is not None, then compute the Kullback-Leibler divergence
+<code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">sum(pk</span> <span class="pre">*</span> <span class="pre">log(pk</span> <span class="pre">/</span> <span class="pre">qk),</span> <span class="pre">axis=axis)</span></code>.</p>
+<p>This routine will normalize <em class="xref py py-obj">pk</em> and <em class="xref py py-obj">qk</em> if they don’t sum to 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pk</strong><span class="classifier">sequence</span></dt><dd><p>Defines the (discrete) distribution. <code class="docutils literal notranslate"><span class="pre">pk[i]</span></code> is the (possibly
+unnormalized) probability of event <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+</dd>
+<dt><strong>qk</strong><span class="classifier">sequence, optional</span></dt><dd><p>Sequence against which the relative entropy is computed. Should be in
+the same format as <em class="xref py py-obj">pk</em>.</p>
+</dd>
+<dt><strong>base</strong><span class="classifier">float, optional</span></dt><dd><p>The logarithmic base to use, defaults to <code class="docutils literal notranslate"><span class="pre">e</span></code> (natural logarithm).</p>
+</dd>
+<dt><strong>axis: int, optional</strong></dt><dd><p>The axis along which the entropy is calculated. Default is 0.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>S</strong><span class="classifier">float</span></dt><dd><p>The calculated entropy.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">entropy</span>
+</pre></div>
+</div>
+<p>Bernoulli trial with different p.
+The outcome of a fair coin is the most uncertain:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>The outcome of a biased coin is less uncertain:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span><span class="p">([</span><span class="mi">9</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">10</span><span class="p">],</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0.46899559358928117</span>
+</pre></div>
+</div>
+<p>Relative entropy:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">entropy</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span> <span class="n">qk</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">0.5108256237659907</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.mvsdist.html"
+                        title="previous chapter">scipy.stats.mvsdist</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.median_absolute_deviation.html"
+                        title="next chapter">scipy.stats.median_absolute_deviation</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

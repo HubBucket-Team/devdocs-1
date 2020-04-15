@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.ellip_harm &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.ellip_harm_2" href="scipy.special.ellip_harm_2.html" >
+    <link rel="prev" title="scipy.special.lqmn" href="scipy.special.lqmn.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.ellip_harm_2.html" title="scipy.special.ellip_harm_2"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.lqmn.html" title="scipy.special.lqmn"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-ellip-harm">
+<h1>scipy.special.ellip_harm<a class="headerlink" href="#scipy-special-ellip-harm" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.special.ellip_harm">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">ellip_harm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h2</span></em>, <em class="sig-param"><span class="n">k2</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">p</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">signm</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">signn</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/special/_ellip_harm.py#L7-L95"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.special.ellip_harm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ellipsoidal harmonic functions E^p_n(l)</p>
+<p>These are also known as Lame functions of the first kind, and are
+solutions to the Lame equation:</p>
+<div class="math notranslate nohighlight">
+\[(s^2 - h^2)(s^2 - k^2)E''(s) + s(2s^2 - h^2 - k^2)E'(s) + (a - q s^2)E(s) = 0\]</div>
+<p>where <span class="math notranslate nohighlight">\(q = (n+1)n\)</span> and <span class="math notranslate nohighlight">\(a\)</span> is the eigenvalue (not
+returned) corresponding to the solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>h2</strong><span class="classifier">float</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">h**2</span></code></p>
+</dd>
+<dt><strong>k2</strong><span class="classifier">float</span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">k**2</span></code>; should be larger than <code class="docutils literal notranslate"><span class="pre">h**2</span></code></p>
+</dd>
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>Degree</p>
+</dd>
+<dt><strong>s</strong><span class="classifier">float</span></dt><dd><p>Coordinate</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">int</span></dt><dd><p>Order, can range between [1,2n+1]</p>
+</dd>
+<dt><strong>signm</strong><span class="classifier">{1, -1}, optional</span></dt><dd><p>Sign of prefactor of functions. Can be +/-1. See Notes.</p>
+</dd>
+<dt><strong>signn</strong><span class="classifier">{1, -1}, optional</span></dt><dd><p>Sign of prefactor of functions. Can be +/-1. See Notes.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>E</strong><span class="classifier">float</span></dt><dd><p>the harmonic <span class="math notranslate nohighlight">\(E^p_n(s)\)</span></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.special.ellip_harm_2.html#scipy.special.ellip_harm_2" title="scipy.special.ellip_harm_2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ellip_harm_2</span></code></a>, <a class="reference internal" href="scipy.special.ellip_normal.html#scipy.special.ellip_normal" title="scipy.special.ellip_normal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ellip_normal</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The geometric interpretation of the ellipsoidal functions is
+explained in <a class="reference internal" href="#r903a518669cc-2" id="id1">[2]</a>, <a class="reference internal" href="#r903a518669cc-3" id="id2">[3]</a>, <a class="reference internal" href="#r903a518669cc-4" id="id3">[4]</a>. The <em class="xref py py-obj">signm</em> and <em class="xref py py-obj">signn</em> arguments control the
+sign of prefactors for functions according to their type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">:</span> <span class="o">+</span><span class="mi">1</span>
+<span class="n">L</span> <span class="p">:</span> <span class="n">signm</span>
+<span class="n">M</span> <span class="p">:</span> <span class="n">signn</span>
+<span class="n">N</span> <span class="p">:</span> <span class="n">signm</span><span class="o">*</span><span class="n">signn</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.15.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r903a518669cc-1"><span class="brackets">1</span></dt>
+<dd><p>Digital Library of Mathematical Functions 29.12
+<a class="reference external" href="https://dlmf.nist.gov/29.12">https://dlmf.nist.gov/29.12</a></p>
+</dd>
+<dt class="label" id="r903a518669cc-2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Bardhan and Knepley, “Computational science and
+re-discovery: open-source implementations of
+ellipsoidal harmonics for problems in potential theory”,
+Comput. Sci. Disc. 5, 014006 (2012)
+<a class="reference external" href="https://doi.org/10.1088/1749-4699/5/1/014006">DOI:10.1088/1749-4699/5/1/014006</a>.</p>
+</dd>
+<dt class="label" id="r903a518669cc-3"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
+<dd><p>David J.and Dechambre P, “Computation of Ellipsoidal
+Gravity Field Harmonics for small solar system bodies”
+pp. 30-36, 2000</p>
+</dd>
+<dt class="label" id="r903a518669cc-4"><span class="brackets"><a class="fn-backref" href="#id3">4</a></span></dt>
+<dd><p>George Dassios, “Ellipsoidal Harmonics: Theory and Applications”
+pp. 418, 2012</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">ellip_harm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">ellip_harm</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+<p>Check that the functions indeed are solutions to the Lame equation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">UnivariateSpline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">eigenvalue</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">ddf</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">r</span> <span class="o">=</span> <span class="p">((</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ddf</span> <span class="o">+</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">df</span> <span class="o">-</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="o">/</span><span class="n">f</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="o">-</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">r</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">ellip_harm</span><span class="p">(</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_spl</span> <span class="o">=</span> <span class="n">UnivariateSpline</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">a_err</span> <span class="o">=</span> <span class="n">eigenvalue</span><span class="p">(</span><span class="n">E_spl</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">E_spl</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">E_spl</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">a_err</span>
+<span class="go">(583.44366156701483, 6.4580890640310646e-11)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.lqmn.html"
+                        title="previous chapter">scipy.special.lqmn</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.ellip_harm_2.html"
+                        title="next chapter">scipy.special.ellip_harm_2</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.iirdesign &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.iirfilter" href="scipy.signal.iirfilter.html" >
+    <link rel="prev" title="scipy.signal.group_delay" href="scipy.signal.group_delay.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.iirfilter.html" title="scipy.signal.iirfilter"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.group_delay.html" title="scipy.signal.group_delay"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-iirdesign">
+<h1>scipy.signal.iirdesign<a class="headerlink" href="#scipy-signal-iirdesign" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.iirdesign">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">iirdesign</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">wp</span></em>, <em class="sig-param"><span class="n">ws</span></em>, <em class="sig-param"><span class="n">gpass</span></em>, <em class="sig-param"><span class="n">gstop</span></em>, <em class="sig-param"><span class="n">analog</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ftype</span><span class="o">=</span><span class="default_value">'ellip'</span></em>, <em class="sig-param"><span class="n">output</span><span class="o">=</span><span class="default_value">'ba'</span></em>, <em class="sig-param"><span class="n">fs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/filter_design.py#L2063-L2192"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.iirdesign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complete IIR digital and analog filter design.</p>
+<p>Given passband and stopband frequencies and gains, construct an analog or
+digital IIR filter of minimum order for a given basic type. Return the
+output in numerator, denominator (‘ba’), pole-zero (‘zpk’) or second order
+sections (‘sos’) form.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>wp, ws</strong><span class="classifier">float</span></dt><dd><p>Passband and stopband edge frequencies.
+For digital filters, these are in the same units as <em class="xref py py-obj">fs</em>. By default,
+<em class="xref py py-obj">fs</em> is 2 half-cycles/sample, so these are normalized from 0 to 1,
+where 1 is the Nyquist frequency. For example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Lowpass:   wp = 0.2,          ws = 0.3</p></li>
+<li><p>Highpass:  wp = 0.3,          ws = 0.2</p></li>
+<li><p>Bandpass:  wp = [0.2, 0.5],   ws = [0.1, 0.6]</p></li>
+<li><p>Bandstop:  wp = [0.1, 0.6],   ws = [0.2, 0.5]</p></li>
+</ul>
+</div></blockquote>
+<p>For analog filters, <em class="xref py py-obj">wp</em> and <em class="xref py py-obj">ws</em> are angular frequencies (e.g., rad/s).</p>
+</dd>
+<dt><strong>gpass</strong><span class="classifier">float</span></dt><dd><p>The maximum loss in the passband (dB).</p>
+</dd>
+<dt><strong>gstop</strong><span class="classifier">float</span></dt><dd><p>The minimum attenuation in the stopband (dB).</p>
+</dd>
+<dt><strong>analog</strong><span class="classifier">bool, optional</span></dt><dd><p>When True, return an analog filter, otherwise a digital filter is
+returned.</p>
+</dd>
+<dt><strong>ftype</strong><span class="classifier">str, optional</span></dt><dd><p>The type of IIR filter to design:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Butterworth   : ‘butter’</p></li>
+<li><p>Chebyshev I   : ‘cheby1’</p></li>
+<li><p>Chebyshev II  : ‘cheby2’</p></li>
+<li><p>Cauer/elliptic: ‘ellip’</p></li>
+<li><p>Bessel/Thomson: ‘bessel’</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>output</strong><span class="classifier">{‘ba’, ‘zpk’, ‘sos’}, optional</span></dt><dd><p>Type of output:  numerator/denominator (‘ba’), pole-zero (‘zpk’), or
+second-order sections (‘sos’). Default is ‘ba’ for backwards
+compatibility, but ‘sos’ should be used for general-purpose filtering.</p>
+</dd>
+<dt><strong>fs</strong><span class="classifier">float, optional</span></dt><dd><p>The sampling frequency of the digital system.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>b, a</strong><span class="classifier">ndarray, ndarray</span></dt><dd><p>Numerator (<em class="xref py py-obj">b</em>) and denominator (<em class="xref py py-obj">a</em>) polynomials of the IIR filter.
+Only returned if <code class="docutils literal notranslate"><span class="pre">output='ba'</span></code>.</p>
+</dd>
+<dt><strong>z, p, k</strong><span class="classifier">ndarray, ndarray, float</span></dt><dd><p>Zeros, poles, and system gain of the IIR filter transfer
+function.  Only returned if <code class="docutils literal notranslate"><span class="pre">output='zpk'</span></code>.</p>
+</dd>
+<dt><strong>sos</strong><span class="classifier">ndarray</span></dt><dd><p>Second-order sections representation of the IIR filter.
+Only returned if <code class="docutils literal notranslate"><span class="pre">output=='sos'</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.butter.html#scipy.signal.butter" title="scipy.signal.butter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">butter</span></code></a></dt><dd><p>Filter design using order and critical points</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.cheby1.html#scipy.signal.cheby1" title="scipy.signal.cheby1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cheby1</span></code></a>, <a class="reference internal" href="scipy.signal.cheby2.html#scipy.signal.cheby2" title="scipy.signal.cheby2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cheby2</span></code></a>, <a class="reference internal" href="scipy.signal.ellip.html#scipy.signal.ellip" title="scipy.signal.ellip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ellip</span></code></a>, <a class="reference internal" href="scipy.signal.bessel.html#scipy.signal.bessel" title="scipy.signal.bessel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bessel</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.signal.buttord.html#scipy.signal.buttord" title="scipy.signal.buttord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buttord</span></code></a></dt><dd><p>Find order and critical points from passband and stopband spec</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.cheb1ord.html#scipy.signal.cheb1ord" title="scipy.signal.cheb1ord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cheb1ord</span></code></a>, <a class="reference internal" href="scipy.signal.cheb2ord.html#scipy.signal.cheb2ord" title="scipy.signal.cheb2ord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cheb2ord</span></code></a>, <a class="reference internal" href="scipy.signal.ellipord.html#scipy.signal.ellipord" title="scipy.signal.ellipord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ellipord</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.signal.iirfilter.html#scipy.signal.iirfilter" title="scipy.signal.iirfilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iirfilter</span></code></a></dt><dd><p>General filter design using order and critical frequencies</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">'sos'</span></code> output parameter was added in 0.16.0.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.ticker</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wp</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ws</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpass</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gstop</span> <span class="o">=</span> <span class="mi">40</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">system</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">iirdesign</span><span class="p">(</span><span class="n">wp</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">gpass</span><span class="p">,</span> <span class="n">gstop</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="o">*</span><span class="n">system</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Digital filter frequency response&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="p">)),</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude [dB]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency [rad/sample]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Angle (radians)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nticks</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">LinearLocator</span><span class="p">(</span><span class="n">nticks</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">LinearLocator</span><span class="p">(</span><span class="n">nticks</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-iirdesign-1.png" src="../_images/scipy-signal-iirdesign-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.group_delay.html"
+                        title="previous chapter">scipy.signal.group_delay</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.iirfilter.html"
+                        title="next chapter">scipy.signal.iirfilter</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

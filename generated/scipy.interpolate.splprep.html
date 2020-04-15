@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.interpolate.splprep &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Interpolation (scipy.interpolate)" href="../interpolate.html" >
+    <link rel="next" title="scipy.interpolate.splev" href="scipy.interpolate.splev.html" >
+    <link rel="prev" title="scipy.interpolate.splrep" href="scipy.interpolate.splrep.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../interpolate.html" accesskey="U">Interpolation (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.interpolate.splev.html" title="scipy.interpolate.splev"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.interpolate.splrep.html" title="scipy.interpolate.splrep"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-interpolate-splprep">
+<h1>scipy.interpolate.splprep<a class="headerlink" href="#scipy-interpolate-splprep" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.interpolate.splprep">
+<code class="sig-prename descclassname">scipy.interpolate.</code><code class="sig-name descname">splprep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">w</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">u</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ub</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ue</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">task</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">t</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">full_output</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nest</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">per</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">quiet</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/interpolate/fitpack.py#L14-L157"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.interpolate.splprep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the B-spline representation of an N-D curve.</p>
+<p>Given a list of N rank-1 arrays, <em class="xref py py-obj">x</em>, which represent a curve in
+N-D space parametrized by <em class="xref py py-obj">u</em>, find a smooth approximating
+spline curve g(<em class="xref py py-obj">u</em>). Uses the FORTRAN routine parcur from FITPACK.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>A list of sample vector arrays representing the curve.</p>
+</dd>
+<dt><strong>w</strong><span class="classifier">array_like, optional</span></dt><dd><p>Strictly positive rank-1 array of weights the same length as <em class="xref py py-obj">x[0]</em>.
+The weights are used in computing the weighted least-squares spline
+fit. If the errors in the <em class="xref py py-obj">x</em> values have standard-deviation given by
+the vector d, then <em class="xref py py-obj">w</em> should be 1/d. Default is <code class="docutils literal notranslate"><span class="pre">ones(len(x[0]))</span></code>.</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">array_like, optional</span></dt><dd><p>An array of parameter values. If not given, these values are
+calculated automatically as <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">len(x[0])</span></code>, where</p>
+<blockquote>
+<div><p>v[0] = 0</p>
+<p>v[i] = v[i-1] + distance(<em class="xref py py-obj">x[i]</em>, <em class="xref py py-obj">x[i-1]</em>)</p>
+<p>u[i] = v[i] / v[M-1]</p>
+</div></blockquote>
+</dd>
+<dt><strong>ub, ue</strong><span class="classifier">int, optional</span></dt><dd><p>The end-points of the parameters interval.  Defaults to
+u[0] and u[-1].</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, optional</span></dt><dd><p>Degree of the spline. Cubic splines are recommended.
+Even values of <em class="xref py py-obj">k</em> should be avoided especially with a small s-value.
+<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&lt;=</span> <span class="pre">k</span> <span class="pre">&lt;=</span> <span class="pre">5</span></code>, default is 3.</p>
+</dd>
+<dt><strong>task</strong><span class="classifier">int, optional</span></dt><dd><p>If task==0 (default), find t and c for a given smoothing factor, s.
+If task==1, find t and c for another value of the smoothing factor, s.
+There must have been a previous call with task=0 or task=1
+for the same set of data.
+If task=-1 find the weighted least square spline for a given set of
+knots, t.</p>
+</dd>
+<dt><strong>s</strong><span class="classifier">float, optional</span></dt><dd><p>A smoothing condition.  The amount of smoothness is determined by
+satisfying the conditions: <code class="docutils literal notranslate"><span class="pre">sum((w</span> <span class="pre">*</span> <span class="pre">(y</span> <span class="pre">-</span> <span class="pre">g))**2,axis=0)</span> <span class="pre">&lt;=</span> <span class="pre">s</span></code>,
+where g(x) is the smoothed interpolation of (x,y).  The user can
+use <em class="xref py py-obj">s</em> to control the trade-off between closeness and smoothness
+of fit.  Larger <em class="xref py py-obj">s</em> means more smoothing while smaller values of <em class="xref py py-obj">s</em>
+indicate less smoothing. Recommended values of <em class="xref py py-obj">s</em> depend on the
+weights, w.  If the weights represent the inverse of the
+standard-deviation of y, then a good <em class="xref py py-obj">s</em> value should be found in
+the range <code class="docutils literal notranslate"><span class="pre">(m-sqrt(2*m),m+sqrt(2*m))</span></code>, where m is the number of
+data points in x, y, and w.</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">int, optional</span></dt><dd><p>The knots needed for task=-1.</p>
+</dd>
+<dt><strong>full_output</strong><span class="classifier">int, optional</span></dt><dd><p>If non-zero, then return optional outputs.</p>
+</dd>
+<dt><strong>nest</strong><span class="classifier">int, optional</span></dt><dd><p>An over-estimate of the total number of knots of the spline to
+help in determining the storage space.  By default nest=m/2.
+Always large enough is nest=m+k+1.</p>
+</dd>
+<dt><strong>per</strong><span class="classifier">int, optional</span></dt><dd><p>If non-zero, data points are considered periodic with period
+<code class="docutils literal notranslate"><span class="pre">x[m-1]</span> <span class="pre">-</span> <span class="pre">x[0]</span></code> and a smooth periodic spline approximation is
+returned.  Values of <code class="docutils literal notranslate"><span class="pre">y[m-1]</span></code> and <code class="docutils literal notranslate"><span class="pre">w[m-1]</span></code> are not used.</p>
+</dd>
+<dt><strong>quiet</strong><span class="classifier">int, optional</span></dt><dd><p>Non-zero to suppress messages.
+This parameter is deprecated; use standard Python warning filters
+instead.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>tck</strong><span class="classifier">tuple</span></dt><dd><p>(t,c,k) a tuple containing the vector of knots, the B-spline
+coefficients, and the degree of the spline.</p>
+</dd>
+<dt><strong>u</strong><span class="classifier">array</span></dt><dd><p>An array of the values of the parameter.</p>
+</dd>
+<dt><strong>fp</strong><span class="classifier">float</span></dt><dd><p>The weighted sum of squared residuals of the spline approximation.</p>
+</dd>
+<dt><strong>ier</strong><span class="classifier">int</span></dt><dd><p>An integer flag about splrep success.  Success is indicated
+if ier&lt;=0. If ier in [1,2,3] an error occurred but was not raised.
+Otherwise an error is raised.</p>
+</dd>
+<dt><strong>msg</strong><span class="classifier">str</span></dt><dd><p>A message corresponding to the integer flag, ier.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.interpolate.splrep.html#scipy.interpolate.splrep" title="scipy.interpolate.splrep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splrep</span></code></a>, <a class="reference internal" href="scipy.interpolate.splev.html#scipy.interpolate.splev" title="scipy.interpolate.splev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splev</span></code></a>, <a class="reference internal" href="scipy.interpolate.sproot.html#scipy.interpolate.sproot" title="scipy.interpolate.sproot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sproot</span></code></a>, <a class="reference internal" href="scipy.interpolate.spalde.html#scipy.interpolate.spalde" title="scipy.interpolate.spalde"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spalde</span></code></a>, <a class="reference internal" href="scipy.interpolate.splint.html#scipy.interpolate.splint" title="scipy.interpolate.splint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splint</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.interpolate.bisplrep.html#scipy.interpolate.bisplrep" title="scipy.interpolate.bisplrep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bisplrep</span></code></a>, <a class="reference internal" href="scipy.interpolate.bisplev.html#scipy.interpolate.bisplev" title="scipy.interpolate.bisplev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bisplev</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.interpolate.UnivariateSpline.html#scipy.interpolate.UnivariateSpline" title="scipy.interpolate.UnivariateSpline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnivariateSpline</span></code></a>, <a class="reference internal" href="scipy.interpolate.BivariateSpline.html#scipy.interpolate.BivariateSpline" title="scipy.interpolate.BivariateSpline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BivariateSpline</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.interpolate.BSpline.html#scipy.interpolate.BSpline" title="scipy.interpolate.BSpline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BSpline</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="scipy.interpolate.make_interp_spline.html#scipy.interpolate.make_interp_spline" title="scipy.interpolate.make_interp_spline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_interp_spline</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>See <a class="reference internal" href="scipy.interpolate.splev.html#scipy.interpolate.splev" title="scipy.interpolate.splev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splev</span></code></a> for evaluation of the spline and its derivatives.
+The number of dimensions N must be smaller than 11.</p>
+<p>The number of coefficients in the <em class="xref py py-obj">c</em> array is <code class="docutils literal notranslate"><span class="pre">k+1</span></code> less then the number
+of knots, <code class="docutils literal notranslate"><span class="pre">len(t)</span></code>. This is in contrast with <a class="reference internal" href="scipy.interpolate.splrep.html#scipy.interpolate.splrep" title="scipy.interpolate.splrep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splrep</span></code></a>, which zero-pads
+the array of coefficients to have the same length as the array of knots.
+These additional coefficients are ignored by evaluation routines, <a class="reference internal" href="scipy.interpolate.splev.html#scipy.interpolate.splev" title="scipy.interpolate.splev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splev</span></code></a>
+and <a class="reference internal" href="scipy.interpolate.BSpline.html#scipy.interpolate.BSpline" title="scipy.interpolate.BSpline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BSpline</span></code></a>.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r407dc2c2cbe0-1"><span class="brackets">1</span></dt>
+<dd><p>P. Dierckx, “Algorithms for smoothing data with periodic and
+parametric splines, Computer Graphics and Image Processing”,
+20 (1982) 171-184.</p>
+</dd>
+<dt class="label" id="r407dc2c2cbe0-2"><span class="brackets">2</span></dt>
+<dd><p>P. Dierckx, “Algorithms for smoothing data with periodic and
+parametric splines”, report tw55, Dept. Computer Science,
+K.U.Leuven, 1981.</p>
+</dd>
+<dt class="label" id="r407dc2c2cbe0-3"><span class="brackets">3</span></dt>
+<dd><p>P. Dierckx, “Curve and surface fitting with splines”, Monographs on
+Numerical Analysis, Oxford University Press, 1993.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Generate a discretization of a limacon curve in the polar coordinates:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>         <span class="c1"># polar coords</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>    <span class="c1"># convert to cartesian</span>
+</pre></div>
+</div>
+<p>And interpolate:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">splprep</span><span class="p">,</span> <span class="n">splev</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tck</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">splprep</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_points</span> <span class="o">=</span> <span class="n">splev</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">tck</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that (i) we force interpolation by using <em class="xref py py-obj">s=0</em>,
+(ii) the parameterization, <code class="docutils literal notranslate"><span class="pre">u</span></code>, is generated automatically.
+Now plot the result:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">new_points</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_points</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-interpolate-splprep-1.png" src="../_images/scipy-interpolate-splprep-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.interpolate.splrep.html"
+                        title="previous chapter">scipy.interpolate.splrep</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.interpolate.splev.html"
+                        title="next chapter">scipy.interpolate.splev</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.cluster.hierarchy.cophenet &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Hierarchical clustering (scipy.cluster.hierarchy)" href="../cluster.hierarchy.html" >
+    <link rel="next" title="scipy.cluster.hierarchy.from_mlab_linkage" href="scipy.cluster.hierarchy.from_mlab_linkage.html" >
+    <link rel="prev" title="scipy.cluster.hierarchy.ward" href="scipy.cluster.hierarchy.ward.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../cluster.html" >Clustering package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code>)</a></li>
+          <li class="active"><a href="../cluster.hierarchy.html" accesskey="U">Hierarchical clustering (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster.hierarchy</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.hierarchy.from_mlab_linkage.html" title="scipy.cluster.hierarchy.from_mlab_linkage"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.hierarchy.ward.html" title="scipy.cluster.hierarchy.ward"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-cluster-hierarchy-cophenet">
+<h1>scipy.cluster.hierarchy.cophenet<a class="headerlink" href="#scipy-cluster-hierarchy-cophenet" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.cluster.hierarchy.cophenet">
+<code class="sig-prename descclassname">scipy.cluster.hierarchy.</code><code class="sig-name descname">cophenet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Z</span></em>, <em class="sig-param"><span class="n">Y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/cluster/hierarchy.py#L1566-L1696"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.cluster.hierarchy.cophenet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the cophenetic distances between each observation in
+the hierarchical clustering defined by the linkage <code class="docutils literal notranslate"><span class="pre">Z</span></code>.</p>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> are original observations in
+disjoint clusters <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code>, respectively and
+<code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code> are joined by a direct parent cluster
+<code class="docutils literal notranslate"><span class="pre">u</span></code>. The cophenetic distance between observations
+<code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> is simply the distance between
+clusters <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>Z</strong><span class="classifier">ndarray</span></dt><dd><p>The hierarchical clustering encoded as an array
+(see <a class="reference internal" href="scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage" title="scipy.cluster.hierarchy.linkage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linkage</span></code></a> function).</p>
+</dd>
+<dt><strong>Y</strong><span class="classifier">ndarray (optional)</span></dt><dd><p>Calculates the cophenetic correlation coefficient <code class="docutils literal notranslate"><span class="pre">c</span></code> of a
+hierarchical clustering defined by the linkage matrix <em class="xref py py-obj">Z</em>
+of a set of <span class="math notranslate nohighlight">\(n\)</span> observations in <span class="math notranslate nohighlight">\(m\)</span>
+dimensions. <em class="xref py py-obj">Y</em> is the condensed distance matrix from which
+<em class="xref py py-obj">Z</em> was generated.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>c</strong><span class="classifier">ndarray</span></dt><dd><p>The cophentic correlation distance (if <code class="docutils literal notranslate"><span class="pre">Y</span></code> is passed).</p>
+</dd>
+<dt><strong>d</strong><span class="classifier">ndarray</span></dt><dd><p>The cophenetic distance matrix in condensed form. The
+<span class="math notranslate nohighlight">\(ij\)</span> th entry is the cophenetic distance between
+original observations <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage" title="scipy.cluster.hierarchy.linkage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linkage</span></code></a></dt><dd><p>for a description of what a linkage matrix is.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.spatial.distance.squareform.html#scipy.spatial.distance.squareform" title="scipy.spatial.distance.squareform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.spatial.distance.squareform</span></code></a></dt><dd><p>transforming condensed matrices into square ones.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">single</span><span class="p">,</span> <span class="n">cophenet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+</pre></div>
+</div>
+<p>Given a dataset <code class="docutils literal notranslate"><span class="pre">X</span></code> and a linkage matrix <code class="docutils literal notranslate"><span class="pre">Z</span></code>, the cophenetic distance
+between two points of <code class="docutils literal notranslate"><span class="pre">X</span></code> is the distance between the largest two
+distinct clusters that each of the points:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">X</span></code> corresponds to this dataset</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="n">x</span>    <span class="n">x</span> <span class="n">x</span>
+<span class="n">x</span>        <span class="n">x</span>
+
+<span class="n">x</span>        <span class="n">x</span>
+<span class="n">x</span> <span class="n">x</span>    <span class="n">x</span> <span class="n">x</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">single</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span>
+<span class="go">array([[ 0.,  1.,  1.,  2.],</span>
+<span class="go">       [ 2., 12.,  1.,  3.],</span>
+<span class="go">       [ 3.,  4.,  1.,  2.],</span>
+<span class="go">       [ 5., 14.,  1.,  3.],</span>
+<span class="go">       [ 6.,  7.,  1.,  2.],</span>
+<span class="go">       [ 8., 16.,  1.,  3.],</span>
+<span class="go">       [ 9., 10.,  1.,  2.],</span>
+<span class="go">       [11., 18.,  1.,  3.],</span>
+<span class="go">       [13., 15.,  2.,  6.],</span>
+<span class="go">       [17., 20.,  2.,  9.],</span>
+<span class="go">       [19., 21.,  2., 12.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cophenet</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="go">array([1., 1., 2., 2., 2., 2., 2., 2., 2., 2., 2., 1., 2., 2., 2., 2., 2.,</span>
+<span class="go">       2., 2., 2., 2., 2., 2., 2., 2., 2., 2., 2., 2., 2., 1., 1., 2., 2.,</span>
+<span class="go">       2., 2., 2., 2., 1., 2., 2., 2., 2., 2., 2., 2., 2., 2., 2., 2., 2.,</span>
+<span class="go">       1., 1., 2., 2., 2., 1., 2., 2., 2., 2., 2., 2., 1., 1., 1.])</span>
+</pre></div>
+</div>
+<p>The output of the <a class="reference internal" href="#scipy.cluster.hierarchy.cophenet" title="scipy.cluster.hierarchy.cophenet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.cluster.hierarchy.cophenet</span></code></a> method is
+represented in condensed form. We can use
+<a class="reference internal" href="scipy.spatial.distance.squareform.html#scipy.spatial.distance.squareform" title="scipy.spatial.distance.squareform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.spatial.distance.squareform</span></code></a> to see the output as a
+regular matrix (where each element <code class="docutils literal notranslate"><span class="pre">ij</span></code> denotes the cophenetic distance
+between each <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span></code> pair of points in <code class="docutils literal notranslate"><span class="pre">X</span></code>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">squareform</span><span class="p">(</span><span class="n">cophenet</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
+<span class="go">array([[0., 1., 1., 2., 2., 2., 2., 2., 2., 2., 2., 2.],</span>
+<span class="go">       [1., 0., 1., 2., 2., 2., 2., 2., 2., 2., 2., 2.],</span>
+<span class="go">       [1., 1., 0., 2., 2., 2., 2., 2., 2., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 0., 1., 1., 2., 2., 2., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 1., 0., 1., 2., 2., 2., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 1., 1., 0., 2., 2., 2., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 2., 2., 2., 0., 1., 1., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 2., 2., 2., 1., 0., 1., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 2., 2., 2., 1., 1., 0., 2., 2., 2.],</span>
+<span class="go">       [2., 2., 2., 2., 2., 2., 2., 2., 2., 0., 1., 1.],</span>
+<span class="go">       [2., 2., 2., 2., 2., 2., 2., 2., 2., 1., 0., 1.],</span>
+<span class="go">       [2., 2., 2., 2., 2., 2., 2., 2., 2., 1., 1., 0.]])</span>
+</pre></div>
+</div>
+<p>In this example, the cophenetic distance between points on <code class="docutils literal notranslate"><span class="pre">X</span></code> that are
+very close (i.e., in the same corner) is 1. For other pairs of points is 2,
+because the points will be located in clusters at different
+corners - thus, the distance between these clusters will be larger.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.cluster.hierarchy.ward.html"
+                        title="previous chapter">scipy.cluster.hierarchy.ward</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.cluster.hierarchy.from_mlab_linkage.html"
+                        title="next chapter">scipy.cluster.hierarchy.from_mlab_linkage</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

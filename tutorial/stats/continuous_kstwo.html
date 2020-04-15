@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>KStwo Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Continuous Statistical Distributions" href="continuous.html" >
+    <link rel="next" title="KStwobign Distribution" href="continuous_kstwobign.html" >
+    <link rel="prev" title="KSone Distribution" href="continuous_ksone.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="continuous.html" accesskey="U">Continuous Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="continuous_kstwobign.html" title="KStwobign Distribution"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="continuous_ksone.html" title="KSone Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="kstwo-distribution">
+<span id="continuous-kstwo"></span><h1>KStwo Distribution<a class="headerlink" href="#kstwo-distribution" title="Permalink to this headline">¶</a></h1>
+<p>This is the distribution of the maximum absolute differences between an
+empirical distribution function, computed from <span class="math notranslate nohighlight">\(n\)</span> samples or observations,
+and a comparison (or target) cumulative distribution function, which is
+assumed to be continuous.
+(The “two” in the name is because this is the two-sided difference.
+<code class="docutils literal notranslate"><span class="pre">ksone</span></code> is the distribution of the positive differences, <span class="math notranslate nohighlight">\(D_n^+\)</span>,
+hence it concerns one-sided differences.
+<code class="docutils literal notranslate"><span class="pre">kstwobign</span></code> is the limiting
+distribution of the <em>normalized</em> maximum absolute differences <span class="math notranslate nohighlight">\(\sqrt{n} D_n\)</span>.)</p>
+<p>Writing <span class="math notranslate nohighlight">\(D_n = \sup_t \left|F_{empirical,n}(t)-F_{target}(t)\right|\)</span>,
+<code class="docutils literal notranslate"><span class="pre">kstwo</span></code> is the distribution of the <span class="math notranslate nohighlight">\(D_n\)</span> values.</p>
+<p><code class="docutils literal notranslate"><span class="pre">kstwo</span></code> can also be used with the differences between two empirical distribution functions,
+for sets of observations with <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> samples respectively.
+Writing <span class="math notranslate nohighlight">\(D_{m,n} = \sup_t \left|F_{1,m}(t)-F_{2,n}(t)\right|\)</span>,  where
+<span class="math notranslate nohighlight">\(F_{1,m}\)</span> and <span class="math notranslate nohighlight">\(F_{2,n}\)</span> are the two empirical distribution functions, then
+<span class="math notranslate nohighlight">\(Pr(D_{m,n} \le x) \approx Pr(D_N \le x)\)</span> under appropriate conditions,
+where <span class="math notranslate nohighlight">\(N = \sqrt{\left(\frac{mn}{m+n}\right)}\)</span>.</p>
+<p>There is one shape parameter <span class="math notranslate nohighlight">\(n\)</span>, a positive integer, and the support is <span class="math notranslate nohighlight">\(x\in\left[0,1\right]\)</span>.</p>
+<p>The implementation follows Simard &amp; L’Ecuyer, which combines exact algorithms of Durbin and Pomeranz
+with asymptotic estimates of Li-Chien, Pelz and Good to compute the CDF with 5-15 accurate digits.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">kstwo</span>
+</pre></div>
+</div>
+<p>Show the probability of a gap at least as big as 0, 0.5 and 1.0 for a sample of size 5</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">kstwo</span><span class="o">.</span><span class="n">sf</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">array([1.   , 0.112, 0.   ])</span>
+</pre></div>
+</div>
+<p>Compare a sample of size 5 drawn from a source N(0.5, 1) distribution against
+a target N(0, 1) CDF.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gendist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1"># Normal distribution, mean 0.5, stddev 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">423</span><span class="p">)</span>  <span class="c1"># Set the seed for reproducibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">gendist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([-1.59113056, -0.66335147,  0.54791569,  0.78009321,  1.27641365])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdfs</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdfs</span>
+<span class="go">array([0.0557901 , 0.25355274, 0.7081251 , 0.78233199, 0.89909533])</span>
+<span class="go"># Construct the Empirical CDF and the K-S statistics (Dn+, Dn-, Dn)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ecdfs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">ecdfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">cdfs</span><span class="p">,</span> <span class="n">cdfs</span> <span class="o">-</span> <span class="n">ecdfs</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">ecdfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">cdfs</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span>
+<span class="go">array([[-1.591,  0.2  ,  0.056,  0.056,  0.144],</span>
+<span class="go">       [-0.663,  0.4  ,  0.254,  0.054,  0.146],</span>
+<span class="go">       [ 0.548,  0.6  ,  0.708,  0.308, -0.108],</span>
+<span class="go">       [ 0.78 ,  0.8  ,  0.782,  0.182,  0.018],</span>
+<span class="go">       [ 1.276,  1.   ,  0.899,  0.099,  0.101]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gaps</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dnpm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gaps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Dnpm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iminus</span><span class="p">,</span> <span class="n">iplus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">gaps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dn- = </span><span class="si">%f</span><span class="s1"> (at x=</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Dnpm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">iminus</span><span class="p">]))</span>
+<span class="go">Dn- = 0.308125 (at x=0.55)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dn+ = </span><span class="si">%f</span><span class="s1"> (at x=</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Dnpm</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">iplus</span><span class="p">]))</span>
+<span class="go">Dn+ = 0.146447 (at x=-0.66)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dn  = </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Dn</span><span class="p">))</span>
+<span class="go">Dn  = 0.308125</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="n">kstwo</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">Dn</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;For a sample of size </span><span class="si">%d</span><span class="s1"> drawn from a N(0, 1) distribution:&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s1">&#39; Kolmogorov-Smirnov 2-sided n=</span><span class="si">%d</span><span class="s1">: Prob(Dn &gt;= </span><span class="si">%f</span><span class="s1">) = </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Dn</span><span class="p">,</span> <span class="n">probs</span><span class="p">)]))</span>
+<span class="go">For a sample of size 5 drawn from a N(0, 1) distribution:</span>
+<span class="go"> Kolmogorov-Smirnov 2-sided n=5: Prob(Dn &gt;= 0.308125) = 0.6319</span>
+</pre></div>
+</div>
+<p>Plot the Empirical CDF against the target N(0, 1) CDF</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="p">]),</span> <span class="n">ecdfs</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Empirical CDF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x3</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF for N(0, 1)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">iminus</span><span class="p">]],</span> <span class="n">ecdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">],</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">iplus</span><span class="p">]],</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iplus</span><span class="p">],</span> <span class="n">ecdfs</span><span class="p">[</span><span class="n">iplus</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Dn-&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">iminus</span><span class="p">],</span> <span class="p">(</span><span class="n">ecdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">]</span><span class="o">+</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">iminus</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">ecdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">]</span><span class="o">+</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">0.02</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Dn+&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">iplus</span><span class="p">],</span> <span class="p">(</span><span class="n">ecdfs</span><span class="p">[</span><span class="n">iplus</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iplus</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">iplus</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">ecdfs</span><span class="p">[</span><span class="n">iplus</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iplus</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">0.02</span><span class="p">),</span>
+<span class="gp">... </span>            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>“Kolmogorov-Smirnov test”, Wikipedia
+<a class="reference external" href="https://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test">https://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test</a></p></li>
+<li><p>Durbin J. “The Probability that the Sample Distribution Function Lies Between Two
+Parallel Straight Lines.” <em>Ann. Math. Statist</em>., 39 (1968) 39, 398-411.</p></li>
+<li><p>Pomeranz J.  “Exact Cumulative Distribution of the Kolmogorov-Smirnov Statistic for
+Small Samples (Algorithm 487).”  <em>Communications of the ACM</em>, 17(12), (1974) 703-704.</p></li>
+<li><p>Li-Chien, C.  “On the exact distribution of the statistics of A. N. Kolmogorov and
+their asymptotic expansion.”  <em>Acta Matematica Sinica</em>, 6, (1956) 55-81.</p></li>
+<li><p>Pelz W, Good IJ. “Approximating the Lower Tail-areas of the Kolmogorov-Smirnov One-sample
+Statistic.” <em>Journal of the Royal Statistical Society</em>, Series B, (1976) 38(2), 152-156.</p></li>
+<li><p>Simard, R., L’Ecuyer, P. “Computing the Two-Sided Kolmogorov-Smirnov Distribution”,
+<em>Journal of Statistical Software</em>, Vol 39, (2011) 11.</p></li>
+</ul>
+<p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.kstwo.html#scipy.stats.kstwo" title="scipy.stats.kstwo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.kstwo</span></code></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">KStwo Distribution</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous_ksone.html"
+                        title="previous chapter">KSone Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="continuous_kstwobign.html"
+                        title="next chapter">KStwobign Distribution</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

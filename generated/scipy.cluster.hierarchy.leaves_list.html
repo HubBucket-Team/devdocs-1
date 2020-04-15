@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.cluster.hierarchy.leaves_list &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Hierarchical clustering (scipy.cluster.hierarchy)" href="../cluster.hierarchy.html" >
+    <link rel="next" title="scipy.cluster.hierarchy.to_tree" href="scipy.cluster.hierarchy.to_tree.html" >
+    <link rel="prev" title="scipy.cluster.hierarchy.ClusterNode.pre_order" href="scipy.cluster.hierarchy.ClusterNode.pre_order.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../cluster.html" >Clustering package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code>)</a></li>
+          <li class="active"><a href="../cluster.hierarchy.html" accesskey="U">Hierarchical clustering (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster.hierarchy</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.hierarchy.to_tree.html" title="scipy.cluster.hierarchy.to_tree"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.hierarchy.ClusterNode.pre_order.html" title="scipy.cluster.hierarchy.ClusterNode.pre_order"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-cluster-hierarchy-leaves-list">
+<h1>scipy.cluster.hierarchy.leaves_list<a class="headerlink" href="#scipy-cluster-hierarchy-leaves-list" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.cluster.hierarchy.leaves_list">
+<code class="sig-prename descclassname">scipy.cluster.hierarchy.</code><code class="sig-name descname">leaves_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Z</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/cluster/hierarchy.py#L2699-L2753"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.cluster.hierarchy.leaves_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of leaf node ids.</p>
+<p>The return corresponds to the observation vector index as it appears
+in the tree from left to right. Z is a linkage matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>Z</strong><span class="classifier">ndarray</span></dt><dd><p>The hierarchical clustering encoded as a matrix.  <em class="xref py py-obj">Z</em> is
+a linkage matrix.  See <a class="reference internal" href="scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage" title="scipy.cluster.hierarchy.linkage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linkage</span></code></a> for more information.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>leaves_list</strong><span class="classifier">ndarray</span></dt><dd><p>The list of leaf node ids.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.cluster.hierarchy.dendrogram.html#scipy.cluster.hierarchy.dendrogram" title="scipy.cluster.hierarchy.dendrogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dendrogram</span></code></a></dt><dd><p>for information about dendrogram structure.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">ward</span><span class="p">,</span> <span class="n">dendrogram</span><span class="p">,</span> <span class="n">leaves_list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">ward</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The linkage matrix <code class="docutils literal notranslate"><span class="pre">Z</span></code> represents a dendrogram, that is, a tree that
+encodes the structure of the clustering performed.
+<a class="reference internal" href="#scipy.cluster.hierarchy.leaves_list" title="scipy.cluster.hierarchy.leaves_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.cluster.hierarchy.leaves_list</span></code></a> shows the mapping between
+indices in the <code class="docutils literal notranslate"><span class="pre">X</span></code> dataset and leaves in the dendrogram:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">leaves_list</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="go">array([ 2,  0,  1,  5,  3,  4,  8,  6,  7, 11,  9, 10], dtype=int32)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dn</span> <span class="o">=</span> <span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-cluster-hierarchy-leaves_list-1.png" src="../_images/scipy-cluster-hierarchy-leaves_list-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.cluster.hierarchy.ClusterNode.pre_order.html"
+                        title="previous chapter">scipy.cluster.hierarchy.ClusterNode.pre_order</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.cluster.hierarchy.to_tree.html"
+                        title="next chapter">scipy.cluster.hierarchy.to_tree</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

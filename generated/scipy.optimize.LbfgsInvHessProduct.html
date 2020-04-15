@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.LbfgsInvHessProduct &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.LbfgsInvHessProduct.__call__" href="scipy.optimize.LbfgsInvHessProduct.__call__.html" >
+    <link rel="prev" title="scipy.optimize.line_search" href="scipy.optimize.line_search.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.LbfgsInvHessProduct.__call__.html" title="scipy.optimize.LbfgsInvHessProduct.__call__"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.line_search.html" title="scipy.optimize.line_search"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-lbfgsinvhessproduct">
+<h1>scipy.optimize.LbfgsInvHessProduct<a class="headerlink" href="#scipy-optimize-lbfgsinvhessproduct" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.optimize.LbfgsInvHessProduct">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">LbfgsInvHessProduct</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sk</span></em>, <em class="sig-param"><span class="n">yk</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/lbfgsb.py#L399-L493"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.LbfgsInvHessProduct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear operator for the L-BFGS approximate inverse Hessian.</p>
+<p>This operator computes the product of a vector with the approximate inverse
+of the Hessian of the objective function, using the L-BFGS limited
+memory approximation to the inverse Hessian, accumulated during the
+optimization.</p>
+<p>Objects of this class implement the <code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.LinearOperator</span></code>
+interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sk</strong><span class="classifier">array_like, shape=(n_corr, n)</span></dt><dd><p>Array of <em class="xref py py-obj">n_corr</em> most recent updates to the solution vector.
+(See [1]).</p>
+</dd>
+<dt><strong>yk</strong><span class="classifier">array_like, shape=(n_corr, n)</span></dt><dd><p>Array of <em class="xref py py-obj">n_corr</em> most recent updates to the gradient. (See [1]).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rcefce8c085d0-1"><span class="brackets">Rcefce8c085d0-1</span></dt>
+<dd><p>Nocedal, Jorge. “Updating quasi-Newton matrices with limited
+storage.” Mathematics of computation 35.151 (1980): 773-782.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.H.html#scipy.optimize.LbfgsInvHessProduct.H" title="scipy.optimize.LbfgsInvHessProduct.H"><code class="xref py py-obj docutils literal notranslate"><span class="pre">H</span></code></a></dt><dd><p>Hermitian adjoint.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.T.html#scipy.optimize.LbfgsInvHessProduct.T" title="scipy.optimize.LbfgsInvHessProduct.T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code></a></dt><dd><p>Transpose this linear operator.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.__call__.html#scipy.optimize.LbfgsInvHessProduct.__call__" title="scipy.optimize.LbfgsInvHessProduct.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(self, x)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.adjoint.html#scipy.optimize.LbfgsInvHessProduct.adjoint" title="scipy.optimize.LbfgsInvHessProduct.adjoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjoint</span></code></a>(self)</p></td>
+<td><p>Hermitian adjoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.dot.html#scipy.optimize.LbfgsInvHessProduct.dot" title="scipy.optimize.LbfgsInvHessProduct.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(self, x)</p></td>
+<td><p>Matrix-matrix or matrix-vector multiplication.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.matmat.html#scipy.optimize.LbfgsInvHessProduct.matmat" title="scipy.optimize.LbfgsInvHessProduct.matmat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matmat</span></code></a>(self, X)</p></td>
+<td><p>Matrix-matrix multiplication.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.matvec.html#scipy.optimize.LbfgsInvHessProduct.matvec" title="scipy.optimize.LbfgsInvHessProduct.matvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matvec</span></code></a>(self, x)</p></td>
+<td><p>Matrix-vector multiplication.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.rmatmat.html#scipy.optimize.LbfgsInvHessProduct.rmatmat" title="scipy.optimize.LbfgsInvHessProduct.rmatmat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmatmat</span></code></a>(self, X)</p></td>
+<td><p>Adjoint matrix-matrix multiplication.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.rmatvec.html#scipy.optimize.LbfgsInvHessProduct.rmatvec" title="scipy.optimize.LbfgsInvHessProduct.rmatvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmatvec</span></code></a>(self, x)</p></td>
+<td><p>Adjoint matrix-vector multiplication.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.todense.html#scipy.optimize.LbfgsInvHessProduct.todense" title="scipy.optimize.LbfgsInvHessProduct.todense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">todense</span></code></a>(self)</p></td>
+<td><p>Return a dense array representation of this operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.optimize.LbfgsInvHessProduct.transpose.html#scipy.optimize.LbfgsInvHessProduct.transpose" title="scipy.optimize.LbfgsInvHessProduct.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(self)</p></td>
+<td><p>Transpose this linear operator.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>__mul__</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.line_search.html"
+                        title="previous chapter">scipy.optimize.line_search</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.LbfgsInvHessProduct.__call__.html"
+                        title="next chapter">scipy.optimize.LbfgsInvHessProduct.__call__</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

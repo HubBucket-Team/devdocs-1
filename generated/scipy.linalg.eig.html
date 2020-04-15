@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.linalg.eig &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Linear algebra (scipy.linalg)" href="../linalg.html" >
+    <link rel="next" title="scipy.linalg.eigvals" href="scipy.linalg.eigvals.html" >
+    <link rel="prev" title="scipy.linalg.LinAlgWarning" href="scipy.linalg.LinAlgWarning.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../linalg.html" accesskey="U">Linear algebra (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.linalg</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.linalg.eigvals.html" title="scipy.linalg.eigvals"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.linalg.LinAlgWarning.html" title="scipy.linalg.LinAlgWarning"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-linalg-eig">
+<h1>scipy.linalg.eig<a class="headerlink" href="#scipy-linalg-eig" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.linalg.eig">
+<code class="sig-prename descclassname">scipy.linalg.</code><code class="sig-name descname">eig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">left</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">right</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">overwrite_a</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">overwrite_b</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_finite</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">homogeneous_eigvals</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/linalg/decomp.py#L115-L264"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.linalg.eig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve an ordinary or generalized eigenvalue problem of a square matrix.</p>
+<p>Find eigenvalues w and right or left eigenvectors of a general matrix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>   <span class="n">vr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>        <span class="n">b</span>   <span class="n">vr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">H</span> <span class="n">vl</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span> <span class="n">b</span><span class="o">.</span><span class="n">H</span> <span class="n">vl</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">.H</span></code> is the Hermitian conjugation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>a</strong><span class="classifier">(M, M) array_like</span></dt><dd><p>A complex or real matrix whose eigenvalues and eigenvectors
+will be computed.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">(M, M) array_like, optional</span></dt><dd><p>Right-hand side matrix in a generalized eigenvalue problem.
+Default is None, identity matrix is assumed.</p>
+</dd>
+<dt><strong>left</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to calculate and return left eigenvectors.  Default is False.</p>
+</dd>
+<dt><strong>right</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to calculate and return right eigenvectors.  Default is True.</p>
+</dd>
+<dt><strong>overwrite_a</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to overwrite <em class="xref py py-obj">a</em>; may improve performance.  Default is False.</p>
+</dd>
+<dt><strong>overwrite_b</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to overwrite <em class="xref py py-obj">b</em>; may improve performance.  Default is False.</p>
+</dd>
+<dt><strong>check_finite</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to check that the input matrices contain only finite numbers.
+Disabling may give a performance gain, but may result in problems
+(crashes, non-termination) if the inputs do contain infinities or NaNs.</p>
+</dd>
+<dt><strong>homogeneous_eigvals</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, return the eigenvalues in homogeneous coordinates.
+In this case <code class="docutils literal notranslate"><span class="pre">w</span></code> is a (2, M) array so that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="n">a</span> <span class="n">vr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="n">b</span> <span class="n">vr</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>w</strong><span class="classifier">(M,) or (2, M) double or complex ndarray</span></dt><dd><p>The eigenvalues, each repeated according to its
+multiplicity. The shape is (M,) unless
+<code class="docutils literal notranslate"><span class="pre">homogeneous_eigvals=True</span></code>.</p>
+</dd>
+<dt><strong>vl</strong><span class="classifier">(M, M) double or complex ndarray</span></dt><dd><p>The normalized left eigenvector corresponding to the eigenvalue
+<code class="docutils literal notranslate"><span class="pre">w[i]</span></code> is the column vl[:,i]. Only returned if <code class="docutils literal notranslate"><span class="pre">left=True</span></code>.</p>
+</dd>
+<dt><strong>vr</strong><span class="classifier">(M, M) double or complex ndarray</span></dt><dd><p>The normalized right eigenvector corresponding to the eigenvalue
+<code class="docutils literal notranslate"><span class="pre">w[i]</span></code> is the column <code class="docutils literal notranslate"><span class="pre">vr[:,i]</span></code>.  Only returned if <code class="docutils literal notranslate"><span class="pre">right=True</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>LinAlgError</dt><dd><p>If eigenvalue computation does not converge.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.linalg.eigvals.html#scipy.linalg.eigvals" title="scipy.linalg.eigvals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigvals</span></code></a></dt><dd><p>eigenvalues of general arrays</p>
+</dd>
+<dt><a class="reference internal" href="scipy.linalg.eigh.html#scipy.linalg.eigh" title="scipy.linalg.eigh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigh</span></code></a></dt><dd><p>Eigenvalues and right eigenvectors for symmetric/Hermitian arrays.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.linalg.eig_banded.html#scipy.linalg.eig_banded" title="scipy.linalg.eig_banded"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eig_banded</span></code></a></dt><dd><p>eigenvalues and right eigenvectors for symmetric/Hermitian band matrices</p>
+</dd>
+<dt><a class="reference internal" href="scipy.linalg.eigh_tridiagonal.html#scipy.linalg.eigh_tridiagonal" title="scipy.linalg.eigh_tridiagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigh_tridiagonal</span></code></a></dt><dd><p>eigenvalues and right eiegenvectors for symmetric/Hermitian tridiagonal matrices</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([0.+1.j, 0.-1.j])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 1.+0.j, -1.+0.j])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">7.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">homogeneous_eigvals</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[3.+0.j, 8.+0.j, 7.+0.j],</span>
+<span class="go">       [1.+0.j, 1.+0.j, 1.+0.j]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">array([ True,  True])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># normalized left eigenvector</span>
+<span class="go">array([[-0.70710678+0.j        , -0.70710678-0.j        ],</span>
+<span class="go">       [-0.        +0.70710678j, -0.        -0.70710678j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># normalized right eigenvector</span>
+<span class="go">array([[0.70710678+0.j        , 0.70710678-0.j        ],</span>
+<span class="go">       [0.        -0.70710678j, 0.        +0.70710678j]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.linalg.LinAlgWarning.html"
+                        title="previous chapter">scipy.linalg.LinAlgWarning</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.linalg.eigvals.html"
+                        title="next chapter">scipy.linalg.eigvals</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

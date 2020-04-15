@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>linprog(method=’interior-point’) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="optimize.html" >
+    <link rel="next" title="linprog(method=’revised simplex’)" href="optimize.linprog-revised_simplex.html" >
+    <link rel="prev" title="linprog(method=’simplex’)" href="optimize.linprog-simplex.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="index.html">
+      <img style="border: 0;" alt="SciPy" src="_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="optimize.linprog-revised_simplex.html" title="linprog(method=’revised simplex’)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="optimize.linprog-simplex.html" title="linprog(method=’simplex’)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="linprog-method-interior-point">
+<span id="optimize-linprog-interior-point"></span><h1>linprog(method=’interior-point’)<a class="headerlink" href="#linprog-method-interior-point" title="Permalink to this headline">¶</a></h1>
+<dl class="scipy-optimize function">
+<dt>
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">linprog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'interior-point'</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">{'c0': None, 'A': None, 'b': None, 'postsolve_args': None, 'maxiter': 1000, 'tol': 1e-08, 'disp': False, 'alpha0': 0.99995, 'beta': 0.1, 'sparse': False, 'lstsq': False, 'sym_pos': True, 'cholesky': None, 'pc': True, 'ip': False, 'permc_spec': 'MMD_AT_PLUS_A'}</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Minimize a linear objective function subject to linear
+equality and non-negativity constraints using the interior point method
+of <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id1">[4]</a>. Linear programming is intended to solve problems
+of the following form:</p>
+<p>Minimize:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">@</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Subject to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">==</span> <span class="n">b</span>
+    <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>c</strong><span class="classifier">1-D array</span></dt><dd><p>Coefficients of the linear objective function to be minimized.</p>
+</dd>
+<dt><strong>c0</strong><span class="classifier">float</span></dt><dd><p>Constant term in objective function due to fixed (and eliminated)
+variables. (Purely for display.)</p>
+</dd>
+<dt><strong>A</strong><span class="classifier">2-D array</span></dt><dd><p>2-D array such that <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">x</span></code>, gives the values of the equality
+constraints at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">1-D array</span></dt><dd><p>1-D array of values representing the right hand side of each equality
+constraint (row) in <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+</dd>
+<dt><strong>callback</strong><span class="classifier">callable, optional</span></dt><dd><p>Callback function to be executed once per iteration.</p>
+</dd>
+<dt><strong>postsolve_args</strong><span class="classifier">tuple</span></dt><dd><p>Data needed by _postsolve to convert the solution to the standard-form
+problem into the solution to the original problem.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>x</strong><span class="classifier">1-D array</span></dt><dd><p>Solution vector.</p>
+</dd>
+<dt><strong>status</strong><span class="classifier">int</span></dt><dd><p>An integer representing the exit status of the optimization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="p">:</span> <span class="n">Optimization</span> <span class="n">terminated</span> <span class="n">successfully</span>
+<span class="mi">1</span> <span class="p">:</span> <span class="n">Iteration</span> <span class="n">limit</span> <span class="n">reached</span>
+<span class="mi">2</span> <span class="p">:</span> <span class="n">Problem</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">be</span> <span class="n">infeasible</span>
+<span class="mi">3</span> <span class="p">:</span> <span class="n">Problem</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">be</span> <span class="n">unbounded</span>
+<span class="mi">4</span> <span class="p">:</span> <span class="n">Serious</span> <span class="n">numerical</span> <span class="n">difficulties</span> <span class="n">encountered</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>message</strong><span class="classifier">str</span></dt><dd><p>A string descriptor of the exit status of the optimization.</p>
+</dd>
+<dt><strong>iteration</strong><span class="classifier">int</span></dt><dd><p>The number of iterations taken to solve the problem.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For documentation for the rest of the parameters, see <a class="reference internal" href="generated/scipy.optimize.linprog.html#scipy.optimize.linprog" title="scipy.optimize.linprog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.linprog</span></code></a></p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Options</dt>
+<dd class="field-odd"><dl>
+<dt><strong>maxiter</strong><span class="classifier">int (default = 1000)</span></dt><dd><p>The maximum number of iterations of the algorithm.</p>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float (default = 1e-8)</span></dt><dd><p>Termination tolerance to be used for all termination criteria;
+see <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id2">[4]</a> Section 4.5.</p>
+</dd>
+<dt><strong>disp</strong><span class="classifier">bool (default = False)</span></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if indicators of optimization status are to be printed
+to the console each iteration.</p>
+</dd>
+<dt><strong>alpha0</strong><span class="classifier">float (default = 0.99995)</span></dt><dd><p>The maximal step size for Mehrota’s predictor-corrector search
+direction; see <span class="math notranslate nohighlight">\(\beta_{3}\)</span> of <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id3">[4]</a> Table 8.1.</p>
+</dd>
+<dt><strong>beta</strong><span class="classifier">float (default = 0.1)</span></dt><dd><p>The desired reduction of the path parameter <span class="math notranslate nohighlight">\(\mu\)</span> (see <a class="reference internal" href="#r2a16fe6ab0ca-6" id="id4">[6]</a>)
+when Mehrota’s predictor-corrector is not in use (uncommon).</p>
+</dd>
+<dt><strong>sparse</strong><span class="classifier">bool (default = False)</span></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if the problem is to be treated as sparse after
+presolve. If either <code class="docutils literal notranslate"><span class="pre">A_eq</span></code> or <code class="docutils literal notranslate"><span class="pre">A_ub</span></code> is a sparse matrix,
+this option will automatically be set <code class="docutils literal notranslate"><span class="pre">True</span></code>, and the problem
+will be treated as sparse even during presolve. If your constraint
+matrices contain mostly zeros and the problem is not very small (less
+than about 100 constraints or variables), consider setting <code class="docutils literal notranslate"><span class="pre">True</span></code>
+or providing <code class="docutils literal notranslate"><span class="pre">A_eq</span></code> and <code class="docutils literal notranslate"><span class="pre">A_ub</span></code> as sparse matrices.</p>
+</dd>
+<dt><strong>lstsq</strong><span class="classifier">bool (default = False)</span></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if the problem is expected to be very poorly
+conditioned. This should always be left <code class="docutils literal notranslate"><span class="pre">False</span></code> unless severe
+numerical difficulties are encountered. Leave this at the default
+unless you receive a warning message suggesting otherwise.</p>
+</dd>
+<dt><strong>sym_pos</strong><span class="classifier">bool (default = True)</span></dt><dd><p>Leave <code class="docutils literal notranslate"><span class="pre">True</span></code> if the problem is expected to yield a well conditioned
+symmetric positive definite normal equation matrix
+(almost always). Leave this at the default unless you receive
+a warning message suggesting otherwise.</p>
+</dd>
+<dt><strong>cholesky</strong><span class="classifier">bool (default = True)</span></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if the normal equations are to be solved by explicit
+Cholesky decomposition followed by explicit forward/backward
+substitution. This is typically faster for problems
+that are numerically well-behaved.</p>
+</dd>
+<dt><strong>pc</strong><span class="classifier">bool (default = True)</span></dt><dd><p>Leave <code class="docutils literal notranslate"><span class="pre">True</span></code> if the predictor-corrector method of Mehrota is to be
+used. This is almost always (if not always) beneficial.</p>
+</dd>
+<dt><strong>ip</strong><span class="classifier">bool (default = False)</span></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if the improved initial point suggestion due to <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id5">[4]</a>
+Section 4.3 is desired. Whether this is beneficial or not
+depends on the problem.</p>
+</dd>
+<dt><strong>permc_spec</strong><span class="classifier">str (default = ‘MMD_AT_PLUS_A’)</span></dt><dd><p>(Has effect only with <code class="docutils literal notranslate"><span class="pre">sparse</span> <span class="pre">=</span> <span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">lstsq</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">sym_pos</span> <span class="pre">=</span>
+<span class="pre">True</span></code>, and no SuiteSparse.)
+A matrix is factorized in each iteration of the algorithm.
+This option specifies how to permute the columns of the matrix for
+sparsity preservation. Acceptable values are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NATURAL</span></code>: natural ordering.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MMD_ATA</span></code>: minimum degree ordering on the structure of A^T A.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MMD_AT_PLUS_A</span></code>: minimum degree ordering on the structure of A^T+A.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COLAMD</span></code>: approximate minimum degree column ordering.</p></li>
+</ul>
+<p>This option can impact the convergence of the
+interior point algorithm; test different values to determine which
+performs best for your problem. For more information, refer to
+<code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu</span></code>.</p>
+</dd>
+<dt><strong>unknown_options</strong><span class="classifier">dict</span></dt><dd><p>Optional arguments not used by this particular solver. If
+<em class="xref py py-obj">unknown_options</em> is non-empty a warning is issued listing all
+unused options.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method implements the algorithm outlined in <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id6">[4]</a> with ideas from <a class="reference internal" href="#r2a16fe6ab0ca-8" id="id7">[8]</a>
+and a structure inspired by the simpler methods of <a class="reference internal" href="#r2a16fe6ab0ca-6" id="id8">[6]</a>.</p>
+<p>The primal-dual path following method begins with initial ‘guesses’ of
+the primal and dual variables of the standard form problem and iteratively
+attempts to solve the (nonlinear) Karush-Kuhn-Tucker conditions for the
+problem with a gradually reduced logarithmic barrier term added to the
+objective. This particular implementation uses a homogeneous self-dual
+formulation, which provides certificates of infeasibility or unboundedness
+where applicable.</p>
+<p>The default initial point for the primal and dual variables is that
+defined in <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id9">[4]</a> Section 4.4 Equation 8.22. Optionally (by setting initial
+point option <code class="docutils literal notranslate"><span class="pre">ip=True</span></code>), an alternate (potentially improved) starting
+point can be calculated according to the additional recommendations of
+<a class="reference internal" href="#r2a16fe6ab0ca-4" id="id10">[4]</a> Section 4.4.</p>
+<p>A search direction is calculated using the predictor-corrector method
+(single correction) proposed by Mehrota and detailed in <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id11">[4]</a> Section 4.1.
+(A potential improvement would be to implement the method of multiple
+corrections described in <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id12">[4]</a> Section 4.2.) In practice, this is
+accomplished by solving the normal equations, <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id13">[4]</a> Section 5.1 Equations
+8.31 and 8.32, derived from the Newton equations <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id14">[4]</a> Section 5 Equations
+8.25 (compare to <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id15">[4]</a> Section 4 Equations 8.6-8.8). The advantage of
+solving the normal equations rather than 8.25 directly is that the
+matrices involved are symmetric positive definite, so Cholesky
+decomposition can be used rather than the more expensive LU factorization.</p>
+<p>With default options, the solver used to perform the factorization depends
+on third-party software availability and the conditioning of the problem.</p>
+<p>For dense problems, solvers are tried in the following order:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.linalg.cho_factor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.linalg.solve</span></code> with option <code class="docutils literal notranslate"><span class="pre">sym_pos=True</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.linalg.solve</span></code> with option <code class="docutils literal notranslate"><span class="pre">sym_pos=False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.linalg.lstsq</span></code></p></li>
+</ol>
+<p>For sparse problems:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sksparse.cholmod.cholesky</span></code> (if scikit-sparse and SuiteSparse are installed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.factorized</span></code> (if scikit-umfpack and SuiteSparse are installed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.splu</span></code> (which uses SuperLU distributed with SciPy)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.sparse.linalg.lsqr</span></code></p></li>
+</ol>
+<p>If the solver fails for any reason, successively more robust (but slower)
+solvers are attempted in the order indicated. Attempting, failing, and
+re-starting factorization can be time consuming, so if the problem is
+numerically challenging, options can be set to  bypass solvers that are
+failing. Setting <code class="docutils literal notranslate"><span class="pre">cholesky=False</span></code> skips to solver 2,
+<code class="docutils literal notranslate"><span class="pre">sym_pos=False</span></code> skips to solver 3, and <code class="docutils literal notranslate"><span class="pre">lstsq=True</span></code> skips
+to solver 4 for both sparse and dense problems.</p>
+<p>Potential improvements for combatting issues associated with dense
+columns in otherwise sparse problems are outlined in <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id16">[4]</a> Section 5.3 and
+<a class="reference internal" href="#r2a16fe6ab0ca-10" id="id17">[10]</a> Section 4.1-4.2; the latter also discusses the alleviation of
+accuracy issues associated with the substitution approach to free
+variables.</p>
+<p>After calculating the search direction, the maximum possible step size
+that does not activate the non-negativity constraints is calculated, and
+the smaller of this step size and unity is applied (as in <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id18">[4]</a> Section
+4.1.) <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id19">[4]</a> Section 4.3 suggests improvements for choosing the step size.</p>
+<p>The new point is tested according to the termination conditions of <a class="reference internal" href="#r2a16fe6ab0ca-4" id="id20">[4]</a>
+Section 4.5. The same tolerance, which can be set using the <code class="docutils literal notranslate"><span class="pre">tol</span></code> option,
+is used for all checks. (A potential improvement would be to expose
+the different tolerances to be set independently.) If optimality,
+unboundedness, or infeasibility is detected, the solve procedure
+terminates; otherwise it repeats.</p>
+<p>The expected problem formulation differs between the top level <code class="docutils literal notranslate"><span class="pre">linprog</span></code>
+module and the method specific solvers. The method specific solvers expect a
+problem in standard form:</p>
+<p>Minimize:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">@</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Subject to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">==</span> <span class="n">b</span>
+    <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Whereas the top level <code class="docutils literal notranslate"><span class="pre">linprog</span></code> module expects a problem of form:</p>
+<p>Minimize:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">@</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Subject to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A_ub</span> <span class="o">@</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">b_ub</span>
+<span class="n">A_eq</span> <span class="o">@</span> <span class="n">x</span> <span class="o">==</span> <span class="n">b_eq</span>
+ <span class="n">lb</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">ub</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">lb</span> <span class="pre">=</span> <span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">ub</span> <span class="pre">=</span> <span class="pre">None</span></code> unless set in <code class="docutils literal notranslate"><span class="pre">bounds</span></code>.</p>
+<p>The original problem contains equality, upper-bound and variable constraints
+whereas the method specific solver requires equality constraints and
+variable non-negativity.</p>
+<p><code class="docutils literal notranslate"><span class="pre">linprog</span></code> module converts the original problem to standard form by
+converting the simple bounds to upper bound constraints, introducing
+non-negative slack variables for inequality constraints, and expressing
+unbounded variables as the difference between two non-negative variables.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r2a16fe6ab0ca-4"><span class="brackets">4</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id5">4</a>,<a href="#id6">5</a>,<a href="#id9">6</a>,<a href="#id10">7</a>,<a href="#id11">8</a>,<a href="#id12">9</a>,<a href="#id13">10</a>,<a href="#id14">11</a>,<a href="#id15">12</a>,<a href="#id16">13</a>,<a href="#id18">14</a>,<a href="#id19">15</a>,<a href="#id20">16</a>)</span></dt>
+<dd><p>Andersen, Erling D., and Knud D. Andersen. “The MOSEK interior point
+optimizer for linear programming: an implementation of the
+homogeneous algorithm.” High performance optimization. Springer US,
+2000. 197-232.</p>
+</dd>
+<dt class="label" id="r2a16fe6ab0ca-6"><span class="brackets">6</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id8">2</a>)</span></dt>
+<dd><p>Freund, Robert M. “Primal-Dual Interior-Point Methods for Linear
+Programming based on Newton’s Method.” Unpublished Course Notes,
+March 2004. Available 2/25/2017 at
+<a class="reference external" href="https://ocw.mit.edu/courses/sloan-school-of-management/15-084j-nonlinear-programming-spring-2004/lecture-notes/lec14_int_pt_mthd.pdf">https://ocw.mit.edu/courses/sloan-school-of-management/15-084j-nonlinear-programming-spring-2004/lecture-notes/lec14_int_pt_mthd.pdf</a></p>
+</dd>
+<dt class="label" id="r2a16fe6ab0ca-8"><span class="brackets"><a class="fn-backref" href="#id7">8</a></span></dt>
+<dd><p>Andersen, Erling D., and Knud D. Andersen. “Presolving in linear
+programming.” Mathematical Programming 71.2 (1995): 221-245.</p>
+</dd>
+<dt class="label" id="r2a16fe6ab0ca-9"><span class="brackets">9</span></dt>
+<dd><p>Bertsimas, Dimitris, and J. Tsitsiklis. “Introduction to linear
+programming.” Athena Scientific 1 (1997): 997.</p>
+</dd>
+<dt class="label" id="r2a16fe6ab0ca-10"><span class="brackets"><a class="fn-backref" href="#id17">10</a></span></dt>
+<dd><p>Andersen, Erling D., et al. Implementation of interior point methods
+for large scale linear programming. HEC/Universite de Geneve, 1996.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optimize.linprog-simplex.html"
+                        title="previous chapter">linprog(method=’simplex’)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optimize.linprog-revised_simplex.html"
+                        title="next chapter">linprog(method=’revised simplex’)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>minimize(method=’trust-ncg’) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="optimize.html" >
+    <link rel="next" title="minimize(method=’trust-krylov’)" href="optimize.minimize-trustkrylov.html" >
+    <link rel="prev" title="minimize(method=’dogleg’)" href="optimize.minimize-dogleg.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="index.html">
+      <img style="border: 0;" alt="SciPy" src="_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="optimize.minimize-trustkrylov.html" title="minimize(method=’trust-krylov’)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="optimize.minimize-dogleg.html" title="minimize(method=’dogleg’)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="minimize-method-trust-ncg">
+<span id="optimize-minimize-trustncg"></span><h1>minimize(method=’trust-ncg’)<a class="headerlink" href="#minimize-method-trust-ncg" title="Permalink to this headline">¶</a></h1>
+<dl class="scipy-optimize function">
+<dt>
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">minimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fun</span></em>, <em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'trust-ncg'</span></em>, <em class="sig-param"><span class="n">jac</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hess</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hessp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Minimization of scalar function of one or more variables using
+the Newton conjugate gradient trust-region algorithm.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For documentation for the rest of the parameters, see <a class="reference internal" href="generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="scipy.optimize.minimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code></a></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Options</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>initial_trust_radius</strong><span class="classifier">float</span></dt><dd><p>Initial trust-region radius.</p>
+</dd>
+<dt><strong>max_trust_radius</strong><span class="classifier">float</span></dt><dd><p>Maximum value of the trust-region radius. No steps that are longer
+than this value will be proposed.</p>
+</dd>
+<dt><strong>eta</strong><span class="classifier">float</span></dt><dd><p>Trust region related acceptance stringency for proposed steps.</p>
+</dd>
+<dt><strong>gtol</strong><span class="classifier">float</span></dt><dd><p>Gradient norm must be less than <em class="xref py py-obj">gtol</em> before successful
+termination.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optimize.minimize-dogleg.html"
+                        title="previous chapter">minimize(method=’dogleg’)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="optimize.minimize-trustkrylov.html"
+                        title="next chapter">minimize(method=’trust-krylov’)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

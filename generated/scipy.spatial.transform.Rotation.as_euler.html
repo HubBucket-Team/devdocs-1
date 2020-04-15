@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.spatial.transform.Rotation.as_euler &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-spatial-transform-rotation-as-euler">
+<h1>scipy.spatial.transform.Rotation.as_euler<a class="headerlink" href="#scipy-spatial-transform-rotation-as-euler" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="scipy.spatial.transform.Rotation.as_euler">
+<code class="sig-prename descclassname">Rotation.</code><code class="sig-name descname">as_euler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">seq</span></em>, <em class="sig-param"><span class="n">degrees</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/spatial/transform/rotation.py#L1085-L1189"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.spatial.transform.Rotation.as_euler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent as Euler angles.</p>
+<p>Any orientation can be expressed as a composition of 3 elementary
+rotations. Once the axis sequence has been chosen, Euler angles define
+the angle of rotation around each respective axis <a class="reference internal" href="#r72d546869407-1" id="id1">[1]</a>.</p>
+<p>The algorithm from <a class="reference internal" href="#r72d546869407-2" id="id2">[2]</a> has been used to calculate Euler angles for the
+rotation about a given sequence of axes.</p>
+<p>Euler angles suffer from the problem of gimbal lock <a class="reference internal" href="#r72d546869407-3" id="id3">[3]</a>, where the
+representation loses a degree of freedom and it is not possible to
+determine the first and third angles uniquely. In this case,
+a warning is raised, and the third angle is set to zero. Note however
+that the returned angles still represent the correct rotation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>seq</strong><span class="classifier">string, length 3</span></dt><dd><p>3 characters belonging to the set {‘X’, ‘Y’, ‘Z’} for intrinsic
+rotations, or {‘x’, ‘y’, ‘z’} for extrinsic rotations <a class="reference internal" href="#r72d546869407-1" id="id4">[1]</a>.
+Adjacent axes cannot be the same.
+Extrinsic and intrinsic rotations cannot be mixed in one function
+call.</p>
+</dd>
+<dt><strong>degrees</strong><span class="classifier">boolean, optional</span></dt><dd><p>Returned angles are in degrees if this flag is True, else they are
+in radians. Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>angles</strong><span class="classifier">ndarray, shape (3,) or (N, 3)</span></dt><dd><p>Shape depends on shape of inputs used to initialize object.
+The returned angles are in the range:</p>
+<ul>
+<li><p>First angle belongs to [-180, 180] degrees (both inclusive)</p></li>
+<li><p>Third angle belongs to [-180, 180] degrees (both inclusive)</p></li>
+<li><p>Second angle belongs to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>[-90, 90] degrees if all axes are different (like xyz)</p></li>
+<li><p>[0, 180] degrees if first and third axes are the same
+(like zxz)</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r72d546869407-1"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id4">2</a>)</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Euler_angles#Definition_by_intrinsic_rotations">https://en.wikipedia.org/wiki/Euler_angles#Definition_by_intrinsic_rotations</a></p>
+</dd>
+<dt class="label" id="r72d546869407-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Malcolm D. Shuster, F. Landis Markley, “General formula for
+extraction the Euler angles”, Journal of guidance, control, and
+dynamics, vol. 29.1, pp. 215-221. 2006</p>
+</dd>
+<dt class="label" id="r72d546869407-3"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Gimbal_lock#In_applied_mathematics">https://en.wikipedia.org/wiki/Gimbal_lock#In_applied_mathematics</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial.transform</span> <span class="kn">import</span> <span class="n">Rotation</span> <span class="k">as</span> <span class="n">R</span>
+</pre></div>
+</div>
+<p>Represent a single rotation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">from_rotvec</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([90.,  0.,  0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3,)</span>
+</pre></div>
+</div>
+<p>Represent a stack of single rotation:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">from_rotvec</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[90.,  0.,  0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 3)</span>
+</pre></div>
+</div>
+<p>Represent multiple rotations in a single object:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">from_rotvec</span><span class="p">([</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[ 90.,   0.,   0.],</span>
+<span class="go">       [  0.,   0., -60.],</span>
+<span class="go">       [  0.,  45.,   0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">as_euler</span><span class="p">(</span><span class="s1">&#39;zxy&#39;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

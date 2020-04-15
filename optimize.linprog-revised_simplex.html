@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>linprog(method=’revised simplex’) &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="optimize.html" >
+    <link rel="next" title="scipy.optimize.linprog_verbose_callback" href="generated/scipy.optimize.linprog_verbose_callback.html" >
+    <link rel="prev" title="linprog(method=’interior-point’)" href="optimize.linprog-interior-point.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="index.html">
+      <img style="border: 0;" alt="SciPy" src="_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="generated/scipy.optimize.linprog_verbose_callback.html" title="scipy.optimize.linprog_verbose_callback"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="optimize.linprog-interior-point.html" title="linprog(method=’interior-point’)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="linprog-method-revised-simplex">
+<span id="optimize-linprog-revised-simplex"></span><h1>linprog(method=’revised simplex’)<a class="headerlink" href="#linprog-method-revised-simplex" title="Permalink to this headline">¶</a></h1>
+<dl class="scipy-optimize function">
+<dt>
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">linprog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">c</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'revised_simplex'</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">{'c0': None, 'A': None, 'b': None, 'postsolve_args': None, 'maxiter': 5000, 'tol': 1e-12, 'disp': False, 'maxupdate': 10, 'mast': False, 'pivot': 'mrc'}</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Solve the following linear programming problem via a two-phase
+revised simplex algorithm.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">minimize</span><span class="p">:</span>     <span class="n">c</span> <span class="o">@</span> <span class="n">x</span>
+
+<span class="n">subject</span> <span class="n">to</span><span class="p">:</span>  <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">==</span> <span class="n">b</span>
+             <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">oo</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>c</strong><span class="classifier">1-D array</span></dt><dd><p>Coefficients of the linear objective function to be minimized.</p>
+</dd>
+<dt><strong>c0</strong><span class="classifier">float</span></dt><dd><p>Constant term in objective function due to fixed (and eliminated)
+variables. (Currently unused.)</p>
+</dd>
+<dt><strong>A</strong><span class="classifier">2-D array</span></dt><dd><p>2-D array which, when matrix-multiplied by <code class="docutils literal notranslate"><span class="pre">x</span></code>, gives the values of
+the equality constraints at <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">1-D array</span></dt><dd><p>1-D array of values representing the RHS of each equality constraint
+(row) in <code class="docutils literal notranslate"><span class="pre">A_eq</span></code>.</p>
+</dd>
+<dt><strong>x0</strong><span class="classifier">1-D array, optional</span></dt><dd><p>Starting values of the independent variables, which will be refined by
+the optimization algorithm. For the revised simplex method, these must
+correspond with a basic feasible solution.</p>
+</dd>
+<dt><strong>callback</strong><span class="classifier">callable, optional</span></dt><dd><p>If a callback function is provided, it will be called within each
+iteration of the algorithm. The callback function must accept a single
+<a class="reference internal" href="generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult" title="scipy.optimize.OptimizeResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.OptimizeResult</span></code></a> consisting of the following fields:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x<span class="classifier">1-D array</span></dt><dd><p>Current solution vector.</p>
+</dd>
+<dt>fun<span class="classifier">float</span></dt><dd><p>Current value of the objective function <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">&#64;</span> <span class="pre">x</span></code>.</p>
+</dd>
+<dt>success<span class="classifier">bool</span></dt><dd><p>True only when an algorithm has completed successfully,
+so this is always False as the callback function is called
+only while the algorithm is still iterating.</p>
+</dd>
+<dt>slack<span class="classifier">1-D array</span></dt><dd><p>The values of the slack variables. Each slack variable
+corresponds to an inequality constraint. If the slack is zero,
+the corresponding constraint is active.</p>
+</dd>
+<dt>con<span class="classifier">1-D array</span></dt><dd><p>The (nominally zero) residuals of the equality constraints,
+that is, <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">-</span> <span class="pre">A_eq</span> <span class="pre">&#64;</span> <span class="pre">x</span></code>.</p>
+</dd>
+<dt>phase<span class="classifier">int</span></dt><dd><p>The phase of the algorithm being executed.</p>
+</dd>
+<dt>status<span class="classifier">int</span></dt><dd><p>For revised simplex, this is always 0 because if a different
+status is detected, the algorithm terminates.</p>
+</dd>
+<dt>nit<span class="classifier">int</span></dt><dd><p>The number of iterations performed.</p>
+</dd>
+<dt>message<span class="classifier">str</span></dt><dd><p>A string descriptor of the exit status of the optimization.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><strong>postsolve_args</strong><span class="classifier">tuple</span></dt><dd><p>Data needed by _postsolve to convert the solution to the standard-form
+problem into the solution to the original problem.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>x</strong><span class="classifier">1-D array</span></dt><dd><p>Solution vector.</p>
+</dd>
+<dt><strong>status</strong><span class="classifier">int</span></dt><dd><p>An integer representing the exit status of the optimization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="p">:</span> <span class="n">Optimization</span> <span class="n">terminated</span> <span class="n">successfully</span>
+<span class="mi">1</span> <span class="p">:</span> <span class="n">Iteration</span> <span class="n">limit</span> <span class="n">reached</span>
+<span class="mi">2</span> <span class="p">:</span> <span class="n">Problem</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">be</span> <span class="n">infeasible</span>
+<span class="mi">3</span> <span class="p">:</span> <span class="n">Problem</span> <span class="n">appears</span> <span class="n">to</span> <span class="n">be</span> <span class="n">unbounded</span>
+<span class="mi">4</span> <span class="p">:</span> <span class="n">Numerical</span> <span class="n">difficulties</span> <span class="n">encountered</span>
+<span class="mi">5</span> <span class="p">:</span> <span class="n">No</span> <span class="n">constraints</span><span class="p">;</span> <span class="n">turn</span> <span class="n">presolve</span> <span class="n">on</span>
+<span class="mi">6</span> <span class="p">:</span> <span class="n">Guess</span> <span class="n">x0</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">a</span> <span class="n">basic</span> <span class="n">feasible</span> <span class="n">solution</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>message</strong><span class="classifier">str</span></dt><dd><p>A string descriptor of the exit status of the optimization.</p>
+</dd>
+<dt><strong>iteration</strong><span class="classifier">int</span></dt><dd><p>The number of iterations taken to solve the problem.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For documentation for the rest of the parameters, see <a class="reference internal" href="generated/scipy.optimize.linprog.html#scipy.optimize.linprog" title="scipy.optimize.linprog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.optimize.linprog</span></code></a></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Options</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>maxiter</strong><span class="classifier">int</span></dt><dd><p>The maximum number of iterations to perform in either phase.</p>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float</span></dt><dd><p>The tolerance which determines when a solution is “close enough” to
+zero in Phase 1 to be considered a basic feasible solution or close
+enough to positive to serve as an optimal solution.</p>
+</dd>
+<dt><strong>disp</strong><span class="classifier">bool</span></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if indicators of optimization status are to be printed
+to the console each iteration.</p>
+</dd>
+<dt><strong>maxupdate</strong><span class="classifier">int</span></dt><dd><p>The maximum number of updates performed on the LU factorization.
+After this many updates is reached, the basis matrix is factorized
+from scratch.</p>
+</dd>
+<dt><strong>mast</strong><span class="classifier">bool</span></dt><dd><p>Minimize Amortized Solve Time. If enabled, the average time to solve
+a linear system using the basis factorization is measured. Typically,
+the average solve time will decrease with each successive solve after
+initial factorization, as factorization takes much more time than the
+solve operation (and updates). Eventually, however, the updated
+factorization becomes sufficiently complex that the average solve time
+begins to increase. When this is detected, the basis is refactorized
+from scratch. Enable this option to maximize speed at the risk of
+nondeterministic behavior. Ignored if <code class="docutils literal notranslate"><span class="pre">maxupdate</span></code> is 0.</p>
+</dd>
+<dt><strong>pivot</strong><span class="classifier">“mrc” or “bland”</span></dt><dd><p>Pivot rule: Minimum Reduced Cost (default) or Bland’s rule. Choose
+Bland’s rule if iteration limit is reached and cycling is suspected.</p>
+</dd>
+<dt><strong>unknown_options</strong><span class="classifier">dict</span></dt><dd><p>Optional arguments not used by this particular solver. If
+<em class="xref py py-obj">unknown_options</em> is non-empty a warning is issued listing all
+unused options.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="optimize.linprog-interior-point.html"
+                        title="previous chapter">linprog(method=’interior-point’)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generated/scipy.optimize.linprog_verbose_callback.html"
+                        title="next chapter">scipy.optimize.linprog_verbose_callback</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

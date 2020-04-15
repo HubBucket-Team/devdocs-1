@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>SciPy Project Governance &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="next" title="Development environment quickstart guide (macOS)" href="../contributor/quickstart_mac.html" >
+    <link rel="prev" title="SciPy Core Developer Guide" href="../core-dev/index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="../contributor/quickstart_mac.html" title="Development environment quickstart guide (macOS)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../core-dev/index.html" title="SciPy Core Developer Guide"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-project-governance">
+<span id="governance"></span><h1>SciPy Project Governance<a class="headerlink" href="#scipy-project-governance" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this document is to formalize the governance process
+used by the SciPy project in both ordinary and extraordinary
+situations, and to clarify how decisions are made and how the various
+elements of our community interact, including the relationship between
+open source collaborative development and work that may be funded by
+for-profit or non-profit entities.</p>
+<div class="section" id="the-project">
+<h2>The Project<a class="headerlink" href="#the-project" title="Permalink to this headline">¶</a></h2>
+<p>The SciPy Project (The Project) is an open source software project.
+The goal of The Project is to develop open source software for scientific
+computing in Python, and, in particular, the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> package. The Software
+developed by The Project is released under the BSD (or similar) open source
+license, developed openly and hosted on public GitHub repositories under
+the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> GitHub organization.</p>
+<p>The Project is developed by a team of distributed developers, called
+Contributors. Contributors are individuals who have contributed code,
+documentation, designs, or other work to the Project. Anyone can be a
+Contributor. Contributors can be affiliated with any legal entity or
+none. Contributors participate in the project by submitting, reviewing,
+and discussing GitHub Pull Requests and Issues and participating in open
+and public Project discussions on GitHub, mailing lists, and other
+channels. The foundation of Project participation is openness and
+transparency.</p>
+<p>The Project Community consists of all Contributors and Users of the
+Project. Contributors work on behalf of and are responsible to the
+larger Project Community and we strive to keep the barrier between
+Contributors and Users as low as possible.</p>
+<p>The Project is not a legal entity, nor does it currently have any formal
+relationships with legal entities.</p>
+</div>
+<div class="section" id="id1">
+<h2>Governance<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the governance and leadership model of The
+Project.</p>
+<p>The foundations of Project governance are:</p>
+<ul class="simple">
+<li><p>openness and transparency</p></li>
+<li><p>active contribution</p></li>
+<li><p>institutional neutrality</p></li>
+</ul>
+<p>Traditionally, Project leadership was provided by a subset of Contributors,
+called Core Developers, whose active and consistent contributions have been
+recognized by their receiving “commit rights” to the Project GitHub
+repositories. In general, all Project decisions are made through consensus among
+the Core Developers with input from the Community.</p>
+<p>While this approach has served us well, as the Project grows, we see a need for
+a more formal governance model. The SciPy Core Developers expressed a
+preference for a leadership model which includes a BDFL (Benevolent Dictator
+for Life). Therefore, moving forward The Project leadership will consist of a
+BDFL and Steering Council.</p>
+<div class="section" id="bdfl">
+<h3>BDFL<a class="headerlink" href="#bdfl" title="Permalink to this headline">¶</a></h3>
+<p>The Project will have a BDFL (Benevolent Dictator for Life), who is currently
+Pauli Virtanen. As Dictator, the BDFL has the authority to make all final
+decisions for The Project. As Benevolent, the BDFL, in practice, chooses to
+defer that authority to the consensus of the community discussion channels and
+the Steering Council (see below). It is expected, and in the past has been the
+case, that the BDFL will only rarely assert his/her final authority. Because
+rarely used, we refer to BDFL’s final authority as a “special” or “overriding”
+vote. When it does occur, the BDFL override typically happens in situations
+where there is a deadlock in the Steering Council or if the Steering Council
+asks the BDFL to make a decision on a specific matter. To ensure the
+benevolence of the BDFL, The Project encourages others to fork the project if
+they disagree with the overall direction the BDFL is taking. The BDFL may
+delegate his/her authority on a particular decision or set of decisions to
+any other Council member at his/her discretion.</p>
+<p>The BDFL can appoint his/her successor, but it is expected that the Steering
+Council would be consulted on this decision. If the BDFL is unable to appoint a
+successor, the Steering Council will make this decision - preferably by
+consensus, but if needed, by a majority vote.</p>
+<p>Note that the BDFL can step down at any time, and acting in good faith, will
+also listen to serious calls to do so. Also note that the BDFL is more a role
+for fallback decision making rather than that of a director/CEO.</p>
+</div>
+<div class="section" id="steering-council">
+<h3>Steering Council<a class="headerlink" href="#steering-council" title="Permalink to this headline">¶</a></h3>
+<p>The Project will have a Steering Council that consists of Project Contributors
+who have produced contributions that are substantial in quality and quantity,
+and sustained over at least one year. The overall role of the Council is to
+ensure, through working with the BDFL and taking input from the Community, the
+long-term well-being of the project, both technically and as a community.</p>
+<p>The Council will have a Chair, who is tasked with keeping the organizational
+aspects of the functioning of the Council and the Project on track. The
+Council will also appoint a Release Manager for the Project, who has final
+responsibility for one or more releases.</p>
+<p>During the everyday project activities, Council Members participate in all
+discussions, code review, and other project activities as peers with all other
+Contributors and the Community. In these everyday activities, Council Members
+do not have any special power or privilege through their membership on the
+Council. However, it is expected that because of the quality and quantity of
+their contributions and their expert knowledge of the Project Software and
+Services, Council Members will provide useful guidance, both technical and
+in terms of project direction, to potentially less experienced contributors.</p>
+<p>The Steering Council and its Members play a special role in certain situations.
+In particular, the Council may:</p>
+<ul class="simple">
+<li><p>Make decisions about the overall scope, vision, and direction of the
+project.</p></li>
+<li><p>Make decisions about strategic collaborations with other organizations or
+individuals.</p></li>
+<li><p>Make decisions about specific technical issues, features, bugs, and pull
+requests. They are the primary mechanism of guiding the code review process
+and merging pull requests.</p></li>
+<li><p>Make decisions about the Services that are run by The Project and manage
+those Services for the benefit of the Project and Community.</p></li>
+<li><p>Make decisions when regular community discussion does not produce consensus
+on an issue in a reasonable time frame.</p></li>
+<li><p>Update policy documents, such as this one.</p></li>
+</ul>
+<div class="section" id="council-membership">
+<h4>Council membership<a class="headerlink" href="#council-membership" title="Permalink to this headline">¶</a></h4>
+<p>To become eligible for being a Steering Council Member, an individual must be a
+Project Contributor who has produced contributions that are substantial in
+quality and quantity, and sustained over at least one year. Potential Council
+Members are nominated by existing Council members and voted upon by the
+existing Council after asking if the potential Member is interested and willing
+to serve in that capacity. The Council will be initially formed from the set of
+existing Core Developers who, as of January 2017, have been significantly
+active over the last two years.</p>
+<p>When considering potential Members, the Council will look at candidates with a
+comprehensive view of their contributions. This will include, but is not limited
+to, code, code review, infrastructure work, mailing list and chat participation,
+community help/building, education and outreach, design work, etc. We are
+deliberately not setting arbitrary quantitative metrics (like “100 commits in
+this repo”) to avoid encouraging behavior that plays to the metrics rather than
+the project’s overall well-being. We want to encourage a diverse array of
+backgrounds, viewpoints, and talents in our team, which is why we explicitly do
+not define code as the sole metric on which council membership will be
+evaluated.</p>
+<p>If a Council Member becomes inactive in the project for a period of one year,
+they will be considered for removal from the Council. Before removal, inactive
+Member will be approached to see if they plan on returning to active
+participation. If not, they will be removed immediately upon a Council
+vote. If they plan on returning to active participation soon, they will be
+given a grace period of one year. If they don’t return to active participation
+within that time period they will be removed by vote of the Council without
+further grace period. All former Council Members can be considered for
+membership again at any time in the future, like any other Project Contributor.
+Retired Council Members will be listed on the project website, acknowledging
+the period during which they were active in the Council.</p>
+<p>The Council reserves the right to eject current Members, other than the BDFL,
+if they are deemed to be actively harmful to the project’s well-being, and
+attempts at communication and conflict resolution have failed.</p>
+<p>A list of current Steering Council Members is maintained at the
+page <a class="reference internal" href="people.html#governance-people"><span class="std std-ref">Current steering council and institutional partners</span></a>.</p>
+</div>
+<div class="section" id="council-chair">
+<h4>Council Chair<a class="headerlink" href="#council-chair" title="Permalink to this headline">¶</a></h4>
+<p>The Chair will be appointed by the Steering Council. The Chair can stay on as
+long as he/she wants, but may step down at any time and will listen to
+serious calls to do so (similar to the BDFL role). The Chair will be
+responsible for:</p>
+<ul class="simple">
+<li><p>Starting a review of the technical direction of the project (as captured by
+the <a class="reference internal" href="../../roadmap.html#scipy-roadmap"><span class="std std-ref">SciPy Roadmap</span></a>) bi-yearly, around mid-April and mid-October.</p></li>
+<li><p>At the same times of the year, summarizing any relevant
+organizational updates and issues in the preceding period, and asking for
+feedback/suggestions on the mailing list.</p></li>
+<li><p>Ensuring the composition of the Steering Council stays current.</p></li>
+<li><p>Ensuring matters discussed in private by the Steering Council get
+summarized on the mailing list to keep the Community informed.</p></li>
+<li><p>Ensuring other important organizational documents (e.g., Code of Conduct,
+Fiscal Sponsorship Agreement) stay current after they are added.</p></li>
+</ul>
+</div>
+<div class="section" id="release-manager">
+<h4>Release Manager<a class="headerlink" href="#release-manager" title="Permalink to this headline">¶</a></h4>
+<p>The Release Manager has final responsibility for making a release.  This
+includes:</p>
+<ul class="simple">
+<li><p>Proposing of and deciding on the timing of a release.</p></li>
+<li><p>Determining the content of a release in case there is no consensus on a
+particular change or feature.</p></li>
+<li><p>Creating the release and announcing it on the relevant public channels.</p></li>
+</ul>
+<p>For more details on what those responsibilities look like in practice, see
+<a class="reference internal" href="../core-dev/index.html#making-a-release"><span class="std std-ref">Making a SciPy release</span></a>.</p>
+</div>
+<div class="section" id="conflict-of-interest">
+<h4>Conflict of interest<a class="headerlink" href="#conflict-of-interest" title="Permalink to this headline">¶</a></h4>
+<p>It is expected that the BDFL and Council Members will be employed at a wide
+range of companies, universities, and non-profit organizations. Because of this,
+it is possible that Members will have a conflict of interest. Such conflicts of
+interest include, but are not limited to:</p>
+<ul class="simple">
+<li><p>Financial interest, such as investments, employment or contracting work,
+outside of The Project that may influence their work on The Project.</p></li>
+<li><p>Access to proprietary information of their employer that could potentially
+leak into their work with the Project.</p></li>
+</ul>
+<p>All members of the Council, BDFL included, shall disclose to the rest of the
+Council any conflict of interest they may have. Members with a conflict of
+interest in a particular issue may participate in Council discussions on that
+issue, but must recuse themselves from voting on the issue. If the BDFL has
+recused his/herself for a particular decision, the Council will appoint a
+substitute BDFL for that decision.</p>
+</div>
+<div class="section" id="private-communications-of-the-council">
+<h4>Private communications of the Council<a class="headerlink" href="#private-communications-of-the-council" title="Permalink to this headline">¶</a></h4>
+<p>Unless specifically required, all Council discussions and activities will be
+public and done in collaboration and discussion with the Project Contributors
+and Community. The Council will have a private mailing list that will be used
+sparingly and only when a specific matter requires privacy. When private
+communications and decisions are needed, the Council will do its best to
+summarize those to the Community after removing personal/private/sensitive
+information that should not be posted to the public internet.</p>
+</div>
+<div class="section" id="council-decision-making">
+<h4>Council decision making<a class="headerlink" href="#council-decision-making" title="Permalink to this headline">¶</a></h4>
+<p>If it becomes necessary for the Steering Council to produce a formal
+decision, then they will use a form of the <a class="reference external" href="https://www.apache.org/foundation/voting.html">Apache Foundation voting
+process</a>. This is a
+formalized version of consensus, in which +1 votes indicate agreement,
+-1 votes are vetoes (and must be accompanied with a rationale, as
+above), and one can also vote fractionally (e.g. -0.5, +0.5) if one
+wishes to express an opinion without registering a full veto. These
+numeric votes are also often used informally as a way of getting a
+general sense of people’s feelings on some issue, and should not
+normally be taken as formal votes. A formal vote only occurs if
+explicitly declared, and if this does occur, then the vote should be held
+open for long enough to give all interested Council Members a chance to
+respond – at least one week.</p>
+<p>In practice, we anticipate that for most Steering Council decisions
+(e.g., voting in new members) a more informal process will suffice.</p>
+</div>
+</div>
+</div>
+<div class="section" id="institutional-partners-and-funding">
+<h2>Institutional Partners and funding<a class="headerlink" href="#institutional-partners-and-funding" title="Permalink to this headline">¶</a></h2>
+<p>The Steering Council is the primary leadership for the project. No
+outside institution, individual, or legal entity has the ability to own,
+control, usurp, or influence the project other than by participating in
+the Project as Contributors and Council Members. However, because
+institutions can be an important funding mechanism for the project, it
+is important to formally acknowledge institutional participation in the
+project. These are Institutional Partners.</p>
+<p>An Institutional Contributor is any individual Project Contributor who
+contributes to the project as part of their official duties at an
+Institutional Partner. Likewise, an Institutional Council Member is any
+Project Steering Council Member who contributes to the project as part
+of their official duties at an Institutional Partner.</p>
+<p>With these definitions, an Institutional Partner is any recognized legal
+entity in any country that employs at least 1 Institutional Contributor or
+Institutional Council Member. Institutional Partners can be for-profit or
+non-profit entities.</p>
+<p>Institutions become eligible to become an Institutional Partner by
+employing individuals who actively contribute to The Project as part of
+their official duties. To state this another way, the only way for a
+Partner to influence the project is by actively contributing to the open
+development of the project, in equal terms to any other member of the
+community of Contributors and Council Members. Merely using Project
+Software in institutional context does not allow an entity to become an
+Institutional Partner. Financial gifts do not enable an entity to become
+an Institutional Partner. Once an institution becomes eligible for
+Institutional Partnership, the Steering Council must nominate and
+approve the Partnership.</p>
+<p>If, at some point, an existing Institutional Partner stops having any
+contributing employees, then a one year grace period commences. If, at
+the end of this one-year period, they continue not to have any
+contributing employees, then their Institutional Partnership will
+lapse, and resuming it will require going through the normal process
+for new Partnerships.</p>
+<p>An Institutional Partner is free to pursue funding for their work on The
+Project through any legal means. This could involve a non-profit
+organization raising money from private foundations and donors or a
+for-profit company building proprietary products and services that
+leverage Project Software and Services. Funding acquired by
+Institutional Partners to work on The Project is called Institutional
+Funding. However, no funding obtained by an Institutional Partner can
+override the Steering Council. If a Partner has funding to do SciPy work
+and the Council decides to not pursue that work as a project, the
+Partner is free to pursue it on their own. However, in this situation,
+that part of the Partner’s work will not be under the SciPy umbrella and
+cannot use the Project trademarks in any way that suggests a formal
+relationship.</p>
+<p>Institutional Partner benefits are:</p>
+<ul class="simple">
+<li><p>acknowledgement on the SciPy website and in talks</p></li>
+<li><p>ability to acknowledge their own funding sources on the SciPy
+website and in talks</p></li>
+<li><p>ability to influence the project through the participation of their
+Council Member</p></li>
+<li><p>invitation of the Council Members to SciPy Developer Meetings</p></li>
+</ul>
+<p>A list of current Institutional Partners is maintained at the page
+<a class="reference internal" href="people.html#governance-people"><span class="std std-ref">Current steering council and institutional partners</span></a>.</p>
+</div>
+<div class="section" id="document-history">
+<h2>Document history<a class="headerlink" href="#document-history" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/scipy/scipy/commits/master/doc/source/dev/governance/governance.rst">https://github.com/scipy/scipy/commits/master/doc/source/dev/governance/governance.rst</a></p>
+</div>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>Substantial portions of this document were adapted from the
+<a class="reference external" href="https://github.com/jupyter/governance/blob/master/governance.md">Jupyter/IPython project’s governance document</a> and
+<a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/source/dev/governance/governance.rst">NumPy’s governance document</a>.</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>To the extent possible under law, the authors have waived all
+copyright and related or neighboring rights to the SciPy project
+governance document, as per the <a class="reference external" href="https://creativecommons.org/publicdomain/zero/1.0/">CC-0 public domain dedication / license</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SciPy Project Governance</a><ul>
+<li><a class="reference internal" href="#the-project">The Project</a></li>
+<li><a class="reference internal" href="#id1">Governance</a><ul>
+<li><a class="reference internal" href="#bdfl">BDFL</a></li>
+<li><a class="reference internal" href="#steering-council">Steering Council</a><ul>
+<li><a class="reference internal" href="#council-membership">Council membership</a></li>
+<li><a class="reference internal" href="#council-chair">Council Chair</a></li>
+<li><a class="reference internal" href="#release-manager">Release Manager</a></li>
+<li><a class="reference internal" href="#conflict-of-interest">Conflict of interest</a></li>
+<li><a class="reference internal" href="#private-communications-of-the-council">Private communications of the Council</a></li>
+<li><a class="reference internal" href="#council-decision-making">Council decision making</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#institutional-partners-and-funding">Institutional Partners and funding</a></li>
+<li><a class="reference internal" href="#document-history">Document history</a></li>
+<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../core-dev/index.html"
+                        title="previous chapter">SciPy Core Developer Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../contributor/quickstart_mac.html"
+                        title="next chapter">Development environment quickstart guide (macOS)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.nbdtrik &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.nbdtrin" href="scipy.special.nbdtrin.html" >
+    <link rel="prev" title="scipy.special.nbdtri" href="scipy.special.nbdtri.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.nbdtrin.html" title="scipy.special.nbdtrin"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.nbdtri.html" title="scipy.special.nbdtri"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-nbdtrik">
+<h1>scipy.special.nbdtrik<a class="headerlink" href="#scipy-special-nbdtrik" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.nbdtrik">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">nbdtrik</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'nbdtrik'&gt;</em><a class="headerlink" href="#scipy.special.nbdtrik" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse of <a class="reference internal" href="scipy.special.nbdtr.html#scipy.special.nbdtr" title="scipy.special.nbdtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbdtr</span></code></a> vs <em class="xref py py-obj">k</em>.</p>
+<p>Returns the inverse with respect to the parameter <em class="xref py py-obj">k</em> of
+<em class="xref py py-obj">y = nbdtr(k, n, p)</em>, the negative binomial cumulative distribution
+function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>y</strong><span class="classifier">array_like</span></dt><dd><p>The probability of <em class="xref py py-obj">k</em> or fewer failures before <em class="xref py py-obj">n</em> successes (float).</p>
+</dd>
+<dt><strong>n</strong><span class="classifier">array_like</span></dt><dd><p>The target number of successes (positive int).</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">array_like</span></dt><dd><p>Probability of success in a single event (float).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>k</strong><span class="classifier">ndarray</span></dt><dd><p>The maximum number of allowed failures such that <em class="xref py py-obj">nbdtr(k, n, p) = y</em>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.special.nbdtr.html#scipy.special.nbdtr" title="scipy.special.nbdtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbdtr</span></code></a></dt><dd><p>Cumulative distribution function of the negative binomial.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.nbdtri.html#scipy.special.nbdtri" title="scipy.special.nbdtri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbdtri</span></code></a></dt><dd><p>Inverse with respect to <em class="xref py py-obj">p</em> of <em class="xref py py-obj">nbdtr(k, n, p)</em>.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.nbdtrin.html#scipy.special.nbdtrin" title="scipy.special.nbdtrin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nbdtrin</span></code></a></dt><dd><p>Inverse with respect to <em class="xref py py-obj">n</em> of <em class="xref py py-obj">nbdtr(k, n, p)</em>.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Wrapper for the CDFLIB <a class="reference internal" href="#r1c68fb2a79db-1" id="id1">[1]</a> Fortran routine <em class="xref py py-obj">cdfnbn</em>.</p>
+<p>Formula 26.5.26 of <a class="reference internal" href="#r1c68fb2a79db-2" id="id2">[2]</a>,</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j=k + 1}^\infty {{n + j - 1}\choose{j}} p^n (1 - p)^j = I_{1 - p}(k + 1, n),\]</div>
+<p>is used to reduce calculation of the cumulative distribution function to
+that of a regularized incomplete beta <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>Computation of <em class="xref py py-obj">k</em> involves a search for a value that produces the desired
+value of <em class="xref py py-obj">y</em>.  The search relies on the monotonicity of <em class="xref py py-obj">y</em> with <em class="xref py py-obj">k</em>.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r1c68fb2a79db-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Barry Brown, James Lovato, and Kathy Russell,
+CDFLIB: Library of Fortran Routines for Cumulative Distribution
+Functions, Inverses, and Other Parameters.</p>
+</dd>
+<dt class="label" id="r1c68fb2a79db-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Milton Abramowitz and Irene A. Stegun, eds.
+Handbook of Mathematical Functions with Formulas,
+Graphs, and Mathematical Tables. New York: Dover, 1972.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.nbdtri.html"
+                        title="previous chapter">scipy.special.nbdtri</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.nbdtrin.html"
+                        title="next chapter">scipy.special.nbdtrin</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.smirnov &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.smirnovi" href="scipy.special.smirnovi.html" >
+    <link rel="prev" title="scipy.special.chndtrix" href="scipy.special.chndtrix.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.smirnovi.html" title="scipy.special.smirnovi"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.chndtrix.html" title="scipy.special.chndtrix"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-smirnov">
+<h1>scipy.special.smirnov<a class="headerlink" href="#scipy-special-smirnov" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.smirnov">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">smirnov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'smirnov'&gt;</em><a class="headerlink" href="#scipy.special.smirnov" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kolmogorov-Smirnov complementary cumulative distribution function</p>
+<p>Returns the exact Kolmogorov-Smirnov complementary cumulative
+distribution function,(aka the Survival Function) of Dn+ (or Dn-)
+for a one-sided test of equality between an empirical and a
+theoretical distribution. It is equal to the probability that the
+maximum difference between a theoretical distribution and an empirical
+one based on <em class="xref py py-obj">n</em> samples is greater than d.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>Number of samples</p>
+</dd>
+<dt><strong>d</strong><span class="classifier">float array_like</span></dt><dd><p>Deviation between the Empirical CDF (ECDF) and the target CDF.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>The value(s) of smirnov(n, d), Prob(Dn+ &gt;= d) (Also Prob(Dn- &gt;= d))</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.special.smirnovi.html#scipy.special.smirnovi" title="scipy.special.smirnovi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smirnovi</span></code></a></dt><dd><p>The Inverse Survival Function for the distribution</p>
+</dd>
+<dt><a class="reference internal" href="scipy.stats.ksone.html#scipy.stats.ksone" title="scipy.stats.ksone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.ksone</span></code></a></dt><dd><p>Provides the functionality as a continuous distribution</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.kolmogorov.html#scipy.special.kolmogorov" title="scipy.special.kolmogorov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kolmogorov</span></code></a>, <a class="reference internal" href="scipy.special.kolmogi.html#scipy.special.kolmogi" title="scipy.special.kolmogi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kolmogi</span></code></a></dt><dd><p>Functions for the two-sided distribution</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p><a class="reference internal" href="#scipy.special.smirnov" title="scipy.special.smirnov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smirnov</span></code></a> is used by <em class="xref py py-obj">stats.kstest</em> in the application of the
+Kolmogorov-Smirnov Goodness of Fit test. For historial reasons this
+function is exposed in <em class="xref py py-obj">scpy.special</em>, but the recommended way to achieve
+the most accurate CDF/SF/PDF/PPF/ISF computations is to use the
+<em class="xref py py-obj">stats.ksone</em> distribution.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">smirnov</span>
+</pre></div>
+</div>
+<p>Show the probability of a gap at least as big as 0, 0.5 and 1.0 for a sample of size 5</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smirnov</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="go">array([ 1.   ,  0.056,  0.   ])</span>
+</pre></div>
+</div>
+<p>Compare a sample of size 5 drawn from a source N(0.5, 1) distribution against
+a target N(0, 1) CDF.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gendist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1"># Normal distribution, mean 0.5, stddev 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">233423</span><span class="p">)</span>  <span class="c1"># Set the seed for reproducibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">gendist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([-0.20946287,  0.71688765,  0.95164151,  1.44590852,  3.08880533])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdfs</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cdfs</span>
+<span class="go">array([ 0.41704346,  0.76327829,  0.82936059,  0.92589857,  0.99899518])</span>
+<span class="go"># Construct the Empirical CDF and the K-S statistics (Dn+, Dn-, Dn)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ecdfs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">ecdfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">cdfs</span><span class="p">,</span> <span class="n">cdfs</span> <span class="o">-</span> <span class="n">ecdfs</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">ecdfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">cdfs</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cols</span>
+<span class="go">array([[ -2.095e-01,   2.000e-01,   4.170e-01,   4.170e-01,  -2.170e-01],</span>
+<span class="go">       [  7.169e-01,   4.000e-01,   7.633e-01,   5.633e-01,  -3.633e-01],</span>
+<span class="go">       [  9.516e-01,   6.000e-01,   8.294e-01,   4.294e-01,  -2.294e-01],</span>
+<span class="go">       [  1.446e+00,   8.000e-01,   9.259e-01,   3.259e-01,  -1.259e-01],</span>
+<span class="go">       [  3.089e+00,   1.000e+00,   9.990e-01,   1.990e-01,   1.005e-03]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gaps</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dnpm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gaps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dn-=</span><span class="si">%f</span><span class="s1">, Dn+=</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Dnpm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Dnpm</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">Dn-=0.563278, Dn+=0.001005</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">probs</span> <span class="o">=</span> <span class="n">smirnov</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Dnpm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;For a sample of size </span><span class="si">%d</span><span class="s1"> drawn from a N(0, 1) distribution:&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s1">&#39; Smirnov n=</span><span class="si">%d</span><span class="s1">: Prob(Dn- &gt;= </span><span class="si">%f</span><span class="s1">) = </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Dnpm</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">probs</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+<span class="gp">... </span>     <span class="s1">&#39; Smirnov n=</span><span class="si">%d</span><span class="s1">: Prob(Dn+ &gt;= </span><span class="si">%f</span><span class="s1">) = </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">Dnpm</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">])]))</span>
+<span class="go">For a sample of size 5 drawn from a N(0, 1) distribution:</span>
+<span class="go"> Smirnov n=5: Prob(Dn- &gt;= 0.563278) = 0.0250</span>
+<span class="go"> Smirnov n=5: Prob(Dn+ &gt;= 0.001005) = 0.9990</span>
+</pre></div>
+</div>
+<p>Plot the Empirical CDF against the target N(0, 1) CDF</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="p">]),</span> <span class="n">ecdfs</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Empirical CDF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x3</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF for N(0, 1)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="go"># Add vertical lines marking Dn+ and Dn-</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iminus</span><span class="p">,</span> <span class="n">iplus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">gaps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">iminus</span><span class="p">]],</span> <span class="n">ecdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">],</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iminus</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">iplus</span><span class="p">]],</span> <span class="n">cdfs</span><span class="p">[</span><span class="n">iplus</span><span class="p">],</span> <span class="n">ecdfs</span><span class="p">[</span><span class="n">iplus</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-special-smirnov-1.png" src="../_images/scipy-special-smirnov-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.chndtrix.html"
+                        title="previous chapter">scipy.special.chndtrix</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.smirnovi.html"
+                        title="next chapter">scipy.special.smirnovi</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

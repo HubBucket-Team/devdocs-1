@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.spatial.transform.Rotation.align_vectors &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-spatial-transform-rotation-align-vectors">
+<h1>scipy.spatial.transform.Rotation.align_vectors<a class="headerlink" href="#scipy-spatial-transform-rotation-align-vectors" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="scipy.spatial.transform.Rotation.align_vectors">
+<em class="property">classmethod </em><code class="sig-prename descclassname">Rotation.</code><code class="sig-name descname">align_vectors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_sensitivity</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/spatial/transform/rotation.py#L1850-L1978"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.spatial.transform.Rotation.align_vectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate a rotation to optimally align two sets of vectors.</p>
+<p>Find a rotation between frames A and B which best aligns a set of
+vectors <em class="xref py py-obj">a</em> and <em class="xref py py-obj">b</em> observed in these frames. The following loss
+function is minimized to solve for the rotation matrix
+<span class="math notranslate nohighlight">\(C\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[L(C) = \frac{1}{2} \sum_{i = 1}^{n} w_i \lVert \mathbf{a}_i -
+C \mathbf{b}_i \rVert^2 ,\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_i\)</span>’s are the <em class="xref py py-obj">weights</em> corresponding to each vector.</p>
+<p>The rotation is estimated with Kabsch algorithm <a class="reference internal" href="#r20eec99246c5-1" id="id1">[1]</a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>a</strong><span class="classifier">array_like, shape (N, 3)</span></dt><dd><p>Vector components observed in initial frame A. Each row of <em class="xref py py-obj">a</em>
+denotes a vector.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">array_like, shape (N, 3)</span></dt><dd><p>Vector components observed in another frame B. Each row of <em class="xref py py-obj">b</em>
+denotes a vector.</p>
+</dd>
+<dt><strong>weights</strong><span class="classifier">array_like shape (N,), optional</span></dt><dd><p>Weights describing the relative importance of the vector
+observations. If None (default), then all values in <em class="xref py py-obj">weights</em> are
+assumed to be 1.</p>
+</dd>
+<dt><strong>return_sensitivity</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to return the sensitivity matrix. See Notes for details.
+Default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>estimated_rotation</strong><span class="classifier"><a class="reference internal" href="scipy.spatial.transform.Rotation.html#scipy.spatial.transform.Rotation" title="scipy.spatial.transform.Rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Rotation</span></code></a> instance</span></dt><dd><p>Best estimate of the rotation that transforms <em class="xref py py-obj">b</em> to <em class="xref py py-obj">a</em>.</p>
+</dd>
+<dt><strong>rmsd</strong><span class="classifier">float</span></dt><dd><p>Root mean square distance (weighted) between the given set of
+vectors after alignment. It is equal to <code class="docutils literal notranslate"><span class="pre">sqrt(2</span> <span class="pre">*</span> <span class="pre">minimum_loss)</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">minimum_loss</span></code> is the loss function evaluated for the
+found optimal rotation.</p>
+</dd>
+<dt><strong>sensitivity_matrix</strong><span class="classifier">ndarray, shape (3, 3)</span></dt><dd><p>Sensitivity matrix of the estimated rotation estimate as explained
+in Notes. Returned only when <em class="xref py py-obj">return_sensitivity</em> is True.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method can also compute the sensitivity of the estimated rotation
+to small perturbations of the vector measurements. Specifically we
+consider the rotation estimate error as a small rotation vector of
+frame A. The sensitivity matrix is proportional to the covariance of
+this rotation vector assuming that the vectors in <em class="xref py py-obj">a</em> was measured with
+errors significantly less than their lengths. To get the true
+covariance matrix, the returned sensitivity matrix must be multiplied
+by harmonic mean <a class="reference internal" href="#r20eec99246c5-3" id="id2">[3]</a> of variance in each observation. Note that
+<em class="xref py py-obj">weights</em> are supposed to be inversely proportional to the observation
+variances to get consistent results. For example, if all vectors are
+measured with the same accuracy of 0.01 (<em class="xref py py-obj">weights</em> must be all equal),
+then you should multiple the sensitivity matrix by 0.01**2 to get the
+covariance.</p>
+<p>Refer to <a class="reference internal" href="#r20eec99246c5-2" id="id3">[2]</a> for more rigorous discussion of the covariance
+estimation.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r20eec99246c5-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Kabsch_algorithm">https://en.wikipedia.org/wiki/Kabsch_algorithm</a></p>
+</dd>
+<dt class="label" id="r20eec99246c5-2"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>F. Landis Markley,
+“Attitude determination using vector observations: a fast
+optimal matrix algorithm”, Journal of Astronautical Sciences,
+Vol. 41, No.2, 1993, pp. 261-280.</p>
+</dd>
+<dt class="label" id="r20eec99246c5-3"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Harmonic_mean">https://en.wikipedia.org/wiki/Harmonic_mean</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

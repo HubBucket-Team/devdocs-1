@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.integrate.quad_vec &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Integration and ODEs (scipy.integrate)" href="../integrate.html" >
+    <link rel="next" title="scipy.integrate.dblquad" href="scipy.integrate.dblquad.html" >
+    <link rel="prev" title="scipy.integrate.quad" href="scipy.integrate.quad.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../integrate.html" accesskey="U">Integration and ODEs (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.integrate.dblquad.html" title="scipy.integrate.dblquad"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.integrate.quad.html" title="scipy.integrate.quad"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-integrate-quad-vec">
+<h1>scipy.integrate.quad_vec<a class="headerlink" href="#scipy-integrate-quad-vec" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.integrate.quad_vec">
+<code class="sig-prename descclassname">scipy.integrate.</code><code class="sig-name descname">quad_vec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">epsabs</span><span class="o">=</span><span class="default_value">1e-200</span></em>, <em class="sig-param"><span class="n">epsrel</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">norm</span><span class="o">=</span><span class="default_value">'2'</span></em>, <em class="sig-param"><span class="n">cache_size</span><span class="o">=</span><span class="default_value">100000000.0</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">workers</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">quadrature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">full_output</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/integrate/_quad_vec.py#L104-L398"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.integrate.quad_vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive integration of a vector-valued function.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>f</strong><span class="classifier">callable</span></dt><dd><p>Vector-valued function f(x) to integrate.</p>
+</dd>
+<dt><strong>a</strong><span class="classifier">float</span></dt><dd><p>Initial point.</p>
+</dd>
+<dt><strong>b</strong><span class="classifier">float</span></dt><dd><p>Final point.</p>
+</dd>
+<dt><strong>epsabs</strong><span class="classifier">float, optional</span></dt><dd><p>Absolute tolerance.</p>
+</dd>
+<dt><strong>epsrel</strong><span class="classifier">float, optional</span></dt><dd><p>Relative tolerance.</p>
+</dd>
+<dt><strong>norm</strong><span class="classifier">{‘max’, ‘2’}, optional</span></dt><dd><p>Vector norm to use for error estimation.</p>
+</dd>
+<dt><strong>cache_size</strong><span class="classifier">int, optional</span></dt><dd><p>Number of bytes to use for memoization.</p>
+</dd>
+<dt><strong>workers</strong><span class="classifier">int or map-like callable, optional</span></dt><dd><p>If <em class="xref py py-obj">workers</em> is an integer, part of the computation is done in
+parallel subdivided to this many tasks (using
+<a class="reference external" href="https://docs.python.org/dev/library/multiprocessing.html#multiprocessing.pool.Pool" title="(in Python v3.9)"><code class="docutils literal notranslate"><span class="pre">multiprocessing.pool.Pool</span></code></a>).
+Supply <em class="xref py py-obj">-1</em> to use all cores available to the Process.
+Alternatively, supply a map-like callable, such as
+<a class="reference external" href="https://docs.python.org/dev/library/multiprocessing.html#multiprocessing.pool.Pool.map" title="(in Python v3.9)"><code class="docutils literal notranslate"><span class="pre">multiprocessing.pool.Pool.map</span></code></a> for evaluating the
+population in parallel.
+This evaluation is carried out as <code class="docutils literal notranslate"><span class="pre">workers(func,</span> <span class="pre">iterable)</span></code>.</p>
+</dd>
+<dt><strong>points</strong><span class="classifier">list, optional</span></dt><dd><p>List of additional breakpoints.</p>
+</dd>
+<dt><strong>quadrature</strong><span class="classifier">{‘gk21’, ‘gk15’, ‘trapz’}, optional</span></dt><dd><p>Quadrature rule to use on subintervals.
+Options: ‘gk21’ (Gauss-Kronrod 21-point rule),
+‘gk15’ (Gauss-Kronrod 15-point rule),
+‘trapz’ (composite trapezoid rule).
+Default: ‘gk21’ for finite intervals and ‘gk15’ for (semi-)infinite</p>
+</dd>
+<dt><strong>full_output</strong><span class="classifier">bool, optional</span></dt><dd><p>Return an additional <code class="docutils literal notranslate"><span class="pre">info</span></code> dictionary.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>res</strong><span class="classifier">{float, array-like}</span></dt><dd><p>Estimate for the result</p>
+</dd>
+<dt><strong>err</strong><span class="classifier">float</span></dt><dd><p>Error estimate for the result in the given norm</p>
+</dd>
+<dt><strong>info</strong><span class="classifier">dict</span></dt><dd><p>Returned only when <code class="docutils literal notranslate"><span class="pre">full_output=True</span></code>.
+Info dictionary. Is an object with the attributes:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>success<span class="classifier">bool</span></dt><dd><p>Whether integration reached target precision.</p>
+</dd>
+<dt>status<span class="classifier">int</span></dt><dd><p>Indicator for convergence, success (0),
+failure (1), and failure due to rounding error (2).</p>
+</dd>
+<dt>neval<span class="classifier">int</span></dt><dd><p>Number of function evaluations.</p>
+</dd>
+<dt>intervals<span class="classifier">ndarray, shape (num_intervals, 2)</span></dt><dd><p>Start and end points of subdivision intervals.</p>
+</dd>
+<dt>integrals<span class="classifier">ndarray, shape (num_intervals, …)</span></dt><dd><p>Integral for each interval.
+Note that at most <code class="docutils literal notranslate"><span class="pre">cache_size</span></code> values are recorded,
+and the array may contains <em>nan</em> for missing items.</p>
+</dd>
+<dt>errors<span class="classifier">ndarray, shape (num_intervals,)</span></dt><dd><p>Estimated integration error for each interval.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The algorithm mainly follows the implementation of QUADPACK’s
+DQAG* algorithms, implementing global error control and adaptive
+subdivision.</p>
+<p>The algorithm here has some differences to the QUADPACK approach:</p>
+<p>Instead of subdividing one interval at a time, the algorithm
+subdivides N intervals with largest errors at once. This enables
+(partial) parallelization of the integration.</p>
+<p>The logic of subdividing “next largest” intervals first is then
+not implemented, and we rely on the above extension to avoid
+concentrating on “small” intervals only.</p>
+<p>The Wynn epsilon table extrapolation is not used (QUADPACK uses it
+for infinite intervals). This is because the algorithm here is
+supposed to work on vector-valued functions, in an user-specified
+norm, and the extension of the epsilon algorithm to this case does
+not appear to be widely agreed. For max-norm, using elementwise
+Wynn epsilon could be possible, but we do not do this here with
+the hope that the epsilon extrapolation is mainly useful in
+special cases.</p>
+<p class="rubric">References</p>
+<p>[1] R. Piessens, E. de Doncker, QUADPACK (1983).</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.integrate.quad.html"
+                        title="previous chapter">scipy.integrate.quad</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.integrate.dblquad.html"
+                        title="next chapter">scipy.integrate.dblquad</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

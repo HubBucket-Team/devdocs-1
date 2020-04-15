@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Yule-Simon Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Discrete Statistical Distributions" href="discrete.html" >
+    <link rel="next" title="Continuous Statistical Distributions" href="continuous.html" >
+    <link rel="prev" title="Discrete Laplacian Distribution" href="discrete_dlaplace.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="discrete.html" accesskey="U">Discrete Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="continuous.html" title="Continuous Statistical Distributions"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="discrete_dlaplace.html" title="Discrete Laplacian Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="yule-simon-distribution">
+<span id="discrete-yulesimon"></span><h1>Yule-Simon Distribution<a class="headerlink" href="#yule-simon-distribution" title="Permalink to this headline">¶</a></h1>
+<p>A Yule-Simon random variable with parameter <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span>
+can be represented as a mixture of
+exponential random variates. To see this write <span class="math notranslate nohighlight">\(W\)</span> as an exponential
+random variate with rate <span class="math notranslate nohighlight">\(\rho\)</span> and a Geometric random variate <span class="math notranslate nohighlight">\(K\)</span>
+with probability <span class="math notranslate nohighlight">\(1-exp(-W)\)</span> then <span class="math notranslate nohighlight">\(K\)</span> marginally has a Yule-Simon
+distribution. The latent variable representation described above is used for
+random variate generation.</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*}
+ p \left( k; \alpha \right) &amp; = &amp; \alpha \frac{\Gamma\left(k\right)\Gamma\left(\alpha + 1\right)}{\Gamma\left(k+\alpha+1\right)} \\
+ F \left( k; \alpha \right) &amp; = &amp;  1 - \frac{ k \Gamma\left(k\right)\Gamma\left(\alpha + 1\right)}{\Gamma\left(k+\alpha+1\right)}
+ \end{eqnarray*}</div><p>for <span class="math notranslate nohighlight">\(k = 1,2,...\)</span>.</p>
+<p>Now</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} \mu &amp; = &amp; \frac{\alpha}{\alpha-1}\\
+ \mu_{2} &amp; = &amp;  \frac{\alpha^2}{\left(\alpha-1\right)^2\left( \alpha - 2 \right)}\\
+ \gamma_{1} &amp; = &amp; \frac{ \sqrt{\left( \alpha - 2 \right)} \left( \alpha + 1 \right)^2}{ \alpha  \left( \alpha - 3 \right)}\\
+ \gamma_{2} &amp; = &amp; \frac{ \left(\alpha + 3\right) + \left(\alpha^3 - 49\alpha - 22\right)}{\alpha \left(\alpha - 4\right)\left(\alpha - 3 \right) }
+ \end{eqnarray*}</div><p>for <span class="math notranslate nohighlight">\(\alpha&gt;1\)</span> otherwise the mean is infinite and the variance does not exist.
+For the variance, <span class="math notranslate nohighlight">\(\alpha&gt;2\)</span> otherwise the variance does not exist.
+Similarly, for the skewness and
+kurtosis to be finite, <span class="math notranslate nohighlight">\(\alpha&gt;3\)</span> and <span class="math notranslate nohighlight">\(\alpha&gt;4\)</span> respectively.</p>
+<p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.yulesimon.html#scipy.stats.yulesimon" title="scipy.stats.yulesimon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.yulesimon</span></code></a></p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="discrete_dlaplace.html"
+                        title="previous chapter">Discrete Laplacian Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="continuous.html"
+                        title="next chapter">Continuous Statistical Distributions</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

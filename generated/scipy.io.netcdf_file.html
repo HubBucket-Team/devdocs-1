@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.io.netcdf_file &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Input and output (scipy.io)" href="../io.html" >
+    <link rel="next" title="scipy.io.netcdf_file.close" href="scipy.io.netcdf_file.close.html" >
+    <link rel="prev" title="scipy.io.FortranFormattingError" href="scipy.io.FortranFormattingError.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../io.html" accesskey="U">Input and output (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.io</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.io.netcdf_file.close.html" title="scipy.io.netcdf_file.close"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.io.FortranFormattingError.html" title="scipy.io.FortranFormattingError"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-io-netcdf-file">
+<h1>scipy.io.netcdf_file<a class="headerlink" href="#scipy-io-netcdf-file" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.io.netcdf_file">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.io.</code><code class="sig-name descname">netcdf_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">mmap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">version</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">maskandscale</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/io/netcdf.py#L100-L802"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.io.netcdf_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file object for NetCDF data.</p>
+<p>A <a class="reference internal" href="#scipy.io.netcdf_file" title="scipy.io.netcdf_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netcdf_file</span></code></a> object has two standard attributes: <em class="xref py py-obj">dimensions</em> and
+<em class="xref py py-obj">variables</em>. The values of both are dictionaries, mapping dimension
+names to their associated lengths and variable names to variables,
+respectively. Application programs should never modify these
+dictionaries.</p>
+<p>All other attributes correspond to global attributes defined in the
+NetCDF file. Global file attributes are created by assigning to an
+attribute of the <a class="reference internal" href="#scipy.io.netcdf_file" title="scipy.io.netcdf_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netcdf_file</span></code></a> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">string or file-like</span></dt><dd><p>string -&gt; filename</p>
+</dd>
+<dt><strong>mode</strong><span class="classifier">{‘r’, ‘w’, ‘a’}, optional</span></dt><dd><p>read-write-append mode, default is ‘r’</p>
+</dd>
+<dt><strong>mmap</strong><span class="classifier">None or bool, optional</span></dt><dd><p>Whether to mmap <em class="xref py py-obj">filename</em> when reading.  Default is True
+when <em class="xref py py-obj">filename</em> is a file name, False when <em class="xref py py-obj">filename</em> is a
+file-like object. Note that when mmap is in use, data arrays
+returned refer directly to the mmapped data on disk, and the
+file cannot be closed as long as references to it exist.</p>
+</dd>
+<dt><strong>version</strong><span class="classifier">{1, 2}, optional</span></dt><dd><p>version of netcdf to read / write, where 1 means <em>Classic
+format</em> and 2 means <em>64-bit offset format</em>.  Default is 1.  See
+<a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_introduction.html#select_format">here</a>
+for more info.</p>
+</dd>
+<dt><strong>maskandscale</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to automatically scale and/or mask data based on attributes.
+Default is False.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The major advantage of this module over other modules is that it doesn’t
+require the code to be linked to the NetCDF libraries. This module is
+derived from <a class="reference external" href="https://bitbucket.org/robertodealmeida/pupynere/">pupynere</a>.</p>
+<p>NetCDF files are a self-describing binary data format. The file contains
+metadata that describes the dimensions and variables in the file. More
+details about NetCDF files can be found <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/user_guide.html">here</a>. There
+are three main sections to a NetCDF data structure:</p>
+<ol class="arabic simple">
+<li><p>Dimensions</p></li>
+<li><p>Variables</p></li>
+<li><p>Attributes</p></li>
+</ol>
+<p>The dimensions section records the name and length of each dimension used
+by the variables. The variables would then indicate which dimensions it
+uses and any attributes such as data units, along with containing the data
+values for the variable. It is good practice to include a
+variable that is the same name as a dimension to provide the values for
+that axes. Lastly, the attributes section would contain additional
+information such as the name of the file creator or the instrument used to
+collect the data.</p>
+<p>When writing data to a NetCDF file, there is often the need to indicate the
+‘record dimension’. A record dimension is the unbounded dimension for a
+variable. For example, a temperature variable may have dimensions of
+latitude, longitude and time. If one wants to add more temperature data to
+the NetCDF file as time progresses, then the temperature variable should
+have the time dimension flagged as the record dimension.</p>
+<p>In addition, the NetCDF file header contains the position of the data in
+the file, so access can be done in an efficient manner without loading
+unnecessary data into memory. It uses the <code class="docutils literal notranslate"><span class="pre">mmap</span></code> module to create
+Numpy arrays mapped to the data on disk, for the same purpose.</p>
+<p>Note that when <a class="reference internal" href="#scipy.io.netcdf_file" title="scipy.io.netcdf_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netcdf_file</span></code></a> is used to open a file with mmap=True
+(default for read-only), arrays returned by it refer to data
+directly on the disk. The file should not be closed, and cannot be cleanly
+closed when asked, if such arrays are alive. You may want to copy data arrays
+obtained from mmapped Netcdf file if they are to be processed after the file
+is closed, see the example below.</p>
+<p class="rubric">Examples</p>
+<p>To create a NetCDF file:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">netcdf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">netcdf_file</span><span class="p">(</span><span class="s1">&#39;simple.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="s1">&#39;Created for a test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;days since 2008-01-01&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note the assignment of <code class="docutils literal notranslate"><span class="pre">arange(10)</span></code> to <code class="docutils literal notranslate"><span class="pre">time[:]</span></code>.  Exposing the slice
+of the time variable allows for the data to be set in the object, rather
+than letting <code class="docutils literal notranslate"><span class="pre">arange(10)</span></code> overwrite the <code class="docutils literal notranslate"><span class="pre">time</span></code> variable.</p>
+<p>To read the NetCDF file we just created:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">netcdf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">netcdf_file</span><span class="p">(</span><span class="s1">&#39;simple.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="go">b&#39;Created for a test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
+<span class="go">b&#39;days since 2008-01-01&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(10,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<p>NetCDF files, when opened read-only, return arrays that refer
+directly to memory-mapped data on disk:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">time</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">base</span>
+<span class="go">&lt;mmap.mmap object at 0x7fe753763180&gt;</span>
+</pre></div>
+</div>
+<p>If the data is to be processed after the file is closed, it needs
+to be copied to main memory:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">time</span><span class="p">[:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">4.5</span>
+</pre></div>
+</div>
+<p>A NetCDF file can also be used as context manager:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">netcdf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">netcdf</span><span class="o">.</span><span class="n">netcdf_file</span><span class="p">(</span><span class="s1">&#39;simple.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="go">b&#39;Created for a test&#39;</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.io.netcdf_file.close.html#scipy.io.netcdf_file.close" title="scipy.io.netcdf_file.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a>(self)</p></td>
+<td><p>Closes the NetCDF file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.io.netcdf_file.createDimension.html#scipy.io.netcdf_file.createDimension" title="scipy.io.netcdf_file.createDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createDimension</span></code></a>(self, name, length)</p></td>
+<td><p>Adds a dimension to the Dimension section of the NetCDF data structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.io.netcdf_file.createVariable.html#scipy.io.netcdf_file.createVariable" title="scipy.io.netcdf_file.createVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVariable</span></code></a>(self, name, type, dimensions)</p></td>
+<td><p>Create an empty variable for the <a class="reference internal" href="#scipy.io.netcdf_file" title="scipy.io.netcdf_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netcdf_file</span></code></a> object, specifying its data type and the dimensions it uses.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.io.netcdf_file.flush.html#scipy.io.netcdf_file.flush" title="scipy.io.netcdf_file.flush"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flush</span></code></a>(self)</p></td>
+<td><p>Perform a sync-to-disk flush if the <a class="reference internal" href="#scipy.io.netcdf_file" title="scipy.io.netcdf_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netcdf_file</span></code></a> object is in write mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.io.netcdf_file.sync.html#scipy.io.netcdf_file.sync" title="scipy.io.netcdf_file.sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sync</span></code></a>(self)</p></td>
+<td><p>Perform a sync-to-disk flush if the <a class="reference internal" href="#scipy.io.netcdf_file" title="scipy.io.netcdf_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netcdf_file</span></code></a> object is in write mode.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.io.FortranFormattingError.html"
+                        title="previous chapter">scipy.io.FortranFormattingError</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.io.netcdf_file.close.html"
+                        title="next chapter">scipy.io.netcdf_file.close</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

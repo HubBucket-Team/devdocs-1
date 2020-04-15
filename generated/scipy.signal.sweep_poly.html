@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.sweep_poly &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.unit_impulse" href="scipy.signal.unit_impulse.html" >
+    <link rel="prev" title="scipy.signal.square" href="scipy.signal.square.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.unit_impulse.html" title="scipy.signal.unit_impulse"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.square.html" title="scipy.signal.square"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-sweep-poly">
+<h1>scipy.signal.sweep_poly<a class="headerlink" href="#scipy-signal-sweep-poly" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.sweep_poly">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">sweep_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">poly</span></em>, <em class="sig-param"><span class="n">phi</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/waveforms.py#L482-L576"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.sweep_poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frequency-swept cosine generator, with a time-dependent frequency.</p>
+<p>This function generates a sinusoidal function whose instantaneous
+frequency varies with time.  The frequency at time <em class="xref py py-obj">t</em> is given by
+the polynomial <em class="xref py py-obj">poly</em>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>t</strong><span class="classifier">ndarray</span></dt><dd><p>Times at which to evaluate the waveform.</p>
+</dd>
+<dt><strong>poly</strong><span class="classifier">1-D array_like or instance of numpy.poly1d</span></dt><dd><p>The desired frequency expressed as a polynomial.  If <em class="xref py py-obj">poly</em> is
+a list or ndarray of length n, then the elements of <em class="xref py py-obj">poly</em> are
+the coefficients of the polynomial, and the instantaneous
+frequency is</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">f(t)</span> <span class="pre">=</span> <span class="pre">poly[0]*t**(n-1)</span> <span class="pre">+</span> <span class="pre">poly[1]*t**(n-2)</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">poly[n-1]</span></code></p>
+</div></blockquote>
+<p>If <em class="xref py py-obj">poly</em> is an instance of numpy.poly1d, then the
+instantaneous frequency is</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">f(t)</span> <span class="pre">=</span> <span class="pre">poly(t)</span></code></p>
+</div></blockquote>
+</dd>
+<dt><strong>phi</strong><span class="classifier">float, optional</span></dt><dd><p>Phase offset, in degrees, Default: 0.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>sweep_poly</strong><span class="classifier">ndarray</span></dt><dd><p>A numpy array containing the signal evaluated at <em class="xref py py-obj">t</em> with the
+requested time-varying frequency.  More precisely, the function
+returns <code class="docutils literal notranslate"><span class="pre">cos(phase</span> <span class="pre">+</span> <span class="pre">(pi/180)*phi)</span></code>, where <em class="xref py py-obj">phase</em> is the integral
+(from 0 to t) of <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">*</span> <span class="pre">f(t)</span></code>; <code class="docutils literal notranslate"><span class="pre">f(t)</span></code> is defined above.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.chirp.html#scipy.signal.chirp" title="scipy.signal.chirp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chirp</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.8.0.</span></p>
+</div>
+<p>If <em class="xref py py-obj">poly</em> is a list or ndarray of length <em class="xref py py-obj">n</em>, then the elements of
+<em class="xref py py-obj">poly</em> are the coefficients of the polynomial, and the instantaneous
+frequency is:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">f(t)</span> <span class="pre">=</span> <span class="pre">poly[0]*t**(n-1)</span> <span class="pre">+</span> <span class="pre">poly[1]*t**(n-2)</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">poly[n-1]</span></code></p>
+</div></blockquote>
+<p>If <em class="xref py py-obj">poly</em> is an instance of <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.poly1d.html#numpy.poly1d" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.poly1d</span></code></a>, then the instantaneous
+frequency is:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">f(t)</span> <span class="pre">=</span> <span class="pre">poly(t)</span></code></p>
+</div></blockquote>
+<p>Finally, the output <em class="xref py py-obj">s</em> is:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">cos(phase</span> <span class="pre">+</span> <span class="pre">(pi/180)*phi)</span></code></p>
+</div></blockquote>
+<p>where <em class="xref py py-obj">phase</em> is the integral from 0 to <em class="xref py py-obj">t</em> of <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">*</span> <span class="pre">f(t)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">f(t)</span></code> as defined above.</p>
+<p class="rubric">Examples</p>
+<p>Compute the waveform with instantaneous frequency:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.025</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mf">0.36</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.25</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>over the interval 0 &lt;= t &lt;= 10.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">sweep_poly</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mf">0.025</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.36</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5001</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">sweep_poly</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plot it:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sweep Poly</span><span class="se">\n</span><span class="s2">with frequency &quot;</span> <span class="o">+</span>
+<span class="gp">... </span>          <span class="s2">&quot;$f(t) = 0.025t^3 - 0.36t^2 + 1.25t + 2$&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(t)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-sweep_poly-1.png" src="../_images/scipy-signal-sweep_poly-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.square.html"
+                        title="previous chapter">scipy.signal.square</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.unit_impulse.html"
+                        title="next chapter">scipy.signal.unit_impulse</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

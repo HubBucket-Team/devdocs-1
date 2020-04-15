@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.levene &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.shapiro" href="scipy.stats.shapiro.html" >
+    <link rel="prev" title="scipy.stats.bartlett" href="scipy.stats.bartlett.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.shapiro.html" title="scipy.stats.shapiro"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.bartlett.html" title="scipy.stats.bartlett"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-levene">
+<h1>scipy.stats.levene<a class="headerlink" href="#scipy-stats-levene" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.levene">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">levene</code><span class="sig-paren">(</span><em class="sig-param">\*args</em>, <em class="sig-param">\*\*kwds</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/morestats.py#L2252-L2370"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.levene" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform Levene test for equal variances.</p>
+<p>The Levene test tests the null hypothesis that all input samples
+are from populations with equal variances.  Levene’s test is an
+alternative to Bartlett’s test <a class="reference internal" href="scipy.stats.bartlett.html#scipy.stats.bartlett" title="scipy.stats.bartlett"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bartlett</span></code></a> in the case where
+there are significant deviations from normality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sample1, sample2, …</strong><span class="classifier">array_like</span></dt><dd><p>The sample data, possibly with different lengths. Only one-dimensional
+samples are accepted.</p>
+</dd>
+<dt><strong>center</strong><span class="classifier">{‘mean’, ‘median’, ‘trimmed’}, optional</span></dt><dd><p>Which function of the data to use in the test.  The default
+is ‘median’.</p>
+</dd>
+<dt><strong>proportiontocut</strong><span class="classifier">float, optional</span></dt><dd><p>When <em class="xref py py-obj">center</em> is ‘trimmed’, this gives the proportion of data points
+to cut from each end. (See <a class="reference internal" href="scipy.stats.trim_mean.html#scipy.stats.trim_mean" title="scipy.stats.trim_mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.trim_mean</span></code></a>.)
+Default is 0.05.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>statistic</strong><span class="classifier">float</span></dt><dd><p>The test statistic.</p>
+</dd>
+<dt><strong>pvalue</strong><span class="classifier">float</span></dt><dd><p>The p-value for the test.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Three variations of Levene’s test are possible.  The possibilities
+and their recommended usages are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘median’ : Recommended for skewed (non-normal) distributions&gt;</p></li>
+<li><p>‘mean’ : Recommended for symmetric, moderate-tailed distributions.</p></li>
+<li><p>‘trimmed’ : Recommended for heavy-tailed distributions.</p></li>
+</ul>
+</div></blockquote>
+<p>The test version using the mean was proposed in the original article
+of Levene (<a class="reference internal" href="#r7cdc7a5c4c19-2" id="id1">[2]</a>) while the median and trimmed mean have been studied by
+Brown and Forsythe (<a class="reference internal" href="#r7cdc7a5c4c19-3" id="id2">[3]</a>), sometimes also referred to as Brown-Forsythe
+test.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r7cdc7a5c4c19-1"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35a.htm">https://www.itl.nist.gov/div898/handbook/eda/section3/eda35a.htm</a></p>
+</dd>
+<dt class="label" id="r7cdc7a5c4c19-2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Levene, H. (1960). In Contributions to Probability and Statistics:
+Essays in Honor of Harold Hotelling, I. Olkin et al. eds.,
+Stanford University Press, pp. 278-292.</p>
+</dd>
+<dt class="label" id="r7cdc7a5c4c19-3"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
+<dd><p>Brown, M. B. and Forsythe, A. B. (1974), Journal of the American
+Statistical Association, 69, 364-367</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.bartlett.html"
+                        title="previous chapter">scipy.stats.bartlett</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.shapiro.html"
+                        title="next chapter">scipy.stats.shapiro</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

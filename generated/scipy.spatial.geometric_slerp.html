@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.spatial.geometric_slerp &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Spatial algorithms and data structures (scipy.spatial)" href="../spatial.html" >
+    <link rel="next" title="Distance computations (scipy.spatial.distance)" href="../spatial.distance.html" >
+    <link rel="prev" title="scipy.spatial.procrustes" href="scipy.spatial.procrustes.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../spatial.html" accesskey="U">Spatial algorithms and data structures (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="../spatial.distance.html" title="Distance computations (scipy.spatial.distance)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.spatial.procrustes.html" title="scipy.spatial.procrustes"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-spatial-geometric-slerp">
+<h1>scipy.spatial.geometric_slerp<a class="headerlink" href="#scipy-spatial-geometric-slerp" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.spatial.geometric_slerp">
+<code class="sig-prename descclassname">scipy.spatial.</code><code class="sig-name descname">geometric_slerp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">end</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1e-07</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/spatial/_geometric_slerp.py#L31-L227"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.spatial.geometric_slerp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geometric spherical linear interpolation.</p>
+<p>The interpolation occurs along a unit-radius
+great circle arc in arbitrary dimensional space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>start</strong><span class="classifier">(n_dimensions, ) array-like</span></dt><dd><p>Single n-dimensional input coordinate in a 1-D array-like
+object. <em class="xref py py-obj">n</em> must be greater than 1.</p>
+</dd>
+<dt><strong>end</strong><span class="classifier">(n_dimensions, ) array-like</span></dt><dd><p>Single n-dimensional input coordinate in a 1-D array-like
+object. <em class="xref py py-obj">n</em> must be greater than 1.</p>
+</dd>
+<dt><strong>t: float or (n_points,) array-like</strong></dt><dd><p>A float or array-like of doubles representing interpolation
+parameters, with values required in the inclusive interval
+between 0 and 1. A common approach is to generate the array
+with <code class="docutils literal notranslate"><span class="pre">np.linspace(0,</span> <span class="pre">1,</span> <span class="pre">n_pts)</span></code> for linearly spaced points.
+Ascending, descending, and scrambled orders are permitted.</p>
+</dd>
+<dt><strong>tol: float</strong></dt><dd><p>The absolute tolerance for determining if the start and end
+coordinates are antipodes.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>result</strong><span class="classifier">(t.size, D)</span></dt><dd><p>An array of doubles containing the interpolated
+spherical path and including start and
+end when 0 and 1 t are used. The
+interpolated values should correspond to the
+same sort order provided in the t array. The result
+may be 1-dimensional if <code class="docutils literal notranslate"><span class="pre">t</span></code> is a float.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> are antipodes, not on the
+unit n-sphere, or for a variety of degenerate conditions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.spatial.transform.Slerp.html#scipy.spatial.transform.Slerp" title="scipy.spatial.transform.Slerp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.spatial.transform.Slerp</span></code></a></dt><dd><p>3-D Slerp that works with quaternions</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The implementation is based on the mathematical formula provided in <a class="reference internal" href="#re44bd46832d9-1" id="id1">[1]</a>,
+and the first known presentation of this algorithm, derived from study of
+4-D geometry, is credited to Glenn Davis in a footnote of the original
+quaternion Slerp publication by Ken Shoemake <a class="reference internal" href="#re44bd46832d9-2" id="id2">[2]</a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="re44bd46832d9-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Slerp#Geometric_Slerp">https://en.wikipedia.org/wiki/Slerp#Geometric_Slerp</a></p>
+</dd>
+<dt class="label" id="re44bd46832d9-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Ken Shoemake (1985) Animating rotation with quaternion curves.
+ACM SIGGRAPH Computer Graphics, 19(3): 245-254.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Interpolate four linearly-spaced values on the circumference of
+a circle spanning 90 degrees:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">geometric_slerp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">geometric_slerp</span><span class="p">(</span><span class="n">start</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">end</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">t_vals</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The interpolated results should be at 30 degree intervals
+recognizable on the unit circle:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">circle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-spatial-geometric_slerp-1_00_00.png" src="../_images/scipy-spatial-geometric_slerp-1_00_00.png" />
+</div>
+<p>Attempting to interpolate between antipodes on a circle is
+ambiguous because there are two possible paths, and on a
+sphere there are infinite possible paths on the geodesic surface.
+Nonetheless, one of the ambiguous paths is returned along
+with a warning:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">opposite_pole</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">suppress_warnings</span><span class="p">()</span> <span class="k">as</span> <span class="n">sup</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">sup</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">geometric_slerp</span><span class="p">(</span><span class="n">start</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">opposite_pole</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">t_vals</span><span class="p">)</span>
+<span class="go">array([[ 1.00000000e+00,  0.00000000e+00],</span>
+<span class="go">       [ 5.00000000e-01,  8.66025404e-01],</span>
+<span class="go">       [-5.00000000e-01,  8.66025404e-01],</span>
+<span class="go">       [-1.00000000e+00,  1.22464680e-16]])</span>
+</pre></div>
+</div>
+<p>Extend the original example to a sphere and plot interpolation
+points in 3D:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">proj3d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plot the unit sphere for reference (optional):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">u</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Interpolating over a larger number of points
+may provide the appearance of a smooth curve on
+the surface of the sphere, which is also useful
+for discretized integration calculations on a
+sphere surface:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">geometric_slerp</span><span class="p">(</span><span class="n">start</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">end</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">t_vals</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="n">result</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="n">result</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-spatial-geometric_slerp-1_01_00.png" src="../_images/scipy-spatial-geometric_slerp-1_01_00.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.spatial.procrustes.html"
+                        title="previous chapter">scipy.spatial.procrustes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../spatial.distance.html"
+                        title="next chapter">Distance computations (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial.distance</span></code>)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

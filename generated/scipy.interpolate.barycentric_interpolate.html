@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.interpolate.barycentric_interpolate &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Interpolation (scipy.interpolate)" href="../interpolate.html" >
+    <link rel="next" title="scipy.interpolate.krogh_interpolate" href="scipy.interpolate.krogh_interpolate.html" >
+    <link rel="prev" title="scipy.interpolate.KroghInterpolator.derivatives" href="scipy.interpolate.KroghInterpolator.derivatives.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../interpolate.html" accesskey="U">Interpolation (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.interpolate.krogh_interpolate.html" title="scipy.interpolate.krogh_interpolate"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.interpolate.KroghInterpolator.derivatives.html" title="scipy.interpolate.KroghInterpolator.derivatives"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-interpolate-barycentric-interpolate">
+<h1>scipy.interpolate.barycentric_interpolate<a class="headerlink" href="#scipy-interpolate-barycentric-interpolate" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.interpolate.barycentric_interpolate">
+<code class="sig-prename descclassname">scipy.interpolate.</code><code class="sig-name descname">barycentric_interpolate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xi</span></em>, <em class="sig-param"><span class="n">yi</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/interpolate/polyint.py#L615-L661"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.interpolate.barycentric_interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function for polynomial interpolation.</p>
+<p>Constructs a polynomial that passes through a given set of points,
+then evaluates the polynomial. For reasons of numerical stability,
+this function does not compute the coefficients of the polynomial.</p>
+<p>This function uses a “barycentric interpolation” method that treats
+the problem as a special case of rational function interpolation.
+This algorithm is quite stable, numerically, but even in a world of
+exact computation, unless the <em class="xref py py-obj">x</em> coordinates are chosen very
+carefully - Chebyshev zeros (e.g., cos(i*pi/n)) are a good choice -
+polynomial interpolation itself is a very ill-conditioned process
+due to the Runge phenomenon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>xi</strong><span class="classifier">array_like</span></dt><dd><p>1-D array of x coordinates of the points the polynomial should
+pass through</p>
+</dd>
+<dt><strong>yi</strong><span class="classifier">array_like</span></dt><dd><p>The y coordinates of the points the polynomial should pass through.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">scalar or array_like</span></dt><dd><p>Points to evaluate the interpolator at.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int, optional</span></dt><dd><p>Axis in the yi array corresponding to the x-coordinate values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>y</strong><span class="classifier">scalar or array_like</span></dt><dd><p>Interpolated values. Shape is determined by replacing
+the interpolation axis in the original array with the shape of x.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.interpolate.BarycentricInterpolator.html#scipy.interpolate.BarycentricInterpolator" title="scipy.interpolate.BarycentricInterpolator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BarycentricInterpolator</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Construction of the interpolation weights is a relatively slow process.
+If you want to call this many times with the same xi (but possibly
+varying yi or x) you should use the class <a class="reference internal" href="scipy.interpolate.BarycentricInterpolator.html#scipy.interpolate.BarycentricInterpolator" title="scipy.interpolate.BarycentricInterpolator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BarycentricInterpolator</span></code></a>.
+This is what this function uses internally.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.interpolate.KroghInterpolator.derivatives.html"
+                        title="previous chapter">scipy.interpolate.KroghInterpolator.derivatives</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.interpolate.krogh_interpolate.html"
+                        title="next chapter">scipy.interpolate.krogh_interpolate</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

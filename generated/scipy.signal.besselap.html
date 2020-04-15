@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.besselap &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.buttap" href="scipy.signal.buttap.html" >
+    <link rel="prev" title="scipy.signal.band_stop_obj" href="scipy.signal.band_stop_obj.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.buttap.html" title="scipy.signal.buttap"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.band_stop_obj.html" title="scipy.signal.band_stop_obj"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-besselap">
+<h1>scipy.signal.besselap<a class="headerlink" href="#scipy-signal-besselap" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.besselap">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">besselap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">norm</span><span class="o">=</span><span class="default_value">'phase'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/filter_design.py#L4506-L4608"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.besselap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return (z,p,k) for analog prototype of an Nth-order Bessel filter.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>N</strong><span class="classifier">int</span></dt><dd><p>The order of the filter.</p>
+</dd>
+<dt><strong>norm</strong><span class="classifier">{‘phase’, ‘delay’, ‘mag’}, optional</span></dt><dd><p>Frequency normalization:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">phase</span></code></dt><dd><p>The filter is normalized such that the phase response reaches its
+midpoint at an angular (e.g., rad/s) cutoff frequency of 1. This
+happens for both low-pass and high-pass filters, so this is the
+“phase-matched” case. <a class="reference internal" href="#r96887f5d7b02-6" id="id1">[6]</a></p>
+<p>The magnitude response asymptotes are the same as a Butterworth
+filter of the same order with a cutoff of <em class="xref py py-obj">Wn</em>.</p>
+<p>This is the default, and matches MATLAB’s implementation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">delay</span></code></dt><dd><p>The filter is normalized such that the group delay in the passband
+is 1 (e.g., 1 second). This is the “natural” type obtained by
+solving Bessel polynomials</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mag</span></code></dt><dd><p>The filter is normalized such that the gain magnitude is -3 dB at
+angular frequency 1. This is called “frequency normalization” by
+Bond. <a class="reference internal" href="#r96887f5d7b02-1" id="id2">[1]</a></p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>z</strong><span class="classifier">ndarray</span></dt><dd><p>Zeros of the transfer function. Is always an empty array.</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">ndarray</span></dt><dd><p>Poles of the transfer function.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">scalar</span></dt><dd><p>Gain of the transfer function. For phase-normalized, this is always 1.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.bessel.html#scipy.signal.bessel" title="scipy.signal.bessel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bessel</span></code></a></dt><dd><p>Filter design function using this prototype</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>To find the pole locations, approximate starting points are generated <a class="reference internal" href="#r96887f5d7b02-2" id="id3">[2]</a>
+for the zeros of the ordinary Bessel polynomial <a class="reference internal" href="#r96887f5d7b02-3" id="id4">[3]</a>, then the
+Aberth-Ehrlich method <a class="reference internal" href="#r96887f5d7b02-4" id="id5">[4]</a> <a class="reference internal" href="#r96887f5d7b02-5" id="id6">[5]</a> is used on the Kv(x) Bessel function to
+calculate more accurate zeros, and these locations are then inverted about
+the unit circle.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r96887f5d7b02-1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>C.R. Bond, “Bessel Filter Constants”,
+<a class="reference external" href="http://www.crbond.com/papers/bsf.pdf">http://www.crbond.com/papers/bsf.pdf</a></p>
+</dd>
+<dt class="label" id="r96887f5d7b02-2"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>Campos and Calderon, “Approximate closed-form formulas for the
+zeros of the Bessel Polynomials”, <a class="reference external" href="https://arxiv.org/abs/1105.0957">arXiv:1105.0957</a>.</p>
+</dd>
+<dt class="label" id="r96887f5d7b02-3"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd><p>Thomson, W.E., “Delay Networks having Maximally Flat Frequency
+Characteristics”, Proceedings of the Institution of Electrical
+Engineers, Part III, November 1949, Vol. 96, No. 44, pp. 487-490.</p>
+</dd>
+<dt class="label" id="r96887f5d7b02-4"><span class="brackets"><a class="fn-backref" href="#id5">4</a></span></dt>
+<dd><p>Aberth, “Iteration Methods for Finding all Zeros of a Polynomial
+Simultaneously”, Mathematics of Computation, Vol. 27, No. 122,
+April 1973</p>
+</dd>
+<dt class="label" id="r96887f5d7b02-5"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
+<dd><p>Ehrlich, “A modified Newton method for polynomials”, Communications
+of the ACM, Vol. 10, Issue 2, pp. 107-108, Feb. 1967,
+<a class="reference external" href="https://doi.org/10.1145/363067.363115">DOI:10.1145/363067.363115</a></p>
+</dd>
+<dt class="label" id="r96887f5d7b02-6"><span class="brackets"><a class="fn-backref" href="#id1">6</a></span></dt>
+<dd><p>Miller and Bohn, “A Bessel Filter Crossover, and Its Relation to
+Others”, RaneNote 147, 1998, <a class="reference external" href="http://www.rane.com/note147.html">http://www.rane.com/note147.html</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.band_stop_obj.html"
+                        title="previous chapter">scipy.signal.band_stop_obj</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.buttap.html"
+                        title="next chapter">scipy.signal.buttap</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

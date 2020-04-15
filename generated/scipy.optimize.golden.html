@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.golden &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.leastsq" href="scipy.optimize.leastsq.html" >
+    <link rel="prev" title="scipy.optimize.brent" href="scipy.optimize.brent.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.leastsq.html" title="scipy.optimize.leastsq"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.brent.html" title="scipy.optimize.brent"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-golden">
+<h1>scipy.optimize.golden<a class="headerlink" href="#scipy-optimize-golden" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.optimize.golden">
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">golden</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">brack</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">1.4901161193847656e-08</span></em>, <em class="sig-param"><span class="n">full_output</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">5000</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/optimize.py#L2301-L2365"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.golden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the minimum of a function of one variable using golden section
+method.</p>
+<p>Given a function of one variable and a possible bracketing interval,
+return the minimum of the function isolated to a fractional precision of
+tol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>func</strong><span class="classifier">callable func(x,*args)</span></dt><dd><p>Objective function to minimize.</p>
+</dd>
+<dt><strong>args</strong><span class="classifier">tuple, optional</span></dt><dd><p>Additional arguments (if present), passed to func.</p>
+</dd>
+<dt><strong>brack</strong><span class="classifier">tuple, optional</span></dt><dd><p>Triple (a,b,c), where (a&lt;b&lt;c) and func(b) &lt;
+func(a),func(c). If bracket consists of two numbers (a,
+c), then they are assumed to be a starting interval for a
+downhill bracket search (see <a class="reference internal" href="scipy.optimize.bracket.html#scipy.optimize.bracket" title="scipy.optimize.bracket"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bracket</span></code></a>); it doesn’t always
+mean that obtained solution will satisfy a&lt;=x&lt;=c.</p>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float, optional</span></dt><dd><p>x tolerance stop criterion</p>
+</dd>
+<dt><strong>full_output</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, return optional outputs.</p>
+</dd>
+<dt><strong>maxiter</strong><span class="classifier">int</span></dt><dd><p>Maximum number of iterations to perform.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.optimize.minimize_scalar.html#scipy.optimize.minimize_scalar" title="scipy.optimize.minimize_scalar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimize_scalar</span></code></a></dt><dd><p>Interface to minimization algorithms for scalar univariate functions. See the ‘Golden’ <em class="xref py py-obj">method</em> in particular.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Uses analog of bisection method to decrease the bracketed
+interval.</p>
+<p class="rubric">Examples</p>
+<p>We illustrate the behaviour of the function when <em class="xref py py-obj">brack</em> is of
+size 2 and 3, respectively. In the case where <em class="xref py py-obj">brack</em> is of the
+form (xa,xb), we can see for the given values, the output need
+not necessarily lie in the range <code class="docutils literal notranslate"><span class="pre">(xa,</span> <span class="pre">xb)</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">minimum</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">golden</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">brack</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minimum</span>
+<span class="go">1.5717277788484873e-162</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minimum</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">golden</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">brack</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minimum</span>
+<span class="go">-1.5717277788484873e-162</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.brent.html"
+                        title="previous chapter">scipy.optimize.brent</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.leastsq.html"
+                        title="next chapter">scipy.optimize.leastsq</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

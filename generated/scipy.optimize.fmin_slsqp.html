@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.fmin_slsqp &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.fminbound" href="scipy.optimize.fminbound.html" >
+    <link rel="prev" title="scipy.optimize.fmin_cobyla" href="scipy.optimize.fmin_cobyla.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.fminbound.html" title="scipy.optimize.fminbound"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.fmin_cobyla.html" title="scipy.optimize.fmin_cobyla"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-fmin-slsqp">
+<h1>scipy.optimize.fmin_slsqp<a class="headerlink" href="#scipy-optimize-fmin-slsqp" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.optimize.fmin_slsqp">
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">fmin_slsqp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">eqcons</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">f_eqcons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ieqcons</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">f_ieqcons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bounds</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">fprime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fprime_eqcons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fprime_ieqcons</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">iter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">acc</span><span class="o">=</span><span class="default_value">1e-06</span></em>, <em class="sig-param"><span class="n">iprint</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">disp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">full_output</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1.4901161193847656e-08</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/slsqp.py#L67-L210"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.fmin_slsqp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize a function using Sequential Least Squares Programming</p>
+<p>Python interface function for the SLSQP Optimization subroutine
+originally implemented by Dieter Kraft.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier">callable f(x,*args)</span></dt><dd><p>Objective function.  Must return a scalar.</p>
+</dd>
+<dt><strong>x0</strong><span class="classifier">1-D ndarray of float</span></dt><dd><p>Initial guess for the independent variable(s).</p>
+</dd>
+<dt><strong>eqcons</strong><span class="classifier">list, optional</span></dt><dd><p>A list of functions of length n such that
+eqcons[j](x,*args) == 0.0 in a successfully optimized
+problem.</p>
+</dd>
+<dt><strong>f_eqcons</strong><span class="classifier">callable f(x,*args), optional</span></dt><dd><p>Returns a 1-D array in which each element must equal 0.0 in a
+successfully optimized problem. If f_eqcons is specified,
+eqcons is ignored.</p>
+</dd>
+<dt><strong>ieqcons</strong><span class="classifier">list, optional</span></dt><dd><p>A list of functions of length n such that
+ieqcons[j](x,*args) &gt;= 0.0 in a successfully optimized
+problem.</p>
+</dd>
+<dt><strong>f_ieqcons</strong><span class="classifier">callable f(x,*args), optional</span></dt><dd><p>Returns a 1-D ndarray in which each element must be greater or
+equal to 0.0 in a successfully optimized problem. If
+f_ieqcons is specified, ieqcons is ignored.</p>
+</dd>
+<dt><strong>bounds</strong><span class="classifier">list, optional</span></dt><dd><p>A list of tuples specifying the lower and upper bound
+for each independent variable [(xl0, xu0),(xl1, xu1),…]
+Infinite values will be interpreted as large floating values.</p>
+</dd>
+<dt><strong>fprime</strong><span class="classifier">callable <em class="xref py py-obj">f(x,*args)</em>, optional</span></dt><dd><p>A function that evaluates the partial derivatives of func.</p>
+</dd>
+<dt><strong>fprime_eqcons</strong><span class="classifier">callable <em class="xref py py-obj">f(x,*args)</em>, optional</span></dt><dd><p>A function of the form <em class="xref py py-obj">f(x, *args)</em> that returns the m by n
+array of equality constraint normals. If not provided,
+the normals will be approximated. The array returned by
+fprime_eqcons should be sized as ( len(eqcons), len(x0) ).</p>
+</dd>
+<dt><strong>fprime_ieqcons</strong><span class="classifier">callable <em class="xref py py-obj">f(x,*args)</em>, optional</span></dt><dd><p>A function of the form <em class="xref py py-obj">f(x, *args)</em> that returns the m by n
+array of inequality constraint normals. If not provided,
+the normals will be approximated. The array returned by
+fprime_ieqcons should be sized as ( len(ieqcons), len(x0) ).</p>
+</dd>
+<dt><strong>args</strong><span class="classifier">sequence, optional</span></dt><dd><p>Additional arguments passed to func and fprime.</p>
+</dd>
+<dt><strong>iter</strong><span class="classifier">int, optional</span></dt><dd><p>The maximum number of iterations.</p>
+</dd>
+<dt><strong>acc</strong><span class="classifier">float, optional</span></dt><dd><p>Requested accuracy.</p>
+</dd>
+<dt><strong>iprint</strong><span class="classifier">int, optional</span></dt><dd><p>The verbosity of fmin_slsqp :</p>
+<ul class="simple">
+<li><p>iprint &lt;= 0 : Silent operation</p></li>
+<li><p>iprint == 1 : Print summary upon completion (default)</p></li>
+<li><p>iprint &gt;= 2 : Print status of each iterate and summary</p></li>
+</ul>
+</dd>
+<dt><strong>disp</strong><span class="classifier">int, optional</span></dt><dd><p>Overrides the iprint interface (preferred).</p>
+</dd>
+<dt><strong>full_output</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, return only the minimizer of func (default).
+Otherwise, output final objective function and summary
+information.</p>
+</dd>
+<dt><strong>epsilon</strong><span class="classifier">float, optional</span></dt><dd><p>The step size for finite-difference derivative estimates.</p>
+</dd>
+<dt><strong>callback</strong><span class="classifier">callable, optional</span></dt><dd><p>Called after each iteration, as <code class="docutils literal notranslate"><span class="pre">callback(x)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> is the
+current parameter vector.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">ndarray of float</span></dt><dd><p>The final minimizer of func.</p>
+</dd>
+<dt><strong>fx</strong><span class="classifier">ndarray of float, if full_output is true</span></dt><dd><p>The final value of the objective function.</p>
+</dd>
+<dt><strong>its</strong><span class="classifier">int, if full_output is true</span></dt><dd><p>The number of iterations.</p>
+</dd>
+<dt><strong>imode</strong><span class="classifier">int, if full_output is true</span></dt><dd><p>The exit mode from the optimizer (see below).</p>
+</dd>
+<dt><strong>smode</strong><span class="classifier">string, if full_output is true</span></dt><dd><p>Message describing the exit mode from the optimizer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.optimize.minimize.html#scipy.optimize.minimize" title="scipy.optimize.minimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimize</span></code></a></dt><dd><p>Interface to minimization algorithms for multivariate functions. See the ‘SLSQP’ <em class="xref py py-obj">method</em> in particular.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Exit modes are defined as follows</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mi">1</span> <span class="p">:</span> <span class="n">Gradient</span> <span class="n">evaluation</span> <span class="n">required</span> <span class="p">(</span><span class="n">g</span> <span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span>
+ <span class="mi">0</span> <span class="p">:</span> <span class="n">Optimization</span> <span class="n">terminated</span> <span class="n">successfully</span>
+ <span class="mi">1</span> <span class="p">:</span> <span class="n">Function</span> <span class="n">evaluation</span> <span class="n">required</span> <span class="p">(</span><span class="n">f</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">)</span>
+ <span class="mi">2</span> <span class="p">:</span> <span class="n">More</span> <span class="n">equality</span> <span class="n">constraints</span> <span class="n">than</span> <span class="n">independent</span> <span class="n">variables</span>
+ <span class="mi">3</span> <span class="p">:</span> <span class="n">More</span> <span class="n">than</span> <span class="mi">3</span><span class="o">*</span><span class="n">n</span> <span class="n">iterations</span> <span class="ow">in</span> <span class="n">LSQ</span> <span class="n">subproblem</span>
+ <span class="mi">4</span> <span class="p">:</span> <span class="n">Inequality</span> <span class="n">constraints</span> <span class="n">incompatible</span>
+ <span class="mi">5</span> <span class="p">:</span> <span class="n">Singular</span> <span class="n">matrix</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">LSQ</span> <span class="n">subproblem</span>
+ <span class="mi">6</span> <span class="p">:</span> <span class="n">Singular</span> <span class="n">matrix</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">LSQ</span> <span class="n">subproblem</span>
+ <span class="mi">7</span> <span class="p">:</span> <span class="n">Rank</span><span class="o">-</span><span class="n">deficient</span> <span class="n">equality</span> <span class="n">constraint</span> <span class="n">subproblem</span> <span class="n">HFTI</span>
+ <span class="mi">8</span> <span class="p">:</span> <span class="n">Positive</span> <span class="n">directional</span> <span class="n">derivative</span> <span class="k">for</span> <span class="n">linesearch</span>
+ <span class="mi">9</span> <span class="p">:</span> <span class="n">Iteration</span> <span class="n">limit</span> <span class="n">reached</span>
+</pre></div>
+</div>
+<p class="rubric">Examples</p>
+<p>Examples are given <a class="reference internal" href="../tutorial/optimize.html#tutorial-sqlsp"><span class="std std-ref">in the tutorial</span></a>.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.fmin_cobyla.html"
+                        title="previous chapter">scipy.optimize.fmin_cobyla</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.fminbound.html"
+                        title="next chapter">scipy.optimize.fminbound</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

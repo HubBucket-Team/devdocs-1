@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.binom_test &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.fligner" href="scipy.stats.fligner.html" >
+    <link rel="prev" title="scipy.stats.anderson_ksamp" href="scipy.stats.anderson_ksamp.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.fligner.html" title="scipy.stats.fligner"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.anderson_ksamp.html" title="scipy.stats.anderson_ksamp"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-binom-test">
+<h1>scipy.stats.binom_test<a class="headerlink" href="#scipy-stats-binom-test" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.binom_test">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">binom_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">p</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">alternative</span><span class="o">=</span><span class="default_value">'two-sided'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/morestats.py#L2373-L2464"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.binom_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a test that the probability of success is p.</p>
+<p>This is an exact, two-sided test of the null hypothesis
+that the probability of success in a Bernoulli experiment
+is <em class="xref py py-obj">p</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">int or array_like</span></dt><dd><p>The number of successes, or if x has length 2, it is the
+number of successes and the number of failures.</p>
+</dd>
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>The number of trials.  This is ignored if x gives both the
+number of successes and failures.</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">float, optional</span></dt><dd><p>The hypothesized probability of success.  <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">p</span> <span class="pre">&lt;=</span> <span class="pre">1</span></code>. The
+default value is <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">0.5</span></code>.</p>
+</dd>
+<dt><strong>alternative</strong><span class="classifier">{‘two-sided’, ‘greater’, ‘less’}, optional</span></dt><dd><p>Indicates the alternative hypothesis. The default value is
+‘two-sided’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>p-value</strong><span class="classifier">float</span></dt><dd><p>The p-value of the hypothesis test.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r293ade6c9d11-1"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Binomial_test">https://en.wikipedia.org/wiki/Binomial_test</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+<p>A car manufacturer claims that no more than 10% of their cars are unsafe.
+15 cars are inspected for safety, 3 were found to be unsafe. Test the
+manufacturer’s claim:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span><span class="o">.</span><span class="n">binom_test</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;greater&#39;</span><span class="p">)</span>
+<span class="go">0.18406106910639114</span>
+</pre></div>
+</div>
+<p>The null hypothesis cannot be rejected at the 5% level of significance
+because the returned p-value is greater than the critical value of 5%.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.anderson_ksamp.html"
+                        title="previous chapter">scipy.stats.anderson_ksamp</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.fligner.html"
+                        title="next chapter">scipy.stats.fligner</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

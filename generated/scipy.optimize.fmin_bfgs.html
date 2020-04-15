@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.optimize.fmin_bfgs &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Optimization and root finding (scipy.optimize)" href="../optimize.html" >
+    <link rel="next" title="scipy.optimize.fmin_ncg" href="scipy.optimize.fmin_ncg.html" >
+    <link rel="prev" title="scipy.optimize.fmin_cg" href="scipy.optimize.fmin_cg.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../optimize.html" accesskey="U">Optimization and root finding (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.fmin_ncg.html" title="scipy.optimize.fmin_ncg"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.optimize.fmin_cg.html" title="scipy.optimize.fmin_cg"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-optimize-fmin-bfgs">
+<h1>scipy.optimize.fmin_bfgs<a class="headerlink" href="#scipy-optimize-fmin-bfgs" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.optimize.fmin_bfgs">
+<code class="sig-prename descclassname">scipy.optimize.</code><code class="sig-name descname">fmin_bfgs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">x0</span></em>, <em class="sig-param"><span class="n">fprime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value"></span></em>, <em class="sig-param"><span class="n">gtol</span><span class="o">=</span><span class="default_value">1e-05</span></em>, <em class="sig-param"><span class="n">norm</span><span class="o">=</span><span class="default_value">inf</span></em>, <em class="sig-param"><span class="n">epsilon</span><span class="o">=</span><span class="default_value">1.4901161193847656e-08</span></em>, <em class="sig-param"><span class="n">maxiter</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">full_output</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">disp</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">retall</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">callback</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/optimize/optimize.py#L958-L1050"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.optimize.fmin_bfgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimize a function using the BFGS algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>f</strong><span class="classifier">callable f(x,*args)</span></dt><dd><p>Objective function to be minimized.</p>
+</dd>
+<dt><strong>x0</strong><span class="classifier">ndarray</span></dt><dd><p>Initial guess.</p>
+</dd>
+<dt><strong>fprime</strong><span class="classifier">callable f’(x,*args), optional</span></dt><dd><p>Gradient of f.</p>
+</dd>
+<dt><strong>args</strong><span class="classifier">tuple, optional</span></dt><dd><p>Extra arguments passed to f and fprime.</p>
+</dd>
+<dt><strong>gtol</strong><span class="classifier">float, optional</span></dt><dd><p>Gradient norm must be less than gtol before successful termination.</p>
+</dd>
+<dt><strong>norm</strong><span class="classifier">float, optional</span></dt><dd><p>Order of norm (Inf is max, -Inf is min)</p>
+</dd>
+<dt><strong>epsilon</strong><span class="classifier">int or ndarray, optional</span></dt><dd><p>If fprime is approximated, use this value for the step size.</p>
+</dd>
+<dt><strong>callback</strong><span class="classifier">callable, optional</span></dt><dd><p>An optional user-supplied function to call after each
+iteration. Called as callback(xk), where xk is the
+current parameter vector.</p>
+</dd>
+<dt><strong>maxiter</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of iterations to perform.</p>
+</dd>
+<dt><strong>full_output</strong><span class="classifier">bool, optional</span></dt><dd><p>If True,return fopt, func_calls, grad_calls, and warnflag
+in addition to xopt.</p>
+</dd>
+<dt><strong>disp</strong><span class="classifier">bool, optional</span></dt><dd><p>Print convergence message if True.</p>
+</dd>
+<dt><strong>retall</strong><span class="classifier">bool, optional</span></dt><dd><p>Return a list of results at each iteration if True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>xopt</strong><span class="classifier">ndarray</span></dt><dd><p>Parameters which minimize f, i.e., f(xopt) == fopt.</p>
+</dd>
+<dt><strong>fopt</strong><span class="classifier">float</span></dt><dd><p>Minimum value.</p>
+</dd>
+<dt><strong>gopt</strong><span class="classifier">ndarray</span></dt><dd><p>Value of gradient at minimum, f’(xopt), which should be near 0.</p>
+</dd>
+<dt><strong>Bopt</strong><span class="classifier">ndarray</span></dt><dd><p>Value of 1/f’’(xopt), i.e., the inverse Hessian matrix.</p>
+</dd>
+<dt><strong>func_calls</strong><span class="classifier">int</span></dt><dd><p>Number of function_calls made.</p>
+</dd>
+<dt><strong>grad_calls</strong><span class="classifier">int</span></dt><dd><p>Number of gradient calls made.</p>
+</dd>
+<dt><strong>warnflag</strong><span class="classifier">integer</span></dt><dd><p>1 : Maximum number of iterations exceeded.
+2 : Gradient and/or function calls not changing.
+3 : NaN result encountered.</p>
+</dd>
+<dt><strong>allvecs</strong><span class="classifier">list</span></dt><dd><p>The value of xopt at each iteration. Only returned if retall is True.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.optimize.minimize.html#scipy.optimize.minimize" title="scipy.optimize.minimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimize</span></code></a></dt><dd><p>Interface to minimization algorithms for multivariate functions. See the ‘BFGS’ <em class="xref py py-obj">method</em> in particular.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Optimize the function, f, whose gradient is given by fprime
+using the quasi-Newton method of Broyden, Fletcher, Goldfarb,
+and Shanno (BFGS)</p>
+<p class="rubric">References</p>
+<p>Wright, and Nocedal ‘Numerical Optimization’, 1999, p. 198.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.optimize.fmin_cg.html"
+                        title="previous chapter">scipy.optimize.fmin_cg</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.optimize.fmin_ncg.html"
+                        title="next chapter">scipy.optimize.fmin_ncg</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

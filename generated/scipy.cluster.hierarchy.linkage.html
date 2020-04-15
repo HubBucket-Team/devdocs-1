@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.cluster.hierarchy.linkage &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Hierarchical clustering (scipy.cluster.hierarchy)" href="../cluster.hierarchy.html" >
+    <link rel="next" title="scipy.cluster.hierarchy.single" href="scipy.cluster.hierarchy.single.html" >
+    <link rel="prev" title="scipy.cluster.hierarchy.leaders" href="scipy.cluster.hierarchy.leaders.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../cluster.html" >Clustering package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code>)</a></li>
+          <li class="active"><a href="../cluster.hierarchy.html" accesskey="U">Hierarchical clustering (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster.hierarchy</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.hierarchy.single.html" title="scipy.cluster.hierarchy.single"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.hierarchy.leaders.html" title="scipy.cluster.hierarchy.leaders"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-cluster-hierarchy-linkage">
+<h1>scipy.cluster.hierarchy.linkage<a class="headerlink" href="#scipy-cluster-hierarchy-linkage" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.cluster.hierarchy.linkage">
+<code class="sig-prename descclassname">scipy.cluster.hierarchy.</code><code class="sig-name descname">linkage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'single'</span></em>, <em class="sig-param"><span class="n">metric</span><span class="o">=</span><span class="default_value">'euclidean'</span></em>, <em class="sig-param"><span class="n">optimal_ordering</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/cluster/hierarchy.py#L829-L1073"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.cluster.hierarchy.linkage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform hierarchical/agglomerative clustering.</p>
+<p>The input y may be either a 1-D condensed distance matrix
+or a 2-D array of observation vectors.</p>
+<p>If y is a 1-D condensed distance matrix,
+then y must be a <span class="math notranslate nohighlight">\(\binom{n}{2}\)</span> sized
+vector, where n is the number of original observations paired
+in the distance matrix. The behavior of this function is very
+similar to the MATLAB linkage function.</p>
+<p>A <span class="math notranslate nohighlight">\((n-1)\)</span> by 4 matrix <code class="docutils literal notranslate"><span class="pre">Z</span></code> is returned. At the
+<span class="math notranslate nohighlight">\(i\)</span>-th iteration, clusters with indices <code class="docutils literal notranslate"><span class="pre">Z[i,</span> <span class="pre">0]</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Z[i,</span> <span class="pre">1]</span></code> are combined to form cluster <span class="math notranslate nohighlight">\(n + i\)</span>. A
+cluster with an index less than <span class="math notranslate nohighlight">\(n\)</span> corresponds to one of
+the <span class="math notranslate nohighlight">\(n\)</span> original observations. The distance between
+clusters <code class="docutils literal notranslate"><span class="pre">Z[i,</span> <span class="pre">0]</span></code> and <code class="docutils literal notranslate"><span class="pre">Z[i,</span> <span class="pre">1]</span></code> is given by <code class="docutils literal notranslate"><span class="pre">Z[i,</span> <span class="pre">2]</span></code>. The
+fourth value <code class="docutils literal notranslate"><span class="pre">Z[i,</span> <span class="pre">3]</span></code> represents the number of original
+observations in the newly formed cluster.</p>
+<p>The following linkage methods are used to compute the distance
+<span class="math notranslate nohighlight">\(d(s, t)\)</span> between two clusters <span class="math notranslate nohighlight">\(s\)</span> and
+<span class="math notranslate nohighlight">\(t\)</span>. The algorithm begins with a forest of clusters that
+have yet to be used in the hierarchy being formed. When two
+clusters <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> from this forest are combined
+into a single cluster <span class="math notranslate nohighlight">\(u\)</span>, <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> are
+removed from the forest, and <span class="math notranslate nohighlight">\(u\)</span> is added to the
+forest. When only one cluster remains in the forest, the algorithm
+stops, and this cluster becomes the root.</p>
+<p>A distance matrix is maintained at each iteration. The <code class="docutils literal notranslate"><span class="pre">d[i,j]</span></code>
+entry corresponds to the distance between cluster <span class="math notranslate nohighlight">\(i\)</span> and
+<span class="math notranslate nohighlight">\(j\)</span> in the original forest.</p>
+<p>At each iteration, the algorithm must update the distance matrix
+to reflect the distance of the newly formed cluster u with the
+remaining clusters in the forest.</p>
+<p>Suppose there are <span class="math notranslate nohighlight">\(|u|\)</span> original observations
+<span class="math notranslate nohighlight">\(u[0], \ldots, u[|u|-1]\)</span> in cluster <span class="math notranslate nohighlight">\(u\)</span> and
+<span class="math notranslate nohighlight">\(|v|\)</span> original objects <span class="math notranslate nohighlight">\(v[0], \ldots, v[|v|-1]\)</span> in
+cluster <span class="math notranslate nohighlight">\(v\)</span>. Recall, <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> are
+combined to form cluster <span class="math notranslate nohighlight">\(u\)</span>. Let <span class="math notranslate nohighlight">\(v\)</span> be any
+remaining cluster in the forest that is not <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<p>The following are methods for calculating the distance between the
+newly formed cluster <span class="math notranslate nohighlight">\(u\)</span> and each <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<blockquote>
+<div><ul>
+<li><p>method=’single’ assigns</p>
+<div class="math notranslate nohighlight">
+\[d(u,v) = \min(dist(u[i],v[j]))\]</div>
+<p>for all points <span class="math notranslate nohighlight">\(i\)</span> in cluster <span class="math notranslate nohighlight">\(u\)</span> and
+<span class="math notranslate nohighlight">\(j\)</span> in cluster <span class="math notranslate nohighlight">\(v\)</span>. This is also known as the
+Nearest Point Algorithm.</p>
+</li>
+<li><p>method=’complete’ assigns</p>
+<div class="math notranslate nohighlight">
+\[d(u, v) = \max(dist(u[i],v[j]))\]</div>
+<p>for all points <span class="math notranslate nohighlight">\(i\)</span> in cluster u and <span class="math notranslate nohighlight">\(j\)</span> in
+cluster <span class="math notranslate nohighlight">\(v\)</span>. This is also known by the Farthest Point
+Algorithm or Voor Hees Algorithm.</p>
+</li>
+<li><p>method=’average’ assigns</p>
+<div class="math notranslate nohighlight">
+\[d(u,v) = \sum_{ij} \frac{d(u[i], v[j])}
+                        {(|u|*|v|)}\]</div>
+<p>for all points <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> where <span class="math notranslate nohighlight">\(|u|\)</span>
+and <span class="math notranslate nohighlight">\(|v|\)</span> are the cardinalities of clusters <span class="math notranslate nohighlight">\(u\)</span>
+and <span class="math notranslate nohighlight">\(v\)</span>, respectively. This is also called the UPGMA
+algorithm.</p>
+</li>
+<li><p>method=’weighted’ assigns</p>
+<div class="math notranslate nohighlight">
+\[d(u,v) = (dist(s,v) + dist(t,v))/2\]</div>
+<p>where cluster u was formed with cluster s and t and v
+is a remaining cluster in the forest (also called WPGMA).</p>
+</li>
+<li><p>method=’centroid’ assigns</p>
+<div class="math notranslate nohighlight">
+\[dist(s,t) = ||c_s-c_t||_2\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_s\)</span> and <span class="math notranslate nohighlight">\(c_t\)</span> are the centroids of
+clusters <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, respectively. When two
+clusters <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> are combined into a new
+cluster <span class="math notranslate nohighlight">\(u\)</span>, the new centroid is computed over all the
+original objects in clusters <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span>. The
+distance then becomes the Euclidean distance between the
+centroid of <span class="math notranslate nohighlight">\(u\)</span> and the centroid of a remaining cluster
+<span class="math notranslate nohighlight">\(v\)</span> in the forest. This is also known as the UPGMC
+algorithm.</p>
+</li>
+<li><p>method=’median’ assigns <span class="math notranslate nohighlight">\(d(s,t)\)</span> like the <code class="docutils literal notranslate"><span class="pre">centroid</span></code>
+method. When two clusters <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> are combined
+into a new cluster <span class="math notranslate nohighlight">\(u\)</span>, the average of centroids s and t
+give the new centroid <span class="math notranslate nohighlight">\(u\)</span>. This is also known as the
+WPGMC algorithm.</p></li>
+<li><p>method=’ward’ uses the Ward variance minimization algorithm.
+The new entry <span class="math notranslate nohighlight">\(d(u,v)\)</span> is computed as follows,</p>
+<div class="math notranslate nohighlight">
+\[d(u,v) = \sqrt{\frac{|v|+|s|}
+                    {T}d(v,s)^2
+             + \frac{|v|+|t|}
+                    {T}d(v,t)^2
+             - \frac{|v|}
+                    {T}d(s,t)^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u\)</span> is the newly joined cluster consisting of
+clusters <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(v\)</span> is an unused
+cluster in the forest, <span class="math notranslate nohighlight">\(T=|v|+|s|+|t|\)</span>, and
+<span class="math notranslate nohighlight">\(|*|\)</span> is the cardinality of its argument. This is also
+known as the incremental algorithm.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Warning: When the minimum distance pair in the forest is chosen, there
+may be two or more pairs with the same minimum distance. This
+implementation may choose a different minimum than the MATLAB
+version.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>y</strong><span class="classifier">ndarray</span></dt><dd><p>A condensed distance matrix. A condensed distance matrix
+is a flat array containing the upper triangular of the distance matrix.
+This is the form that <code class="docutils literal notranslate"><span class="pre">pdist</span></code> returns. Alternatively, a collection of
+<span class="math notranslate nohighlight">\(m\)</span> observation vectors in <span class="math notranslate nohighlight">\(n\)</span> dimensions may be passed as
+an <span class="math notranslate nohighlight">\(m\)</span> by <span class="math notranslate nohighlight">\(n\)</span> array. All elements of the condensed distance
+matrix must be finite, i.e., no NaNs or infs.</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><p>The linkage algorithm to use. See the <code class="docutils literal notranslate"><span class="pre">Linkage</span> <span class="pre">Methods</span></code> section below
+for full descriptions.</p>
+</dd>
+<dt><strong>metric</strong><span class="classifier">str or function, optional</span></dt><dd><p>The distance metric to use in the case that y is a collection of
+observation vectors; ignored otherwise. See the <code class="docutils literal notranslate"><span class="pre">pdist</span></code>
+function for a list of valid distance metrics. A custom distance
+function can also be used.</p>
+</dd>
+<dt><strong>optimal_ordering</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, the linkage matrix will be reordered so that the distance
+between successive leaves is minimal. This results in a more intuitive
+tree structure when the data are visualized. defaults to False, because
+this algorithm can be slow, particularly on large datasets <a class="reference internal" href="#r42785432a407-2" id="id1">[2]</a>. See
+also the <a class="reference internal" href="scipy.cluster.hierarchy.optimal_leaf_ordering.html#scipy.cluster.hierarchy.optimal_leaf_ordering" title="scipy.cluster.hierarchy.optimal_leaf_ordering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal_leaf_ordering</span></code></a> function.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>Z</strong><span class="classifier">ndarray</span></dt><dd><p>The hierarchical clustering encoded as a linkage matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist" title="scipy.spatial.distance.pdist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.spatial.distance.pdist</span></code></a></dt><dd><p>pairwise distance metrics</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>For method ‘single’, an optimized algorithm based on minimum spanning
+tree is implemented. It has time complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>.
+For methods ‘complete’, ‘average’, ‘weighted’ and ‘ward’, an algorithm
+called nearest-neighbors chain is implemented. It also has time
+complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>.
+For other methods, a naive algorithm is implemented with <span class="math notranslate nohighlight">\(O(n^3)\)</span>
+time complexity.
+All algorithms use <span class="math notranslate nohighlight">\(O(n^2)\)</span> memory.
+Refer to <a class="reference internal" href="#r42785432a407-1" id="id2">[1]</a> for details about the algorithms.</p></li>
+<li><p>Methods ‘centroid’, ‘median’, and ‘ward’ are correctly defined only if
+Euclidean pairwise metric is used. If <em class="xref py py-obj">y</em> is passed as precomputed
+pairwise distances, then it is the user’s responsibility to assure that
+these distances are in fact Euclidean, otherwise the produced result
+will be incorrect.</p></li>
+</ol>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r42785432a407-1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>Daniel Mullner, “Modern hierarchical, agglomerative clustering
+algorithms”, <a class="reference external" href="https://arxiv.org/abs/1109.2378v1">arXiv:1109.2378v1</a>.</p>
+</dd>
+<dt class="label" id="r42785432a407-2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Ziv Bar-Joseph, David K. Gifford, Tommi S. Jaakkola, “Fast optimal
+leaf ordering for hierarchical clustering”, 2001. Bioinformatics
+<a class="reference external" href="https://doi.org/10.1093/bioinformatics/17.suppl_1.S22">DOI:10.1093/bioinformatics/17.suppl_1.S22</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">dendrogram</span><span class="p">,</span> <span class="n">linkage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;ward&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dn</span> <span class="o">=</span> <span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;single&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dn</span> <span class="o">=</span> <span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-cluster-hierarchy-linkage-1_00.png" src="../_images/scipy-cluster-hierarchy-linkage-1_00.png" />
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-cluster-hierarchy-linkage-1_01.png" src="../_images/scipy-cluster-hierarchy-linkage-1_01.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.cluster.hierarchy.leaders.html"
+                        title="previous chapter">scipy.cluster.hierarchy.leaders</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.cluster.hierarchy.single.html"
+                        title="next chapter">scipy.cluster.hierarchy.single</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

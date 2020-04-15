@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Introduction &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="SciPy Tutorial" href="index.html" >
+    <link rel="next" title="Basic functions" href="basic.html" >
+    <link rel="prev" title="SciPy Tutorial" href="index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="index.html" accesskey="U">SciPy Tutorial</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="basic.html" title="Basic functions"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="index.html" title="SciPy Tutorial"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="introduction">
+<h1><a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p>
+<ul>
+<li><p><a class="reference internal" href="#scipy-organization" id="id2">SciPy Organization</a></p></li>
+<li><p><a class="reference internal" href="#finding-documentation" id="id3">Finding Documentation</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>SciPy is a collection of mathematical algorithms and convenience
+functions built on the NumPy extension of Python. It adds
+significant power to the interactive Python session by providing the
+user with high-level commands and classes for manipulating and
+visualizing data. With SciPy, an interactive Python session
+becomes a data-processing and system-prototyping environment rivaling
+systems, such as MATLAB, IDL, Octave, R-Lab, and SciLab.</p>
+<p>The additional benefit of basing SciPy on Python is that this also makes a
+powerful programming language available for use in developing
+sophisticated programs and specialized applications. Scientific
+applications using SciPy benefit from the development of
+additional modules in numerous niches of the software landscape by
+developers across the world. Everything from parallel programming to
+web and data-base subroutines and classes have been made available to
+the Python programmer. All of this power is available in addition to
+the mathematical libraries in SciPy.</p>
+<p>This tutorial will acquaint the first-time user of SciPy with some of its most
+important features. It assumes that the user has already installed the SciPy
+package. Some general Python facility is also assumed, such as could be
+acquired by working through the Python distribution’s Tutorial. For further
+introductory help the user is directed to the NumPy documentation.</p>
+<p>For brevity and convenience, we will often assume that the main
+packages (numpy, scipy, and matplotlib) have been imported as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>These are the import conventions that our community has adopted
+after discussion on public mailing lists.  You will see these
+conventions used throughout NumPy and SciPy source code and
+documentation.  While we obviously don’t require you to follow
+these conventions in your own code, it is highly recommended.</p>
+<div class="section" id="scipy-organization">
+<h2><a class="toc-backref" href="#id2">SciPy Organization</a><a class="headerlink" href="#scipy-organization" title="Permalink to this headline">¶</a></h2>
+<p>SciPy is organized into subpackages covering different scientific
+computing domains. These are summarized in the following table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Subpackage</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../cluster.html#module-scipy.cluster" title="scipy.cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cluster</span></code></a></p></td>
+<td><p>Clustering algorithms</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../constants.html#module-scipy.constants" title="scipy.constants"><code class="xref py py-obj docutils literal notranslate"><span class="pre">constants</span></code></a></p></td>
+<td><p>Physical and mathematical constants</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../fftpack.html#module-scipy.fftpack" title="scipy.fftpack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftpack</span></code></a></p></td>
+<td><p>Fast Fourier Transform routines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../integrate.html#module-scipy.integrate" title="scipy.integrate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integrate</span></code></a></p></td>
+<td><p>Integration and ordinary differential equation solvers</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../interpolate.html#module-scipy.interpolate" title="scipy.interpolate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpolate</span></code></a></p></td>
+<td><p>Interpolation and smoothing splines</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../io.html#module-scipy.io" title="scipy.io"><code class="xref py py-obj docutils literal notranslate"><span class="pre">io</span></code></a></p></td>
+<td><p>Input and Output</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../linalg.html#module-scipy.linalg" title="scipy.linalg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linalg</span></code></a></p></td>
+<td><p>Linear algebra</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../ndimage.html#module-scipy.ndimage" title="scipy.ndimage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndimage</span></code></a></p></td>
+<td><p>N-dimensional image processing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../odr.html#module-scipy.odr" title="scipy.odr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">odr</span></code></a></p></td>
+<td><p>Orthogonal distance regression</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../optimize.html#module-scipy.optimize" title="scipy.optimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize</span></code></a></p></td>
+<td><p>Optimization and root-finding routines</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../signal.html#module-scipy.signal" title="scipy.signal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signal</span></code></a></p></td>
+<td><p>Signal processing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../sparse.html#module-scipy.sparse" title="scipy.sparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse</span></code></a></p></td>
+<td><p>Sparse matrices and associated routines</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../spatial.html#module-scipy.spatial" title="scipy.spatial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatial</span></code></a></p></td>
+<td><p>Spatial data structures and algorithms</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../special.html#module-scipy.special" title="scipy.special"><code class="xref py py-obj docutils literal notranslate"><span class="pre">special</span></code></a></p></td>
+<td><p>Special functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stats.html#module-scipy.stats" title="scipy.stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stats</span></code></a></p></td>
+<td><p>Statistical distributions and functions</p></td>
+</tr>
+</tbody>
+</table>
+<p>SciPy sub-packages need to be imported separately, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span><span class="p">,</span> <span class="n">optimize</span>
+</pre></div>
+</div>
+<p>Because of their ubiquitousness, some of the functions in these
+subpackages are also made available in the <a class="reference internal" href="../index.html#module-scipy" title="scipy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy</span></code></a> namespace to ease
+their use in interactive sessions and programs. In addition, many
+basic array functions from <a class="reference external" href="https://numpy.org/devdocs/reference/index.html#module-numpy" title="(in NumPy v1.19.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> are also available at the
+top-level of the <a class="reference internal" href="../index.html#module-scipy" title="scipy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> package. Before looking at the
+sub-packages individually, we will first look at some of these common
+functions.</p>
+</div>
+<div class="section" id="finding-documentation">
+<h2><a class="toc-backref" href="#id3">Finding Documentation</a><a class="headerlink" href="#finding-documentation" title="Permalink to this headline">¶</a></h2>
+<p>SciPy and NumPy have documentation versions in both HTML and PDF format
+available at <a class="reference external" href="https://docs.scipy.org/">https://docs.scipy.org/</a>, that cover nearly
+all available functionality. However, this documentation is still
+work-in-progress and some parts may be incomplete or sparse. As
+we are a volunteer organization and depend on the community for
+growth, your participation - everything from providing feedback to
+improving the documentation and code - is welcome and actively
+encouraged.</p>
+<p>Python’s documentation strings are used in SciPy for on-line
+documentation. There are two methods for reading them and
+getting help. One is Python’s command <a class="reference external" href="https://docs.python.org/dev/library/functions.html#help" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">help</span></code></a> in the <a class="reference external" href="https://docs.python.org/dev/library/pydoc.html#module-pydoc" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pydoc</span></code></a>
+module. Entering this command with no arguments (i.e. <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">help</span></code> )
+launches an interactive help session that allows searching through the
+keywords and modules available to all of Python. Secondly, running the command
+<em class="xref py py-obj">help(obj)</em> with an object as the argument displays that object’s calling
+signature, and documentation string.</p>
+<p>The pydoc method of <code class="docutils literal notranslate"><span class="pre">help</span></code> is sophisticated but uses a pager to display
+the text. Sometimes this can interfere with the terminal within which you are
+running the interactive session. A numpy/scipy-specific help system
+is also available under the command <code class="docutils literal notranslate"><span class="pre">numpy.info</span></code>. The signature and
+documentation string for the object passed to the <code class="docutils literal notranslate"><span class="pre">help</span></code> command are
+printed to standard output (or to a writeable object passed as the
+third argument). The second keyword argument of <code class="docutils literal notranslate"><span class="pre">numpy.info</span></code> defines
+the maximum width of the line for printing. If a module is passed as
+the argument to <code class="docutils literal notranslate"><span class="pre">help</span></code> then a list of the functions and classes defined
+in that module is printed. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">optimize</span><span class="o">.</span><span class="n">fmin</span><span class="p">)</span>
+<span class="go"> fmin(func, x0, args=(), xtol=0.0001, ftol=0.0001, maxiter=None, maxfun=None,</span>
+<span class="go">      full_output=0, disp=1, retall=0, callback=None)</span>
+
+<span class="go">Minimize a function using the downhill simplex algorithm.</span>
+
+<span class="go">Parameters</span>
+<span class="go">----------</span>
+<span class="go">func : callable func(x,*args)</span>
+<span class="go">    The objective function to be minimized.</span>
+<span class="go">x0 : ndarray</span>
+<span class="go">    Initial guess.</span>
+<span class="go">args : tuple</span>
+<span class="go">    Extra arguments passed to func, i.e. ``f(x,*args)``.</span>
+<span class="go">callback : callable</span>
+<span class="go">    Called after each iteration, as callback(xk), where xk is the</span>
+<span class="go">    current parameter vector.</span>
+
+<span class="go">Returns</span>
+<span class="go">-------</span>
+<span class="go">xopt : ndarray</span>
+<span class="go">    Parameter that minimizes function.</span>
+<span class="go">fopt : float</span>
+<span class="go">    Value of function at minimum: ``fopt = func(xopt)``.</span>
+<span class="go">iter : int</span>
+<span class="go">    Number of iterations performed.</span>
+<span class="go">funcalls : int</span>
+<span class="go">    Number of function calls made.</span>
+<span class="go">warnflag : int</span>
+<span class="go">    1 : Maximum number of function evaluations made.</span>
+<span class="go">    2 : Maximum number of iterations reached.</span>
+<span class="go">allvecs : list</span>
+<span class="go">    Solution at each iteration.</span>
+
+<span class="go">Other parameters</span>
+<span class="go">----------------</span>
+<span class="go">xtol : float</span>
+<span class="go">    Relative error in xopt acceptable for convergence.</span>
+<span class="go">ftol : number</span>
+<span class="go">    Relative error in func(xopt) acceptable for convergence.</span>
+<span class="go">maxiter : int</span>
+<span class="go">    Maximum number of iterations to perform.</span>
+<span class="go">maxfun : number</span>
+<span class="go">    Maximum number of function evaluations to make.</span>
+<span class="go">full_output : bool</span>
+<span class="go">    Set to True if fopt and warnflag outputs are desired.</span>
+<span class="go">disp : bool</span>
+<span class="go">    Set to True to print convergence messages.</span>
+<span class="go">retall : bool</span>
+<span class="go">    Set to True to return list of solutions at each iteration.</span>
+
+<span class="go">Notes</span>
+<span class="go">-----</span>
+<span class="go">Uses a Nelder-Mead simplex algorithm to find the minimum of function of</span>
+<span class="go">one or more variables.</span>
+</pre></div>
+</div>
+<p>Another useful command is <code class="docutils literal notranslate"><span class="pre">dir</span></code>,
+which can be used to look at the namespace of a module or package.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#scipy-organization">SciPy Organization</a></li>
+<li><a class="reference internal" href="#finding-documentation">Finding Documentation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">SciPy Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="basic.html"
+                        title="next chapter">Basic functions</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

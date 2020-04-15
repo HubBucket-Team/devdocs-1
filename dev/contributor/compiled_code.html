@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Beyond Python &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="beyond-python">
+<span id="other-languages"></span><h1>Beyond Python<a class="headerlink" href="#beyond-python" title="Permalink to this headline">¶</a></h1>
+<p>This is a small collection of thoughts related to the inclusion of code written
+in languages other than Python. Currently, the only option for languages other
+than Python that is explicitly documented is <a class="reference internal" href="cython.html#adding-cython"><span class="std std-ref">Cython</span></a>.</p>
+<p><em>Can I use a programming language other than Python to speed up my code?</em></p>
+<p>Yes. The languages used in SciPy are Python, Cython, C, C++, and Fortran. All
+of these have their pros and cons. If Python really doesn’t offer enough
+performance, one of those languages can be used. Important concerns when
+using compiled languages are maintainability and portability. For
+maintainability, Cython is clearly preferred over C/C++/Fortran. Cython and C
+are more portable than C++/Fortran. A lot of the existing C and Fortran code
+in SciPy is older, battle-tested code that was only wrapped in (but not
+specifically written for) Python/SciPy. Therefore, the basic advice is: use
+Cython. If there are specific reasons why C/C++/Fortran should be preferred,
+please discuss those reasons first.</p>
+<p><em>Can I use Numba or Pythran?</em></p>
+<p>Not yet, but we’re considering it for the future.</p>
+<p><em>How do I debug code written in C/C++/Fortran inside SciPy?</em></p>
+<p>The easiest way to do this is to first write a Python script that
+invokes the C code whose execution you want to debug. For instance
+<code class="docutils literal notranslate"><span class="pre">mytest.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">hyp2f1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hyp2f1</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now, you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdb</span> <span class="o">--</span><span class="n">args</span> <span class="n">python</span> <span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">g</span> <span class="o">--</span><span class="n">python</span> <span class="n">mytest</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>If you didn’t compile with debug symbols enabled before, remove the
+<code class="docutils literal notranslate"><span class="pre">build</span></code> directory first. While in the debugger:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">cephes_hyp2f1</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>The execution will now stop at the corresponding C function and you
+can step through it as usual. Instead of plain <code class="docutils literal notranslate"><span class="pre">gdb</span></code> you can, of
+course, use your favorite alternative debugger; run it on the
+<code class="docutils literal notranslate"><span class="pre">python</span></code> binary with arguments <code class="docutils literal notranslate"><span class="pre">runtests.py</span> <span class="pre">-g</span> <span class="pre">--python</span> <span class="pre">mytest.py</span></code>.</p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

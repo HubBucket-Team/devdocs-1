@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Pareto Second Kind (Lomax) Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Continuous Statistical Distributions" href="continuous.html" >
+    <link rel="next" title="Power Log Normal Distribution" href="continuous_powerlognorm.html" >
+    <link rel="prev" title="Pareto Distribution" href="continuous_pareto.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="continuous.html" accesskey="U">Continuous Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="continuous_powerlognorm.html" title="Power Log Normal Distribution"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="continuous_pareto.html" title="Pareto Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="pareto-second-kind-lomax-distribution">
+<span id="continuous-lomax"></span><h1>Pareto Second Kind (Lomax) Distribution<a class="headerlink" href="#pareto-second-kind-lomax-distribution" title="Permalink to this headline">¶</a></h1>
+<p>This is Pareto of the first kind with <span class="math notranslate nohighlight">\(L=-1.0\)</span> .  There is one shape parameter
+<span class="math notranslate nohighlight">\(c&gt;0\)</span> and support <span class="math notranslate nohighlight">\(x\geq0\)</span>.</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} f\left(x;c\right) &amp; = &amp; \frac{c}{\left(1+x\right)^{c+1}}\\ F\left(x;c\right) &amp; = &amp; 1-\frac{1}{\left(1+x\right)^{c}}\\ G\left(q;c\right) &amp; = &amp; \left(1-q\right)^{-1/c}-1\end{eqnarray*}</div><div class="math notranslate nohighlight">
+\[h\left[X\right]=\frac{1}{c}+1-\log\left(c\right).\]</div>
+<p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.lomax.html#scipy.stats.lomax" title="scipy.stats.lomax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.lomax</span></code></a></p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous_pareto.html"
+                        title="previous chapter">Pareto Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="continuous_powerlognorm.html"
+                        title="next chapter">Power Log Normal Distribution</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

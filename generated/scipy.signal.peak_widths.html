@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.peak_widths &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.periodogram" href="scipy.signal.periodogram.html" >
+    <link rel="prev" title="scipy.signal.peak_prominences" href="scipy.signal.peak_prominences.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.periodogram.html" title="scipy.signal.periodogram"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.peak_prominences.html" title="scipy.signal.peak_prominences"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-peak-widths">
+<h1>scipy.signal.peak_widths<a class="headerlink" href="#scipy-signal-peak-widths" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.peak_widths">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">peak_widths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">peaks</span></em>, <em class="sig-param"><span class="n">rel_height</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">prominence_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wlen</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/_peak_finding.py#L462-L587"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.peak_widths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the width of each peak in a signal.</p>
+<p>This function calculates the width of a peak in samples at a relative
+distance to the peak’s height and prominence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">sequence</span></dt><dd><p>A signal with peaks.</p>
+</dd>
+<dt><strong>peaks</strong><span class="classifier">sequence</span></dt><dd><p>Indices of peaks in <em class="xref py py-obj">x</em>.</p>
+</dd>
+<dt><strong>rel_height</strong><span class="classifier">float, optional</span></dt><dd><p>Chooses the relative height at which the peak width is measured as a
+percentage of its prominence. 1.0 calculates the width of the peak at
+its lowest contour line while 0.5 evaluates at half the prominence
+height. Must be at least 0. See notes for further explanation.</p>
+</dd>
+<dt><strong>prominence_data</strong><span class="classifier">tuple, optional</span></dt><dd><p>A tuple of three arrays matching the output of <a class="reference internal" href="scipy.signal.peak_prominences.html#scipy.signal.peak_prominences" title="scipy.signal.peak_prominences"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_prominences</span></code></a> when
+called with the same arguments <em class="xref py py-obj">x</em> and <em class="xref py py-obj">peaks</em>. This data are calculated
+internally if not provided.</p>
+</dd>
+<dt><strong>wlen</strong><span class="classifier">int, optional</span></dt><dd><p>A window length in samples passed to <a class="reference internal" href="scipy.signal.peak_prominences.html#scipy.signal.peak_prominences" title="scipy.signal.peak_prominences"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_prominences</span></code></a> as an optional
+argument for internal calculation of <em class="xref py py-obj">prominence_data</em>. This argument
+is ignored if <em class="xref py py-obj">prominence_data</em> is given.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>widths</strong><span class="classifier">ndarray</span></dt><dd><p>The widths for each peak in samples.</p>
+</dd>
+<dt><strong>width_heights</strong><span class="classifier">ndarray</span></dt><dd><p>The height of the contour lines at which the <em class="xref py py-obj">widths</em> where evaluated.</p>
+</dd>
+<dt><strong>left_ips, right_ips</strong><span class="classifier">ndarray</span></dt><dd><p>Interpolated positions of left and right intersection points of a
+horizontal line at the respective evaluation height.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If <em class="xref py py-obj">prominence_data</em> is supplied but doesn’t satisfy the condition
+<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">left_base</span> <span class="pre">&lt;=</span> <span class="pre">peak</span> <span class="pre">&lt;=</span> <span class="pre">right_base</span> <span class="pre">&lt;</span> <span class="pre">x.shape[0]</span></code> for each peak,
+has the wrong dtype, is not C-contiguous or does not have the same
+shape.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Warns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>PeakPropertyWarning</dt><dd><p>Raised if any calculated width is 0. This may stem from the supplied
+<em class="xref py py-obj">prominence_data</em> or if <em class="xref py py-obj">rel_height</em> is set to 0.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This function may return unexpected results for data containing NaNs. To
+avoid this, NaNs should either be removed or replaced.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.find_peaks.html#scipy.signal.find_peaks" title="scipy.signal.find_peaks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_peaks</span></code></a></dt><dd><p>Find peaks inside a signal based on peak properties.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.peak_prominences.html#scipy.signal.peak_prominences" title="scipy.signal.peak_prominences"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_prominences</span></code></a></dt><dd><p>Calculate the prominence of peaks.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The basic algorithm to calculate a peak’s width is as follows:</p>
+<ul class="simple">
+<li><p>Calculate the evaluation height <span class="math notranslate nohighlight">\(h_{eval}\)</span> with the formula
+<span class="math notranslate nohighlight">\(h_{eval} = h_{Peak} - P \cdot R\)</span>, where <span class="math notranslate nohighlight">\(h_{Peak}\)</span> is the
+height of the peak itself, <span class="math notranslate nohighlight">\(P\)</span> is the peak’s prominence and
+<span class="math notranslate nohighlight">\(R\)</span> a positive ratio specified with the argument <em class="xref py py-obj">rel_height</em>.</p></li>
+<li><p>Draw a horizontal line at the evaluation height to both sides, starting at
+the peak’s current vertical position until the lines either intersect a
+slope, the signal border or cross the vertical position of the peak’s
+base (see <a class="reference internal" href="scipy.signal.peak_prominences.html#scipy.signal.peak_prominences" title="scipy.signal.peak_prominences"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_prominences</span></code></a> for an definition). For the first case,
+intersection with the signal, the true intersection point is estimated
+with linear interpolation.</p></li>
+<li><p>Calculate the width as the horizontal distance between the chosen
+endpoints on both sides. As a consequence of this the maximal possible
+width for each peak is the horizontal distance between its bases.</p></li>
+</ul>
+<p>As shown above to calculate a peak’s width its prominence and bases must be
+known. You can supply these yourself with the argument <em class="xref py py-obj">prominence_data</em>.
+Otherwise, they are internally calculated (see <a class="reference internal" href="scipy.signal.peak_prominences.html#scipy.signal.peak_prominences" title="scipy.signal.peak_prominences"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_prominences</span></code></a>).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.1.0.</span></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">chirp</span><span class="p">,</span> <span class="n">find_peaks</span><span class="p">,</span> <span class="n">peak_widths</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>Create a test signal with two overlayed harmonics</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">2.6</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Find all peaks and calculate their widths at the relative height of 0.5
+(contour line at half the prominence height) and 1 (at the lowest contour
+line at full prominence height).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">peaks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results_half</span> <span class="o">=</span> <span class="n">peak_widths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">peaks</span><span class="p">,</span> <span class="n">rel_height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results_half</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># widths</span>
+<span class="go">array([ 64.25172825,  41.29465463,  35.46943289, 104.71586081,</span>
+<span class="go">        35.46729324,  41.30429622, 181.93835853,  45.37078546])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results_full</span> <span class="o">=</span> <span class="n">peak_widths</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">peaks</span><span class="p">,</span> <span class="n">rel_height</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results_full</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># widths</span>
+<span class="go">array([181.9396084 ,  72.99284945,  61.28657872, 373.84622694,</span>
+<span class="go">    61.78404617,  72.48822812, 253.09161876,  79.36860878])</span>
+</pre></div>
+</div>
+<p>Plot signal, peaks and contour lines at which the widths where calculated</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">peaks</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">peaks</span><span class="p">],</span> <span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="o">*</span><span class="n">results_half</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="o">*</span><span class="n">results_full</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-peak_widths-1.png" src="../_images/scipy-signal-peak_widths-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.peak_prominences.html"
+                        title="previous chapter">scipy.signal.peak_prominences</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.periodogram.html"
+                        title="next chapter">scipy.signal.periodogram</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

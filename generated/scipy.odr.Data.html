@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.odr.Data &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Orthogonal distance regression (scipy.odr)" href="../odr.html" >
+    <link rel="next" title="scipy.odr.Data.set_meta" href="scipy.odr.Data.set_meta.html" >
+    <link rel="prev" title="Orthogonal distance regression (scipy.odr)" href="../odr.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../odr.html" accesskey="U">Orthogonal distance regression (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.odr</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.odr.Data.set_meta.html" title="scipy.odr.Data.set_meta"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../odr.html" title="Orthogonal distance regression (scipy.odr)"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-odr-data">
+<h1>scipy.odr.Data<a class="headerlink" href="#scipy-odr-data" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.odr.Data">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.odr.</code><code class="sig-name descname">Data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">we</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wd</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fix</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meta</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/odr/odrpack.py#L181-L292"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.odr.Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The data to fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Observed data for the independent variable of the regression</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">array_like, optional</span></dt><dd><p>If array-like, observed data for the dependent variable of the
+regression. A scalar input implies that the model to be used on
+the data is implicit.</p>
+</dd>
+<dt><strong>we</strong><span class="classifier">array_like, optional</span></dt><dd><p>If <em class="xref py py-obj">we</em> is a scalar, then that value is used for all data points (and
+all dimensions of the response variable).
+If <em class="xref py py-obj">we</em> is a rank-1 array of length q (the dimensionality of the
+response variable), then this vector is the diagonal of the covariant
+weighting matrix for all data points.
+If <em class="xref py py-obj">we</em> is a rank-1 array of length n (the number of data points), then
+the i’th element is the weight for the i’th response variable
+observation (single-dimensional only).
+If <em class="xref py py-obj">we</em> is a rank-2 array of shape (q, q), then this is the full
+covariant weighting matrix broadcast to each observation.
+If <em class="xref py py-obj">we</em> is a rank-2 array of shape (q, n), then <em class="xref py py-obj">we[:,i]</em> is the
+diagonal of the covariant weighting matrix for the i’th observation.
+If <em class="xref py py-obj">we</em> is a rank-3 array of shape (q, q, n), then <em class="xref py py-obj">we[:,:,i]</em> is the
+full specification of the covariant weighting matrix for each
+observation.
+If the fit is implicit, then only a positive scalar value is used.</p>
+</dd>
+<dt><strong>wd</strong><span class="classifier">array_like, optional</span></dt><dd><p>If <em class="xref py py-obj">wd</em> is a scalar, then that value is used for all data points
+(and all dimensions of the input variable). If <em class="xref py py-obj">wd</em> = 0, then the
+covariant weighting matrix for each observation is set to the identity
+matrix (so each dimension of each observation has the same weight).
+If <em class="xref py py-obj">wd</em> is a rank-1 array of length m (the dimensionality of the input
+variable), then this vector is the diagonal of the covariant weighting
+matrix for all data points.
+If <em class="xref py py-obj">wd</em> is a rank-1 array of length n (the number of data points), then
+the i’th element is the weight for the ith input variable observation
+(single-dimensional only).
+If <em class="xref py py-obj">wd</em> is a rank-2 array of shape (m, m), then this is the full
+covariant weighting matrix broadcast to each observation.
+If <em class="xref py py-obj">wd</em> is a rank-2 array of shape (m, n), then <em class="xref py py-obj">wd[:,i]</em> is the
+diagonal of the covariant weighting matrix for the ith observation.
+If <em class="xref py py-obj">wd</em> is a rank-3 array of shape (m, m, n), then <em class="xref py py-obj">wd[:,:,i]</em> is the
+full specification of the covariant weighting matrix for each
+observation.</p>
+</dd>
+<dt><strong>fix</strong><span class="classifier">array_like of ints, optional</span></dt><dd><p>The <em class="xref py py-obj">fix</em> argument is the same as ifixx in the class ODR. It is an
+array of integers with the same shape as data.x that determines which
+input observations are treated as fixed. One can use a sequence of
+length m (the dimensionality of the input observations) to fix some
+dimensions for all observations. A value of 0 fixes the observation,
+a value &gt; 0 makes it free.</p>
+</dd>
+<dt><strong>meta</strong><span class="classifier">dict, optional</span></dt><dd><p>Free-form dictionary for metadata.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Each argument is attached to the member of the instance of the same name.
+The structures of <em class="xref py py-obj">x</em> and <em class="xref py py-obj">y</em> are described in the Model class docstring.
+If <em class="xref py py-obj">y</em> is an integer, then the Data instance can only be used to fit with
+implicit models where the dimensionality of the response is equal to the
+specified value of <em class="xref py py-obj">y</em>.</p>
+<p>The <em class="xref py py-obj">we</em> argument weights the effect a deviation in the response variable
+has on the fit. The <em class="xref py py-obj">wd</em> argument weights the effect a deviation in the
+input variable has on the fit. To handle multidimensional inputs and
+responses easily, the structure of these arguments has the n’th
+dimensional axis first. These arguments heavily use the structured
+arguments feature of ODRPACK to conveniently and flexibly support all
+options. See the ODRPACK User’s Guide for a full explanation of how these
+weights are used in the algorithm. Basically, a higher value of the weight
+for a particular data point makes a deviation at that point more
+detrimental to the fit.</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.odr.Data.set_meta.html#scipy.odr.Data.set_meta" title="scipy.odr.Data.set_meta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_meta</span></code></a>(self, \*\*kwds)</p></td>
+<td><p>Update the metadata dictionary with the keywords and data provided by keywords.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../odr.html"
+                        title="previous chapter">Orthogonal distance regression (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.odr</span></code>)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.odr.Data.set_meta.html"
+                        title="next chapter">scipy.odr.Data.set_meta</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

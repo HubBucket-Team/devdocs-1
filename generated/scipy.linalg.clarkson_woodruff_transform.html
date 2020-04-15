@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.linalg.clarkson_woodruff_transform &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Linear algebra (scipy.linalg)" href="../linalg.html" >
+    <link rel="next" title="scipy.linalg.block_diag" href="scipy.linalg.block_diag.html" >
+    <link rel="prev" title="scipy.linalg.solve_discrete_lyapunov" href="scipy.linalg.solve_discrete_lyapunov.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../linalg.html" accesskey="U">Linear algebra (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.linalg</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.linalg.block_diag.html" title="scipy.linalg.block_diag"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.linalg.solve_discrete_lyapunov.html" title="scipy.linalg.solve_discrete_lyapunov"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-linalg-clarkson-woodruff-transform">
+<h1>scipy.linalg.clarkson_woodruff_transform<a class="headerlink" href="#scipy-linalg-clarkson-woodruff-transform" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.linalg.clarkson_woodruff_transform">
+<code class="sig-prename descclassname">scipy.linalg.</code><code class="sig-name descname">clarkson_woodruff_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_matrix</span></em>, <em class="sig-param"><span class="n">sketch_size</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/linalg/_sketches.py#L55-L166"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.linalg.clarkson_woodruff_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>”
+Applies a Clarkson-Woodruff Transform/sketch to the input matrix.</p>
+<p>Given an input_matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> of size <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">d)</span></code>, compute a matrix <code class="docutils literal notranslate"><span class="pre">A'</span></code> of
+size (sketch_size, d) so that</p>
+<div class="math notranslate nohighlight">
+\[\|Ax\| \approx \|A'x\|\]</div>
+<p>with high probability via the Clarkson-Woodruff Transform, otherwise
+known as the CountSketch matrix.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>input_matrix: array_like</strong></dt><dd><p>Input matrix, of shape <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">d)</span></code>.</p>
+</dd>
+<dt><strong>sketch_size: int</strong></dt><dd><p>Number of rows for the sketch.</p>
+</dd>
+<dt><strong>seed</strong><span class="classifier">None or int or <a class="reference external" href="https://numpy.org/devdocs/reference/random/legacy.html#numpy.random.RandomState" title="(in NumPy v1.19.dev0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.random.RandomState</span></code></a> instance, optional</span></dt><dd><p>This parameter defines the <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> object to use for drawing
+random variates.
+If None (or <code class="docutils literal notranslate"><span class="pre">np.random</span></code>), the global <code class="docutils literal notranslate"><span class="pre">np.random</span></code> state is used.
+If integer, it is used to seed the local <code class="docutils literal notranslate"><span class="pre">RandomState</span></code> instance.
+Default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>A’</strong><span class="classifier">array_like</span></dt><dd><p>Sketch of the input matrix <code class="docutils literal notranslate"><span class="pre">A</span></code>, of size <code class="docutils literal notranslate"><span class="pre">(sketch_size,</span> <span class="pre">d)</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>To make the statement</p>
+<div class="math notranslate nohighlight">
+\[\|Ax\| \approx \|A'x\|\]</div>
+<p>precise, observe the following result which is adapted from the
+proof of Theorem 14 of <a class="reference internal" href="#rc781ce4e1ea0-2" id="id1">[2]</a> via Markov’s Inequality. If we have
+a sketch size <code class="docutils literal notranslate"><span class="pre">sketch_size=k</span></code> which is at least</p>
+<div class="math notranslate nohighlight">
+\[k \geq \frac{2}{\epsilon^2\delta}\]</div>
+<p>Then for any fixed vector <code class="docutils literal notranslate"><span class="pre">x</span></code>,</p>
+<div class="math notranslate nohighlight">
+\[\|Ax\| = (1\pm\epsilon)\|A'x\|\]</div>
+<p>with probability at least one minus delta.</p>
+<p>This implementation takes advantage of sparsity: computing
+a sketch takes time proportional to <code class="docutils literal notranslate"><span class="pre">A.nnz</span></code>. Data <code class="docutils literal notranslate"><span class="pre">A</span></code> which
+is in <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code> format gives the quickest
+computation time for sparse input.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">sketch_n_rows</span> <span class="o">=</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;coo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SA</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">clarkson_woodruff_transform</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">sketch_n_rows</span><span class="p">)</span> <span class="c1"># fastest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SB</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">clarkson_woodruff_transform</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">sketch_n_rows</span><span class="p">)</span> <span class="c1"># fast</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SC</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">clarkson_woodruff_transform</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">sketch_n_rows</span><span class="p">)</span> <span class="c1"># slower</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SD</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">clarkson_woodruff_transform</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">sketch_n_rows</span><span class="p">)</span> <span class="c1"># slowest</span>
+</pre></div>
+</div>
+<p>That said, this method does perform well on dense inputs, just slower
+on a relative scale.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rc781ce4e1ea0-1"><span class="brackets">1</span></dt>
+<dd><p>Kenneth L. Clarkson and David P. Woodruff. Low rank approximation and
+regression in input sparsity time. In STOC, 2013.</p>
+</dd>
+<dt class="label" id="rc781ce4e1ea0-2"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>David P. Woodruff. Sketching as a tool for numerical linear algebra.
+In Foundations and Trends in Theoretical Computer Science, 2014.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Given a big dense matrix <code class="docutils literal notranslate"><span class="pre">A</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">sketch_n_rows</span> <span class="o">=</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sketch</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">clarkson_woodruff_transform</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">sketch_n_rows</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sketch</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(200, 100)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">norm_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">norm_sketch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sketch</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now with high probability, the true norm <code class="docutils literal notranslate"><span class="pre">norm_A</span></code> is close to
+the sketched norm <code class="docutils literal notranslate"><span class="pre">norm_sketch</span></code> in absolute value.</p>
+<p>Similarly, applying our sketch preserves the solution to a linear
+regression of <span class="math notranslate nohighlight">\(\min \|Ax - b\|\)</span>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">sketch_n_rows</span> <span class="o">=</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_rows</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SAb</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">clarkson_woodruff_transform</span><span class="p">(</span><span class="n">Ab</span><span class="p">,</span> <span class="n">sketch_n_rows</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SA</span><span class="p">,</span> <span class="n">Sb</span> <span class="o">=</span> <span class="n">SAb</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">SAb</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_sketched</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">SA</span><span class="p">,</span> <span class="n">Sb</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As with the matrix norm example, <code class="docutils literal notranslate"><span class="pre">np.linalg.norm(A</span> <span class="pre">&#64;</span> <span class="pre">x</span> <span class="pre">-</span> <span class="pre">b)</span></code>
+is close to <code class="docutils literal notranslate"><span class="pre">np.linalg.norm(A</span> <span class="pre">&#64;</span> <span class="pre">x_sketched</span> <span class="pre">-</span> <span class="pre">b)</span></code> with high
+probability.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.linalg.solve_discrete_lyapunov.html"
+                        title="previous chapter">scipy.linalg.solve_discrete_lyapunov</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.linalg.block_diag.html"
+                        title="next chapter">scipy.linalg.block_diag</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

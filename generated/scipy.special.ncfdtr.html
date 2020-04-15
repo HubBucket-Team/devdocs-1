@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.special.ncfdtr &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Special functions (scipy.special)" href="../special.html" >
+    <link rel="next" title="scipy.special.ncfdtridfd" href="scipy.special.ncfdtridfd.html" >
+    <link rel="prev" title="scipy.special.nbdtrin" href="scipy.special.nbdtrin.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../special.html" accesskey="U">Special functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.ncfdtridfd.html" title="scipy.special.ncfdtridfd"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.special.nbdtrin.html" title="scipy.special.nbdtrin"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-special-ncfdtr">
+<h1>scipy.special.ncfdtr<a class="headerlink" href="#scipy-special-ncfdtr" title="Permalink to this headline">¶</a></h1>
+<dl class="py data">
+<dt id="scipy.special.ncfdtr">
+<code class="sig-prename descclassname">scipy.special.</code><code class="sig-name descname">ncfdtr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfn</span></em>, <em class="sig-param"><span class="n">dfd</span></em>, <em class="sig-param"><span class="n">nc</span></em>, <em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><em class="property"> = &lt;ufunc 'ncfdtr'&gt;</em><a class="headerlink" href="#scipy.special.ncfdtr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative distribution function of the non-central F distribution.</p>
+<p>The non-central F describes the distribution of,</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{X/d_n}{Y/d_d}\]</div>
+<p>where <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independently distributed, with
+<span class="math notranslate nohighlight">\(X\)</span> distributed non-central <span class="math notranslate nohighlight">\(\chi^2\)</span> with noncentrality
+parameter <em class="xref py py-obj">nc</em> and <span class="math notranslate nohighlight">\(d_n\)</span> degrees of freedom, and <span class="math notranslate nohighlight">\(Y\)</span>
+distributed <span class="math notranslate nohighlight">\(\chi^2\)</span> with <span class="math notranslate nohighlight">\(d_d\)</span> degrees of freedom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dfn</strong><span class="classifier">array_like</span></dt><dd><p>Degrees of freedom of the numerator sum of squares.  Range (0, inf).</p>
+</dd>
+<dt><strong>dfd</strong><span class="classifier">array_like</span></dt><dd><p>Degrees of freedom of the denominator sum of squares.  Range (0, inf).</p>
+</dd>
+<dt><strong>nc</strong><span class="classifier">array_like</span></dt><dd><p>Noncentrality parameter.  Should be in range (0, 1e4).</p>
+</dd>
+<dt><strong>f</strong><span class="classifier">array_like</span></dt><dd><p>Quantiles, i.e. the upper limit of integration.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>cdf</strong><span class="classifier">float or ndarray</span></dt><dd><p>The calculated CDF.  If all inputs are scalar, the return will be a
+float.  Otherwise it will be an array.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.special.ncfdtri.html#scipy.special.ncfdtri" title="scipy.special.ncfdtri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtri</span></code></a></dt><dd><p>Quantile function; inverse of <a class="reference internal" href="#scipy.special.ncfdtr" title="scipy.special.ncfdtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtr</span></code></a> with respect to <em class="xref py py-obj">f</em>.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.ncfdtridfd.html#scipy.special.ncfdtridfd" title="scipy.special.ncfdtridfd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtridfd</span></code></a></dt><dd><p>Inverse of <a class="reference internal" href="#scipy.special.ncfdtr" title="scipy.special.ncfdtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtr</span></code></a> with respect to <em class="xref py py-obj">dfd</em>.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.ncfdtridfn.html#scipy.special.ncfdtridfn" title="scipy.special.ncfdtridfn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtridfn</span></code></a></dt><dd><p>Inverse of <a class="reference internal" href="#scipy.special.ncfdtr" title="scipy.special.ncfdtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtr</span></code></a> with respect to <em class="xref py py-obj">dfn</em>.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.special.ncfdtrinc.html#scipy.special.ncfdtrinc" title="scipy.special.ncfdtrinc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtrinc</span></code></a></dt><dd><p>Inverse of <a class="reference internal" href="#scipy.special.ncfdtr" title="scipy.special.ncfdtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncfdtr</span></code></a> with respect to <em class="xref py py-obj">nc</em>.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Wrapper for the CDFLIB <a class="reference internal" href="#r10ebdb5a7072-1" id="id1">[1]</a> Fortran routine <em class="xref py py-obj">cdffnc</em>.</p>
+<p>The cumulative distribution function is computed using Formula 26.6.20 of
+<a class="reference internal" href="#r10ebdb5a7072-2" id="id2">[2]</a>:</p>
+<div class="math notranslate nohighlight">
+\[F(d_n, d_d, n_c, f) = \sum_{j=0}^\infty e^{-n_c/2} \frac{(n_c/2)^j}{j!} I_{x}(\frac{d_n}{2} + j, \frac{d_d}{2}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(I\)</span> is the regularized incomplete beta function, and
+<span class="math notranslate nohighlight">\(x = f d_n/(f d_n + d_d)\)</span>.</p>
+<p>The computation time required for this routine is proportional to the
+noncentrality parameter <em class="xref py py-obj">nc</em>.  Very large values of this parameter can
+consume immense computer resources.  This is why the search range is
+bounded by 10,000.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r10ebdb5a7072-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Barry Brown, James Lovato, and Kathy Russell,
+CDFLIB: Library of Fortran Routines for Cumulative Distribution
+Functions, Inverses, and Other Parameters.</p>
+</dd>
+<dt class="label" id="r10ebdb5a7072-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Milton Abramowitz and Irene A. Stegun, eds.
+Handbook of Mathematical Functions with Formulas,
+Graphs, and Mathematical Tables. New York: Dover, 1972.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>Plot the CDF of the non-central F distribution, for nc=0.  Compare with the
+F-distribution from scipy.stats:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfn</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfd</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ncf_stats</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dfn</span><span class="p">,</span> <span class="n">dfd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ncf_special</span> <span class="o">=</span> <span class="n">special</span><span class="o">.</span><span class="n">ncfdtr</span><span class="p">(</span><span class="n">dfn</span><span class="p">,</span> <span class="n">dfd</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ncf_stats</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ncf_special</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-special-ncfdtr-1.png" src="../_images/scipy-special-ncfdtr-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.special.nbdtrin.html"
+                        title="previous chapter">scipy.special.nbdtrin</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.special.ncfdtridfd.html"
+                        title="next chapter">scipy.special.ncfdtridfd</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

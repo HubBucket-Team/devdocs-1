@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.stats.energy_distance &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Statistical functions (scipy.stats)" href="../stats.html" >
+    <link rel="next" title="scipy.stats.rvs_ratio_uniforms" href="scipy.stats.rvs_ratio_uniforms.html" >
+    <link rel="prev" title="scipy.stats.wasserstein_distance" href="scipy.stats.wasserstein_distance.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../stats.html" accesskey="U">Statistical functions (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.rvs_ratio_uniforms.html" title="scipy.stats.rvs_ratio_uniforms"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.stats.wasserstein_distance.html" title="scipy.stats.wasserstein_distance"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-stats-energy-distance">
+<h1>scipy.stats.energy_distance<a class="headerlink" href="#scipy-stats-energy-distance" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.stats.energy_distance">
+<code class="sig-prename descclassname">scipy.stats.</code><code class="sig-name descname">energy_distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u_values</span></em>, <em class="sig-param"><span class="n">v_values</span></em>, <em class="sig-param"><span class="n">u_weights</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">v_weights</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/stats/stats.py#L6979-L7059"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.stats.energy_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the energy distance between two 1D distributions.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.0.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>u_values, v_values</strong><span class="classifier">array_like</span></dt><dd><p>Values observed in the (empirical) distribution.</p>
+</dd>
+<dt><strong>u_weights, v_weights</strong><span class="classifier">array_like, optional</span></dt><dd><p>Weight for each value. If unspecified, each value is assigned the same
+weight.
+<em class="xref py py-obj">u_weights</em> (resp. <em class="xref py py-obj">v_weights</em>) must have the same length as
+<em class="xref py py-obj">u_values</em> (resp. <em class="xref py py-obj">v_values</em>). If the weight sum differs from 1, it
+must still be positive and finite so that the weights can be normalized
+to sum to 1.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>distance</strong><span class="classifier">float</span></dt><dd><p>The computed distance between the distributions.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The energy distance between two distributions <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span>, whose
+respective CDFs are <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, equals to:</p>
+<div class="math notranslate nohighlight">
+\[D(u, v) = \left( 2\mathbb E|X - Y| - \mathbb E|X - X'| -
+\mathbb E|Y - Y'| \right)^{1/2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(X'\)</span> (resp. <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(Y'\)</span>) are
+independent random variables whose probability distribution is <span class="math notranslate nohighlight">\(u\)</span>
+(resp. <span class="math notranslate nohighlight">\(v\)</span>).</p>
+<p>As shown in <a class="reference internal" href="#r9c3c89b1919f-2" id="id1">[2]</a>, for one-dimensional real-valued variables, the energy
+distance is linked to the non-distribution-free version of the Cramer-von
+Mises distance:</p>
+<div class="math notranslate nohighlight">
+\[D(u, v) = \sqrt{2} l_2(u, v) = \left( 2 \int_{-\infty}^{+\infty} (U-V)^2
+\right)^{1/2}\]</div>
+<p>Note that the common Cramer-von Mises criterion uses the distribution-free
+version of the distance. See <a class="reference internal" href="#r9c3c89b1919f-2" id="id2">[2]</a> (section 2), for more details about both
+versions of the distance.</p>
+<p>The input distributions can be empirical, therefore coming from samples
+whose values are effectively inputs of the function, or they can be seen as
+generalized functions, in which case they are weighted sums of Dirac delta
+functions located at the specified values.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r9c3c89b1919f-1"><span class="brackets">1</span></dt>
+<dd><p>“Energy distance”, <a class="reference external" href="https://en.wikipedia.org/wiki/Energy_distance">https://en.wikipedia.org/wiki/Energy_distance</a></p>
+</dd>
+<dt class="label" id="r9c3c89b1919f-2"><span class="brackets">2</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Szekely “E-statistics: The energy of statistical samples.” Bowling
+Green State University, Department of Mathematics and Statistics,
+Technical Report 02-16 (2002).</p>
+</dd>
+<dt class="label" id="r9c3c89b1919f-3"><span class="brackets">3</span></dt>
+<dd><p>Rizzo, Szekely “Energy distance.” Wiley Interdisciplinary Reviews:
+Computational Statistics, 8(1):27-38 (2015).</p>
+</dd>
+<dt class="label" id="r9c3c89b1919f-4"><span class="brackets">4</span></dt>
+<dd><p>Bellemare, Danihelka, Dabney, Mohamed, Lakshminarayanan, Hoyer,
+Munos “The Cramer Distance as a Solution to Biased Wasserstein
+Gradients” (2017). <a class="reference external" href="https://arxiv.org/abs/1705.10743">arXiv:1705.10743</a>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">energy_distance</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_distance</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">2.0000000000000004</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_distance</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">1.0000000000000002</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_distance</span><span class="p">([</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">7.4</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">8.</span> <span class="p">],</span>
+<span class="gp">... </span>                <span class="p">[</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">7.4</span><span class="p">,</span> <span class="mf">8.</span> <span class="p">],</span> <span class="p">[</span><span class="mf">7.6</span><span class="p">,</span> <span class="mf">8.8</span><span class="p">])</span>
+<span class="go">0.88003340976158217</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.stats.wasserstein_distance.html"
+                        title="previous chapter">scipy.stats.wasserstein_distance</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.stats.rvs_ratio_uniforms.html"
+                        title="next chapter">scipy.stats.rvs_ratio_uniforms</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

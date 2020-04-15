@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Noncentral chi-squared Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Continuous Statistical Distributions" href="continuous.html" >
+    <link rel="next" title="Noncentral F Distribution" href="continuous_ncf.html" >
+    <link rel="prev" title="Nakagami Distribution" href="continuous_nakagami.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="continuous.html" accesskey="U">Continuous Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="continuous_ncf.html" title="Noncentral F Distribution"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="continuous_nakagami.html" title="Nakagami Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="noncentral-chi-squared-distribution">
+<span id="continuous-ncx2"></span><h1>Noncentral chi-squared Distribution<a class="headerlink" href="#noncentral-chi-squared-distribution" title="Permalink to this headline">¶</a></h1>
+<p>The distribution of <span class="math notranslate nohighlight">\(\sum_{i=1}^{\nu}\left(Z_{i}+\delta_{i}\right)^{2}\)</span>
+where <span class="math notranslate nohighlight">\(Z_{i}\)</span> are independent standard normal variables and
+<span class="math notranslate nohighlight">\(\delta_{i}\)</span> are constants.
+<span class="math notranslate nohighlight">\(\lambda=\sum_{i=1}^{\nu}\delta_{i}^{2}&gt;0.\)</span>
+(In communications it is called the Marcum-Q function).
+It can be thought of as a Generalized Rayleigh-Rice distribution.</p>
+<p>The two shape parameters are <span class="math notranslate nohighlight">\(\nu\)</span>, a positive integer, and <span class="math notranslate nohighlight">\(\lambda\)</span>,
+a positive real number.  The support is <span class="math notranslate nohighlight">\(x\geq0\)</span>.</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} f\left(x;\nu,\lambda\right) &amp; = &amp; e^{-\left(\lambda+x\right)/2}\frac{1}{2}\left(\frac{x}{\lambda}\right)^{\left(\nu-2\right)/4}I_{\left(\nu-2\right)/2}\left(\sqrt{\lambda x}\right)\\
+ F\left(x;\nu,\lambda\right) &amp; = &amp; \sum_{j=0}^{\infty}\left\{ \frac{\left(\lambda/2\right)^{j}}{j!}e^{-\lambda/2}\right\} \mathrm{Pr}\left[\chi_{\nu+2j}^{2}\leq x\right]\\
+ G\left(q;\nu,\lambda\right) &amp; = &amp; F^{-1}\left(q;\nu,\lambda\right)\\
+ \mu &amp; = &amp; \nu+\lambda\\
+ \mu_{2} &amp; = &amp; 2\left(\nu+2\lambda\right)\\
+ \gamma_{1} &amp; = &amp; \frac{\sqrt{8}\left(\nu+3\lambda\right)}{\left(\nu+2\lambda\right)^{3/2}}\\
+ \gamma_{2} &amp; = &amp; \frac{12\left(\nu+4\lambda\right)}{\left(\nu+2\lambda\right)^{2}}\end{eqnarray*}</div><p>where  <span class="math notranslate nohighlight">\(I_{\nu }(y)\)</span> is a modified Bessel function of the first kind.</p>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>“Noncentral chi-squared distribution”, Wikipedia
+<a class="reference external" href="https://en.wikipedia.org/wiki/Noncentral_chi-squared_distribution">https://en.wikipedia.org/wiki/Noncentral_chi-squared_distribution</a></p></li>
+</ul>
+<p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.ncx2.html#scipy.stats.ncx2" title="scipy.stats.ncx2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.ncx2</span></code></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Noncentral chi-squared Distribution</a><ul>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous_nakagami.html"
+                        title="previous chapter">Nakagami Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="continuous_ncf.html"
+                        title="next chapter">Noncentral F Distribution</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

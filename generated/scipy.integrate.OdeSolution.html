@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.integrate.OdeSolution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Integration and ODEs (scipy.integrate)" href="../integrate.html" >
+    <link rel="next" title="scipy.integrate.OdeSolution.__call__" href="scipy.integrate.OdeSolution.__call__.html" >
+    <link rel="prev" title="scipy.integrate.DenseOutput.__call__" href="scipy.integrate.DenseOutput.__call__.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../integrate.html" accesskey="U">Integration and ODEs (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.integrate.OdeSolution.__call__.html" title="scipy.integrate.OdeSolution.__call__"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.integrate.DenseOutput.__call__.html" title="scipy.integrate.DenseOutput.__call__"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-integrate-odesolution">
+<h1>scipy.integrate.OdeSolution<a class="headerlink" href="#scipy-integrate-odesolution" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.integrate.OdeSolution">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.integrate.</code><code class="sig-name descname">OdeSolution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts</span></em>, <em class="sig-param"><span class="n">interpolants</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/integrate/_ivp/common.py#L122-L237"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.integrate.OdeSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Continuous ODE solution.</p>
+<p>It is organized as a collection of <a class="reference internal" href="scipy.integrate.DenseOutput.html#scipy.integrate.DenseOutput" title="scipy.integrate.DenseOutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DenseOutput</span></code></a> objects which represent
+local interpolants. It provides an algorithm to select a right interpolant
+for each given point.</p>
+<p>The interpolants cover the range between <em class="xref py py-obj">t_min</em> and <em class="xref py py-obj">t_max</em> (see
+Attributes below). Evaluation outside this interval is not forbidden, but
+the accuracy is not guaranteed.</p>
+<p>When evaluating at a breakpoint (one of the values in <em class="xref py py-obj">ts</em>) a segment with
+the lower index is selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ts</strong><span class="classifier">array_like, shape (n_segments + 1,)</span></dt><dd><p>Time instants between which local interpolants are defined. Must
+be strictly increasing or decreasing (zero segment with two points is
+also allowed).</p>
+</dd>
+<dt><strong>interpolants</strong><span class="classifier">list of DenseOutput with n_segments elements</span></dt><dd><p>Local interpolants. An i-th interpolant is assumed to be defined
+between <code class="docutils literal notranslate"><span class="pre">ts[i]</span></code> and <code class="docutils literal notranslate"><span class="pre">ts[i</span> <span class="pre">+</span> <span class="pre">1]</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>t_min, t_max</strong><span class="classifier">float</span></dt><dd><p>Time range of the interpolation.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.integrate.OdeSolution.__call__.html#scipy.integrate.OdeSolution.__call__" title="scipy.integrate.OdeSolution.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code></a>(self, t)</p></td>
+<td><p>Evaluate the solution.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.integrate.DenseOutput.__call__.html"
+                        title="previous chapter">scipy.integrate.DenseOutput.__call__</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.integrate.OdeSolution.__call__.html"
+                        title="next chapter">scipy.integrate.OdeSolution.__call__</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

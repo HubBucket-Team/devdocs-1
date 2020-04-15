@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.sparse.csc_matrix &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Sparse matrices (scipy.sparse)" href="../sparse.html" >
+    <link rel="next" title="scipy.sparse.csc_matrix.__len__" href="scipy.sparse.csc_matrix.__len__.html" >
+    <link rel="prev" title="scipy.sparse.coo_matrix.trunc" href="scipy.sparse.coo_matrix.trunc.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../sparse.html" accesskey="U">Sparse matrices (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.csc_matrix.__len__.html" title="scipy.sparse.csc_matrix.__len__"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.sparse.coo_matrix.trunc.html" title="scipy.sparse.coo_matrix.trunc"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-sparse-csc-matrix">
+<h1>scipy.sparse.csc_matrix<a class="headerlink" href="#scipy-sparse-csc-matrix" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scipy.sparse.csc_matrix">
+<em class="property">class </em><code class="sig-prename descclassname">scipy.sparse.</code><code class="sig-name descname">csc_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg1</span></em>, <em class="sig-param"><span class="n">shape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">copy</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/sparse/csc.py#L16-L233"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.sparse.csc_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compressed Sparse Column matrix</p>
+<p>This can be instantiated in several ways:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>csc_matrix(D)</dt><dd><p>with a dense matrix or rank-2 ndarray D</p>
+</dd>
+<dt>csc_matrix(S)</dt><dd><p>with another sparse matrix S (equivalent to S.tocsc())</p>
+</dd>
+<dt>csc_matrix((M, N), [dtype])</dt><dd><p>to construct an empty matrix with shape (M, N)
+dtype is optional, defaulting to dtype=’d’.</p>
+</dd>
+<dt>csc_matrix((data, (row_ind, col_ind)), [shape=(M, N)])</dt><dd><p>where <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">row_ind</span></code> and <code class="docutils literal notranslate"><span class="pre">col_ind</span></code> satisfy the
+relationship <code class="docutils literal notranslate"><span class="pre">a[row_ind[k],</span> <span class="pre">col_ind[k]]</span> <span class="pre">=</span> <span class="pre">data[k]</span></code>.</p>
+</dd>
+<dt>csc_matrix((data, indices, indptr), [shape=(M, N)])</dt><dd><p>is the standard CSC representation where the row indices for
+column i are stored in <code class="docutils literal notranslate"><span class="pre">indices[indptr[i]:indptr[i+1]]</span></code>
+and their corresponding values are stored in
+<code class="docutils literal notranslate"><span class="pre">data[indptr[i]:indptr[i+1]]</span></code>.  If the shape parameter is
+not supplied, the matrix dimensions are inferred from
+the index arrays.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p class="rubric">Notes</p>
+<p>Sparse matrices can be used in arithmetic operations: they support
+addition, subtraction, multiplication, division, and matrix power.</p>
+<dl class="simple">
+<dt>Advantages of the CSC format</dt><dd><ul class="simple">
+<li><p>efficient arithmetic operations CSC + CSC, CSC * CSC, etc.</p></li>
+<li><p>efficient column slicing</p></li>
+<li><p>fast matrix vector products (CSR, BSR may be faster)</p></li>
+</ul>
+</dd>
+<dt>Disadvantages of the CSC format</dt><dd><ul class="simple">
+<li><p>slow row slicing operations (consider CSR)</p></li>
+<li><p>changes to the sparsity structure are expensive (consider LIL or DOK)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csc_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csc_matrix</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 0]], dtype=int8)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csc_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1, 0, 4],</span>
+<span class="go">       [0, 0, 5],</span>
+<span class="go">       [2, 3, 6]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">indptr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csc_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">indptr</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1, 0, 4],</span>
+<span class="go">       [0, 0, 5],</span>
+<span class="go">       [2, 3, 6]])</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dtype</strong><span class="classifier">dtype</span></dt><dd><p>Data type of the matrix</p>
+</dd>
+<dt><a class="reference internal" href="scipy.sparse.csc_matrix.shape.html#scipy.sparse.csc_matrix.shape" title="scipy.sparse.csc_matrix.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></a><span class="classifier">2-tuple</span></dt><dd><p>Get shape of a matrix.</p>
+</dd>
+<dt><strong>ndim</strong><span class="classifier">int</span></dt><dd><p>Number of dimensions (this is always 2)</p>
+</dd>
+<dt><a class="reference internal" href="scipy.sparse.csc_matrix.nnz.html#scipy.sparse.csc_matrix.nnz" title="scipy.sparse.csc_matrix.nnz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nnz</span></code></a></dt><dd><p>Number of stored values, including explicit zeros.</p>
+</dd>
+<dt><strong>data</strong></dt><dd><p>Data array of the matrix</p>
+</dd>
+<dt><strong>indices</strong></dt><dd><p>CSC format index array</p>
+</dd>
+<dt><strong>indptr</strong></dt><dd><p>CSC format index pointer array</p>
+</dd>
+<dt><a class="reference internal" href="scipy.sparse.csc_matrix.has_sorted_indices.html#scipy.sparse.csc_matrix.has_sorted_indices" title="scipy.sparse.csc_matrix.has_sorted_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_sorted_indices</span></code></a></dt><dd><p>Determine whether the matrix has sorted indices</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.__len__.html#scipy.sparse.csc_matrix.__len__" title="scipy.sparse.csc_matrix.__len__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__len__</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.__mul__.html#scipy.sparse.csc_matrix.__mul__" title="scipy.sparse.csc_matrix.__mul__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__mul__</span></code></a>(self, other)</p></td>
+<td><p>interpret other and call one of the following</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.arcsin.html#scipy.sparse.csc_matrix.arcsin" title="scipy.sparse.csc_matrix.arcsin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arcsin</span></code></a>(self)</p></td>
+<td><p>Element-wise arcsin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.arcsinh.html#scipy.sparse.csc_matrix.arcsinh" title="scipy.sparse.csc_matrix.arcsinh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arcsinh</span></code></a>(self)</p></td>
+<td><p>Element-wise arcsinh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.arctan.html#scipy.sparse.csc_matrix.arctan" title="scipy.sparse.csc_matrix.arctan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arctan</span></code></a>(self)</p></td>
+<td><p>Element-wise arctan.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.arctanh.html#scipy.sparse.csc_matrix.arctanh" title="scipy.sparse.csc_matrix.arctanh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arctanh</span></code></a>(self)</p></td>
+<td><p>Element-wise arctanh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.argmax.html#scipy.sparse.csc_matrix.argmax" title="scipy.sparse.csc_matrix.argmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">argmax</span></code></a>(self[, axis, out])</p></td>
+<td><p>Return indices of maximum elements along an axis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.argmin.html#scipy.sparse.csc_matrix.argmin" title="scipy.sparse.csc_matrix.argmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">argmin</span></code></a>(self[, axis, out])</p></td>
+<td><p>Return indices of minimum elements along an axis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.asformat.html#scipy.sparse.csc_matrix.asformat" title="scipy.sparse.csc_matrix.asformat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asformat</span></code></a>(self, format[, copy])</p></td>
+<td><p>Return this matrix in the passed format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.asfptype.html#scipy.sparse.csc_matrix.asfptype" title="scipy.sparse.csc_matrix.asfptype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asfptype</span></code></a>(self)</p></td>
+<td><p>Upcast matrix to a floating point format (if necessary)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.astype.html#scipy.sparse.csc_matrix.astype" title="scipy.sparse.csc_matrix.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">astype</span></code></a>(self, dtype[, casting, copy])</p></td>
+<td><p>Cast the matrix elements to a specified type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.ceil.html#scipy.sparse.csc_matrix.ceil" title="scipy.sparse.csc_matrix.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ceil</span></code></a>(self)</p></td>
+<td><p>Element-wise ceil.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.check_format.html#scipy.sparse.csc_matrix.check_format" title="scipy.sparse.csc_matrix.check_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_format</span></code></a>(self[, full_check])</p></td>
+<td><p>check whether the matrix format is valid</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.conj.html#scipy.sparse.csc_matrix.conj" title="scipy.sparse.csc_matrix.conj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conj</span></code></a>(self[, copy])</p></td>
+<td><p>Element-wise complex conjugation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.conjugate.html#scipy.sparse.csc_matrix.conjugate" title="scipy.sparse.csc_matrix.conjugate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conjugate</span></code></a>(self[, copy])</p></td>
+<td><p>Element-wise complex conjugation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.copy.html#scipy.sparse.csc_matrix.copy" title="scipy.sparse.csc_matrix.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>(self)</p></td>
+<td><p>Returns a copy of this matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.count_nonzero.html#scipy.sparse.csc_matrix.count_nonzero" title="scipy.sparse.csc_matrix.count_nonzero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_nonzero</span></code></a>(self)</p></td>
+<td><p>Number of non-zero entries, equivalent to</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.deg2rad.html#scipy.sparse.csc_matrix.deg2rad" title="scipy.sparse.csc_matrix.deg2rad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deg2rad</span></code></a>(self)</p></td>
+<td><p>Element-wise deg2rad.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.diagonal.html#scipy.sparse.csc_matrix.diagonal" title="scipy.sparse.csc_matrix.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(self[, k])</p></td>
+<td><p>Returns the kth diagonal of the matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.dot.html#scipy.sparse.csc_matrix.dot" title="scipy.sparse.csc_matrix.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(self, other)</p></td>
+<td><p>Ordinary dot product</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.eliminate_zeros.html#scipy.sparse.csc_matrix.eliminate_zeros" title="scipy.sparse.csc_matrix.eliminate_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eliminate_zeros</span></code></a>(self)</p></td>
+<td><p>Remove zero entries from the matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.expm1.html#scipy.sparse.csc_matrix.expm1" title="scipy.sparse.csc_matrix.expm1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expm1</span></code></a>(self)</p></td>
+<td><p>Element-wise expm1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.floor.html#scipy.sparse.csc_matrix.floor" title="scipy.sparse.csc_matrix.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">floor</span></code></a>(self)</p></td>
+<td><p>Element-wise floor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.getH.html#scipy.sparse.csc_matrix.getH" title="scipy.sparse.csc_matrix.getH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getH</span></code></a>(self)</p></td>
+<td><p>Return the Hermitian transpose of this matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.get_shape.html#scipy.sparse.csc_matrix.get_shape" title="scipy.sparse.csc_matrix.get_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_shape</span></code></a>(self)</p></td>
+<td><p>Get shape of a matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.getcol.html#scipy.sparse.csc_matrix.getcol" title="scipy.sparse.csc_matrix.getcol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getcol</span></code></a>(self, i)</p></td>
+<td><p>Returns a copy of column i of the matrix, as a (m x 1) CSC matrix (column vector).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.getformat.html#scipy.sparse.csc_matrix.getformat" title="scipy.sparse.csc_matrix.getformat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getformat</span></code></a>(self)</p></td>
+<td><p>Format of a matrix representation as a string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.getmaxprint.html#scipy.sparse.csc_matrix.getmaxprint" title="scipy.sparse.csc_matrix.getmaxprint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getmaxprint</span></code></a>(self)</p></td>
+<td><p>Maximum number of elements to display when printed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.getnnz.html#scipy.sparse.csc_matrix.getnnz" title="scipy.sparse.csc_matrix.getnnz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getnnz</span></code></a>(self[, axis])</p></td>
+<td><p>Number of stored values, including explicit zeros.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.getrow.html#scipy.sparse.csc_matrix.getrow" title="scipy.sparse.csc_matrix.getrow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getrow</span></code></a>(self, i)</p></td>
+<td><p>Returns a copy of row i of the matrix, as a (1 x n) CSR matrix (row vector).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.log1p.html#scipy.sparse.csc_matrix.log1p" title="scipy.sparse.csc_matrix.log1p"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log1p</span></code></a>(self)</p></td>
+<td><p>Element-wise log1p.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.max.html#scipy.sparse.csc_matrix.max" title="scipy.sparse.csc_matrix.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max</span></code></a>(self[, axis, out])</p></td>
+<td><p>Return the maximum of the matrix or maximum along an axis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.maximum.html#scipy.sparse.csc_matrix.maximum" title="scipy.sparse.csc_matrix.maximum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum</span></code></a>(self, other)</p></td>
+<td><p>Element-wise maximum between this and another matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.mean.html#scipy.sparse.csc_matrix.mean" title="scipy.sparse.csc_matrix.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean</span></code></a>(self[, axis, dtype, out])</p></td>
+<td><p>Compute the arithmetic mean along the specified axis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.min.html#scipy.sparse.csc_matrix.min" title="scipy.sparse.csc_matrix.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">min</span></code></a>(self[, axis, out])</p></td>
+<td><p>Return the minimum of the matrix or maximum along an axis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.minimum.html#scipy.sparse.csc_matrix.minimum" title="scipy.sparse.csc_matrix.minimum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum</span></code></a>(self, other)</p></td>
+<td><p>Element-wise minimum between this and another matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.multiply.html#scipy.sparse.csc_matrix.multiply" title="scipy.sparse.csc_matrix.multiply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multiply</span></code></a>(self, other)</p></td>
+<td><p>Point-wise multiplication by another matrix, vector, or scalar.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.nonzero.html#scipy.sparse.csc_matrix.nonzero" title="scipy.sparse.csc_matrix.nonzero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero</span></code></a>(self)</p></td>
+<td><p>nonzero indices</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.power.html#scipy.sparse.csc_matrix.power" title="scipy.sparse.csc_matrix.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(self, n[, dtype])</p></td>
+<td><p>This function performs element-wise power.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.prune.html#scipy.sparse.csc_matrix.prune" title="scipy.sparse.csc_matrix.prune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prune</span></code></a>(self)</p></td>
+<td><p>Remove empty space after all non-zero elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.rad2deg.html#scipy.sparse.csc_matrix.rad2deg" title="scipy.sparse.csc_matrix.rad2deg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rad2deg</span></code></a>(self)</p></td>
+<td><p>Element-wise rad2deg.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.reshape.html#scipy.sparse.csc_matrix.reshape" title="scipy.sparse.csc_matrix.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(self, shape[, order, copy])</p></td>
+<td><p>Gives a new shape to a sparse matrix without changing its data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.resize.html#scipy.sparse.csc_matrix.resize" title="scipy.sparse.csc_matrix.resize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resize</span></code></a>(self, \*shape)</p></td>
+<td><p>Resize the matrix in-place to dimensions given by <code class="docutils literal notranslate"><span class="pre">shape</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.rint.html#scipy.sparse.csc_matrix.rint" title="scipy.sparse.csc_matrix.rint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rint</span></code></a>(self)</p></td>
+<td><p>Element-wise rint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.set_shape.html#scipy.sparse.csc_matrix.set_shape" title="scipy.sparse.csc_matrix.set_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_shape</span></code></a>(self, shape)</p></td>
+<td><p>See <a class="reference internal" href="scipy.sparse.csc_matrix.reshape.html#scipy.sparse.csc_matrix.reshape" title="scipy.sparse.csc_matrix.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.setdiag.html#scipy.sparse.csc_matrix.setdiag" title="scipy.sparse.csc_matrix.setdiag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setdiag</span></code></a>(self, values[, k])</p></td>
+<td><p>Set diagonal or off-diagonal elements of the array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sign.html#scipy.sparse.csc_matrix.sign" title="scipy.sparse.csc_matrix.sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sign</span></code></a>(self)</p></td>
+<td><p>Element-wise sign.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sin.html#scipy.sparse.csc_matrix.sin" title="scipy.sparse.csc_matrix.sin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sin</span></code></a>(self)</p></td>
+<td><p>Element-wise sin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sinh.html#scipy.sparse.csc_matrix.sinh" title="scipy.sparse.csc_matrix.sinh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sinh</span></code></a>(self)</p></td>
+<td><p>Element-wise sinh.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sort_indices.html#scipy.sparse.csc_matrix.sort_indices" title="scipy.sparse.csc_matrix.sort_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_indices</span></code></a>(self)</p></td>
+<td><p>Sort the indices of this matrix <em>in place</em></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sorted_indices.html#scipy.sparse.csc_matrix.sorted_indices" title="scipy.sparse.csc_matrix.sorted_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted_indices</span></code></a>(self)</p></td>
+<td><p>Return a copy of this matrix with sorted indices</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sqrt.html#scipy.sparse.csc_matrix.sqrt" title="scipy.sparse.csc_matrix.sqrt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sqrt</span></code></a>(self)</p></td>
+<td><p>Element-wise sqrt.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sum.html#scipy.sparse.csc_matrix.sum" title="scipy.sparse.csc_matrix.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(self[, axis, dtype, out])</p></td>
+<td><p>Sum the matrix elements over a given axis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.sum_duplicates.html#scipy.sparse.csc_matrix.sum_duplicates" title="scipy.sparse.csc_matrix.sum_duplicates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum_duplicates</span></code></a>(self)</p></td>
+<td><p>Eliminate duplicate matrix entries by adding them together</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tan.html#scipy.sparse.csc_matrix.tan" title="scipy.sparse.csc_matrix.tan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tan</span></code></a>(self)</p></td>
+<td><p>Element-wise tan.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tanh.html#scipy.sparse.csc_matrix.tanh" title="scipy.sparse.csc_matrix.tanh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanh</span></code></a>(self)</p></td>
+<td><p>Element-wise tanh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.toarray.html#scipy.sparse.csc_matrix.toarray" title="scipy.sparse.csc_matrix.toarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toarray</span></code></a>(self[, order, out])</p></td>
+<td><p>Return a dense ndarray representation of this matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tobsr.html#scipy.sparse.csc_matrix.tobsr" title="scipy.sparse.csc_matrix.tobsr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tobsr</span></code></a>(self[, blocksize, copy])</p></td>
+<td><p>Convert this matrix to Block Sparse Row format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tocoo.html#scipy.sparse.csc_matrix.tocoo" title="scipy.sparse.csc_matrix.tocoo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocoo</span></code></a>(self[, copy])</p></td>
+<td><p>Convert this matrix to COOrdinate format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tocsc.html#scipy.sparse.csc_matrix.tocsc" title="scipy.sparse.csc_matrix.tocsc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocsc</span></code></a>(self[, copy])</p></td>
+<td><p>Convert this matrix to Compressed Sparse Column format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tocsr.html#scipy.sparse.csc_matrix.tocsr" title="scipy.sparse.csc_matrix.tocsr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocsr</span></code></a>(self[, copy])</p></td>
+<td><p>Convert this matrix to Compressed Sparse Row format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.todense.html#scipy.sparse.csc_matrix.todense" title="scipy.sparse.csc_matrix.todense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">todense</span></code></a>(self[, order, out])</p></td>
+<td><p>Return a dense matrix representation of this matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.todia.html#scipy.sparse.csc_matrix.todia" title="scipy.sparse.csc_matrix.todia"><code class="xref py py-obj docutils literal notranslate"><span class="pre">todia</span></code></a>(self[, copy])</p></td>
+<td><p>Convert this matrix to sparse DIAgonal format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.todok.html#scipy.sparse.csc_matrix.todok" title="scipy.sparse.csc_matrix.todok"><code class="xref py py-obj docutils literal notranslate"><span class="pre">todok</span></code></a>(self[, copy])</p></td>
+<td><p>Convert this matrix to Dictionary Of Keys format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.tolil.html#scipy.sparse.csc_matrix.tolil" title="scipy.sparse.csc_matrix.tolil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tolil</span></code></a>(self[, copy])</p></td>
+<td><p>Convert this matrix to List of Lists format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.transpose.html#scipy.sparse.csc_matrix.transpose" title="scipy.sparse.csc_matrix.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(self[, axes, copy])</p></td>
+<td><p>Reverses the dimensions of the sparse matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="scipy.sparse.csc_matrix.trunc.html#scipy.sparse.csc_matrix.trunc" title="scipy.sparse.csc_matrix.trunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trunc</span></code></a>(self)</p></td>
+<td><p>Element-wise trunc.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 40%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>__getitem__</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.sparse.coo_matrix.trunc.html"
+                        title="previous chapter">scipy.sparse.coo_matrix.trunc</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.sparse.csc_matrix.__len__.html"
+                        title="next chapter">scipy.sparse.csc_matrix.__len__</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

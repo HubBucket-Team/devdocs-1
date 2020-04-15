@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Adding New Methods, Functions, and Classes &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="next" title="Clustering package (scipy.cluster)" href="../../cluster.html" >
+    <link rel="prev" title="Adding Cython to SciPy" href="cython.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="../../cluster.html" title="Clustering package (scipy.cluster)"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="cython.html" title="Adding Cython to SciPy"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="adding-new-methods-functions-and-classes">
+<span id="adding-new"></span><h1>Adding New Methods, Functions, and Classes<a class="headerlink" href="#adding-new-methods-functions-and-classes" title="Permalink to this headline">¶</a></h1>
+<p>While adding code to SciPy is in most cases quite straight forward, there are a few places where that is not the case.
+This document contains detailed information on some specific situations where
+it may not be clear from the outset what is involved in the task.</p>
+<div class="section" id="adding-a-new-statistics-distribution">
+<h2>Adding A New Statistics Distribution<a class="headerlink" href="#adding-a-new-statistics-distribution" title="Permalink to this headline">¶</a></h2>
+<p>For hundreds of years statisticians, mathematicians and scientists have needed
+to understand, analyze and model data.
+This has led to a plethora of statisics distributions, many of which are
+related to others.
+Modeling of new types of data continues to give rise to new distributions,
+as does theoretical considerations being applied to new disciplines.
+SciPy models about a dozen discrete distributions
+<a class="reference internal" href="../../tutorial/stats/discrete.html#discrete-random-variables"><span class="std std-ref">Discrete Statistical Distributions</span></a> and 100 continuous distributions
+<a class="reference internal" href="../../tutorial/stats/continuous.html#continuous-random-variables"><span class="std std-ref">Continuous Statistical Distributions</span></a>.</p>
+<p>To add a new distribution, a good reference is needed.
+Scipy typically uses <a class="reference internal" href="#jkb" id="id1"><span>[JKB]</span></a> as its gold standard, with <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_probability_distributions">WikipediaDistributions</a>
+articles often providing some extra details and/or graphical plots.</p>
+<div class="section" id="how-to-create-a-new-continuous-distribution">
+<h3>How to create a new continuous distribution<a class="headerlink" href="#how-to-create-a-new-continuous-distribution" title="Permalink to this headline">¶</a></h3>
+<p>There are a few steps to be done to add a continuous distribution to SciPy.
+(Adding a discrete distribution is similar).
+We’ll use the fictitious “Squirrel” distribution in the instructions below.</p>
+<div class="section" id="before-implementation">
+<h4>Before Implementation<a class="headerlink" href="#before-implementation" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>See if <code class="docutils literal notranslate"><span class="pre">Squirrel</span></code> has already been implemented (that saves a lot of effort!)</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>It may have been implemented with a different name.</p></li>
+<li><p>It may have been implemented with a different parameterization (shape parameters).</p></li>
+<li><p>It may be a specialization of a more general family of distributions.</p></li>
+</ul>
+</div></blockquote>
+<p>It is very common for multiple disciplines to discover/rediscover a
+distribution (or a specialization or different parameterization).
+There are a few existing SciPy distributions which are specializations
+of other distributions.  E.g. The <a class="reference internal" href="../../generated/scipy.stats.arcsine.html#scipy.stats.arcsine" title="scipy.stats.arcsine"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.arcsine</span></code></a> distribution
+is a specialization of the <a class="reference internal" href="../../generated/scipy.stats.beta.html#scipy.stats.beta" title="scipy.stats.beta"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.stats.beta</span></code></a> distribution.
+These duplications exist for (very!) historical and widespread usage reasons.
+At this time, adding new specializations/reparametrizations of existing
+distributions to SciPy is not supported,  mainly due to the increase in user
+confusion resulting from such additions.</p>
+<ol class="arabic simple" start="2">
+<li><p>Create a <a class="reference external" href="https://github.com/scipy/scipy/issues">SciPy Issue on github</a>,
+listing the distribution, references and reasons for its inclusion.</p></li>
+</ol>
+</div>
+<div class="section" id="implementation">
+<h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Find an already existing distribution similar to <code class="docutils literal notranslate"><span class="pre">Squirrel</span></code>.
+Use its code as a template for <code class="docutils literal notranslate"><span class="pre">Squirrel</span></code>.</p></li>
+<li><p>Read the docstring for class <code class="docutils literal notranslate"><span class="pre">rv_continuous</span></code> in
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/scipy/stats/_distn_infrastructure.py#L1378">scipy/stats/_distn_infrastructure.py</a>.</p></li>
+<li><p>Write the new code for class <code class="docutils literal notranslate"><span class="pre">squirrel_gen</span></code> and insert it into
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/scipy/stats/_continuous_distns.py">scipy/stats/_continuous_distns.py</a>,
+which is in (mostly) alphabetical order by distribution name.</p></li>
+<li><p>Does the distribution have infinite support? If not, left and/or right
+endpoints <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code> need to be specified in the call to <code class="docutils literal notranslate"><span class="pre">squirrel_gen(name='squirrel',</span> <span class="pre">a=?,</span> <span class="pre">b=?)</span></code>.</p></li>
+<li><p>If the support depends upon the shape parameters,
+<code class="docutils literal notranslate"><span class="pre">squirrel_gen._get_support()</span></code> needs to be implemented.</p></li>
+<li><p>The default inherited <code class="docutils literal notranslate"><span class="pre">_argcheck()</span></code> implementation checks that the shape parameters
+are positive.  Create a more appropriate implementation.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">squirrel_gen.ppf()</span></code> is expensive to compute relative to
+<code class="docutils literal notranslate"><span class="pre">squirrel_gen.pdf()</span></code>, consider setting the <code class="docutils literal notranslate"><span class="pre">momtype</span></code> in the call
+to <code class="docutils literal notranslate"><span class="pre">squirrel_gen()</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">squirrel_gen.rvs()</span></code> is expensive to compute, consider implementing a
+specific <code class="docutils literal notranslate"><span class="pre">squirrel_gen._rvs()</span></code>.</p></li>
+<li><p>Add the name to the listing in the docstring of
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/scipy/stats/__init__.py">scipy/stats/__init__.py</a>.</p></li>
+<li><p>Add the name and a good set of example shape parameters to the <code class="docutils literal notranslate"><span class="pre">distcont</span></code>
+list in
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/scipy/stats/_distr_params.py#L5">scipy/stats/_distr_params.py</a>.
+These shape parameters are used both for testing and automatic documentation generation.</p></li>
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">TestSquirrel</span></code> class and any specific tests to
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/scipy/stats/tests/test_distributions.py">scipy/stats/tests/test_distributions.py</a>.</p></li>
+<li><p>Run and pass(!) the tests.</p></li>
+</ol>
+</div>
+<div class="section" id="after-implementation">
+<h4>After Implementation<a class="headerlink" href="#after-implementation" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Add a tutorial <code class="docutils literal notranslate"><span class="pre">doc/source/tutorial/stats/continuous_squirrel.rst</span></code></p></li>
+<li><p>Add it to the listing of continuous distributions in
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/doc/source/tutorial/stats/continuous.rst">doc/source/tutorial/stats/continuous.rst</a>.</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">continuous</span> <span class="pre">distributions</span></code> in the example code in
+<a class="reference external" href="https://github.com/scipy/scipy/blob/master/doc/source/tutorial/stats.rst">doc/source/tutorial/stats.rst</a>.</p></li>
+<li><p>Build the documentation successfully.</p></li>
+<li><p>Submit a PR.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<dl class="citation">
+<dt class="label" id="jkb"><span class="brackets"><a class="fn-backref" href="#id1">JKB</a></span></dt>
+<dd><p>Johnson, Kotz, and Balakrishnan, “Continuous Univariate Distributions, Volume 1”, Second Edition, John Wiley and Sons,
+p. 173 (1994).</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Adding New Methods, Functions, and Classes</a><ul>
+<li><a class="reference internal" href="#adding-a-new-statistics-distribution">Adding A New Statistics Distribution</a><ul>
+<li><a class="reference internal" href="#how-to-create-a-new-continuous-distribution">How to create a new continuous distribution</a><ul>
+<li><a class="reference internal" href="#before-implementation">Before Implementation</a></li>
+<li><a class="reference internal" href="#implementation">Implementation</a></li>
+<li><a class="reference internal" href="#after-implementation">After Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cython.html"
+                        title="previous chapter">Adding Cython to SciPy</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../cluster.html"
+                        title="next chapter">Clustering package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code>)</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

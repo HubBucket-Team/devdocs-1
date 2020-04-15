@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.signal.oaconvolve &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Signal processing (scipy.signal)" href="../signal.html" >
+    <link rel="next" title="scipy.signal.convolve2d" href="scipy.signal.convolve2d.html" >
+    <link rel="prev" title="scipy.signal.fftconvolve" href="scipy.signal.fftconvolve.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../signal.html" accesskey="U">Signal processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.convolve2d.html" title="scipy.signal.convolve2d"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.signal.fftconvolve.html" title="scipy.signal.fftconvolve"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-signal-oaconvolve">
+<h1>scipy.signal.oaconvolve<a class="headerlink" href="#scipy-signal-oaconvolve" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.signal.oaconvolve">
+<code class="sig-prename descclassname">scipy.signal.</code><code class="sig-name descname">oaconvolve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">in1</span></em>, <em class="sig-param"><span class="n">in2</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'full'</span></em>, <em class="sig-param"><span class="n">axes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/signal/signaltools.py#L653-L855"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.signal.oaconvolve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convolve two N-dimensional arrays using the overlap-add method.</p>
+<p>Convolve <em class="xref py py-obj">in1</em> and <em class="xref py py-obj">in2</em> using the overlap-add method, with
+the output size determined by the <em class="xref py py-obj">mode</em> argument.</p>
+<p>This is generally much faster than <a class="reference internal" href="scipy.signal.convolve.html#scipy.signal.convolve" title="scipy.signal.convolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve</span></code></a> for large arrays (n &gt; ~500),
+and generally much faster than <a class="reference internal" href="scipy.signal.fftconvolve.html#scipy.signal.fftconvolve" title="scipy.signal.fftconvolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftconvolve</span></code></a> when one array is much
+larger than the other, but can be slower when only a few output values are
+needed or when the arrays are very similar in shape, and can only
+output float arrays (int or object array inputs will be cast to float).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>in1</strong><span class="classifier">array_like</span></dt><dd><p>First input.</p>
+</dd>
+<dt><strong>in2</strong><span class="classifier">array_like</span></dt><dd><p>Second input. Should have the same number of dimensions as <em class="xref py py-obj">in1</em>.</p>
+</dd>
+<dt><strong>mode</strong><span class="classifier">str {‘full’, ‘valid’, ‘same’}, optional</span></dt><dd><p>A string indicating the size of the output:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">full</span></code></dt><dd><p>The output is the full discrete linear convolution
+of the inputs. (Default)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">valid</span></code></dt><dd><p>The output consists only of those elements that do not
+rely on the zero-padding. In ‘valid’ mode, either <em class="xref py py-obj">in1</em> or <em class="xref py py-obj">in2</em>
+must be at least as large as the other in every dimension.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">same</span></code></dt><dd><p>The output is the same size as <em class="xref py py-obj">in1</em>, centered
+with respect to the ‘full’ output.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>axes</strong><span class="classifier">int or array_like of ints or None, optional</span></dt><dd><p>Axes over which to compute the convolution.
+The default is over all axes.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">array</span></dt><dd><p>An N-dimensional array containing a subset of the discrete linear
+convolution of <em class="xref py py-obj">in1</em> with <em class="xref py py-obj">in2</em>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.signal.convolve.html#scipy.signal.convolve" title="scipy.signal.convolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve</span></code></a></dt><dd><p>Uses the direct convolution or FFT convolution algorithm depending on which is faster.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.signal.fftconvolve.html#scipy.signal.fftconvolve" title="scipy.signal.fftconvolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftconvolve</span></code></a></dt><dd><p>An implementation of convolution using FFT.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.0.</span></p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="r65f3731a4343-1"><span class="brackets">1</span></dt>
+<dd><p>Wikipedia, “Overlap-add_method”.
+<a class="reference external" href="https://en.wikipedia.org/wiki/Overlap-add_method">https://en.wikipedia.org/wiki/Overlap-add_method</a></p>
+</dd>
+<dt class="label" id="r65f3731a4343-2"><span class="brackets">2</span></dt>
+<dd><p>Richard G. Lyons. Understanding Digital Signal Processing,
+Third Edition, 2011. Chapter 13.10.
+ISBN 13: 978-0137-02741-5</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Convolve a 100,000 sample signal with a 512-sample filter.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filt</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">firwin</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fsig</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">oaconvolve</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">filt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_orig</span><span class="p">,</span> <span class="n">ax_mag</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax_orig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax_orig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;White noise&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax_mag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fsig</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax_mag</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Filtered noise&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-signal-oaconvolve-1.png" src="../_images/scipy-signal-oaconvolve-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.signal.fftconvolve.html"
+                        title="previous chapter">scipy.signal.fftconvolve</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.signal.convolve2d.html"
+                        title="next chapter">scipy.signal.convolve2d</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

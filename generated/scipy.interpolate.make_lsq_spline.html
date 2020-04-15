@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.interpolate.make_lsq_spline &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Interpolation (scipy.interpolate)" href="../interpolate.html" >
+    <link rel="next" title="scipy.interpolate.splrep" href="scipy.interpolate.splrep.html" >
+    <link rel="prev" title="scipy.interpolate.make_interp_spline" href="scipy.interpolate.make_interp_spline.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../interpolate.html" accesskey="U">Interpolation (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.interpolate.splrep.html" title="scipy.interpolate.splrep"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.interpolate.make_interp_spline.html" title="scipy.interpolate.make_interp_spline"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-interpolate-make-lsq-spline">
+<h1>scipy.interpolate.make_lsq_spline<a class="headerlink" href="#scipy-interpolate-make-lsq-spline" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.interpolate.make_lsq_spline">
+<code class="sig-prename descclassname">scipy.interpolate.</code><code class="sig-name descname">make_lsq_spline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">k</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">w</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">check_finite</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/interpolate/_bsplines.py#L859-L1014"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.interpolate.make_lsq_spline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the (coefficients of) an LSQ B-spline.</p>
+<p>The result is a linear combination</p>
+<div class="math notranslate nohighlight">
+\[S(x) = \sum_j c_j B_j(x; t)\]</div>
+<p>of the B-spline basis elements, <span class="math notranslate nohighlight">\(B_j(x; t)\)</span>, which minimizes</p>
+<div class="math notranslate nohighlight">
+\[\sum_{j} \left( w_j \times (S(x_j) - y_j) \right)^2\]</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">array_like, shape (m,)</span></dt><dd><p>Abscissas.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">array_like, shape (m, …)</span></dt><dd><p>Ordinates.</p>
+</dd>
+<dt><strong>t</strong><span class="classifier">array_like, shape (n + k + 1,).</span></dt><dd><p>Knots.
+Knots and data points must satisfy Schoenberg-Whitney conditions.</p>
+</dd>
+<dt><strong>k</strong><span class="classifier">int, optional</span></dt><dd><p>B-spline degree. Default is cubic, k=3.</p>
+</dd>
+<dt><strong>w</strong><span class="classifier">array_like, shape (n,), optional</span></dt><dd><p>Weights for spline fitting. Must be positive. If <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+then weights are all equal.
+Default is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int, optional</span></dt><dd><p>Interpolation axis. Default is zero.</p>
+</dd>
+<dt><strong>check_finite</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to check that the input arrays contain only finite numbers.
+Disabling may give a performance gain, but may result in problems
+(crashes, non-termination) if the inputs do contain infinities or NaNs.
+Default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>b</strong><span class="classifier">a BSpline object of the degree <em class="xref py py-obj">k</em> with knots <em class="xref py py-obj">t</em>.</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.interpolate.BSpline.html#scipy.interpolate.BSpline" title="scipy.interpolate.BSpline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BSpline</span></code></a></dt><dd><p>base class representing the B-spline objects</p>
+</dd>
+<dt><a class="reference internal" href="scipy.interpolate.make_interp_spline.html#scipy.interpolate.make_interp_spline" title="scipy.interpolate.make_interp_spline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_interp_spline</span></code></a></dt><dd><p>a similar factory function for interpolating splines</p>
+</dd>
+<dt><a class="reference internal" href="scipy.interpolate.LSQUnivariateSpline.html#scipy.interpolate.LSQUnivariateSpline" title="scipy.interpolate.LSQUnivariateSpline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LSQUnivariateSpline</span></code></a></dt><dd><p>a FITPACK-based spline fitting routine</p>
+</dd>
+<dt><a class="reference internal" href="scipy.interpolate.splrep.html#scipy.interpolate.splrep" title="scipy.interpolate.splrep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splrep</span></code></a></dt><dd><p>a FITPACK-based fitting routine</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The number of data points must be larger than the spline degree <em class="xref py py-obj">k</em>.</p>
+<p>Knots <em class="xref py py-obj">t</em> must satisfy the Schoenberg-Whitney conditions,
+i.e., there must be a subset of data points <code class="docutils literal notranslate"><span class="pre">x[j]</span></code> such that
+<code class="docutils literal notranslate"><span class="pre">t[j]</span> <span class="pre">&lt;</span> <span class="pre">x[j]</span> <span class="pre">&lt;</span> <span class="pre">t[j+k+1]</span></code>, for <code class="docutils literal notranslate"><span class="pre">j=0,</span> <span class="pre">1,...,n-k-2</span></code>.</p>
+<p class="rubric">Examples</p>
+<p>Generate some noisy data:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now fit a smoothing cubic spline with a pre-defined internal knots.
+Here we make the knot vector (k+1)-regular by adding boundary knots:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">make_lsq_spline</span><span class="p">,</span> <span class="n">BSpline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],)</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>          <span class="n">t</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],)</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spl</span> <span class="o">=</span> <span class="n">make_lsq_spline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For comparison, we also construct an interpolating spline for the same
+set of data:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">make_interp_spline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spl_i</span> <span class="o">=</span> <span class="n">make_interp_spline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plot both:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">spl</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LSQ spline&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">spl_i</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;interp spline&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-interpolate-make_lsq_spline-1_00_00.png" src="../_images/scipy-interpolate-make_lsq_spline-1_00_00.png" />
+</div>
+<p><strong>NaN handling</strong>: If the input arrays contain <code class="docutils literal notranslate"><span class="pre">nan</span></code> values, the result is
+not useful since the underlying spline fitting routines cannot deal with
+<code class="docutils literal notranslate"><span class="pre">nan</span></code>. A workaround is to use zero weights for not-a-number data points:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tck</span> <span class="o">=</span> <span class="n">make_lsq_spline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="o">=~</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice the need to replace a <code class="docutils literal notranslate"><span class="pre">nan</span></code> by a numerical value (precise value
+does not matter as long as the corresponding weight is zero.)</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.interpolate.make_interp_spline.html"
+                        title="previous chapter">scipy.interpolate.make_interp_spline</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.interpolate.splrep.html"
+                        title="next chapter">scipy.interpolate.splrep</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Von Mises Distribution &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../../index.html" >
+    <link rel="up" title="Continuous Statistical Distributions" href="continuous.html" >
+    <link rel="next" title="Wald Distribution" href="continuous_wald.html" >
+    <link rel="prev" title="Uniform Distribution" href="continuous_uniform.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../../index.html">
+      <img style="border: 0;" alt="SciPy" src="../../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../index.html" >SciPy Tutorial</a></li>
+          <li class="active"><a href="../stats.html" >Statistics (<code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats</span></code>)</a></li>
+          <li class="active"><a href="continuous.html" accesskey="U">Continuous Statistical Distributions</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="continuous_wald.html" title="Wald Distribution"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="continuous_uniform.html" title="Uniform Distribution"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="von-mises-distribution">
+<span id="continuous-vonmises"></span><h1>Von Mises Distribution<a class="headerlink" href="#von-mises-distribution" title="Permalink to this headline">¶</a></h1>
+<p>There is one shape parameter <span class="math notranslate nohighlight">\(\kappa&gt;0\)</span>, with support <span class="math notranslate nohighlight">\(x\in\left[-\pi,\pi\right]\)</span>.
+For values of <span class="math notranslate nohighlight">\(\kappa&lt;100\)</span> the PDF and CDF formulas below are used. Otherwise, a normal
+approximation with variance <span class="math notranslate nohighlight">\(1/\kappa\)</span> is used.
+[Note that the PDF and CDF functions below are periodic with period <span class="math notranslate nohighlight">\(2\pi\)</span>.
+If an input outside <span class="math notranslate nohighlight">\(x\in\left[-\pi,\pi\right]\)</span> is given, it is converted
+to the equivalent angle in this range.]</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} f\left(x;\kappa\right) &amp; = &amp; \frac{e^{\kappa\cos x}}{2\pi I_{0}\left(\kappa\right)}\\
+ F\left(x;\kappa\right) &amp; = &amp; \frac{1}{2} + \frac{x}{2\pi} + \sum_{k=1}^{\infty}\frac{I_{k}\left(\kappa\right)\sin\left(kx\right)}{I_{0}\left(\kappa\right)\pi k}\\
+ G\left(q; \kappa\right) &amp; = &amp; F^{-1}\left(x;\kappa\right)\end{eqnarray*}</div><p>where  <span class="math notranslate nohighlight">\(I_{k}(\kappa)\)</span> is a modified Bessel function of the first kind.</p>
+<div class="math notranslate nohighlight">
+ \begin{eqnarray*} \mu &amp; = &amp; 0\\
+ \mu_{2} &amp; = &amp; \int_{-\pi}^{\pi}x^{2}f\left(x;\kappa\right)dx\\
+ \gamma_{1} &amp; = &amp; 0\\
+ \gamma_{2} &amp; = &amp; \frac{\int_{-\pi}^{\pi}x^{4}f\left(x;\kappa\right)dx}{\mu_{2}^{2}}-3\end{eqnarray*}</div><p>This can be used for defining circular variance.</p>
+<p>Implementation: <a class="reference internal" href="../../generated/scipy.stats.vonmises.html#scipy.stats.vonmises" title="scipy.stats.vonmises"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scipy.stats.vonmises</span></code></a></p>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous_uniform.html"
+                        title="previous chapter">Uniform Distribution</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="continuous_wald.html"
+                        title="next chapter">Wald Distribution</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

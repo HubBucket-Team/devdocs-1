@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.cluster.vq.kmeans &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="K-means clustering and vector quantization (scipy.cluster.vq)" href="../cluster.vq.html" >
+    <link rel="next" title="scipy.cluster.vq.kmeans2" href="scipy.cluster.vq.kmeans2.html" >
+    <link rel="prev" title="scipy.cluster.vq.vq" href="scipy.cluster.vq.vq.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../cluster.html" >Clustering package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code>)</a></li>
+          <li class="active"><a href="../cluster.vq.html" accesskey="U">K-means clustering and vector quantization (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster.vq</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.vq.kmeans2.html" title="scipy.cluster.vq.kmeans2"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.cluster.vq.vq.html" title="scipy.cluster.vq.vq"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-cluster-vq-kmeans">
+<h1>scipy.cluster.vq.kmeans<a class="headerlink" href="#scipy-cluster-vq-kmeans" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.cluster.vq.kmeans">
+<code class="sig-prename descclassname">scipy.cluster.vq.</code><code class="sig-name descname">kmeans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obs</span></em>, <em class="sig-param"><span class="n">k_or_guess</span></em>, <em class="sig-param"><span class="n">iter</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">thresh</span><span class="o">=</span><span class="default_value">1e-05</span></em>, <em class="sig-param"><span class="n">check_finite</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/cluster/vq.py#L316-L458"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.cluster.vq.kmeans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs k-means on a set of observation vectors forming k clusters.</p>
+<p>The k-means algorithm adjusts the classification of the observations
+into clusters and updates the cluster centroids until the position of
+the centroids is stable over successive iterations. In this
+implementation of the algorithm, the stability of the centroids is
+determined by comparing the absolute value of the change in the average
+Euclidean distance between the observations and their corresponding
+centroids against a threshold. This yields
+a code book mapping centroids to codes and vice versa.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>obs</strong><span class="classifier">ndarray</span></dt><dd><p>Each row of the M by N array is an observation vector. The
+columns are the features seen during each observation.
+The features must be whitened first with the <a class="reference internal" href="scipy.cluster.vq.whiten.html#scipy.cluster.vq.whiten" title="scipy.cluster.vq.whiten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">whiten</span></code></a> function.</p>
+</dd>
+<dt><strong>k_or_guess</strong><span class="classifier">int or ndarray</span></dt><dd><p>The number of centroids to generate. A code is assigned to
+each centroid, which is also the row index of the centroid
+in the code_book matrix generated.</p>
+<p>The initial k centroids are chosen by randomly selecting
+observations from the observation matrix. Alternatively,
+passing a k by N array specifies the initial k centroids.</p>
+</dd>
+<dt><strong>iter</strong><span class="classifier">int, optional</span></dt><dd><p>The number of times to run k-means, returning the codebook
+with the lowest distortion. This argument is ignored if
+initial centroids are specified with an array for the
+<code class="docutils literal notranslate"><span class="pre">k_or_guess</span></code> parameter. This parameter does not represent the
+number of iterations of the k-means algorithm.</p>
+</dd>
+<dt><strong>thresh</strong><span class="classifier">float, optional</span></dt><dd><p>Terminates the k-means algorithm if the change in
+distortion since the last k-means iteration is less than
+or equal to threshold.</p>
+</dd>
+<dt><strong>check_finite</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to check that the input matrices contain only finite numbers.
+Disabling may give a performance gain, but may result in problems
+(crashes, non-termination) if the inputs do contain infinities or NaNs.
+Default: True</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>codebook</strong><span class="classifier">ndarray</span></dt><dd><p>A k by N array of k centroids. The ith centroid
+codebook[i] is represented with the code i. The centroids
+and codes generated represent the lowest distortion seen,
+not necessarily the globally minimal distortion.</p>
+</dd>
+<dt><strong>distortion</strong><span class="classifier">float</span></dt><dd><p>The mean (non-squared) Euclidean distance between the observations
+passed and the centroids generated. Note the difference to the standard
+definition of distortion in the context of the k-means algorithm, which
+is the sum of the squared distances.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="scipy.cluster.vq.kmeans2.html#scipy.cluster.vq.kmeans2" title="scipy.cluster.vq.kmeans2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kmeans2</span></code></a></dt><dd><p>a different implementation of k-means clustering with more methods for generating initial centroids but without using a distortion change threshold as a stopping criterion.</p>
+</dd>
+<dt><a class="reference internal" href="scipy.cluster.vq.whiten.html#scipy.cluster.vq.whiten" title="scipy.cluster.vq.whiten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">whiten</span></code></a></dt><dd><p>must be called prior to passing an observation matrix to kmeans.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.cluster.vq</span> <span class="kn">import</span> <span class="n">vq</span><span class="p">,</span> <span class="n">kmeans</span><span class="p">,</span> <span class="n">whiten</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span>  <span class="o">=</span> <span class="n">array</span><span class="p">([[</span> <span class="mf">1.9</span><span class="p">,</span><span class="mf">2.3</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">1.5</span><span class="p">,</span><span class="mf">2.5</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">0.8</span><span class="p">,</span><span class="mf">0.6</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">0.4</span><span class="p">,</span><span class="mf">1.8</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">0.2</span><span class="p">,</span><span class="mf">1.8</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">2.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">0.3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span> <span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">whitened</span> <span class="o">=</span> <span class="n">whiten</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">whitened</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">whitened</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="p">(</span><span class="n">whitened</span><span class="p">,</span><span class="n">book</span><span class="p">)</span>
+<span class="go">(array([[ 2.3110306 ,  2.86287398],    # random</span>
+<span class="go">       [ 0.93218041,  1.24398691]]), 0.85684700941625547)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">codes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="p">(</span><span class="n">whitened</span><span class="p">,</span><span class="n">codes</span><span class="p">)</span>
+<span class="go">(array([[ 2.3110306 ,  2.86287398],    # random</span>
+<span class="go">       [ 1.32544402,  0.65607529],</span>
+<span class="go">       [ 0.40782893,  2.02786907]]), 0.5196582527686241)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create 50 datapoints in two clusters a and b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pts</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="n">size</span><span class="o">=</span><span class="n">pts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+<span class="gp">... </span>                                  <span class="n">size</span><span class="o">=</span><span class="n">pts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Whiten data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">whitened</span> <span class="o">=</span> <span class="n">whiten</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Find 2 clusters in the data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">codebook</span><span class="p">,</span> <span class="n">distortion</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">whitened</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Plot whitened data and cluster centers in red</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">whitened</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">whitened</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">codebook</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">codebook</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/scipy-cluster-vq-kmeans-1.png" src="../_images/scipy-cluster-vq-kmeans-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.cluster.vq.vq.html"
+                        title="previous chapter">scipy.cluster.vq.vq</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.cluster.vq.kmeans2.html"
+                        title="next chapter">scipy.cluster.vq.kmeans2</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

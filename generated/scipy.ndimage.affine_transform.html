@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>scipy.ndimage.affine_transform &mdash; SciPy v1.5.0.dev0+1995688 Reference Guide</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.dev0+1995688',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/scipy-mathjax/MathJax.js?config=scipy-mathjax"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="SciPy v1.5.0.dev0+1995688 Reference Guide" href="../index.html" >
+    <link rel="up" title="Multidimensional image processing (scipy.ndimage)" href="../ndimage.html" >
+    <link rel="next" title="scipy.ndimage.geometric_transform" href="scipy.ndimage.geometric_transform.html" >
+    <link rel="prev" title="scipy.ndimage.fourier_uniform" href="scipy.ndimage.fourier_uniform.html" > 
+  </head>
+  <body>
+
+<div class="container">
+  <div class="top-scipy-org-logo-header">
+    <a href="../index.html">
+      <img style="border: 0;" alt="SciPy" src="../_static/img/scipy_org_logo.png"></a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://scipy.org/">SciPy.org</a></li>
+        <li class="active"><a href="https://docs.scipy.org/">Docs</a></li>
+	
+        <li class="active"><a href="../index.html">SciPy v1.5.0.dev0+1995688 Reference Guide</a></li>
+	
+          <li class="active"><a href="../ndimage.html" accesskey="U">Multidimensional image processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code>)</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="../py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="scipy.ndimage.geometric_transform.html" title="scipy.ndimage.geometric_transform"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="scipy.ndimage.fourier_uniform.html" title="scipy.ndimage.fourier_uniform"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="scipy-ndimage-affine-transform">
+<h1>scipy.ndimage.affine_transform<a class="headerlink" href="#scipy-ndimage-affine-transform" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="scipy.ndimage.affine_transform">
+<code class="sig-prename descclassname">scipy.ndimage.</code><code class="sig-name descname">affine_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">matrix</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">output_shape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'constant'</span></em>, <em class="sig-param"><span class="n">cval</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">prefilter</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/scipy/scipy/blob/1995688/scipy/ndimage/interpolation.py#L354-L487"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scipy.ndimage.affine_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply an affine transformation.</p>
+<p>Given an output image pixel index vector <code class="docutils literal notranslate"><span class="pre">o</span></code>, the pixel value
+is determined from the input image at position
+<code class="docutils literal notranslate"><span class="pre">np.dot(matrix,</span> <span class="pre">o)</span> <span class="pre">+</span> <span class="pre">offset</span></code>.</p>
+<p>This does ‘pull’ (or ‘backward’) resampling, transforming the output space
+to the input to locate data. Affine transformations are often described in
+the ‘push’ (or ‘forward’) direction, transforming input to output. If you
+have a matrix for the ‘push’ transformation, use its inverse
+(<a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv" title="(in NumPy v1.19.dev0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linalg.inv</span></code></a>) in this function.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>input</strong><span class="classifier">array_like</span></dt><dd><p>The input array.</p>
+</dd>
+<dt><strong>matrix</strong><span class="classifier">ndarray</span></dt><dd><p>The inverse coordinate transformation matrix, mapping output
+coordinates to input coordinates. If <code class="docutils literal notranslate"><span class="pre">ndim</span></code> is the number of
+dimensions of <code class="docutils literal notranslate"><span class="pre">input</span></code>, the given matrix must have one of the
+following shapes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(ndim,</span> <span class="pre">ndim)</span></code>: the linear transformation matrix for each
+output coordinate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(ndim,)</span></code>: assume that the 2-D transformation matrix is
+diagonal, with the diagonal specified by the given value. A more
+efficient algorithm is then used that exploits the separability
+of the problem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(ndim</span> <span class="pre">+</span> <span class="pre">1,</span> <span class="pre">ndim</span> <span class="pre">+</span> <span class="pre">1)</span></code>: assume that the transformation is
+specified using homogeneous coordinates <a class="reference internal" href="#rd28fdca2bce5-1" id="id1">[1]</a>. In this case, any
+value passed to <code class="docutils literal notranslate"><span class="pre">offset</span></code> is ignored.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(ndim,</span> <span class="pre">ndim</span> <span class="pre">+</span> <span class="pre">1)</span></code>: as above, but the bottom row of a
+homogeneous transformation matrix is always <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">...,</span> <span class="pre">1]</span></code>,
+and may be omitted.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>offset</strong><span class="classifier">float or sequence, optional</span></dt><dd><p>The offset into the array where the transform is applied. If a float,
+<em class="xref py py-obj">offset</em> is the same for each axis. If a sequence, <em class="xref py py-obj">offset</em> should
+contain one value for each axis.</p>
+</dd>
+<dt><strong>output_shape</strong><span class="classifier">tuple of ints, optional</span></dt><dd><p>Shape tuple.</p>
+</dd>
+<dt><strong>output</strong><span class="classifier">array or dtype, optional</span></dt><dd><p>The array in which to place the output, or the dtype of the
+returned array. By default an array of the same dtype as input
+will be created.</p>
+</dd>
+<dt><strong>order</strong><span class="classifier">int, optional</span></dt><dd><p>The order of the spline interpolation, default is 3.
+The order has to be in the range 0-5.</p>
+</dd>
+<dt><strong>mode</strong><span class="classifier">{‘reflect’, ‘constant’, ‘nearest’, ‘mirror’, ‘wrap’}, optional</span></dt><dd><p>The <em class="xref py py-obj">mode</em> parameter determines how the input array is extended
+beyond its boundaries. Default is ‘constant’. Behavior for each valid
+value is as follows:</p>
+<dl class="simple">
+<dt>‘reflect’ (<em class="xref py py-obj">d c b a | a b c d | d c b a</em>)</dt><dd><p>The input is extended by reflecting about the edge of the last
+pixel.</p>
+</dd>
+<dt>‘constant’ (<em class="xref py py-obj">k k k k | a b c d | k k k k</em>)</dt><dd><p>The input is extended by filling all values beyond the edge with
+the same constant value, defined by the <em class="xref py py-obj">cval</em> parameter.</p>
+</dd>
+<dt>‘nearest’ (<em class="xref py py-obj">a a a a | a b c d | d d d d</em>)</dt><dd><p>The input is extended by replicating the last pixel.</p>
+</dd>
+<dt>‘mirror’ (<em class="xref py py-obj">d c b | a b c d | c b a</em>)</dt><dd><p>The input is extended by reflecting about the center of the last
+pixel.</p>
+</dd>
+<dt>‘wrap’ (<em class="xref py py-obj">a b c d | a b c d | a b c d</em>)</dt><dd><p>The input is extended by wrapping around to the opposite edge.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>cval</strong><span class="classifier">scalar, optional</span></dt><dd><p>Value to fill past edges of input if <em class="xref py py-obj">mode</em> is ‘constant’. Default
+is 0.0.</p>
+</dd>
+<dt><strong>prefilter</strong><span class="classifier">bool, optional</span></dt><dd><p>Determines if the input array is prefiltered with <a class="reference internal" href="scipy.ndimage.spline_filter.html#scipy.ndimage.spline_filter" title="scipy.ndimage.spline_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spline_filter</span></code></a>
+before interpolation. The default is True, which will create a
+temporary <em class="xref py py-obj">float64</em> array of filtered values if <em class="xref py py-obj">order &gt; 1</em>. If
+setting this to False, the output will be slightly blurred if
+<em class="xref py py-obj">order &gt; 1</em>, unless the input is prefiltered, i.e. it is the result
+of calling <a class="reference internal" href="scipy.ndimage.spline_filter.html#scipy.ndimage.spline_filter" title="scipy.ndimage.spline_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spline_filter</span></code></a> on the original input.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>affine_transform</strong><span class="classifier">ndarray</span></dt><dd><p>The transformed input.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The given matrix and offset are used to find for each point in the
+output the corresponding coordinates in the input by an affine
+transformation. The value of the input at those coordinates is
+determined by spline interpolation of the requested order. Points
+outside the boundaries of the input are filled according to the given
+mode.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.18.0: </span>Previously, the exact interpretation of the affine transformation
+depended on whether the matrix was supplied as a 1-D or a
+2-D array. If a 1-D array was supplied
+to the matrix parameter, the output pixel value at index <code class="docutils literal notranslate"><span class="pre">o</span></code>
+was determined from the input image at position
+<code class="docutils literal notranslate"><span class="pre">matrix</span> <span class="pre">*</span> <span class="pre">(o</span> <span class="pre">+</span> <span class="pre">offset)</span></code>.</p>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rd28fdca2bce5-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Homogeneous_coordinates">https://en.wikipedia.org/wiki/Homogeneous_coordinates</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scipy.ndimage.fourier_uniform.html"
+                        title="previous chapter">scipy.ndimage.fourier_uniform</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scipy.ndimage.geometric_transform.html"
+                        title="next chapter">scipy.ndimage.geometric_transform</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>Quick search</h4>
+    <div>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" style="width: inherit;" name="q" />
+      <input type="submit" value="search" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2008-2020, The SciPy community.
+      </li>
+      <li>
+      Last updated on Apr 15, 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.0.1.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
